@@ -27,7 +27,7 @@ with lib;
         };
         filesystems = mkOption
         {
-          default = [ "ext2" "btrfs" ];
+          default = [ "ext4" "btrfs" ];
           description = "List of filesystems.";
           type = types.listOf types.str;
         };

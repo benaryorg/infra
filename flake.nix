@@ -84,8 +84,9 @@
               {
                 "/boot" =
                 {
-                  device = "/dev/disk/by-uuid/b7cd76f9-2108-47ba-bc87-f97821bdbbe3";
-                  fsType = "ext2";
+                  device = "/dev/disk/by-uuid/cb5c4f14-eca6-484e-b021-28487094a0a1";
+                  fsType = "ext4";
+                  options = [ "noatime" "discard" ];
                 };
                 "/" =
                 {
@@ -99,7 +100,7 @@
                 device = "/dev/disk/by-uuid/cf591bea-156c-4094-92a3-814c8f67e37e";
                 allowDiscards = true;
                 fallbackToPassword = false;
-                keyFile = "/dev/sda2";
+                keyFile = "/dev/sda3";
               };
             };
 
