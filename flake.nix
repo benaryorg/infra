@@ -21,7 +21,7 @@
         };
       };
 
-      defaults = { name, nodes, pkgs, lib, config, ... }:
+      defaults = { name, nodes, pkgs, lib, config, options, ... }:
         let
           conf = pkgs.callPackage ./conf {};
         in
@@ -39,14 +39,30 @@
               ./spec/net.nix
             ];
 
-            deployment =
+            options =
             {
-              targetHost = name;
-              targetUser = conf.sshuser;
-              tags = [ config.benaryorg.hardware.vendor ];
-              buildOnTarget = true;
+              benaryorg.deployment =
+              {
+                default = mkOption
+                {
+                  default = true;
+                  description = "Whether to add the host to the @default deployment.";
+                  type = types.bool;
+                };
+              };
             };
-            benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@shell.cloud.bsocat.net" ] conf) ];
+
+            config =
+            {
+              deployment =
+              {
+                targetHost = name;
+                targetUser = conf.sshuser;
+                tags = [ config.benaryorg.hardware.vendor (mkIf config.benaryorg.deployment.default "default")];
+                buildOnTarget = true;
+              };
+              benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@shell.cloud.bsocat.net" ] conf) ];
+            };
           };
 
       "shell.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -58,6 +74,7 @@
               deployment.allowLocalDeployment = true;
 
               benaryorg.base.sudo.needsPassword = true;
+              benaryorg.deployment.default = false;
               benaryorg.git.adminkey = conf.sshkey."benaryorg@gnutoo.home.bsocat.net";
               benaryorg.git.enable = true;
               benaryorg.hardware.vendor = "ovh";
