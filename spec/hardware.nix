@@ -13,11 +13,42 @@ with lib;
       };
       ovh =
       {
-        bootDevices = mkOption
+        device = mkOption
         {
-          default = [ "/dev/sda" ];
-          description = "List of boot devices for grub.";
-          type = types.listOf types.str;
+          description = "List of devices and their UUIDs, each must be GPT and have four partitions: 1) bios boot, 2) /boot (mdadm), 3) lukskey (1 sector), 4) luksroot (btrfs).";
+          type = types.attrsOf (types.attrsOf types.str);
+          example =
+          ''
+            device =
+            {
+              sda =
+              {
+                # sda4 (luks encrypted partition) has this uuid
+                uuid = "05208d0f-61a9-4ab4-968e-ae1a4dfbf382";
+                # sda3 is the luks key and has this partuuid
+                keyuuid = "817bbe88-c6db-4cbd-8c67-0e9aac92e067";
+              }
+              # sdb4 (luks encrypted partition) has this uuid, sdb3 is the key
+              sdb =
+              {
+                uuid = "bb8e805b-52d9-4c03-848e-e57f3b364a41";
+                keyuuid = "09b7135d-0902-4bf5-80e7-b6de7995b06b";
+              };
+            }
+          '';
+        };
+        fs =
+        {
+          boot = mkOption
+          {
+            description = "UUID of /boot (ext4).";
+            type = types.str;
+          };
+          root = mkOption
+          {
+            description = "UUID of rootfs (btrfs).";
+            type = types.str;
+          };
         };
         kernelModules = mkOption
         {
@@ -79,7 +110,7 @@ with lib;
         {
           enable = true;
           version = 2;
-          devices = config.benaryorg.hardware.ovh.bootDevices;
+          devices = pipe config.benaryorg.hardware.ovh.device [ attrNames (map (name: "/dev/${name}")) ];
           splashImage = null;
         };
         swapDevices = mkDefault [];
@@ -95,6 +126,38 @@ with lib;
           {
             enable = config.benaryorg.hardware.ovh.btrfsScrub != [];
             fileSystems = config.benaryorg.hardware.ovh.btrfsScrub;
+          };
+        };
+
+        boot.initrd.luks.devices =
+          let
+            device = name: data:
+            {
+              "luks-${data.uuid}" =
+              {
+                device = "/dev/disk/by-uuid/${data.uuid}";
+                allowDiscards = true;
+                fallbackToPassword = false;
+                keyFile = "/dev/disk/by-partuuid/${data.keyuuid}";
+              };
+            };
+            luksDevices = (flip pipe) [ (mapAttrsToList device) (foldl (a: b: a // b) {}) ];
+          in
+            luksDevices config.benaryorg.hardware.ovh.device;
+
+        fileSystems =
+        {
+          "/" =
+          {
+            device = "/dev/disk/by-uuid/${config.benaryorg.hardware.ovh.fs.root}";
+            fsType = "btrfs";
+            options = [ "noatime" "compress=zstd" "degraded" "space_cache=v2" "subvol=@" "discard=async" ];
+          };
+          "/boot" =
+          {
+            device = "/dev/disk/by-uuid/${config.benaryorg.hardware.ovh.fs.boot}";
+            fsType = "ext4";
+            options = [ "noatime" "discard" ];
           };
         };
       })

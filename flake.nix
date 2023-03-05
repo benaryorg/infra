@@ -85,28 +85,17 @@
               benaryorg.net.host.ipv4Gateway = "151.80.37.254";
               benaryorg.net.host.ipv6 = "2001:41d0:e:a10:6d4a:9111:c458:87f1/56";
               benaryorg.net.host.ipv6Gateway = "2001:41d0:e:aff:ff:ff:ff:ff";
-
-              fileSystems =
+              benaryorg.hardware.ovh =
               {
-                "/boot" =
+                device =
                 {
-                  device = "/dev/disk/by-uuid/cb5c4f14-eca6-484e-b021-28487094a0a1";
-                  fsType = "ext4";
-                  options = [ "noatime" "discard" ];
+                  sda = { uuid = "cf591bea-156c-4094-92a3-814c8f67e37e"; keyuuid = "6b7e5660-673e-a24f-af18-a515af4c857c"; };
                 };
-                "/" =
+                fs =
                 {
-                  device = "/dev/disk/by-uuid/97bacf4c-ff7a-40f6-9581-b490977d185f";
-                  fsType = "btrfs";
-                  options = [ "subvol=@" "noatime" "degraded" "compress=zstd" "discard=async" "space_cache=v2" ];
+                  root = "97bacf4c-ff7a-40f6-9581-b490977d185f";
+                  boot = "cb5c4f14-eca6-484e-b021-28487094a0a1";
                 };
-              };
-              boot.initrd.luks.devices.root =
-              {
-                device = "/dev/disk/by-uuid/cf591bea-156c-4094-92a3-814c8f67e37e";
-                allowDiscards = true;
-                fallbackToPassword = false;
-                keyFile = "/dev/sda3";
               };
             };
 
@@ -129,44 +118,22 @@
             with lib;
             {
               benaryorg.hardware.vendor = "ovh";
-              benaryorg.hardware.ovh.bootDevices = [ "/dev/sda" "/dev/sdb" ];
               benaryorg.net.host.primaryInterface = "eno1";
               benaryorg.net.host.ipv4 = "37.187.145.124/24";
               benaryorg.net.host.ipv4Gateway = "37.187.145.254";
               benaryorg.net.host.ipv6 = "2001:41d0:a:517c::1/56";
               benaryorg.net.host.ipv6Gateway = "2001:41d0:a:51ff:ff:ff:ff:ff";
-
-              fileSystems =
+              benaryorg.hardware.ovh =
               {
-                "/" =
+                device =
                 {
-                  device = "/dev/disk/by-uuid/87967ab0-05c9-4d4d-9873-90bb10233a69";
-                  fsType = "btrfs";
-                  options = [ "noatime" "compress=zstd" "degraded" "space_cache=v2" "subvol=@" "discard=async" ];
+                  sda = { uuid = "6fbaef44-b179-43f3-88ca-8e5f1bc3c3f0"; keyuuid = "5a2aaeea-6981-6b4d-91c4-61dcaa8cb12e"; };
+                  sdb = { uuid = "fa938535-0599-458b-9ff8-55f7f41eff6f"; keyuuid = "a5f0c623-ee37-5e4e-a78d-a4271a0c4b04"; };
                 };
-                "/boot" =
+                fs =
                 {
-                  device = "/dev/disk/by-uuid/4726bb92-3b08-4026-b557-7a7da7491ba0";
-                  fsType = "ext4";
-                  options = [ "noatime" "discard" ];
-                };
-              };
-
-              boot.initrd.luks.devices =
-              {
-                "root-a" =
-                {
-                  device = "/dev/disk/by-uuid/6fbaef44-b179-43f3-88ca-8e5f1bc3c3f0";
-                  allowDiscards = true;
-                  fallbackToPassword = false;
-                  keyFile = "/dev/sda3";
-                };
-                "root-b" =
-                {
-                  device = "/dev/disk/by-uuid/fa938535-0599-458b-9ff8-55f7f41eff6f";
-                  allowDiscards = true;
-                  fallbackToPassword = false;
-                  keyFile = "/dev/sdb3";
+                  root = "ea9ea296-44d8-43f2-9ceb-1c765b1b1b7d";
+                  boot = "eaa28e6d-63df-46c6-9a13-652b6c0a5ce4";
                 };
               };
             };
