@@ -115,6 +115,66 @@
 
               networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
             };
+
+      "lxd6.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.hardware.vendor = "ovh";
+              benaryorg.hardware.ovh.bootDevices = [ "/dev/sda" "/dev/sdb" ];
+
+              networking.interfaces =
+              {
+                eno1 =
+                {
+                  ipv4 =
+                  {
+                    addresses = [ { address = "37.187.145.124"; prefixLength = 24; } ];
+                    routes = [ { address = "0.0.0.0"; prefixLength = 0; via = "37.187.145.254"; } ];
+                  };
+                  ipv6 =
+                  {
+                    addresses = [ { address = "2001:41d0:a:517c::1"; prefixLength = 128; } ];
+                    routes = [ { address = "::"; prefixLength = 0; via = "2001:41d0:a:51ff:ff:ff:ff:ff"; } ];
+                  };
+                };
+              };
+              fileSystems =
+              {
+                "/" =
+                {
+                  device = "/dev/disk/by-uuid/87967ab0-05c9-4d4d-9873-90bb10233a69";
+                  fsType = "btrfs";
+                  options = [ "noatime" "compress=zstd" "degraded" "space_cache=v2" "subvol=@" "discard=async" ];
+                };
+                "/boot" =
+                {
+                  device = "/dev/disk/by-uuid/4726bb92-3b08-4026-b557-7a7da7491ba0";
+                  fsType = "ext4";
+                  options = [ "noatime" "discard" ];
+                };
+              };
+
+              boot.initrd.luks.devices =
+              {
+                "root-a" =
+                {
+                  device = "/dev/disk/by-uuid/6fbaef44-b179-43f3-88ca-8e5f1bc3c3f0";
+                  allowDiscards = true;
+                  fallbackToPassword = false;
+                  keyFile = "/dev/sda3";
+                };
+                "root-b" =
+                {
+                  device = "/dev/disk/by-uuid/fa938535-0599-458b-9ff8-55f7f41eff6f";
+                  allowDiscards = true;
+                  fallbackToPassword = false;
+                  keyFile = "/dev/sdb3";
+                };
+              };
+            };
     };
   };
 }
