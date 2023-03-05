@@ -6,23 +6,23 @@ with lib;
     benaryorg.base =
     {
       sudo =
-			{
-				needsPassword = mkOption
-				{
-					default = false;
-					description = "Whether to enable OpenSSH server.";
-					type = types.bool;
-				};
-			};
+      {
+        needsPassword = mkOption
+        {
+          default = false;
+          description = "Whether to enable OpenSSH server.";
+          type = types.bool;
+        };
+      };
       gnupg =
-			{
-				enable = mkOption
-				{
-					default = false;
-					description = "Whether to enable GnuPG.";
-					type = types.bool;
-				};
-			};
+      {
+        enable = mkOption
+        {
+          default = false;
+          description = "Whether to enable GnuPG.";
+          type = types.bool;
+        };
+      };
     };
   };
 
@@ -35,42 +35,42 @@ with lib;
     time.timeZone = "Etc/UTC";
     i18n.defaultLocale = "C.UTF-8";
 
-		security.sudo =
-		{
-			enable = true;
-			wheelNeedsPassword = config.benaryorg.base.sudo.needsPassword;
-			extraRules =
-			[
-				{
-					groups = [ "wheel" ];
-					commands =
-					[
-						{ command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
-					];
-				}
-			];
-		};
+    security.sudo =
+    {
+      enable = true;
+      wheelNeedsPassword = config.benaryorg.base.sudo.needsPassword;
+      extraRules =
+      [
+        {
+          groups = [ "wheel" ];
+          commands =
+          [
+            { command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
+          ];
+        }
+      ];
+    };
 
-		programs =
-		{
-			vim.defaultEditor = true;
-			mtr.enable = true;
-			zsh =
-			{
-				enable = true;
-				enableCompletion = true;
-			};
-			git =
-			{
-				enable = true;
-				lfs.enable = true;
-			};
+    programs =
+    {
+      vim.defaultEditor = true;
+      mtr.enable = true;
+      zsh =
+      {
+        enable = true;
+        enableCompletion = true;
+      };
+      git =
+      {
+        enable = true;
+        lfs.enable = true;
+      };
       gnupg.agent =
       {
         enable = config.benaryorg.base.gnupg.enable;
         pinentryFlavor = "curses";
       };
-		};
+    };
 
     services =
     {
