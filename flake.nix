@@ -80,23 +80,12 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = pkgs.lib.attrValues conf.sshkey;
+              benaryorg.net.host.primaryInterface = "eno0";
+              benaryorg.net.host.ipv4 = "151.80.37.166/24";
+              benaryorg.net.host.ipv4Gateway = "151.80.37.254";
+              benaryorg.net.host.ipv6 = "2001:41d0:e:a10:6d4a:9111:c458:87f1/56";
+              benaryorg.net.host.ipv6Gateway = "2001:41d0:e:aff:ff:ff:ff:ff";
 
-              networking.interfaces =
-              {
-                eno0 =
-                {
-                  ipv4 =
-                  {
-                    addresses = [ { address = "151.80.37.166"; prefixLength = 24; } ];
-                    routes = [ { address = "0.0.0.0"; prefixLength = 0; via = "151.80.37.254"; } ];
-                  };
-                  ipv6 =
-                  {
-                    addresses = [ { address = "2001:41d0:e:a10:6d4a:9111:c458:87f1"; prefixLength = 56; } ];
-                    routes = [ { address = "::"; prefixLength = 0; via = "2001:41d0:e:aff:ff:ff:ff:fd"; } ];
-                  };
-                };
-              };
               fileSystems =
               {
                 "/boot" =
@@ -141,23 +130,12 @@
             {
               benaryorg.hardware.vendor = "ovh";
               benaryorg.hardware.ovh.bootDevices = [ "/dev/sda" "/dev/sdb" ];
+              benaryorg.net.host.primaryInterface = "eno1";
+              benaryorg.net.host.ipv4 = "37.187.145.124/24";
+              benaryorg.net.host.ipv4Gateway = "37.187.145.254";
+              benaryorg.net.host.ipv6 = "2001:41d0:a:517c::1/56";
+              benaryorg.net.host.ipv6Gateway = "2001:41d0:a:51ff:ff:ff:ff:ff";
 
-              networking.interfaces =
-              {
-                eno1 =
-                {
-                  ipv4 =
-                  {
-                    addresses = [ { address = "37.187.145.124"; prefixLength = 24; } ];
-                    routes = [ { address = "0.0.0.0"; prefixLength = 0; via = "37.187.145.254"; } ];
-                  };
-                  ipv6 =
-                  {
-                    addresses = [ { address = "2001:41d0:a:517c::1"; prefixLength = 56; } ];
-                    routes = [ { address = "::"; prefixLength = 0; via = "2001:41d0:a:51ff:ff:ff:ff:ff"; } ];
-                  };
-                };
-              };
               fileSystems =
               {
                 "/" =
