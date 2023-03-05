@@ -136,7 +136,7 @@
                   };
                   ipv6 =
                   {
-                    addresses = [ { address = "2001:41d0:a:517c::1"; prefixLength = 128; } ];
+                    addresses = [ { address = "2001:41d0:a:517c::1"; prefixLength = 56; } ];
                     routes = [ { address = "::"; prefixLength = 0; via = "2001:41d0:a:51ff:ff:ff:ff:ff"; } ];
                   };
                 };
