@@ -41,7 +41,7 @@ with lib;
     {
       enable = true;
       wheelNeedsPassword = config.benaryorg.base.sudo.needsPassword;
-      extraRules =
+      extraRules = mkOrder 1500
       [
         {
           groups = [ "wheel" ];
@@ -109,6 +109,12 @@ with lib;
       # filesystem tooling
       bcache-tools btrfs-progs cryptsetup dosfstools fio mdadm ncdu
     ];
+
+    users.users.root =
+    {
+      subUidRanges = mkForce [ { startUid = 2000000; count = 1000000; } ];
+      subGidRanges = mkForce [ { startGid = 2000000; count = 1000000; } ];
+    };
 
     system.stateVersion = "22.11";
   };

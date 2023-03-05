@@ -37,6 +37,7 @@
               ./spec/base.nix
               ./spec/git.nix
               ./spec/net.nix
+              ./spec/lxd.nix
             ];
 
             options =
@@ -117,7 +118,24 @@
           in
             with lib;
             {
+              age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd6.cloud.bsocat.net.age;
               benaryorg.hardware.vendor = "ovh";
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legoConfig = 
+              {
+                email = "letsencrypt@benary.org";
+                dnsProvider = "hurricane";
+                credentialsFile = config.age.secrets.lxdLegoSecret.path;
+              };
+              benaryorg.lxd.extraRemotes =
+              [
+                "https://lxd1.cloud.bsocat.net:9132"
+                "https://lxd2.cloud.bsocat.net:9132"
+                "https://lxd3.cloud.bsocat.net:9132"
+                "https://lxd4.cloud.bsocat.net:9132"
+                "https://lxd5.cloud.bsocat.net:9132"
+              ];
               benaryorg.net.host.primaryInterface = "eno1";
               benaryorg.net.host.ipv4 = "37.187.145.124/24";
               benaryorg.net.host.ipv4Gateway = "37.187.145.254";
