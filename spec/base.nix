@@ -35,6 +35,8 @@ with lib;
     time.timeZone = "Etc/UTC";
     i18n.defaultLocale = "C.UTF-8";
 
+    boot.tmpOnTmpfs = true;
+
     security.sudo =
     {
       enable = true;
