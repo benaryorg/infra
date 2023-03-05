@@ -44,6 +44,7 @@
               targetHost = name;
               targetUser = conf.sshuser;
               tags = [ config.benaryorg.hardware.vendor ];
+              buildOnTarget = true;
             };
             benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@shell.cloud.bsocat.net" ] conf) ];
           };
