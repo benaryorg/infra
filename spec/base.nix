@@ -53,6 +53,9 @@ with lib;
       ];
     };
 
+    # fails to start
+    systemd.services.mdmonitor.enable = false;
+
     programs =
     {
       vim.defaultEditor = true;
