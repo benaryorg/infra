@@ -160,6 +160,8 @@ with lib;
             options = [ "noatime" "discard" ];
           };
         };
+
+        systemd.services.mdadm-monitor.enable = false;
       })
     ];
 }

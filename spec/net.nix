@@ -79,28 +79,33 @@ with lib;
     }
     (mkIf (config.benaryorg.net.type == "host")
     {
-      networking.interfaces =
+      systemd.network =
       {
-        "${config.benaryorg.net.host.primaryInterface}" =
-          let
-            splitAddr = addr: (
-              pipe addr
-              [
-                (splitString "/")
-                (list: { address = (builtins.head list); prefixLength = (pipe list [ reverseList builtins.head toInt]); })
-              ]
-            );
-          in
+        enable = true;
+        networks =
         {
-          ipv4 = mkIf (config.benaryorg.net.host.ipv4 != null)
+          "40-external" =
           {
-            addresses = [ (splitAddr config.benaryorg.net.host.ipv4) ];
-            routes = [ { address = "0.0.0.0"; prefixLength = 0; via = config.benaryorg.net.host.ipv4Gateway; } ];
-          };
-          ipv6 = mkIf (config.benaryorg.net.host.ipv6 != null)
-          {
-            addresses = [ (splitAddr config.benaryorg.net.host.ipv6) ];
-            routes = [ { address = "::"; prefixLength = 0; via = config.benaryorg.net.host.ipv6Gateway; } ];
+            enable = true;
+            name = "${config.benaryorg.net.host.primaryInterface}";
+            addresses =
+            [
+              (mkIf (config.benaryorg.net.host.ipv4 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv4; }; })
+              (mkIf (config.benaryorg.net.host.ipv6 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv6; }; })
+            ];
+            routes =
+            [
+              (mkIf (config.benaryorg.net.host.ipv4 != null) { routeConfig =
+              {
+                Destination = "0.0.0.0/0";
+                Gateway = config.benaryorg.net.host.ipv4Gateway;
+              }; })
+              (mkIf (config.benaryorg.net.host.ipv6 != null) { routeConfig =
+              {
+                Destination = "::/0";
+                Gateway = config.benaryorg.net.host.ipv6Gateway;
+              }; })
+            ];
           };
         };
       };

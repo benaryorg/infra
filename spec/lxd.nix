@@ -116,6 +116,23 @@ with lib;
           ];
         };
 
+        services.ndppd =
+        {
+          enable = true;
+          proxies =
+          {
+            "${config.benaryorg.lxd.extInterface}" =
+            {
+              router = false;
+              rules."${config.benaryorg.lxd.network}::/64" =
+              {
+                method = "iface";
+                interface = config.benaryorg.lxd.bridge;
+              };
+            };
+          };
+        };
+
         systemd.services =
         {
           lxddns-responder =
@@ -137,59 +154,88 @@ with lib;
           };
         };
 
-        networking.bridges."${config.benaryorg.lxd.bridge}".interfaces = [];
-        networking.interfaces."${config.benaryorg.lxd.bridge}" =
+        systemd.network =
         {
-          ipv6.addresses = [ { address = "${config.benaryorg.lxd.network}::2"; prefixLength = 64; } ];
+          networks =
+          {
+            "40-external" =
+            {
+              networkConfig =
+              {
+                IPForward = true;
+                IPv6SendRA = false;
+                IPv6AcceptRA = true;
+              };
+              ipv6RoutePrefixes =
+              [
+                {
+                  ipv6RoutePrefixConfig =
+                  {
+                      Route = "${config.benaryorg.lxd.network}::/64";
+                  };
+                }
+              ];
+              ipv6SendRAConfig =
+              {
+                RouterPreference = "high";
+              };
+            };
+            "50-internal" =
+            {
+              enable = true;
+              name = "br0";
+              addresses = [ { addressConfig = { Address = "${config.benaryorg.lxd.network}::2/64"; }; } ];
+              networkConfig =
+              {
+                IPForward = true;
+                IPv6ProxyNDP = true;
+                IPv6ProxyNDPAddress = [ "${config.benaryorg.lxd.network}::1" ];
+                IPv6SendRA = true;
+                IPv6AcceptRA = false;
+                ConfigureWithoutCarrier = true;
+              };
+              ipv6SendRAConfig =
+              {
+                EmitDNS = true;
+                DNS = [ "${config.benaryorg.lxd.network}::2" ];
+                EmitDomains = true;
+                Domains = [ config.benaryorg.lxd.cluster ];
+              };
+              ipv6Prefixes =
+              [
+                {
+                  ipv6PrefixConfig =
+                  {
+                      Prefix = "${config.benaryorg.lxd.network}::/64";
+                  };
+                }
+              ];
+              ipv6RoutePrefixes =
+              [
+                {
+                  ipv6RoutePrefixConfig =
+                  {
+                      Route = "${config.benaryorg.lxd.network}::1/128";
+                  };
+                }
+              ];
+            };
+          };
+          netdevs =
+          {
+            "50-internal" =
+            {
+              netdevConfig =
+              {
+                Name = "br0";
+                Kind = "bridge";
+              };
+            };
+          };
         };
 
         services =
         {
-          ndppd =
-          {
-            enable = true;
-            proxies =
-            {
-              "${config.benaryorg.lxd.bridge}".rules."${config.benaryorg.lxd.network}::1/128".method = "static";
-              "${config.benaryorg.lxd.extInterface}" =
-              {
-                router = false;
-                rules."${config.benaryorg.lxd.network}::/64" =
-                {
-                  method = "iface";
-                  interface = config.benaryorg.lxd.bridge;
-                };
-              };
-            };
-          };
-          radvd =
-          {
-            enable = true;
-            config =
-            ''
-              interface ${config.benaryorg.lxd.bridge}
-              {
-                AdvSendAdvert on;
-                IgnoreIfMissing on;
-                MinRtrAdvInterval 3;
-                MaxRtrAdvInterval 10;
-                AdvDefaultPreference medium;
-                AdvHomeAgentFlag off;
-                prefix ${config.benaryorg.lxd.network}::/64
-                {
-                  AdvOnLink on;
-                  AdvAutonomous on;
-                  AdvRouterAddr on;
-                };
-                RDNSS ${config.benaryorg.lxd.network}::2
-                {
-                };
-                DNSSL ${config.benaryorg.lxd.cluster}
-                {
-                };
-              };
-            '';
-          };
           unbound.settings.server =
           {
             interface = [ "::1" "127.0.0.1" "${config.benaryorg.lxd.network}::2" ];
