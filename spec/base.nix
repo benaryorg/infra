@@ -95,7 +95,7 @@ with lib;
       # shell tooling
       bvi jq moreutils pv tree
       # file tooling
-      binwalk detox dos2unix
+      binwalk detox dos2unix file
       # tui tooling
       asciinema pass pinentry-curses tmux tmux-xpanes
       # databases
