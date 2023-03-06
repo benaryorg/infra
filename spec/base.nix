@@ -91,7 +91,7 @@ with lib;
       btrbk criu efibootmgr psutils pstree podman qemu uucp
       (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_PREFER_APPLETS=y"; })
       # misc utils
-      cfssl testssl
+      cfssl testssl openssl
       # shell tooling
       bvi jq moreutils pv tree
       # file tooling
