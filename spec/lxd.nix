@@ -219,6 +219,10 @@ with lib;
                   };
                 }
               ];
+              linkConfig =
+              {
+                RequiredForOnline = false;
+              };
             };
           };
           netdevs =
