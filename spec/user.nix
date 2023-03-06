@@ -31,7 +31,8 @@ with lib;
 
   config =
   {
-    users.users = mkIf config.benaryorg.user.ssh.enable {
+    users.users = mkIf config.benaryorg.user.ssh.enable
+    {
       "${config.benaryorg.user.ssh.name}" =
       {
         isNormalUser = true;

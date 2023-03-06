@@ -65,15 +65,18 @@ with lib;
             enable = true;
             description = "klaus git viewer";
             path = [ pkgs.git ];
-            environment = {
+            environment =
+            {
               KLAUS_SITE_NAME = "${name} by Katze";
               KLAUS_REPOS_ROOT = "/var/lib/gitolite/repositories/public";
               KLAUS_USE_SMARTHTTP = "true";
             };
-            unitConfig = {
+            unitConfig =
+            {
               Type = "simple";
             };
-            serviceConfig = {
+            serviceConfig =
+            {
               ExecStart = "${klausGunicorn}/bin/gunicorn klaus.contrib.wsgi_autoreload";
               User = "git";
               Group = "git";
