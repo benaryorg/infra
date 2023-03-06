@@ -38,6 +38,8 @@ in
       ];
     };
 
+    boot.tmpOnTmpfs = true;
+
     programs =
     {
       vim.defaultEditor = true;
