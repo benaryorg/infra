@@ -33,6 +33,7 @@
               ./spec/user.nix
               ./spec/ssh.nix
               ./spec/nix.nix
+              ./spec/nullmailer.nix
               ./spec/hardware.nix
               ./spec/base.nix
               ./spec/git.nix
