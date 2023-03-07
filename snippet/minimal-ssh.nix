@@ -7,6 +7,7 @@ let
     jumphost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrKgj+479k+nZjVKAeVnh0clxh6MUuEmY0BTtaNMDi5 benaryorg@shell.cloud.bsocat.net";
   };
   useUser = false;
+  isContainer = false;
 in
   {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -49,7 +50,7 @@ in
     services =
     {
       lldpd.enable = true;
-      unbound.enable = true;
+      unbound.enable = !isContainer;
       openssh =
       {
         enable = true;
@@ -59,33 +60,44 @@ in
     };
 
     environment.systemPackages = with pkgs;
-    [
-      # system tooling
-      efibootmgr psutils pstree uucp
-      (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_PREFER_APPLETS=y"; })
-      # shell tooling
-      bvi jq moreutils pv tree
-      # file tooling
-      binwalk detox dos2unix
-      # tui tooling
-      tmux
-      # debugging
-      curl dig htop iftop iotop lsof netcat-openbsd nmap nmon socat tcpdump traceroute whois
-      # hardware tooling
-      ethtool hdparm lsscsi pciutils smartmontools usbutils
-      # filesystem tooling
-      bcache-tools btrfs-progs cryptsetup dosfstools fio mdadm ncdu
-    ];
+      [
+        # system tooling
+        psutils pstree
+        # shell tooling
+        bvi jq moreutils pv tree
+        # file tooling
+        binwalk detox dos2unix file
+        # tui tooling
+        tmux
+        # debugging
+        curl dig htop iftop iotop lsof netcat-openbsd nmap nmon socat tcpdump traceroute whois
+        # hardware tooling
+        ethtool lsscsi usbutils
+        # filesystem tooling
+        btrfs-progs cryptsetup dosfstools fio ncdu
+      ]
+      ++
+      lib.optionals (!isContainer)
+      [
+        # system tooling
+        efibootmgr uucp
+        (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_PREFER_APPLETS=y"; })
+        # hardware tooling
+        hdparm pciutils smartmontools
+        # filesystem tooling
+        bcache-tools mdadm
+      ]
+    ;
 
     networking =
     {
       firewall.enable = false;
       wireguard.enable = false;
       tempAddresses = "disabled";
-      useDHCP = true;
+      useDHCP = !isContainer;
     };
 
-    system.copySystemConfiguration = true;
+    system.copySystemConfiguration = !isContainer;
 
     system.stateVersion = "22.11"; # Did you read the comment?
   }
