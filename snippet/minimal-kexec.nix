@@ -8,6 +8,8 @@ let
   };
 in
   {
+    kexec.autoReboot = false;
+
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     time.timeZone = "Etc/UTC";
