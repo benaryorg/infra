@@ -91,6 +91,8 @@ with lib;
           group = "lxddns";
         } // config.benaryorg.lxd.legoConfig;
 
+        users.groups.lxd.members = mkIf config.benaryorg.user.ssh.enable [ config.benaryorg.user.ssh.name ];
+
         users.groups.lxddns = {};
         users.users.lxddns =
         {
