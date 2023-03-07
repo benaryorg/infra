@@ -21,6 +21,9 @@ Exceptions to the IPv6-only rule are only made when interaction with other syste
 To avoid having to enter the jumphost SSH keys a bazillion times during deployment while *also* preventing unauthenticated access to the SSH connections use the following command:
 
 ```bash
-ssh-agent zsh -c 'ssh-add && exec $*' -s colmena apply
+# use temporary ssh-agent instance to apply to @default set (everything but the jumphost)
+ssh-agent zsh -c 'ssh-add && exec $*' -s colmena apply --on @default
+# deploy to the jumphost locally via sudo
+colmena apply-local --node shell.cloud.bsocat.net --sudo
 ```
 
