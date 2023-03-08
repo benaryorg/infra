@@ -102,6 +102,7 @@ with lib;
         ''
           ln -fs $systemConfig/init /sbin/init
         '';
+        boot.specialFileSystems."/run".options = [ "rshared" ];
       })
       (mkIf (config.benaryorg.hardware.vendor == "ovh")
       {
