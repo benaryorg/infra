@@ -51,6 +51,7 @@ in
     {
       lldpd.enable = true;
       unbound.enable = !isContainer;
+      rdnssd.enable = isContainer;
       openssh =
       {
         enable = true;
