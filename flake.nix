@@ -2,10 +2,11 @@
   inputs =
   {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgsSyncplay.url = "github:NixOS/nixpkgs?rev=cd0f6e59d17d337f398bbef85636e75089b0f9e8";
     ragenix.url = "github:yaxitech/ragenix";
   };
 
-  outputs = { nixpkgs, ragenix, ... }:
+  outputs = { nixpkgs, ragenix, nixpkgsSyncplay, ... }:
   {
     colmena =
     {
@@ -14,6 +15,13 @@
         nixpkgs = import nixpkgs
         {
           system = "x86_64-linux";
+        };
+        nodeNixpkgs =
+        {
+          "syncplay.lxd.bsocat.net" = import nixpkgsSyncplay
+          {
+            system = "x86_64-linux";
+          };
         };
         specialArgs =
         {
