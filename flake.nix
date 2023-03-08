@@ -156,6 +156,49 @@
                 };
               };
             };
+
+      "syncplay.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              age.secrets.syncplaySalt.file = ./secret/service/syncplay/syncplay.lxd.bsocat.net.age;
+              users.groups.syncplay = {};
+              users.users.syncplay =
+              {
+                isSystemUser = true;
+                group = "syncplay";
+              };
+              services.syncplay =
+              {
+                enable = true;
+                saltFile = config.age.secrets.syncplaySalt.path;
+                certDir = "/run/credentials/syncplay.service";
+                user = "syncplay";
+                group = "syncplay";
+                extraArgs = [ "--isolate-rooms" ];
+              };
+              security.acme.acceptTerms = true;
+              security.acme.certs."${config.networking.fqdn}" =
+              {
+                email = "letsencrypt@benary.org";
+                reloadServices = [ "syncplay.service" ];
+                listenHTTP = ":80";
+                group = "syncplay";
+              };
+              systemd.services.syncplay =
+              {
+                wants = [ "acme-finished-${config.networking.fqdn}.target" ];
+                after = [ "acme-finished-${config.networking.fqdn}.target" ];
+                serviceConfig.LoadCredential =
+                [
+                  "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
+                  "privkey.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
+                  "chain.pem:/var/lib/acme/${config.networking.fqdn}/chain.pem"
+                ];
+              };
+            };
     };
   };
 }
