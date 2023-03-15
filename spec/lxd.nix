@@ -267,6 +267,34 @@ with lib;
                   zone-cache-refresh-interval=0
                 '';
           };
+          # FIXME: this is probably not going away anytime soon
+          # It would be incredibly useful to have this configuration
+          # live in the container config and be pulled from there.
+          # Of course that requires a rather elaborate way to assign
+          # containers to clusters, but that should be doable?
+          nginx =
+          {
+            enable = true;
+            streamConfig =
+            ''
+              upstream smtps {
+                server smtp1.lxd.bsocat.net:465;
+                server smtp2.lxd.bsocat.net:465;
+              }
+              server {
+                listen     0.0.0.0:465;
+                proxy_pass smtps;
+              }
+              upstream smtp {
+                server smtp1.lxd.bsocat.net:25;
+                server smtp2.lxd.bsocat.net:25;
+              }
+              server {
+                listen     0.0.0.0:25;
+                proxy_pass smtp;
+              }
+            '';
+          };
         };
       };
 }
