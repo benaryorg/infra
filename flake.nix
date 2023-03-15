@@ -160,9 +160,34 @@
           in
             with lib;
             {
-              benaryorg.deployment.default = false;
+              age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd4.cloud.bsocat.net.age;
+              benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legoConfig =
+              {
+                email = "letsencrypt@benary.org";
+                dnsProvider = "hurricane";
+                credentialsFile = config.age.secrets.lxdLegoSecret.path;
+              };
+              benaryorg.net.host.primaryInterface = "enp3s0";
+              benaryorg.net.host.ipv4 = "37.187.89.188/24";
+              benaryorg.net.host.ipv4Gateway = "37.187.89.254";
+              benaryorg.net.host.ipv6 = "2001:41d0:a:31bc::1/56";
+              benaryorg.net.host.ipv6Gateway = "2001:41d0:a:31ff:ff:ff:ff:ff";
+              benaryorg.hardware.ovh =
+              {
+                device =
+                {
+                  sda = { uuid = "e8d33298-8829-4720-95a9-65bc1f0d630c"; keyuuid = "80334940-bad4-1645-9d7f-e3f0306c7e6d"; };
+                  sdb = { uuid = "50f61ebd-9a6c-4a3e-afb5-39821081502c"; keyuuid = "054beafa-d039-e848-a9c7-e07d40bf6194"; };
+                };
+                fs =
+                {
+                  root = "c0096bb8-9a5d-4df8-8fbe-e0f693d8e74f";
+                  boot = "1ae61624-fef8-4555-80d0-514e7ba1cb47";
+                };
+              };
             };
 
       "lxd5.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -186,7 +211,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
-              benaryorg.lxd.legoConfig = 
+              benaryorg.lxd.legoConfig =
               {
                 email = "letsencrypt@benary.org";
                 dnsProvider = "hurricane";
