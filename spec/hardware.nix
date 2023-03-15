@@ -74,6 +74,9 @@ with lib;
 
   config = mkMerge
     [
+      {
+        deployment.tags = [ config.benaryorg.hardware.vendor ];
+      }
       (mkIf (config.benaryorg.hardware.vendor == "container")
       {
         # remainder of the container configuration is stolen from

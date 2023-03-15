@@ -68,7 +68,7 @@
               {
                 targetHost = name;
                 targetUser = conf.sshuser;
-                tags = [ config.benaryorg.hardware.vendor (mkIf config.benaryorg.deployment.default "default")];
+                tags = [ (mkIf config.benaryorg.deployment.default "default")];
                 buildOnTarget = true;
               };
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@shell.cloud.bsocat.net" ] conf) ];
