@@ -1,0 +1,13 @@
+groups:
+  - name: lxd
+    targets:
+      - _plugin: task
+        task: colmena::query_by_tag
+        parameters:
+          tag: lxd
+config:
+  transport: ssh
+  ssh:
+    native-ssh: true
+    connect-timeout: 4
+    host-key-check: true
