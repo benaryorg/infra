@@ -121,6 +121,61 @@
               networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
             };
 
+      "lxd1.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "lxd.bsocat.net";
+            };
+
+      "lxd2.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "lxd.bsocat.net";
+            };
+
+      "lxd3.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "lxd.bsocat.net";
+            };
+
+      "lxd4.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "lxd.bsocat.net";
+            };
+
+      "lxd5.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "lxd.bsocat.net";
+            };
+
       "lxd6.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
           let
             conf = pkgs.callPackage ./conf {};
@@ -137,14 +192,6 @@
                 dnsProvider = "hurricane";
                 credentialsFile = config.age.secrets.lxdLegoSecret.path;
               };
-              benaryorg.lxd.extraRemotes =
-              [
-                "https://lxd1.cloud.bsocat.net:9132"
-                "https://lxd2.cloud.bsocat.net:9132"
-                "https://lxd3.cloud.bsocat.net:9132"
-                "https://lxd4.cloud.bsocat.net:9132"
-                "https://lxd5.cloud.bsocat.net:9132"
-              ];
               benaryorg.net.host.primaryInterface = "eno1";
               benaryorg.net.host.ipv4 = "37.187.145.124/24";
               benaryorg.net.host.ipv4Gateway = "37.187.145.254";
