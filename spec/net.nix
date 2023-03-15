@@ -71,12 +71,16 @@ with lib;
         # this is just the global DHCP option, individual interfaces may still use DHCP
         useDHCP = false;
       };
+      services.rdnssd.enable = config.benaryorg.net.rdnssd.enable;
+    }
+    (mkIf config.benaryorg.net.unbound.enable
+    {
       services =
       {
-        unbound.enable = config.benaryorg.net.unbound.enable;
-        rdnssd.enable = config.benaryorg.net.rdnssd.enable;
+        unbound.enable = true;
+        resolved.enable = false;
       };
-    }
+    })
     (mkIf (config.benaryorg.net.type == "host")
     {
       systemd.network =
