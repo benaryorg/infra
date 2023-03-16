@@ -95,8 +95,13 @@ with lib;
     services =
     {
       lldpd.enable = true;
-      locate.locate = pkgs.mlocate;
       atd.enable = true;
+      locate =
+      {
+        enable = true;
+        interval = "daily";
+        locate = pkgs.mlocate;
+      };
     };
 
     environment.systemPackages = with pkgs;
