@@ -53,8 +53,20 @@ with lib;
       ];
     };
 
-    virtualisation.containers.enable = true;
-    virtualisation.containers.storage.settings.storage.driver = mkDefault "btrfs";
+    virtualisation.containers =
+    {
+      enable = true;
+      # upstream default, except for driver=btrfs
+      storage.settings =
+      {
+        storage =
+        {
+          driver = "btrfs";
+          graphroot = "/var/lib/containers/storage";
+          runroot = "/run/containers/storage";
+        };
+      };
+    };
 
     # fails to start
     systemd.services.mdmonitor.enable = false;
