@@ -54,6 +54,7 @@ with lib;
     };
 
     virtualisation.containers.enable = true;
+    virtualisation.containers.storage.settings.storage.driver = mkDefault "btrfs";
 
     # fails to start
     systemd.services.mdmonitor.enable = false;
