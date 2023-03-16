@@ -94,6 +94,14 @@ with lib;
 
         users.groups.lxd.members = mkIf config.benaryorg.user.ssh.enable [ config.benaryorg.user.ssh.name ];
 
+        # lxd user/group for extra large uid ranges
+        users.users.root =
+        {
+          subUidRanges = mkForce [ { startUid = 1000000000; count = 1000000000; } ];
+          subGidRanges = mkForce [ { startGid = 1000000000; count = 1000000000; } ];
+        };
+
+        # lxddns user/group
         users.groups.lxddns = {};
         users.users.lxddns =
         {

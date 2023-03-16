@@ -130,8 +130,8 @@ with lib;
 
     users.users.root =
     {
-      subUidRanges = mkForce [ { startUid = 2000000; count = 1000000; } ];
-      subGidRanges = mkForce [ { startGid = 2000000; count = 1000000; } ];
+      subUidRanges = [ { startUid = 2000000; count = 1000000; } ];
+      subGidRanges = [ { startGid = 2000000; count = 1000000; } ];
     };
 
     system.stateVersion = "22.11";
