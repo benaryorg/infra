@@ -33,6 +33,7 @@ with lib;
   {
     users.users = mkIf config.benaryorg.user.ssh.enable
     {
+      root.hashedPassword = "*";
       "${config.benaryorg.user.ssh.name}" =
       {
         isNormalUser = true;
