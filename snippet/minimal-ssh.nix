@@ -12,6 +12,8 @@ in
   {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    boot.isContainer = isContainer;
+
     time.timeZone = "Etc/UTC";
     i18n.defaultLocale = "C.UTF-8";
 
