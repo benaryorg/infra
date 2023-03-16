@@ -107,6 +107,18 @@ with lib;
         '';
         boot.specialFileSystems."/run".options = [ "rshared" ];
       })
+      (mkIf (config.benaryorg.hardware.vendor != "container")
+      {
+        boot.kernel.sysctl =
+        {
+          "kernel.sysrq" = 244;
+          "kernel.panic" = 3;
+          "fs.protected_symlinks" = 1;
+          "fs.protected_hardlinks" = 1;
+          "net.core.rmem_max" = 4194304;
+          "net.core.wmem_max" = 1048576;
+        };
+      })
       (mkIf (config.benaryorg.hardware.vendor == "ovh")
       {
         boot.kernelParams = [ "console=ttyS0,115200" ];
