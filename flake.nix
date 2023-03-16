@@ -262,6 +262,16 @@
               };
             };
 
+      "steam.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
+              benaryorg.ssh.x11 = true;
+            };
+
       "syncplay.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
           let
             conf = pkgs.callPackage ./conf {};
