@@ -53,6 +53,8 @@ with lib;
       ];
     };
 
+    virtualisation.containers.enable = true;
+
     # fails to start
     systemd.services.mdmonitor.enable = false;
 
