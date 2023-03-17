@@ -77,6 +77,18 @@ with lib;
       {
         deployment.tags = [ config.benaryorg.hardware.vendor ];
       }
+      (
+        let
+          udevRules =
+          ''
+            ACTION=="add|change", KERNEL=="[sv]d[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+          '';
+        in
+          {
+            boot.initrd.services.udev.rules = udevRules;
+            services.udev.extraRules = udevRules;
+          }
+      )
       (mkIf (config.benaryorg.hardware.vendor == "container")
       {
         # remainder of the container configuration is stolen from
