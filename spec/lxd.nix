@@ -162,6 +162,8 @@ with lib;
               Group = "lxddns";
             };
             wantedBy = [ "multi-user.target" ];
+            wants = [ "acme-finished-${config.networking.fqdn}.target" ];
+            after = [ "acme-finished-${config.networking.fqdn}.target" ];
           };
         };
 
