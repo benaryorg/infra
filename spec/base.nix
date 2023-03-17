@@ -101,6 +101,7 @@ with lib;
         enable = true;
         interval = "daily";
         locate = pkgs.mlocate;
+        localuser = null;
       };
     };
 
