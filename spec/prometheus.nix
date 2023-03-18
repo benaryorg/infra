@@ -145,11 +145,22 @@ with lib;
       {
         services.prometheus.exporters =
           let
-            exporterDefaults = key: value:
+            exporterDefaultFunction = key: value:
             {
               listenAddress = "[::1]";
             };
-            exporters = builtins.mapAttrs (key: value: (exporterDefaults key value) // value) config.benaryorg.prometheus.client.exporters;
+            exporterDefaults =
+            {
+              node.enabledCollectors =
+              [
+                "cgroups"
+                "ethtool"
+                "slabinfo"
+                "systemd"
+                "zoneinfo"
+              ];
+            };
+            exporters = builtins.mapAttrs (key: value: (exporterDefaultFunction key value) // (exporterDefaults."${key}") // value) config.benaryorg.prometheus.client.exporters;
           in
             exporters;
 
