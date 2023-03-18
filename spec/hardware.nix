@@ -91,6 +91,7 @@ with lib;
       )
       (mkIf (config.benaryorg.hardware.vendor == "container")
       {
+        systemd.oomd.enable = false;
         # remainder of the container configuration is stolen from
         # <nixpkgs/nixos/modules/virtualisation/lxc-container.nix>
         boot.isContainer = true;
