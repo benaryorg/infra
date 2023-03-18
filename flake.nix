@@ -381,6 +381,7 @@
               age.secrets.grafanaSecret = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/secret.age; owner = "grafana"; mode = "0400"; };
               benaryorg.prometheus.server.enable = true;
               benaryorg.prometheus.client.enable = true;
+              services.prometheus.retentionTime = "360d";
               services =
               {
                 grafana =
