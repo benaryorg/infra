@@ -88,6 +88,7 @@
 
               benaryorg.base.sudo.needsPassword = true;
               benaryorg.deployment.default = false;
+              benaryorg.prometheus.client.enable = true;
               benaryorg.git.adminkey = conf.sshkey."benaryorg@gnutoo.home.bsocat.net";
               benaryorg.git.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -120,6 +121,8 @@
             {
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+              benaryorg.prometheus.client.enable = true;
+              security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
 
               networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
             };
@@ -131,6 +134,7 @@
             with lib;
             {
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd1.cloud.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
@@ -166,6 +170,7 @@
             with lib;
             {
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd2.cloud.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
@@ -200,6 +205,7 @@
             with lib;
             {
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd3.cloud.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
@@ -234,6 +240,7 @@
             with lib;
             {
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd4.cloud.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
@@ -280,6 +287,7 @@
             with lib;
             {
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd6.cloud.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
@@ -316,6 +324,8 @@
             {
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
               benaryorg.ssh.x11 = true;
+              benaryorg.prometheus.client.enable = true;
+              security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
             };
 
       "syncplay.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -325,6 +335,7 @@
             with lib;
             {
               age.secrets.syncplaySalt.file = ./secret/service/syncplay/syncplay.lxd.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
               users.groups.syncplay = {};
               users.users.syncplay =
               {
