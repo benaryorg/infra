@@ -358,6 +358,16 @@
                 ];
               };
             };
+
+      "prometheus.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.prometheus.server.enable = true;
+              benaryorg.prometheus.client.enable = true;
+            };
     };
   };
 }
