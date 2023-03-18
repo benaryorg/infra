@@ -365,8 +365,66 @@
           in
             with lib;
             {
+              age.secrets.grafanaUser = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_user.age; owner = "grafana"; mode = "0400"; };
+              age.secrets.grafanaPass = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_pass.age; owner = "grafana"; mode = "0400"; };
+              age.secrets.grafanaSecret = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/secret.age; owner = "grafana"; mode = "0400"; };
               benaryorg.prometheus.server.enable = true;
               benaryorg.prometheus.client.enable = true;
+              services =
+              {
+                grafana =
+                {
+                  enable = true;
+                  settings =
+                  {
+                    security =
+                    {
+                      admin_user = "$__file{/run/agenix/grafanaUser}";
+                      admin_password = "$__file{/run/agenix/grafanaPass}";
+                      secret_key = "$__file{/run/agenix/grafanaSecret}";
+                    };
+                    server =
+                    {
+                      http_addr = "127.0.0.1";
+                      http_port = 3000;
+                      domain = config.networking.fqdn;
+                      root_url = "https://${config.networking.fqdn}/grafana/";
+                    };
+                    analytics.reporting_enabled = false;
+                  };
+                  provision =
+                  {
+                    enable = true;
+                    datasources.settings =
+                    {
+                      datasources =
+                      [
+                        {
+                          name = "Prometheus";
+                          type = "prometheus";
+                          url = "http://localhost:9090";
+                        }
+                      ];
+                    };
+                  };
+                };
+                nginx =
+                {
+                  enable = true;
+                  recommendedProxySettings = true;
+                  recommendedTlsSettings = true;
+                  virtualHosts."${config.networking.fqdn}" =
+                  {
+                    enableACME = true;
+                    forceSSL = true;
+                    locations."/grafana/" =
+                    {
+                      proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}/";
+                      proxyWebsockets = true;
+                    };
+                  };
+                };
+              };
             };
     };
   };

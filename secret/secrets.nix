@@ -12,4 +12,7 @@ in
     "lego/hedns/lxd2.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd2.cloud.bsocat.net" ];
     "lego/hedns/lxd1.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd1.cloud.bsocat.net" ];
     "service/syncplay/syncplay.lxd.bsocat.net.age".publicKeys = [ conf.hostkey."syncplay.lxd.bsocat.net" ];
+    "service/grafana/prometheus.lxd.bsocat.net/admin_user.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
+    "service/grafana/prometheus.lxd.bsocat.net/admin_pass.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
+    "service/grafana/prometheus.lxd.bsocat.net/secret.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
   }
