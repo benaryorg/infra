@@ -400,7 +400,6 @@
                       http_addr = "127.0.0.1";
                       http_port = 3000;
                       domain = config.networking.fqdn;
-                      root_url = "https://${config.networking.fqdn}/grafana/";
                     };
                     analytics.reporting_enabled = false;
                   };
@@ -429,7 +428,7 @@
                   {
                     enableACME = true;
                     forceSSL = true;
-                    locations."/grafana/" =
+                    locations."/" =
                     {
                       proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}/";
                       proxyWebsockets = true;
