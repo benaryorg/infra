@@ -85,7 +85,6 @@ with lib;
           enable = true;
           recommendedSysctlSettings = true;
         };
-        security.acme.acceptTerms = true;
         security.acme.certs."${config.networking.fqdn}" =
         {
           reloadServices = [ "lxddns-responder.service" ];

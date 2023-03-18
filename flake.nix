@@ -47,6 +47,7 @@
               ./spec/git.nix
               ./spec/net.nix
               ./spec/lxd.nix
+              ./spec/prometheus.nix
             ];
 
             options =
@@ -72,6 +73,8 @@
                 buildOnTarget = true;
               };
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@shell.cloud.bsocat.net" ] conf) ];
+              security.acme.acceptTerms = true;
+              security.acme.defaults.email = "letsencrypt@benary.org";
             };
           };
 
@@ -133,7 +136,6 @@
               benaryorg.lxd.cluster = "lxd.bsocat.net";
               benaryorg.lxd.legoConfig =
               {
-                email = "letsencrypt@benary.org";
                 dnsProvider = "hurricane";
                 credentialsFile = config.age.secrets.lxdLegoSecret.path;
               };
@@ -169,7 +171,6 @@
               benaryorg.lxd.cluster = "lxd.bsocat.net";
               benaryorg.lxd.legoConfig =
               {
-                email = "letsencrypt@benary.org";
                 dnsProvider = "hurricane";
                 credentialsFile = config.age.secrets.lxdLegoSecret.path;
               };
@@ -204,7 +205,6 @@
               benaryorg.lxd.cluster = "lxd.bsocat.net";
               benaryorg.lxd.legoConfig =
               {
-                email = "letsencrypt@benary.org";
                 dnsProvider = "hurricane";
                 credentialsFile = config.age.secrets.lxdLegoSecret.path;
               };
@@ -239,7 +239,6 @@
               benaryorg.lxd.cluster = "lxd.bsocat.net";
               benaryorg.lxd.legoConfig =
               {
-                email = "letsencrypt@benary.org";
                 dnsProvider = "hurricane";
                 credentialsFile = config.age.secrets.lxdLegoSecret.path;
               };
@@ -286,7 +285,6 @@
               benaryorg.lxd.cluster = "lxd.bsocat.net";
               benaryorg.lxd.legoConfig =
               {
-                email = "letsencrypt@benary.org";
                 dnsProvider = "hurricane";
                 credentialsFile = config.age.secrets.lxdLegoSecret.path;
               };
@@ -342,10 +340,8 @@
                 group = "syncplay";
                 extraArgs = [ "--isolate-rooms" ];
               };
-              security.acme.acceptTerms = true;
               security.acme.certs."${config.networking.fqdn}" =
               {
-                email = "letsencrypt@benary.org";
                 reloadServices = [ "syncplay.service" ];
                 listenHTTP = ":80";
                 group = "syncplay";

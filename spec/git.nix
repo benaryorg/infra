@@ -86,10 +86,5 @@ with lib;
             wantedBy = [ "multi-user.target" ];
           };
     };
-    security.acme =
-    {
-      acceptTerms = true;
-      defaults.email = "letsencrypt@benary.org";
-    };
   };
 }
