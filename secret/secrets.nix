@@ -7,6 +7,7 @@ in
   addJumphost
   {
     "lego/hedns/lxd6.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd6.cloud.bsocat.net" ];
+    "lego/hedns/lxd5.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd5.cloud.bsocat.net" ];
     "lego/hedns/lxd4.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd4.cloud.bsocat.net" ];
     "lego/hedns/lxd3.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd3.cloud.bsocat.net" ];
     "lego/hedns/lxd2.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."lxd2.cloud.bsocat.net" ];
