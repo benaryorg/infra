@@ -43,8 +43,6 @@ plan lxd::trust
 			.convert_to(Hash)
 
 		log::debug('Add remotes with tokens')
-		$result = run_task('lxd::trust_local_add', $target, { tokens => $tokens, })
+		run_task('lxd::trust_local_add', $target, { tokens => $tokens, })
 	}
-
-	return $result
 }
