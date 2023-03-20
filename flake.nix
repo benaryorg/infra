@@ -461,6 +461,71 @@
                 };
               };
             };
+
+      "xmpp.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              age.secrets.prosodyLegoSecret.file = ./secret/service/prosody/xmpp.lxd.bsocat.net.age;
+              benaryorg.prometheus.client.enable = true;
+              security.acme.certs =
+              {
+                "${config.networking.fqdn}" =
+                {
+                  listenHTTP = ":80";
+                  reloadServices = [ "prosody.service" ];
+                  group = config.services.prosody.group;
+                };
+                "benary.org" =
+                {
+                  dnsProvider = "hurricane";
+                  credentialsFile = config.age.secrets.prosodyLegoSecret.path;
+                  reloadServices = [ "prosody.service" ];
+                  group = config.services.prosody.group;
+                  extraDomainNames = [ "conference.benary.org" ];
+                };
+              };
+              services =
+              {
+                prosody =
+                {
+                  enable = true;
+                  admins = [ "binary@benary.org" ];
+                  allowRegistration = false;
+                  authentication = "internal_hashed";
+                  c2sRequireEncryption = true;
+                  s2sRequireEncryption = true;
+                  s2sSecureAuth = true;
+                  extraConfig =
+                  ''
+                    unbound = {
+                      resolvconf = true;
+                    };
+                  '';
+                  ssl = { cert = "/var/lib/acme/${config.networking.fqdn}/cert.pem"; key = "/var/lib/acme/${config.networking.fqdn}/key.pem"; };
+                  virtualHosts = mkForce
+                  {
+                    "benary.org" =
+                    {
+                      enabled = true;
+                      domain = "benary.org";
+                      ssl = { cert = "/var/lib/acme/benary.org/cert.pem"; key = "/var/lib/acme/benary.org/key.pem"; };
+                    };
+                  };
+                  uploadHttp = { domain = config.networking.fqdn; };
+                  muc = [ { domain = "conference.benary.org"; } ];
+                  modules =
+                  {
+                    admin_adhoc = false;
+                    http_files = false;
+                    register = false;
+                    dialback = false;
+                  };
+                };
+              };
+            };
     };
   };
 }
