@@ -427,6 +427,7 @@
                     };
                     analytics.reporting_enabled = false;
                   };
+                  declarativePlugins = with pkgs.grafanaPlugins; [ grafana-piechart-panel ];
                   provision =
                   {
                     enable = true;

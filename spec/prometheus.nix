@@ -54,10 +54,7 @@ with lib;
         };
         exporters = mkOption
         {
-          default =
-          {
-            node.enable = true;
-          };
+          default = {};
           description = mdDoc
           ''
             Set of paramaters to be passed to {option}`services.prometheus.exporters`.
@@ -143,6 +140,9 @@ with lib;
       })
       (mkIf config.benaryorg.prometheus.client.enable
       {
+        benaryorg.prometheus.client.exporters.node.enable = true;
+        benaryorg.prometheus.client.exporters.smokeping.enable = true;
+        benaryorg.prometheus.client.exporters.systemd.enable = true;
         services.prometheus.exporters =
           let
             exporterDefaultFunction = key: value:
@@ -159,8 +159,22 @@ with lib;
                 "systemd"
                 "zoneinfo"
               ];
+              smokeping=
+              {
+                buckets = "5e-05,0.001,0.002,0.005,0.01,0.015,0.02,0.025,0.03,0.04,0.05,0.075,0.1,0.15,0.2,0.25,0.3,0.4,0.5,0.75,0.9,1,1.2,1.6,2,5,10";
+                hosts =
+                [
+                  "ipv4.syseleven.de"
+                  "ipv6.syseleven.de"
+                ];
+              };
+              unbound =
+              {
+                controlInterface = "/run/unbound/unbound.socket";
+                group = config.services.unbound.group;
+              };
             };
-            exporters = builtins.mapAttrs (key: value: (exporterDefaultFunction key value) // (exporterDefaults."${key}") // value) config.benaryorg.prometheus.client.exporters;
+            exporters = builtins.mapAttrs (key: value: (exporterDefaultFunction key value) // (attrByPath [ key ] {} exporterDefaults) // value) config.benaryorg.prometheus.client.exporters;
           in
             exporters;
 

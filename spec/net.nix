@@ -77,9 +77,15 @@ with lib;
     {
       services =
       {
-        unbound.enable = true;
+        unbound =
+        {
+          enable = true;
+          localControlSocketPath = "/run/unbound/unbound.socket";
+          settings.remote-control.control-enable = true;
+        };
         resolved.enable = false;
       };
+      benaryorg.prometheus.client.exporters.unbound.enable = true;
     })
     (mkIf (config.benaryorg.net.type == "host")
     {

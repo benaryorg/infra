@@ -131,6 +131,7 @@ with lib;
           "net.core.rmem_max" = 4194304;
           "net.core.wmem_max" = 1048576;
         };
+        benaryorg.prometheus.client.exporters.smartctl.enable = true;
       })
       (mkIf (config.benaryorg.hardware.vendor == "ovh")
       {
