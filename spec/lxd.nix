@@ -164,6 +164,16 @@ with lib;
             wants = [ "acme-finished-${config.networking.fqdn}.target" ];
             after = [ "acme-finished-${config.networking.fqdn}.target" ];
           };
+          pdns =
+          {
+            wants = [ "lxddns-responder.service" ];
+            after = [ "lxddns-responder.service" ];
+          };
+          nginx =
+          {
+            wants = [ "pdns.service" ];
+            after = [ "pdns.service" ];
+          };
         };
 
         systemd.network =
