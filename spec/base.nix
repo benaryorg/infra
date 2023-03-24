@@ -70,6 +70,14 @@ with lib;
 
     # fails to start
     systemd.services.mdmonitor.enable = false;
+    systemd.services.nginx.unitConfig.StartLimitIntervalSec = mkDefault 300;
+
+    systemd.extraConfig =
+    ''
+      DefaultRestartSec=1
+      DefaultStartLimitIntervalSec=300
+      DefaultStartLimitBurst=60
+    '';
 
     programs =
     {
