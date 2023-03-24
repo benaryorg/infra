@@ -470,6 +470,11 @@
             with lib;
             {
               age.secrets.prosodyLegoSecret.file = ./secret/service/prosody/xmpp.lxd.bsocat.net.age;
+              age.secrets.coturnSecret =
+              {
+                file = ./secret/service/coturn/turn.lxd.bsocat.net.age;
+                owner = config.services.prosody.user;
+              };
               benaryorg.prometheus.client.enable = true;
               security.acme.certs =
               {
@@ -504,6 +509,13 @@
                     unbound = {
                       resolvconf = true;
                     };
+                    external_service_secret = io.open("${config.age.secrets.coturnSecret.path}","r"):read()
+                    external_service_host = "turn.svc.benary.org"
+                    external_services = {
+                      { type = "stun", port = 3478 },
+                      { type = "turn", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "turns", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
+                    }
                   '';
                   ssl = { cert = "/var/lib/acme/${config.networking.fqdn}/cert.pem"; key = "/var/lib/acme/${config.networking.fqdn}/key.pem"; };
                   virtualHosts = mkForce
@@ -524,6 +536,46 @@
                     register = false;
                     dialback = false;
                   };
+                  extraModules = [ "turn_external" "external_services" ];
+                };
+              };
+            };
+
+      "turn.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              age.secrets.coturnLegoSecret.file = ./secret/lego/hedns/turn.svc.benary.org.age;
+              age.secrets.coturnSecret =
+              {
+                file = ./secret/service/coturn/turn.lxd.bsocat.net.age;
+                owner = config.systemd.services.coturn.serviceConfig.User;
+              };
+              benaryorg.prometheus.client.enable = true;
+              security.acme.certs =
+              {
+                "${config.networking.fqdn}".listenHTTP = ":80";
+                "turn.svc.benary.org" =
+                {
+                  dnsProvider = "hurricane";
+                  credentialsFile = config.age.secrets.coturnLegoSecret.path;
+                  reloadServices = [ "coturn.service" ];
+                  group = config.systemd.services.coturn.serviceConfig.Group;
+                };
+              };
+              services =
+              {
+                coturn =
+                {
+                  enable = true;
+                  static-auth-secret-file = config.age.secrets.coturnSecret.path;
+                  secure-stun = true;
+                  no-cli = true;
+                  realm = "turn.svc.benary.org";
+                  cert = "/var/lib/acme/turn.svc.benary.org/cert.pem";
+                  pkey = "/var/lib/acme/turn.svc.benary.org/key.pem";
                 };
               };
             };
