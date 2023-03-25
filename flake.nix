@@ -510,11 +510,16 @@
                       resolvconf = true;
                     };
                     external_service_secret = io.open("${config.age.secrets.coturnSecret.path}","r"):read()
-                    external_service_host = "turn.svc.benary.org"
                     external_services = {
-                      { type = "stun", port = 3478 },
-                      { type = "turn", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-                      { type = "turns", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "stun", host = "turn.svc.benary.org", port = 3478 },
+                      { type = "turn", host = "turn.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "turns", host = "turn.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "stun", host = "turn4.svc.benary.org", port = 3478 },
+                      { type = "turn", host = "turn4.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "turns", host = "turn4.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "stun", host = "turn6.svc.benary.org", port = 3478 },
+                      { type = "turn", host = "turn6.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+                      { type = "turns", host = "turn6.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
                     }
                   '';
                   ssl = { cert = "/var/lib/acme/${config.networking.fqdn}/cert.pem"; key = "/var/lib/acme/${config.networking.fqdn}/key.pem"; };
