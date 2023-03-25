@@ -528,7 +528,13 @@
                     };
                   };
                   uploadHttp = { domain = config.networking.fqdn; };
-                  muc = [ { domain = "conference.benary.org"; } ];
+                  muc =
+                  [
+                    {
+                      domain = "conference.benary.org";
+                      restrictRoomCreation = "local";
+                    }
+                  ];
                   modules =
                   {
                     admin_adhoc = false;
