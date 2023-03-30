@@ -116,7 +116,7 @@ with lib;
     environment.systemPackages = with pkgs;
     [
       # automation tooling
-      colmena ragenix.packages.x86_64-linux.default puppet-bolt
+      colmena ragenix.packages.x86_64-linux.default puppet-bolt nix-diff
       # network tooling
       dhcpcd dnsmasq iperf
       # system tooling
