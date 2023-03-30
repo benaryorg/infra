@@ -69,6 +69,7 @@
               {
                 targetHost = name;
                 targetUser = conf.sshuser;
+                privilegeEscalationCommand = [ "sudo" "-H" "TMPDIR=/nix/tmp" "--" ];
                 tags = [ (mkIf config.benaryorg.deployment.default "default")];
                 buildOnTarget = true;
               };
