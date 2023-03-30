@@ -11,6 +11,11 @@ let
 in
   {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    systemd.services.nix-daemon.environment.TMPDIR = "/nix/tmp";
+    system.activationScripts.nix-tmpdir =
+    ''
+      btrfs subvolume create /nix/tmp || mkdir -p /nix/tmp
+    '';
 
     boot.isContainer = isContainer;
 
