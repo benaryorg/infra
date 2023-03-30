@@ -551,6 +551,18 @@
                 extraModules = [ "turn_external" "external_services" ];
               };
             };
+            # https://github.com/NLnetLabs/unbound/issues/869
+            systemd.services.rdnssd.serviceConfig.ExecStart =
+              let
+                mergeHook = pkgs.writeScriptBin "rdnssd-restart-prosody-hook"
+                ''
+                  #! ${pkgs.runtimeShell} -e
+                  ${pkgs.openresolv}/bin/resolvconf -u || exit 1
+                  /run/current-system/systemd/bin/systemctl try-restart --no-block prosody.service || exit 2
+                '';
+                command = "@${pkgs.ndisc6}/bin/rdnssd rdnssd -p /run/rdnssd/rdnssd.pid -r /run/rdnssd/resolv.conf -u rdnssd -H ${mergeHook}/bin/rdnssd-restart-prosody-hook";
+              in
+                mkForce command;
           };
 
       "turn.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
