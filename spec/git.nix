@@ -1,4 +1,4 @@
-{ name, config, pkgs, lib, options, ... }:
+{ config, pkgs, lib, options, ... }:
 with lib;
 {
   options =
@@ -30,7 +30,7 @@ with lib;
         extraGitoliteRc =
         ''
           $RC{UMASK} = 0027;
-          $RC{SITE_INFO} = "${name} by Katze";
+          $RC{SITE_INFO} = "${config.networking.fqdn} by Katze";
           push( @{$RC{ENABLE}}, 'D' );
           push( @{$RC{ENABLE}}, 'desc' );
           push( @{$RC{ENABLE}}, 'help' );
@@ -45,7 +45,7 @@ with lib;
         recommendedTlsSettings = true;
         virtualHosts =
         {
-          "${name}" =
+          ${config.networking.fqdn} =
           {
             forceSSL = true;
             enableACME = true;
@@ -69,7 +69,7 @@ with lib;
             path = [ pkgs.git ];
             environment =
             {
-              KLAUS_SITE_NAME = "${name} by Katze";
+              KLAUS_SITE_NAME = "${config.networking.fqdn} by Katze";
               KLAUS_REPOS_ROOT = "/var/lib/gitolite/repositories/public";
               KLAUS_USE_SMARTHTTP = "true";
             };
