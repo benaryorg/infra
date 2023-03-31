@@ -121,7 +121,7 @@
           with lib;
           {
             benaryorg.ssh.x11 = true;
-            benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+            benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" conf.sshkey."benaryorg@mir.home.bsocat.net" ];
             benaryorg.prometheus.client.enable = true;
             security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
 
