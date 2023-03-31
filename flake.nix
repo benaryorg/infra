@@ -557,8 +557,11 @@
                 mergeHook = pkgs.writeScriptBin "rdnssd-restart-prosody-hook"
                 ''
                   #! ${pkgs.runtimeShell} -e
-                  ${pkgs.openresolv}/bin/resolvconf -u || exit 1
-                  /run/current-system/systemd/bin/systemctl try-restart --no-block prosody.service || exit 2
+                  hash_before="$(sha256sum /etc/resolv.conf)"
+                  ${pkgs.openresolv}/bin/resolvconf -u
+                  hash_after="$(sha256sum /etc/resolv.conf)"
+                  test "$hash_before" != "$hash_after" || exit 0
+                  /run/current-system/systemd/bin/systemctl try-restart --no-block prosody.service
                 '';
                 command = "@${pkgs.ndisc6}/bin/rdnssd rdnssd -p /run/rdnssd/rdnssd.pid -r /run/rdnssd/resolv.conf -u rdnssd -H ${mergeHook}/bin/rdnssd-restart-prosody-hook";
               in
