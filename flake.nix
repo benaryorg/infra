@@ -1,15 +1,29 @@
 {
   inputs =
   {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nixpkgsSyncplay.url = "github:NixOS/nixpkgs?rev=cd0f6e59d17d337f398bbef85636e75089b0f9e8";
-    ragenix.url = "github:yaxitech/ragenix";
-    ragenix.inputs.nixpkgs.follows = "nixpkgs";
-    colmena.url = "github:zhaofengli/colmena";
+    nixpkgs.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-22.11";
+    nixpkgs-unstable.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-unstable";
+    ragenix.url = "git+https://shell.cloud.bsocat.net/ragenix";
+    ragenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    ragenix.inputs.agenix.follows = "agenix";
+    ragenix.inputs.flake-utils.follows = "flake-utils";
+    ragenix.inputs.rust-overlay.follows = "rust-overlay";
+    colmena.url = "git+https://shell.cloud.bsocat.net/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+    colmena.inputs.stable.follows = "nixpkgs";
+    colmena.inputs.flake-compat.follows = "flake-compat";
+    colmena.inputs.flake-utils.follows = "flake-utils";
+    agenix.url = "git+https://shell.cloud.bsocat.net/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    flake-compat.url = "git+https://shell.cloud.bsocat.net/flake-compat";
+    flake-compat.flake = false;
+    flake-utils.url = "git+https://shell.cloud.bsocat.net/flake-utils";
+    rust-overlay.url = "git+https://shell.cloud.bsocat.net/rust-overlay";
+    rust-overlay.inputs.flake-utils.follows = "flake-utils";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, colmena, ragenix, nixpkgsSyncplay, ... }:
+  outputs = { nixpkgs, colmena, ragenix, ... }:
     let
       colmenaConfig =
       {
@@ -18,13 +32,6 @@
           nixpkgs = import nixpkgs
           {
             system = "x86_64-linux";
-          };
-          nodeNixpkgs =
-          {
-            "syncplay.lxd.bsocat.net" = import nixpkgsSyncplay
-            {
-              system = "x86_64-linux";
-            };
           };
           specialArgs =
           {
@@ -390,11 +397,9 @@
               services.syncplay =
               {
                 enable = true;
-                saltFile = config.age.secrets.syncplaySalt.path;
                 certDir = "/run/credentials/syncplay.service";
                 user = "syncplay";
                 group = "syncplay";
-                extraArgs = [ "--isolate-rooms" ];
               };
               security.acme.certs."${config.networking.fqdn}" =
               {
@@ -411,7 +416,13 @@
                   "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
                   "privkey.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
                   "chain.pem:/var/lib/acme/${config.networking.fqdn}/chain.pem"
+                  "salt:${config.age.secrets.syncplaySalt.path}"
                 ];
+                script =
+                ''
+                  export SYNCPLAY_SALT=$(cat "''${CREDENTIALS_DIRECTORY}/salt")
+                  exec ${pkgs.syncplay-nogui}/bin/syncplay-server --port 8999 --isolate-rooms
+                '';
               };
             };
 

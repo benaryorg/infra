@@ -23,6 +23,12 @@ with lib;
         description = "The flake URl to deploy.";
         type = types.str;
       };
+      nixpkgs = mkOption
+      {
+        default = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-22.11";
+        description = "The nixpkgs distribution to use.";
+        type = types.str;
+      };
     };
   };
 
@@ -40,8 +46,8 @@ with lib;
       text =
       ''
         {
-          inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
           inputs.benaryorg.url = "${config.benaryorg.flake.url}";
+          inputs.nixpkgs.url = "${config.benaryorg.flake.nixpkgs}";
           inputs.benaryorg.inputs.nixpkgs.follows = "nixpkgs";
 
           outputs = { benaryorg, ... }:
