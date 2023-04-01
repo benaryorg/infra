@@ -152,6 +152,7 @@ with lib;
         services =
         {
           openntpd.enable = true;
+          fstrim.enable = true;
           btrfs.autoScrub =
           {
             enable = config.benaryorg.hardware.ovh.btrfsScrub != [];
