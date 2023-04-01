@@ -19,7 +19,7 @@ with lib;
       };
       url = mkOption
       {
-        default = "git+https://shell.cloud.bsocat.net/infra";
+        default = "git+https://shell.cloud.bsocat.net/infra?ref=main";
         description = "The flake URl to deploy.";
         type = types.str;
       };
