@@ -96,6 +96,7 @@
               benaryorg.prometheus.client.enable = true;
               benaryorg.git.adminkey = conf.sshkey."benaryorg@gnutoo.home.bsocat.net";
               benaryorg.git.enable = true;
+              benaryorg.git.mirror.nixpkgs = { url = "https://github.com/NixOS/nixpkgs.git"; };
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = pkgs.lib.attrValues conf.sshkey;
