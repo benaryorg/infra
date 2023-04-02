@@ -11,6 +11,7 @@ let
   ];
   hostkey =
   [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHuaQCsI854sA1EZ0+iI/J0XoLhNcE+OeqsCDEnHKUM nixos.home.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJGWGQc44BCDR6m2LB5sThYXxHMNRwJCBi0irETLVb3p terraria.lxd.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILhgl6pXnjK5ZxzFduRmZkSbx5bsF8Tito0M2n8A+2HZ shell.cloud.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIa1t6BignThNJcZzAkhY55aWXPuzAU1KZW+O+C/r4dN lxd6.cloud.bsocat.net"
