@@ -40,6 +40,13 @@ with lib;
       flake = "/etc/nixos";
       flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" "--recreate-lock-file" ];
     };
+    systemd.timers.nixos-upgrade.timerConfig = mkIf config.benaryorg.flake.autoupgrade
+    {
+      OnBootSec = "1h";
+      OnUnitInactiveSec = "1d";
+      RandomizedDelaySec = mkForce "4h";
+      OnCalendar = mkForce null;
+    };
     environment.etc."nixos/flake.nix" =
     {
       mode = "0444";
