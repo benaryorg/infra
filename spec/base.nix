@@ -98,6 +98,13 @@ with lib;
         enable = config.benaryorg.base.gnupg.enable;
         pinentryFlavor = "curses";
       };
+      ssh.knownHosts =
+        let
+          globalConf = pkgs.callPackage ../conf {};
+          hostkey = globalConf.hostkey;
+          toKnownHost = _: value: { publicKey = value; };
+        in
+          builtins.mapAttrs toKnownHost hostkey;
     };
 
     services =
