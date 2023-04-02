@@ -104,6 +104,9 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = pkgs.lib.attrValues conf.sshkey;
+
+              zramSwap.enable = true;
+
               benaryorg.net.host.primaryInterface = "eno0";
               benaryorg.net.host.ipv4 = "151.80.37.166/24";
               benaryorg.net.host.ipv4Gateway = "151.80.37.254";
