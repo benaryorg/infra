@@ -4,6 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgsSyncplay.url = "github:NixOS/nixpkgs?rev=cd0f6e59d17d337f398bbef85636e75089b0f9e8";
     ragenix.url = "github:yaxitech/ragenix";
+    ragenix.inputs.nixpkgs.follows = "nixpkgs";
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -100,6 +101,12 @@
               {
                 nixpkgs = { url = "https://github.com/NixOS/nixpkgs.git"; };
                 dotfiles = { url = "https://github.com/benaryorg/dotfiles.git"; };
+                colmena = { url = "https://github.com/zhaofengli/colmena.git"; };
+                ragenix = { url = "https://github.com/yaxitech/ragenix.git"; };
+                flake-compat = { url = "https://github.com/edolstra/flake-compat.git"; };
+                flake-utils = { url = "https://github.com/numtide/flake-utils.git"; };
+                agenix = { url = "https://github.com/ryantm/agenix.git"; };
+                rust-overlay = { url = "https://github.com/oxalica/rust-overlay.git"; };
               };
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
