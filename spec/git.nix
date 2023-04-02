@@ -90,7 +90,19 @@ with lib;
       {
         klaus =
           let
-            klausGunicorn = pkgs.python3.withPackages (ps: with ps; [gunicorn klaus markdown]);
+            klausGunicorn = pkgs.python3.withPackages (ps: with ps;
+              [
+                gunicorn markdown
+                # https://github.com/jonashaag/klaus/issues/309
+                (klaus.overrideAttrs (o:
+                  {
+                    patches = (o.patches or [ ]) ++
+                    [
+                      ../resource/klaus/patch/0001-retrieve-only-HEAD-for-last-updated-of-repo.patch
+                    ];
+                  })
+                )
+              ]);
           in
             {
               enable = true;
