@@ -646,11 +646,12 @@
             {
               benaryorg.prometheus.client.enable = true;
               security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
-              benaryorg.net.type = "none";
-              benaryorg.net.unbound.enable = true;
-              benaryorg.net.rdnssd.enable = false;
 
+              benaryorg.net.type = "none";
+              services.unbound.enable = true;
               proxmoxLXC.manageHostName = true;
+              services.resolved.enable = mkForce false;
+              networking.firewall.enable = false;
 
               imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
             };
