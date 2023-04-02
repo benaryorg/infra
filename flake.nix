@@ -106,6 +106,7 @@
               benaryorg.user.ssh.keys = pkgs.lib.attrValues conf.sshkey;
 
               zramSwap.enable = true;
+              nix.gc.automatic = mkForce false;
 
               benaryorg.net.host.primaryInterface = "eno0";
               benaryorg.net.host.ipv4 = "151.80.37.166/24";
