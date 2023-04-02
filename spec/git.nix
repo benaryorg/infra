@@ -117,7 +117,7 @@ with lib;
               serviceConfig =
               {
                 Type = "simple";
-                ExecStart = "${klausGunicorn}/bin/gunicorn klaus.contrib.wsgi_autoreload";
+                ExecStart = "${klausGunicorn}/bin/gunicorn --timeout 120 klaus.contrib.wsgi_autoreload";
                 User = "git";
                 Group = "git";
               };
