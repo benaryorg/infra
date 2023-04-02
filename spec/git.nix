@@ -33,9 +33,9 @@ with lib;
             };
             interval = mkOption
             {
-              description = "Interval of update.";
-              default = "hourly";
-              type = types.str;
+              description = "Interval of update in seconds.";
+              default = 3600;
+              type = types.int;
             };
             url = mkOption
             {
@@ -195,7 +195,7 @@ with lib;
           wantedBy = [ "timers.target" ];
           timerConfig =
           {
-            OnCalendar = config.interval;
+            OnUnitInactiveSec = config.interval;
             Persistent = true;
           };
         };
