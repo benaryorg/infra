@@ -637,6 +637,23 @@
                 };
               };
             };
+
+        "nixos-builder.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.prometheus.client.enable = true;
+              security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
+              benaryorg.net.type = "none";
+              benaryorg.net.unbound.enable = true;
+              benaryorg.net.rdnssd.enable = false;
+
+              proxmoxLXC.manageHostName = true;
+
+              imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
+            };
       };
       colmenaHive = colmena.lib.makeHive colmenaConfig;
       hosts = builtins.attrNames colmenaHive.nodes;
