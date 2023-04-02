@@ -17,4 +17,6 @@ in
     "service/grafana/prometheus.lxd.bsocat.net/admin_user.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
     "service/grafana/prometheus.lxd.bsocat.net/admin_pass.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
     "service/grafana/prometheus.lxd.bsocat.net/secret.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
+    "build/nixos-builder.cloud.bsocat.net.age".publicKeys = [ conf.hostkey."nixos-builder.cloud.bsocat.net" ];
+    "build/nixos.home.bsocat.net.age".publicKeys = [ conf.hostkey."nixos.home.bsocat.net" ];
   }

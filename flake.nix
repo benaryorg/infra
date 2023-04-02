@@ -59,6 +59,7 @@
                 ./spec/net.nix
                 ./spec/lxd.nix
                 ./spec/prometheus.nix
+                ./spec/build.nix
               ];
 
               options =
@@ -98,6 +99,7 @@
             {
               deployment.allowLocalDeployment = true;
               benaryorg.flake.autoupgrade = false;
+              benaryorg.build.role = "none";
 
               benaryorg.base.sudo.needsPassword = true;
               benaryorg.deployment.default = false;
@@ -147,10 +149,18 @@
           in
             with lib;
             {
+              age.secrets.buildSecret.file = ./secret/build/nixos.home.bsocat.net.age;
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
               benaryorg.prometheus.client.enable = true;
               security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
+
+              benaryorg.build =
+              {
+                role = "server";
+                publicKey = "nixos.home.bsocat.net:yiK6zWXrGJRUw2LqhSqr9x1H6jbeLl/nokgJJBVJZ80=";
+                privateKeyFile = config.age.secrets.buildSecret.path;
+              };
 
               networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
             };
@@ -644,8 +654,18 @@
           in
             with lib;
             {
+              age.secrets.buildSecret.file = ./secret/build/nixos-builder.cloud.bsocat.net.age;
+
               benaryorg.prometheus.client.enable = true;
               security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
+
+              benaryorg.build =
+              {
+                role = "server";
+                tags = [ "cloud.bsocat.net" "lxd.bsocat.net" ];
+                publicKey = "nixos-builder.cloud.bsocat.net:i0hLFuNDkp781rdD1nmikT7vsf90Nluo13AL1QE6TSc=";
+                privateKeyFile = config.age.secrets.buildSecret.path;
+              };
 
               benaryorg.net.type = "none";
               services.unbound.enable = true;
