@@ -82,8 +82,33 @@ with lib;
             {
               proxyPass = "http://localhost:8000";
             };
+            locations."~ \"^/[a-zA-Z0-9._-]+/(git-(receive|upload)-pack|HEAD|info/refs|objects/(info/(http-)?alternates|packs)|[0-9a-f]{2}/[0-9a-f]{38}|pack/pack-[0-9a-f]{40}\\.(pack|idx))$\"" =
+            {
+              fastcgiParams = 
+              {
+                SCRIPT_FILENAME = "${pkgs.git}/bin/git-http-backend";
+                GIT_PROJECT_ROOT = "/var/lib/gitolite/repositories/public";
+                GIT_HTTP_EXPORT_ALL = "";
+                PATH_INFO = "$fastcgi_script_name";
+              };
+              extraConfig =
+              ''
+                fastcgi_read_timeout 1800;
+                fastcgi_pass unix:/run/fcgiwrap.sock;
+              '';
+            };
           };
         };
+      };
+      fcgiwrap =
+      {
+        enable = true;
+        group = "git";
+        # important; security vulns in git will have major impact here
+        # anonymous write here is only soft-disabled by upstream sanity checks against the repo config
+        # https://git-scm.com/docs/git-daemon#Documentation/git-daemon.txt-receive-pack
+        user = "git";
+        preforkProcesses = 8;
       };
     };
     systemd.services =
@@ -112,7 +137,7 @@ with lib;
               {
                 KLAUS_SITE_NAME = "${config.networking.fqdn} by Katze";
                 KLAUS_REPOS_ROOT = "/var/lib/gitolite/repositories/public";
-                KLAUS_USE_SMARTHTTP = "true";
+                KLAUS_USE_SMARTHTTP = "false";
               };
               serviceConfig =
               {
