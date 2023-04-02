@@ -38,7 +38,7 @@ with lib;
     {
       enable = true;
       flake = "/etc/nixos";
-      flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" ];
+      flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" "--recreate-lock-file" ];
     };
     environment.etc."nixos/flake.nix" =
     {
