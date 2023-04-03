@@ -428,10 +428,10 @@
                   "chain.pem:/var/lib/acme/${config.networking.fqdn}/chain.pem"
                   "salt:${config.age.secrets.syncplaySalt.path}"
                 ];
-                script =
+                script = mkForce
                 ''
                   export SYNCPLAY_SALT=$(cat "''${CREDENTIALS_DIRECTORY}/salt")
-                  exec ${pkgs.syncplay-nogui}/bin/syncplay-server --port 8999 --isolate-rooms
+                  exec ${pkgs.syncplay-nogui}/bin/syncplay-server --port 8999 --isolate-rooms --tls ''${CREDENTIALS_DIRECTORY}
                 '';
               };
             };
