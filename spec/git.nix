@@ -63,6 +63,7 @@ with lib;
           push( @{$RC{ENABLE}}, 'D' );
           push( @{$RC{ENABLE}}, 'desc' );
           push( @{$RC{ENABLE}}, 'help' );
+          push( @{$RC{ENABLE}}, 'symbolic-ref' );
         '';
         group = "git";
         user = "git";
