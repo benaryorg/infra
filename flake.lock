@@ -186,11 +186,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680401949,
-        "narHash": "sha256-s8+b9Zm9osz9oGInNletIFihgXTs9hogw9C/c3MbErs=",
+        "lastModified": 1680488274,
+        "narHash": "sha256-0vYMrZDdokVmPQQXtFpnqA2wEgCCUXf5a3dDuDVshn0=",
         "ref": "refs/heads/master",
-        "rev": "9b8632040df6f2218fd01bf79c0589379ac39584",
-        "revCount": 964,
+        "rev": "7ec2ff598a172c6e8584457167575b3a1a5d80d8",
+        "revCount": 965,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/rust-overlay"
       },
