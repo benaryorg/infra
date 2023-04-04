@@ -26,6 +26,9 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPDCg36Iu+EzJhyUNSPldV+G8q4p8l9JWPT0nbG2XXCw xmpp.lxd.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIs11y4uzabLAmdqd5Zz7owITCiNwx9Z2q5encfwz/kA nixos-builder.cloud.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRtlLH3L15UCWuEY40YsBuCr9bSr8X4Sk5omHRbl4YE turn.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDp4Snx4pM3+8yOVEV/VkdphtSeA7Wh7jAYAMdx75N3e benaryorg1.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXO1VPYJ5YfvCT4wvTWauSSLtmHS2gG8jh7RQyu6hy+ benaryorg2.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyYvEMA/opKvs5IcnRdCZmUqg941x6umlf1I0/Sn5sh benaryorg3.lxd.bsocat.net"
   ];
   keyConversion = keys: lists.foldr (a: b: a // b) {} (map (key: pipe key [ (splitString " ") reverseList (list: { "${head list}" = (pipe list [ tail reverseList (concatStringsSep " ") ]); }) ]) keys);
 in

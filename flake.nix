@@ -21,9 +21,12 @@
     rust-overlay.url = "git+https://shell.cloud.bsocat.net/rust-overlay";
     rust-overlay.inputs.flake-utils.follows = "flake-utils";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    benaryorg-website.url = "git+https://shell.cloud.bsocat.net/benary.org";
+    benaryorg-website.inputs.flake-utils.follows = "flake-utils";
+    benaryorg-website.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, colmena, ragenix, ... }:
+  outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
     let
       colmenaConfig =
       {
@@ -35,7 +38,7 @@
           };
           specialArgs =
           {
-            inherit ragenix;
+            inherit ragenix benaryorg-website;
           };
         };
 
@@ -48,6 +51,7 @@
               imports =
               [
                 ragenix.nixosModules.default
+                benaryorg-website.nixosModules.default
                 ./spec/user.nix
                 ./spec/ssh.nix
                 ./spec/nix.nix
@@ -645,6 +649,78 @@
                   cert = "/var/lib/acme/turn.svc.benary.org/cert.pem";
                   pkey = "/var/lib/acme/turn.svc.benary.org/key.pem";
                 };
+              };
+            };
+
+        "benaryorg1.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
+              benaryorg.prometheus.client.enable = true;
+              benaryorg.website.enable = true;
+              services.nginx.virtualHosts."${config.networking.fqdn}" =
+              {
+                enableACME = true;
+                forceSSL = true;
+                locations."/" = { return = "200 \"Meow.\""; extraConfig = "more_set_headers 'content-type: text/plain';"; };
+              };
+              security.acme.certs."benary.org" =
+              {
+                dnsProvider = "hurricane";
+                credentialsFile = config.age.secrets.benaryorgLegoSecret.path;
+                reloadServices = [ "nginx.service" ];
+                group = config.services.nginx.group;
+              };
+            };
+
+        "benaryorg2.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
+              benaryorg.prometheus.client.enable = true;
+              benaryorg.website.enable = true;
+              services.nginx.virtualHosts."${config.networking.fqdn}" =
+              {
+                enableACME = true;
+                forceSSL = true;
+                locations."/" = { return = "200 \"Meow.\""; extraConfig = "more_set_headers 'content-type: text/plain';"; };
+              };
+              security.acme.certs."benary.org" =
+              {
+                dnsProvider = "hurricane";
+                credentialsFile = config.age.secrets.benaryorgLegoSecret.path;
+                reloadServices = [ "nginx.service" ];
+                group = config.services.nginx.group;
+              };
+            };
+
+        "benaryorg3.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
+              benaryorg.prometheus.client.enable = true;
+              benaryorg.website.enable = true;
+              services.nginx.virtualHosts."${config.networking.fqdn}" =
+              {
+                enableACME = true;
+                forceSSL = true;
+                locations."/" = { return = "200 \"Meow.\""; extraConfig = "more_set_headers 'content-type: text/plain';"; };
+              };
+              security.acme.certs."benary.org" =
+              {
+                dnsProvider = "hurricane";
+                credentialsFile = config.age.secrets.benaryorgLegoSecret.path;
+                reloadServices = [ "nginx.service" ];
+                group = config.services.nginx.group;
               };
             };
 
