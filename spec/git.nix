@@ -124,7 +124,7 @@ with lib;
                   {
                     patches = (o.patches or [ ]) ++
                     [
-                      ../resource/klaus/patch/0001-retrieve-only-HEAD-for-last-updated-of-repo.patch
+                      ../resource/klaus/patch/5f0a7cb7d4186bb9729d73a2864f0e830431f327.patch
                     ];
                   })
                 )

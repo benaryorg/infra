@@ -1,0 +1,39 @@
+From 5f0a7cb7d4186bb9729d73a2864f0e830431f327 Mon Sep 17 00:00:00 2001
+From: Jonas Haag <jonas@lophus.org>
+Date: Wed, 5 Apr 2023 12:40:34 +0300
+Subject: [PATCH] Fix slow repo_list with many refs
+
+---
+ klaus/repo.py | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/klaus/repo.py b/klaus/repo.py
+index 5033607..35ab6a9 100644
+--- a/klaus/repo.py
++++ b/klaus/repo.py
+@@ -58,10 +58,21 @@ def namespaced_name(self):
+ 
+     # TODO: factor out stuff into dulwich
+     def get_last_updated_at(self):
+-        """Get datetime of last commit to this repository."""
+-        # Cache result to speed up repo_list.html template.
+-        # If self.get_refs() has changed, we should invalidate the cache.
+-        all_refs = self.get_refs()
++        """Get datetime of last commit to this repository.
++
++        Caches the result to speed up the repo_list page.
++        Cache is invalidated if one of the ref targets changes,
++        eg. a new commit has been made and 'refs/heads/master' was changed.
++        """
++        if len(self.refs.keys()) > 10000:
++            # If we have too many refs, look at the branches only. (And HEAD, see below.)
++            base = b"refs/heads"
++        else:
++            base = None
++        all_refs = self.refs.as_dict(base)
++        # Always add HEAD.
++        all_refs[b"HEAD"] = self.refs[b"HEAD"]
++
+         return cached_call(
+             key=(id(self), "get_last_updated_at"),
+             validator=all_refs,
