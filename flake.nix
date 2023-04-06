@@ -470,6 +470,7 @@
                       http_addr = "127.0.0.1";
                       http_port = 3000;
                       domain = config.networking.fqdn;
+                      root_url = "https://${config.networking.fqdn}/";
                     };
                     analytics.reporting_enabled = false;
                   };
