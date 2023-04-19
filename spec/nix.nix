@@ -5,6 +5,7 @@ with lib;
   {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nix.gc.automatic = true;
+    nix.gc.options = "--delete-older-than 16d";
     systemd.services.nix-daemon.environment.TMPDIR = "/nix/tmp";
     system.activationScripts.nix-tmpdir =
     ''
