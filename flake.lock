@@ -73,6 +73,35 @@
         "url": "https://shell.cloud.bsocat.net/colmena"
       }
     },
+    "crane": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1681680516,
+        "narHash": "sha256-EB8Adaeg4zgcYDJn9sR6UMjN/OHdIiMMK19+3LmmXQY=",
+        "ref": "refs/heads/master",
+        "rev": "54b63c8eae4c50172cb50b612946ff1d2bc1c75c",
+        "revCount": 357,
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/crane"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/crane"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -112,12 +141,17 @@
       }
     },
     "flake-utils": {
+      "inputs": {
+        "systems": [
+          "nix-systems"
+        ]
+      },
       "locked": {
-        "lastModified": 1678901627,
-        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
+        "lastModified": 1681202837,
+        "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
         "ref": "refs/heads/main",
-        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
-        "revCount": 68,
+        "rev": "cfacdce06f30d2b68473a46042957675eebb3401",
+        "revCount": 77,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/flake-utils"
       },
@@ -126,13 +160,28 @@
         "url": "https://shell.cloud.bsocat.net/flake-utils"
       }
     },
+    "nix-systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "ref": "refs/heads/main",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/nix-systems"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/nix-systems"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1680588688,
-        "narHash": "sha256-SW95w50Pdw3nivgTuCebtbbPqaCTp9ctnFMNj24vdck=",
+        "lastModified": 1681759395,
+        "narHash": "sha256-7aaRtLxLAy8qFVIA26ulB+Q5nDVzuQ71qi0s0wMjAws=",
         "ref": "nixos-22.11",
-        "rev": "3e01f83884b8ed7cbafa784727fb343f1876d56f",
-        "revCount": 432172,
+        "rev": "cd749f58ba83f7155b7062dd49d08e5e47e44d50",
+        "revCount": 432414,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/nixpkgs"
       },
@@ -144,11 +193,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1680487167,
-        "narHash": "sha256-9FNIqrxDZgSliGGN2XJJSvcDYmQbgOANaZA4UWnTdg4=",
+        "lastModified": 1681737997,
+        "narHash": "sha256-pHhjgsIkRMu80LmVe8QoKIZB6VZGRRxFmIvsC5S89k4=",
         "ref": "nixos-unstable",
-        "rev": "53dad94e874c9586e71decf82d972dfb640ef044",
-        "revCount": 470275,
+        "rev": "f00994e78cd39e6fc966f0c4103f908e63284780",
+        "revCount": 474575,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/nixpkgs"
       },
@@ -163,6 +212,9 @@
         "agenix": [
           "agenix"
         ],
+        "crane": [
+          "crane"
+        ],
         "flake-utils": [
           "flake-utils"
         ],
@@ -174,11 +226,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1677625082,
-        "narHash": "sha256-62xmRPfjZgDn8AgEhb6eRoJrTxGeM8HfhfF+PkJokok=",
+        "lastModified": 1681637229,
+        "narHash": "sha256-iE4WYI2rozD5sv4bGW+wZ4skIdN79eBWz/qFweLBGxg=",
         "ref": "refs/heads/main",
-        "rev": "6f2dacf3d6af36228a8fad3b136990a6b6dfe30b",
-        "revCount": 143,
+        "rev": "4be6d20931f8ea9f0b6bfa710f30c2ad940b1510",
+        "revCount": 148,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/ragenix"
       },
@@ -192,8 +244,10 @@
         "agenix": "agenix",
         "benaryorg-website": "benaryorg-website",
         "colmena": "colmena",
+        "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
+        "nix-systems": "nix-systems",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "ragenix": "ragenix",
@@ -210,11 +264,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680660688,
-        "narHash": "sha256-XeQTCxWBR0Ai1VMzI5ZXYpA2lu1F8FzZKjw8RtByZOg=",
+        "lastModified": 1681870826,
+        "narHash": "sha256-1YEXIdr5wwG8PWntvcjjoVpsAKOKuKEaFIy3vR0FGpo=",
         "ref": "refs/heads/master",
-        "rev": "2f40052be98347b479c820c00fb2fc1d87b3aa28",
-        "revCount": 966,
+        "rev": "e2f975856a48ebecba4f95846b8f368f3808d4e7",
+        "revCount": 991,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/rust-overlay"
       },
