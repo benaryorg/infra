@@ -118,6 +118,10 @@ with lib;
         locate = pkgs.mlocate;
         localuser = null;
       };
+      journald.extraConfig =
+      ''
+        SystemMaxUse=2G
+      '';
     };
 
     environment.systemPackages = with pkgs;
