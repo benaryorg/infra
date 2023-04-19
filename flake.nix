@@ -400,6 +400,7 @@
             {
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
               benaryorg.ssh.x11 = true;
+              hardware.opengl.enable = true;
               benaryorg.prometheus.client.enable = true;
               security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
             };
