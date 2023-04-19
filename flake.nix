@@ -8,6 +8,7 @@
     ragenix.inputs.agenix.follows = "agenix";
     ragenix.inputs.flake-utils.follows = "flake-utils";
     ragenix.inputs.rust-overlay.follows = "rust-overlay";
+    ragenix.inputs.crane.follows = "crane";
     colmena.url = "git+https://shell.cloud.bsocat.net/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
     colmena.inputs.stable.follows = "nixpkgs";
@@ -18,12 +19,19 @@
     flake-compat.url = "git+https://shell.cloud.bsocat.net/flake-compat";
     flake-compat.flake = false;
     flake-utils.url = "git+https://shell.cloud.bsocat.net/flake-utils";
+    flake-utils.inputs.systems.follows = "nix-systems";
     rust-overlay.url = "git+https://shell.cloud.bsocat.net/rust-overlay";
     rust-overlay.inputs.flake-utils.follows = "flake-utils";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     benaryorg-website.url = "git+https://shell.cloud.bsocat.net/benary.org";
     benaryorg-website.inputs.flake-utils.follows = "flake-utils";
     benaryorg-website.inputs.nixpkgs.follows = "nixpkgs";
+    crane.url = "git+https://shell.cloud.bsocat.net/crane";
+    crane.inputs.flake-compat.follows = "flake-compat";
+    crane.inputs.flake-utils.follows = "flake-utils";
+    crane.inputs.rust-overlay.follows = "rust-overlay";
+    crane.inputs.nixpkgs.follows = "nixpkgs";
+    nix-systems.url = "git+https://shell.cloud.bsocat.net/nix-systems";
   };
 
   outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
