@@ -560,6 +560,7 @@
                 {
                   enable = true;
                   admins = [ "binary@benary.org" ];
+                  xmppComplianceSuite = false;
                   allowRegistration = false;
                   authentication = "internal_hashed";
                   c2sRequireEncryption = true;
@@ -582,6 +583,10 @@
                       { type = "turn", host = "turn6.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
                       { type = "turns", host = "turn6.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
                     }
+
+                    Component "xmpp.lxd.bsocat.net" "http_file_share"
+                      http_file_share_expires_after = 60 * 60 * 24 * 7 * 4
+                      http_file_share_size_limit = 1024 * 1024 * 512
                   '';
                   ssl = { cert = "/var/lib/acme/${config.networking.fqdn}/cert.pem"; key = "/var/lib/acme/${config.networking.fqdn}/key.pem"; };
                   virtualHosts = mkForce
@@ -593,12 +598,7 @@
                       ssl = { cert = "/var/lib/acme/benary.org/cert.pem"; key = "/var/lib/acme/benary.org/key.pem"; };
                     };
                   };
-                  uploadHttp =
-                  {
-                    domain = config.networking.fqdn;
-                    uploadExpireAfter = "60 * 60 * 24 * 7 * 4";
-                    uploadFileSizeLimit = "1024 * 1024 * 512";
-                  };
+                  uploadHttp = null;
                   muc =
                   [
                     {
@@ -614,6 +614,7 @@
                     dialback = false;
                   };
                   extraModules = [ "turn_external" "external_services" ];
+                  disco_items = [ { url = "xmpp.lxd.bsocat.net"; description = "http upload service"; } ];
                 };
               };
               # https://github.com/NLnetLabs/unbound/issues/869
