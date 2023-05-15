@@ -125,7 +125,6 @@ with lib;
             {
               nix.distributedBuilds = true;
               nix.settings.trusted-public-keys = map (node: node.config.benaryorg.build.publicKey) server;
-              nix.settings.builders-use-substitutes = true;
               nix.settings.substituters = map (node: "https://${node.config.networking.fqdn}") server;
               nix.buildMachines = lib.pipe server
               [
