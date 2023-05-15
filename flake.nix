@@ -16,6 +16,7 @@
     colmena.inputs.flake-utils.follows = "flake-utils";
     agenix.url = "git+https://shell.cloud.bsocat.net/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.home-manager.follows = "home-manager";
     flake-compat.url = "git+https://shell.cloud.bsocat.net/flake-compat";
     flake-compat.flake = false;
     flake-utils.url = "git+https://shell.cloud.bsocat.net/flake-utils";
@@ -32,6 +33,8 @@
     crane.inputs.rust-overlay.follows = "rust-overlay";
     crane.inputs.nixpkgs.follows = "nixpkgs";
     nix-systems.url = "git+https://shell.cloud.bsocat.net/nix-systems";
+    home-manager.url = "git+https://shell.cloud.bsocat.net/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
