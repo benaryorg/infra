@@ -590,7 +590,12 @@
                       ssl = { cert = "/var/lib/acme/benary.org/cert.pem"; key = "/var/lib/acme/benary.org/key.pem"; };
                     };
                   };
-                  uploadHttp = { domain = config.networking.fqdn; };
+                  uploadHttp =
+                  {
+                    domain = config.networking.fqdn;
+                    uploadExpireAfter = "60 * 60 * 24 * 7 * 4";
+                    uploadFileSizeLimit = "1024 * 1024 * 512";
+                  };
                   muc =
                   [
                     {
