@@ -171,7 +171,6 @@
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
               benaryorg.prometheus.client.enable = true;
-              security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
 
               benaryorg.build =
               {
@@ -754,7 +753,6 @@
               age.secrets.buildSecret.file = ./secret/build/nixos-builder.cloud.bsocat.net.age;
 
               benaryorg.prometheus.client.enable = true;
-              security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
 
               benaryorg.build =
               {

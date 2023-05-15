@@ -80,6 +80,34 @@ with lib;
               (builtins.map (node: hostkey.${node.config.networking.fqdn}))
             ];
           };
+          services =
+          {
+            nix-serve =
+            {
+              enable = true;
+              secretKeyFile = cfg.privateKeyFile;
+              bindAddress = "127.0.0.1";
+              port = 5000;
+            };
+            nginx =
+            {
+              enable = true;
+              recommendedProxySettings = true;
+              recommendedTlsSettings = true;
+              virtualHosts =
+              {
+                ${config.networking.fqdn} =
+                {
+                  forceSSL = true;
+                  enableACME = true;
+                  locations."/" =
+                  {
+                    proxyPass = "http://127.0.0.1:5000";
+                  };
+                };
+              };
+            };
+          };
         })
         (
           let
@@ -98,6 +126,7 @@ with lib;
               nix.distributedBuilds = true;
               nix.settings.trusted-public-keys = map (node: node.config.benaryorg.build.publicKey) server;
               nix.settings.builders-use-substitutes = true;
+              nix.settings.substituters = map (node: "https://${node.config.networking.fqdn}") server;
               nix.buildMachines = lib.pipe server
               [
                 # map to entry (hostkeys are global in base)
