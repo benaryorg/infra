@@ -47,6 +47,11 @@ with lib;
       RandomizedDelaySec = mkForce "4h";
       OnCalendar = mkForce null;
     };
+    systemd.services.nixos-upgrade = mkIf config.benaryorg.flake.autoupgrade
+    {
+      onFailure = [ "default.target" ];
+      unitConfig.OnFailureJobMode = "isolate";
+    };
     environment.etc."nixos/flake.nix" =
     {
       mode = "0444";
