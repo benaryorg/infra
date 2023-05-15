@@ -196,7 +196,7 @@ with lib;
           wantedBy = [ "timers.target" ];
           timerConfig =
           {
-            OnUnitInactiveSec = config.interval;
+            OnUnitActiveSec = config.interval;
             Persistent = true;
           };
         };

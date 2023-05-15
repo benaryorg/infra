@@ -43,7 +43,7 @@ with lib;
     systemd.timers.nixos-upgrade.timerConfig = mkIf config.benaryorg.flake.autoupgrade
     {
       OnBootSec = "1h";
-      OnUnitInactiveSec = "1d";
+      OnUnitActiveSec = "1d";
       RandomizedDelaySec = mkForce "4h";
       OnCalendar = mkForce null;
     };
