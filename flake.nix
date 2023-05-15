@@ -130,6 +130,7 @@
                 agenix = { url = "https://github.com/ryantm/agenix.git"; };
                 ragenix = { url = "https://github.com/yaxitech/ragenix.git"; };
                 colmena = { url = "https://github.com/zhaofengli/colmena.git"; };
+                home-manager = { url = "https://github.com/nix-community/home-manager.git"; };
               };
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
