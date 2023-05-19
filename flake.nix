@@ -560,7 +560,6 @@
                 {
                   enable = true;
                   admins = [ "binary@benary.org" ];
-                  xmppComplianceSuite = false;
                   allowRegistration = false;
                   authentication = "internal_hashed";
                   c2sRequireEncryption = true;
@@ -584,9 +583,7 @@
                       { type = "turns", host = "turn6.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
                     }
 
-                    Component "xmpp.lxd.bsocat.net" "http_file_share"
-                      http_file_share_expires_after = 60 * 60 * 24 * 7 * 4
-                      http_file_share_size_limit = 1024 * 1024 * 512
+                    http_max_content_size = 1024 * 1024 * 1024
                   '';
                   ssl = { cert = "/var/lib/acme/${config.networking.fqdn}/cert.pem"; key = "/var/lib/acme/${config.networking.fqdn}/key.pem"; };
                   virtualHosts = mkForce
@@ -598,7 +595,13 @@
                       ssl = { cert = "/var/lib/acme/benary.org/cert.pem"; key = "/var/lib/acme/benary.org/key.pem"; };
                     };
                   };
-                  uploadHttp = null;
+                  uploadHttp =
+                  {
+                    domain = "xmpp.lxd.bsocat.net";
+                    uploadFileSizeLimit = "1024 * 1024 * 512";
+                    uploadExpireAfter = "60 * 60 * 24 * 7 * 4";
+                    httpUploadPath = "/var/lib/prosody/http_upload";
+                  };
                   muc =
                   [
                     {
