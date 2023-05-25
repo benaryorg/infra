@@ -9,11 +9,11 @@ rustPlatform.buildRustPackage rec
   {
     owner = "benaryorg";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-Lxsh+lsD/5bcU1tLiabYO2JhMdLSO2Az3yTaic6pPdk=";
+    rev = "d7215556f2676c3c918f82573bdfb6e6b3715458";
+    sha256 = "sha256-OMJdfQrUNdjhTjwNhJWFVQ7RtNnXmO6boMp8OAMXzKY=";
   };
 
-  cargoHash = "sha256-PYLZLJPUmYl43a9NSKqzm+xJI+2B5MqD4O/qxHKVX/Q=";
+  cargoHash = "sha256-0T9p8GMJijmOkELyNrhI6RsazTrvu6QvYC6nqiuEXA0=";
 
   buildNoDefaultFeatures = true;
   buildFeatures = [ "http" ];
