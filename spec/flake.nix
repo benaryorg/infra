@@ -37,15 +37,14 @@ with lib;
     system.autoUpgrade = mkIf config.benaryorg.flake.autoupgrade
     {
       enable = true;
+      dates = "daily";
       flake = "/etc/nixos";
       flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" "--recreate-lock-file" ];
     };
     systemd.timers.nixos-upgrade.timerConfig = mkIf config.benaryorg.flake.autoupgrade
     {
       OnBootSec = "1h";
-      OnUnitActiveSec = "1d";
-      RandomizedDelaySec = mkForce "4h";
-      OnCalendar = mkForce null;
+      RandomizedDelaySec = mkForce "24h";
     };
     systemd.services.nixos-upgrade = mkIf config.benaryorg.flake.autoupgrade
     {
