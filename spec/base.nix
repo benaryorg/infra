@@ -41,16 +41,6 @@ with lib;
     {
       enable = true;
       wheelNeedsPassword = config.benaryorg.base.sudo.needsPassword;
-      extraRules = mkOrder 1500
-      [
-        {
-          groups = [ "wheel" ];
-          commands =
-          [
-            { command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
-          ];
-        }
-      ];
     };
 
     virtualisation.containers =
