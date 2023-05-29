@@ -433,7 +433,12 @@
           in
             with lib;
             {
-              age.secrets.syncplaySalt.file = ./secret/service/syncplay/syncplay.lxd.bsocat.net.age;
+              age.secrets.syncplaySalt =
+              {
+                file = ./secret/service/syncplay/syncplay.lxd.bsocat.net.age;
+                owner = "syncplay";
+              };
+
               benaryorg.prometheus.client.enable = true;
               users.groups.syncplay = {};
               users.users.syncplay =
@@ -447,6 +452,8 @@
                 certDir = "/run/credentials/syncplay.service";
                 user = "syncplay";
                 group = "syncplay";
+                extraArgs = [ "--isolate-rooms" ];
+                saltFile = config.age.secrets.syncplaySalt.path;
               };
               security.acme.certs."${config.networking.fqdn}" =
               {
@@ -463,13 +470,7 @@
                   "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
                   "privkey.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
                   "chain.pem:/var/lib/acme/${config.networking.fqdn}/chain.pem"
-                  "salt:${config.age.secrets.syncplaySalt.path}"
                 ];
-                script = mkForce
-                ''
-                  export SYNCPLAY_SALT=$(cat "''${CREDENTIALS_DIRECTORY}/salt")
-                  exec ${pkgs.syncplay-nogui}/bin/syncplay-server --port 8999 --isolate-rooms --tls ''${CREDENTIALS_DIRECTORY}
-                '';
               };
 
               system.stateVersion = "22.11";
