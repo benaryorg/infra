@@ -46,7 +46,7 @@ in
       ];
     };
 
-    boot.tmpOnTmpfs = true;
+    boot.tmp.useTmpfs = true;
 
     programs =
     {
@@ -62,8 +62,11 @@ in
       openssh =
       {
         enable = true;
-        permitRootLogin = if useUser then "no" else "yes";
-        passwordAuthentication = false;
+        settings =
+        {
+          PermitRootLogin = if useUser then "no" else "yes";
+          PasswordAuthentication = false;
+        };
       };
     };
 
@@ -107,5 +110,5 @@ in
 
     system.copySystemConfiguration = !isContainer;
 
-    system.stateVersion = "22.11"; # Did you read the comment?
+    system.stateVersion = "23.05"; # Did you read the comment?
   }

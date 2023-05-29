@@ -1,7 +1,7 @@
 {
   inputs =
   {
-    nixpkgs.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-22.11";
+    nixpkgs.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-23.05";
     nixpkgs-unstable.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-unstable";
     ragenix.url = "git+https://shell.cloud.bsocat.net/ragenix";
     ragenix.inputs.nixpkgs.follows = "nixpkgs-unstable";

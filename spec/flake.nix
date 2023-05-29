@@ -25,7 +25,7 @@ with lib;
       };
       nixpkgs = mkOption
       {
-        default = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-22.11";
+        default = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-23.05";
         description = "The nixpkgs distribution to use.";
         type = types.str;
       };

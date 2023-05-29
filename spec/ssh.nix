@@ -26,9 +26,12 @@ with lib;
     {
       enable = config.benaryorg.ssh.enable;
       startWhenNeeded = false;
-      permitRootLogin = "no";
-      passwordAuthentication = false;
-      forwardX11 = config.benaryorg.ssh.x11;
+      settings =
+      {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        X11Forwarding = config.benaryorg.ssh.x11;
+      };
     };
   };
 }

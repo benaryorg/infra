@@ -140,7 +140,6 @@ with lib;
         boot.loader.grub =
         {
           enable = true;
-          version = 2;
           devices = pipe config.benaryorg.hardware.ovh.device [ attrNames (map (name: "/dev/${name}")) ];
           splashImage = null;
         };

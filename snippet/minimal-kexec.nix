@@ -17,7 +17,7 @@ in
 
     users.users.root.openssh.authorizedKeys.keys = lib.attrValues sshkey;
 
-    boot.tmpOnTmpfs = true;
+    boot.tmp.useTmpfs = true;
 
     programs =
     {
@@ -32,8 +32,11 @@ in
       openssh =
       {
         enable = true;
-        permitRootLogin = "yes";
-        passwordAuthentication = false;
+        settings =
+        {
+          PermitRootLogin = "yes";
+          PasswordAuthentication = false;
+        };
       };
     };
 
@@ -67,5 +70,5 @@ in
       useDHCP = true;
     };
 
-    system.stateVersion = "22.11"; # Did you read the comment?
+    system.stateVersion = "23.05"; # Did you read the comment?
   }

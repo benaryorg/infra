@@ -94,7 +94,8 @@ with lib;
                   (node:
                     {
                       fqdn = node.config.networking.fqdn;
-                      exporters = filterAttrs (name: value: value.enable) node.config.services.prometheus.exporters;
+                      # filter for attrs, there seem to be "warnings" and "assertions" present as lists
+                      exporters = filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.services.prometheus.exporters;
                     }
                   )
                 )
