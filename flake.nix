@@ -159,6 +159,8 @@
                   boot = "cb5c4f14-eca6-484e-b021-28487094a0a1";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "nixos.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -180,6 +182,8 @@
               };
 
               networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
+
+              system.stateVersion = "22.11";
             };
 
         "lxd1.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -216,6 +220,8 @@
                   boot = "9d48e3b9-ef76-48b8-969a-266cf0b76be1";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "lxd2.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -251,6 +257,8 @@
                   boot = "f13918cc-9ac3-4c86-a221-87805beaa80d";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "lxd3.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -286,6 +294,8 @@
                   boot = "62c57898-8398-49ce-ad3b-198ab2299b46";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "lxd4.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -322,6 +332,8 @@
                   boot = "bdee9321-64ae-4bf6-92b7-a76377b7f9f6";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "lxd5.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -357,6 +369,8 @@
                   boot = "b51fb8bd-b5b6-4b94-8e5e-51c90faa2b0d";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "lxd6.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -393,6 +407,8 @@
                   boot = "eaa28e6d-63df-46c6-9a13-652b6c0a5ce4";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "steam.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -406,6 +422,8 @@
               hardware.opengl.enable = true;
               benaryorg.prometheus.client.enable = true;
               security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
+
+              system.stateVersion = "22.11";
             };
 
         "syncplay.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -452,6 +470,8 @@
                   exec ${pkgs.syncplay-nogui}/bin/syncplay-server --port 8999 --isolate-rooms --tls ''${CREDENTIALS_DIRECTORY}
                 '';
               };
+
+              system.stateVersion = "22.11";
             };
 
         "prometheus.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -522,6 +542,8 @@
                   };
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "xmpp.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -635,6 +657,8 @@
                   command = "@${pkgs.ndisc6}/bin/rdnssd rdnssd -p /run/rdnssd/rdnssd.pid -r /run/rdnssd/resolv.conf -u rdnssd -H ${mergeHook}/bin/rdnssd-restart-prosody-hook";
                 in
                   mkForce command;
+
+              system.stateVersion = "22.11";
             };
 
         "turn.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -674,6 +698,8 @@
                   pkey = "/var/lib/acme/turn.svc.benary.org/key.pem";
                 };
               };
+
+              system.stateVersion = "22.11";
             };
 
         "benaryorg1.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -698,6 +724,8 @@
                 reloadServices = [ "nginx.service" ];
                 group = config.services.nginx.group;
               };
+
+              system.stateVersion = "22.11";
             };
 
         "benaryorg2.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -722,6 +750,8 @@
                 reloadServices = [ "nginx.service" ];
                 group = config.services.nginx.group;
               };
+
+              system.stateVersion = "22.11";
             };
 
         "benaryorg3.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -746,6 +776,8 @@
                 reloadServices = [ "nginx.service" ];
                 group = config.services.nginx.group;
               };
+
+              system.stateVersion = "22.11";
             };
 
         "nixos-builder.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -773,6 +805,8 @@
               networking.firewall.enable = false;
 
               imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
+
+              system.stateVersion = "22.11";
             };
       };
       colmenaHive = colmena.lib.makeHive colmenaConfig;
