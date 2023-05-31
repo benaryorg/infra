@@ -290,12 +290,9 @@ with lib;
                       (builtins.filter (n: any ((flip elem) tags) n.config.benaryorg.prometheus.server.tags))
                     ];
                   in
-                    # use the first server
-                    # FIXME: https://github.com/NixOS/nixpkgs/issues/221884
-                    (builtins.head clients).config.networking.fqdn;
+                    (builtins.map (n: n.config.networking.fqdn) clients;
 
-                # FIXME: https://github.com/NixOS/nixpkgs/issues/221884
-                #socket = [ "l:TCP_NODELAY=1" "r:TCP_NODELAY=1" ];
+                socket = [ "l:TCP_NODELAY=1" "r:TCP_NODELAY=1" ];
                 sslVersion = "TLSv1.3";
 
                 verifyChain = true;
