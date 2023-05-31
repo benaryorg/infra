@@ -290,7 +290,7 @@ with lib;
                       (builtins.filter (n: any ((flip elem) tags) n.config.benaryorg.prometheus.server.tags))
                     ];
                   in
-                    (builtins.map (n: n.config.networking.fqdn) clients;
+                    builtins.map (n: n.config.networking.fqdn) clients;
 
                 socket = [ "l:TCP_NODELAY=1" "r:TCP_NODELAY=1" ];
                 sslVersion = "TLSv1.3";
