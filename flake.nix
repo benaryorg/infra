@@ -51,6 +51,7 @@
           {
             inherit ragenix benaryorg-website;
           };
+          allowApplyAll = false;
         };
 
         defaults = { name, nodes, pkgs, lib, config, options, ... }:
