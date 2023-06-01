@@ -144,25 +144,25 @@
               zramSwap.enable = true;
               nix.gc.automatic = mkForce false;
 
-              benaryorg.net.host.primaryInterface = "eno0";
-              benaryorg.net.host.ipv4 = "151.80.37.166/24";
-              benaryorg.net.host.ipv4Gateway = "151.80.37.254";
-              benaryorg.net.host.ipv6 = "2001:41d0:e:a10:6d4a:9111:c458:87f1/56";
-              benaryorg.net.host.ipv6Gateway = "2001:41d0:e:aff:ff:ff:ff:ff";
+              benaryorg.net.host.primaryInterface = "enp1s0";
+              benaryorg.net.host.ipv4 = "213.32.7.146/24";
+              benaryorg.net.host.ipv4Gateway = "213.32.7.254";
+              benaryorg.net.host.ipv6 = "2001:41d0:303:192:3697:f6ff:fe5c:fde7/56";
+              benaryorg.net.host.ipv6Gateway = "2001:41d0:303:1ff:ff:ff:ff:ff";
               benaryorg.hardware.ovh =
               {
                 device =
                 {
-                  sda = { uuid = "cf591bea-156c-4094-92a3-814c8f67e37e"; keyuuid = "6b7e5660-673e-a24f-af18-a515af4c857c"; };
+                  sda = { uuid = "7d05e9e8-fcd5-462f-be4f-ac6896092a15"; keyuuid = "f85d4432-b7fe-214c-a105-654a8d99d4ea"; };
                 };
                 fs =
                 {
-                  root = "97bacf4c-ff7a-40f6-9581-b490977d185f";
-                  boot = "cb5c4f14-eca6-484e-b021-28487094a0a1";
+                  root = "897816a8-8ff3-494d-9579-55d7e766616c";
+                  boot = "49e52b5d-3cbc-4318-9fd3-e362dac54dde";
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "nixos.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
