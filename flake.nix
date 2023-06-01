@@ -17,6 +17,7 @@
     agenix.url = "git+https://shell.cloud.bsocat.net/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
+    agenix.inputs.darwin.follows = "darwin";
     flake-compat.url = "git+https://shell.cloud.bsocat.net/flake-compat";
     flake-compat.flake = false;
     flake-utils.url = "git+https://shell.cloud.bsocat.net/flake-utils";
@@ -35,6 +36,8 @@
     nix-systems.url = "git+https://shell.cloud.bsocat.net/nix-systems";
     home-manager.url = "git+https://shell.cloud.bsocat.net/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "git+https://shell.cloud.bsocat.net/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
