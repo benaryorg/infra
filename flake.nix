@@ -135,6 +135,7 @@
                 ragenix = { url = "https://github.com/yaxitech/ragenix.git"; };
                 colmena = { url = "https://github.com/zhaofengli/colmena.git"; };
                 home-manager = { url = "https://github.com/nix-community/home-manager.git"; };
+                nix-darwin = { url = "https://github.com/lnl7/nix-darwin.git"; };
               };
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
