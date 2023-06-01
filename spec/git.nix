@@ -109,7 +109,7 @@ with lib;
         # anonymous write here is only soft-disabled by upstream sanity checks against the repo config
         # https://git-scm.com/docs/git-daemon#Documentation/git-daemon.txt-receive-pack
         user = "git";
-        preforkProcesses = 8;
+        preforkProcesses = 16;
       };
     };
     systemd.services =
