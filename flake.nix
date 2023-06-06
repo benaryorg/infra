@@ -814,6 +814,24 @@
 
               system.stateVersion = "22.11";
             };
+
+        "mir.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+
+              benaryorg.prometheus.client.enable = true;
+              benaryorg.prometheus.client.exporters.node.enable = false;
+              benaryorg.prometheus.client.exporters.smokeping.enable = false;
+              benaryorg.prometheus.client.exporters.systemd.enable = false;
+              benaryorg.prometheus.client.mocks.ceph =
+              {
+                port = 19283;
+              };
+            };
       };
       colmenaHive = colmena.lib.makeHive colmenaConfig;
       hosts = builtins.attrNames colmenaHive.nodes;

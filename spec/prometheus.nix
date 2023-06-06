@@ -64,6 +64,42 @@ with lib;
             The allowed SANs per exporter will be derived via the {option}`benaryorg.prometheus.client.tags` option.
           '';
         };
+        mocks = mkOption
+        {
+          default = {};
+          type = types.attrsOf (types.submodule
+          {
+            options =
+            {
+              enable = mkOption
+              {
+                type = types.bool;
+                default = true;
+                description = "Whether to enable the mock.";
+              };
+              port = mkOption
+              {
+                type = types.port;
+                description = mdDoc
+                ''
+                  Which port to scrape.
+                  Unless changed by the `scrapeConfig` override, this expects a TLS capable endpoint running on the FQDN of the configured host.
+                  The endpoint must provide valid certificates for the FQDN and should verify the certificates presented by the prometheus scraper, corresponding to the FQDN (or FQDNs) of the matching hosts as per {option}`benaryorg.prometheus.client.tags`.
+                  These options have no effect on the client and will only be used on the server to construct the scrape configuration.
+                '';
+              };
+              scrapeConfig = mkOption
+              {
+                default = {};
+                description = mdDoc
+                ''
+                  Scrape configuration as used in prometheus, used to provide values diverging from the defaults.
+                  This can be used to scrape using other protocols than HTTPS for instance.
+                '';
+              };
+            };
+          });
+        };
       };
     };
   };
@@ -96,6 +132,7 @@ with lib;
                       fqdn = node.config.networking.fqdn;
                       # filter for attrs, there seem to be "warnings" and "assertions" present as lists
                       exporters = filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.services.prometheus.exporters;
+                      mocks = filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.benaryorg.prometheus.client.mocks;
                     }
                   )
                 )
@@ -125,8 +162,37 @@ with lib;
                   }
                 )
               ];
+              # build scrape configuration from single mock
+              mockToScrapeConfig = { name, mock, fqdn }:
+                mergeAttrs
+                  {
+                    job_name = "${name}:${fqdn}";
+                    static_configs =
+                    [
+                      {
+                        targets = [ "${fqdn}:${toString mock.port}" ];
+                      }
+                    ];
+                    scheme = "https";
+                    tls_config =
+                    {
+                      ca_file = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+                      cert_file = "/run/credentials/prometheus.service/cert.pem";
+                      key_file = "/run/credentials/prometheus.service/key.pem";
+                    };
+                  }
+                  mock.scrapeConfig;
+              # get a list of mocks for each client
+              clientToMocks = client: pipe client.mocks
+              [
+                (builtins.mapAttrs (name: value: { fqdn = client.fqdn; name = name; mock = value; }))
+                builtins.attrValues
+                (builtins.filter (mock: mock.mock.enable))
+              ];
+              # get additional scrape configuration for list of clients
+              extraScrapeConfigs = clients: pipe clients [ (builtins.concatMap clientToMocks) (builtins.map mockToScrapeConfig) ];
             in
-              builtins.map (exporter: job exporter clients) exporterList;
+              (builtins.map (exporter: job exporter clients) exporterList) ++ (extraScrapeConfigs clients);
         };
         systemd.services.prometheus =
         {
