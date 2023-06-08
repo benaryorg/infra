@@ -565,6 +565,10 @@
                 owner = config.services.prosody.user;
               };
               benaryorg.prometheus.client.enable = true;
+              benaryorg.prometheus.client.mocks.prosody =
+              {
+                port = 15280;
+              };
               security.acme.certs =
               {
                 "${config.networking.fqdn}" =
@@ -612,6 +616,8 @@
                     }
 
                     http_max_content_size = 1024 * 1024 * 1024
+                    statistics = "internal"
+                    statistics_interval = "manual"
                   '';
                   ssl = { cert = "/var/lib/acme/${config.networking.fqdn}/cert.pem"; key = "/var/lib/acme/${config.networking.fqdn}/key.pem"; };
                   virtualHosts = mkForce
@@ -643,8 +649,44 @@
                     http_files = false;
                     dialback = false;
                   };
-                  extraModules = [ "turn_external" "external_services" ];
+                  extraModules = [ "turn_external" "external_services" "http_openmetrics" ];
                   disco_items = [ { url = "xmpp.lxd.bsocat.net"; description = "http upload service"; } ];
+                };
+                stunnel =
+                {
+                  enable = true;
+                  servers.prometheusMock-prosody =
+                  {
+                    accept = ":::15280";
+                    connect = 5280;
+                    cert = "/run/credentials/stunnel.service/cert.pem";
+                    key = "/run/credentials/stunnel.service/key.pem";
+
+                    CAFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+
+                    checkHost =
+                      let
+                        tags = config.benaryorg.prometheus.client.tags;
+                        clients = lib.pipe nodes
+                        [
+                          # get all the node configs
+                          builtins.attrValues
+                          # filter by those which have the prometheus server
+                          (builtins.filter (n: n.config.benaryorg.prometheus.server.enable))
+                          # filter by those which have the local tags
+                          (builtins.filter (n: any ((flip elem) tags) n.config.benaryorg.prometheus.server.tags))
+                        ];
+                      in
+                        # use the first server
+                        # FIXME: https://github.com/NixOS/nixpkgs/issues/221884
+                        (builtins.head clients).config.networking.fqdn;
+
+                    # FIXME: https://github.com/NixOS/nixpkgs/issues/221884
+                    #socket = [ "l:TCP_NODELAY=1" "r:TCP_NODELAY=1" ];
+                    sslVersion = "TLSv1.3";
+
+                    verifyChain = true;
+                  };
                 };
               };
               # https://github.com/NLnetLabs/unbound/issues/869
