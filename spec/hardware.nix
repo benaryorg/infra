@@ -157,6 +157,7 @@ with lib;
           {
             enable = config.benaryorg.hardware.ovh.btrfsScrub != [];
             fileSystems = config.benaryorg.hardware.ovh.btrfsScrub;
+            interval = "weekly";
           };
         };
 
