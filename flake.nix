@@ -641,7 +641,6 @@
                   {
                     admin_adhoc = false;
                     http_files = false;
-                    register = false;
                     dialback = false;
                   };
                   extraModules = [ "turn_external" "external_services" ];
