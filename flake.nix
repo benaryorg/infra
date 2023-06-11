@@ -866,7 +866,6 @@
 
               benaryorg.build.role = "none";
               benaryorg.prometheus.client.enable = true;
-              benaryorg.prometheus.client.exporters.node.enable = false;
               benaryorg.prometheus.client.exporters.smokeping.enable = false;
               benaryorg.prometheus.client.exporters.systemd.enable = false;
               benaryorg.prometheus.client.mocks.ceph =
