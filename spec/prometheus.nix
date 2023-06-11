@@ -221,7 +221,13 @@ with lib;
               node.enabledCollectors =
               [
                 "cgroups"
+                "cpu.guest"
+                "cpu.info"
+                "drm"
                 "ethtool"
+                "netdev.address-info"
+                "network_route"
+                "os"
                 "slabinfo"
                 "systemd"
                 "zoneinfo"
