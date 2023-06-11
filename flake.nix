@@ -873,6 +873,20 @@
                 port = 19283;
               };
             };
+
+        "gnutoo.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+
+              benaryorg.build.role = "none";
+              benaryorg.prometheus.client.enable = true;
+              benaryorg.prometheus.client.exporters.smokeping.enable = false;
+              benaryorg.prometheus.client.exporters.systemd.enable = false;
+            };
       };
       colmenaHive = colmena.lib.makeHive colmenaConfig;
       hosts = builtins.attrNames colmenaHive.nodes;
