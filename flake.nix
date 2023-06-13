@@ -188,7 +188,7 @@
 
               networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "lxd1.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -226,7 +226,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "lxd2.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -263,7 +263,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "lxd3.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -300,7 +300,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "lxd4.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -338,7 +338,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "lxd5.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -375,7 +375,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "lxd6.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -413,7 +413,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "steam.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -428,7 +428,7 @@
               benaryorg.prometheus.client.enable = true;
               security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "syncplay.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -477,7 +477,7 @@
                 ];
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "prometheus.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -549,7 +549,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "xmpp.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -705,7 +705,7 @@
                 in
                   mkForce command;
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "turn.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -746,7 +746,7 @@
                 };
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "benaryorg1.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -772,7 +772,7 @@
                 group = config.services.nginx.group;
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "benaryorg2.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -798,7 +798,7 @@
                 group = config.services.nginx.group;
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "benaryorg3.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -824,7 +824,7 @@
                 group = config.services.nginx.group;
               };
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "nixos-builder.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -853,7 +853,7 @@
 
               imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
 
-              system.stateVersion = "22.11";
+              system.stateVersion = "23.05";
             };
 
         "mir.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
