@@ -52,6 +52,7 @@ in
     {
       vim.defaultEditor = true;
       mtr.enable = true;
+      git.enable = true;
     };
 
     services =
