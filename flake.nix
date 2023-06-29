@@ -449,6 +449,8 @@
               {
                 isSystemUser = true;
                 group = "syncplay";
+                home = "/var/lib/syncplay";
+                createHome = false;
               };
               services.syncplay =
               {
@@ -456,7 +458,7 @@
                 certDir = "/run/credentials/syncplay.service";
                 user = "syncplay";
                 group = "syncplay";
-                extraArgs = [ "--isolate-rooms" ];
+                extraArgs = [ "--rooms-db-file" "/var/lib/syncplay/room.db" ];
                 saltFile = config.age.secrets.syncplaySalt.path;
               };
               security.acme.certs."${config.networking.fqdn}" =
@@ -476,6 +478,7 @@
                   "chain.pem:/var/lib/acme/${config.networking.fqdn}/chain.pem"
                 ];
               };
+              systemd.tmpfiles.rules = [ "v '/var/lib/syncplay' 0750 syncplay syncplay - -" ];
 
               system.stateVersion = "23.05";
             };
