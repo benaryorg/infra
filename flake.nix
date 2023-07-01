@@ -890,6 +890,25 @@
               benaryorg.prometheus.client.exporters.smokeping.enable = false;
               benaryorg.prometheus.client.exporters.systemd.enable = false;
             };
+
+        "bgp.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+
+              benaryorg.build.role = "none";
+              benaryorg.prometheus.client.enable = true;
+              benaryorg.prometheus.client.exporters.node.enable = false;
+              benaryorg.prometheus.client.exporters.smokeping.enable = false;
+              benaryorg.prometheus.client.exporters.systemd.enable = false;
+              benaryorg.prometheus.client.mocks.bgplgd =
+              {
+                port = 443;
+              };
+            };
       };
       colmenaHive = colmena.lib.makeHive colmenaConfig;
       hosts = builtins.attrNames colmenaHive.nodes;
