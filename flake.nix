@@ -87,8 +87,14 @@
                 {
                   default = mkOption
                   {
-                    default = true;
+                    default = !config.benaryorg.deployment.fake;
                     description = "Whether to add the host to the @default deployment.";
+                    type = types.bool;
+                  };
+                  fake = mkOption
+                  {
+                    default = false;
+                    description = "Whether the host is fake. Fake hosts are not built and tested, they are merely used for relationships in other modules (such as monitoring).";
                     type = types.bool;
                   };
                 };
@@ -854,6 +860,23 @@
               services.resolved.enable = mkForce false;
               networking.firewall.enable = false;
 
+              nix.settings.allowed-uris = [ "https://shell.cloud.bsocat.net/" ];
+              services.hydra =
+              {
+                enable = true;
+                hydraURL = "https://${config.networking.fqdn}/hydra";
+                useSubstitutes = true;
+                notificationSender = "hydra@benary.org";
+              };
+              services.nginx.virtualHosts.${config.networking.fqdn}.locations."/hydra" =
+              {
+                proxyPass = "http://127.0.0.1:3000/";
+                extraConfig =
+                ''
+                  proxy_set_header x-request-base /hydra;
+                '';
+              };
+
               imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
 
               system.stateVersion = "23.05";
@@ -865,7 +888,7 @@
           in
             with lib;
             {
-              benaryorg.deployment.default = false;
+              benaryorg.deployment.fake = true;
 
               benaryorg.build.role = "none";
               benaryorg.prometheus.client.enable = true;
@@ -883,7 +906,7 @@
           in
             with lib;
             {
-              benaryorg.deployment.default = false;
+              benaryorg.deployment.fake = true;
 
               benaryorg.build.role = "none";
               benaryorg.prometheus.client.enable = true;
@@ -897,7 +920,7 @@
           in
             with lib;
             {
-              benaryorg.deployment.default = false;
+              benaryorg.deployment.fake = true;
 
               benaryorg.build.role = "none";
               benaryorg.prometheus.client.enable = true;
@@ -910,17 +933,37 @@
               };
             };
       };
+      # build the hive
       colmenaHive = colmena.lib.makeHive colmenaConfig;
-      hosts = builtins.attrNames colmenaHive.nodes;
+      # remove fake hosts
+      hosts = builtins.filter (name: !colmenaHive.nodes.${name}.config.benaryorg.deployment.fake) (builtins.attrNames colmenaHive.nodes);
+      # create a nixosConfiguration entry
       buildNixosKv = name:
       {
         name = colmenaHive.nodes.${name}.config.networking.hostName;
         value = colmenaHive.nodes.${name};
       };
+      # merge the nixosConfiguration entries
       nixosConfig = builtins.listToAttrs (builtins.map buildNixosKv hosts);
+      # create a node Hydra job
+      buildHydraNodeJobKv = name:
+      {
+        name = let
+            hostname = colmenaHive.nodes.${name}.config.networking.hostName;
+          in
+            "node-${hostname}";
+        value = colmenaHive.nodes.${name}.config.system.build.toplevel;
+      };
+      # hydra node jobs
+      hydraNodeJobs = builtins.map buildHydraNodeJobKv hosts;
+      # other hydra jobs
+      hydraExtraJobs =
+      [
+      ];
     in
       {
         colmena = colmenaConfig;
         nixosConfigurations = nixosConfig;
+        hydraJobs = builtins.listToAttrs (hydraNodeJobs ++ hydraExtraJobs);
       };
 }
