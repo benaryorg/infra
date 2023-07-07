@@ -38,6 +38,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "git+https://shell.cloud.bsocat.net/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.url = "git+https://shell.cloud.bsocat.net/nix-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.inputs.nixlib.follows = "nixlib";
+    nixlib.url = "git+https://shell.cloud.bsocat.net/nixlib";
   };
 
   outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
@@ -145,6 +149,8 @@
                 colmena = { url = "https://github.com/zhaofengli/colmena.git"; };
                 home-manager = { url = "https://github.com/nix-community/home-manager.git"; };
                 nix-darwin = { url = "https://github.com/lnl7/nix-darwin.git"; };
+                nix-generators = { url = "https://github.com/nix-community/nixos-generators.git"; };
+                nixlib = { url = "https://github.com/nix-community/nixpkgs.lib.git"; };
               };
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
