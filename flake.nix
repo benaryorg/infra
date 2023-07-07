@@ -886,7 +886,7 @@
               {
                 enable = true;
                 description = "Slice for all services doing build jobs or similar.";
-                sliceConfig.MemoryHigh = "7G";
+                sliceConfig.MemoryHigh = "6G";
               };
               systemd.services =
               {
