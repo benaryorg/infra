@@ -192,7 +192,7 @@
                 privateKeyFile = config.age.secrets.buildSecret.path;
               };
 
-              networking.nameservers = [ "2a01:4f8:1c17:a0a9:20e:c4ff:fed0:6a79" ];
+              networking.nameservers = [ "2a0c:b641:a40:5::" ];
 
               system.stateVersion = "23.05";
             };
