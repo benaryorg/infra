@@ -1,0 +1,25 @@
+{
+  "enabled": 1,
+  "hidden": false,
+  "description": "Infrastructure repository job genaration.",
+  "nixexprinput": "infra",
+  "nixexprpath": ".hydra/jobsets.nix",
+  "checkinterval": 15,
+  "schedulingshares": 1,
+  "enableemail": false,
+  "emailoverride": "",
+  "keepnr": 3,
+  "type": 0,
+  "inputs": {
+    "infra": {
+      "value": "https://shell.cloud.bsocat.net/infra.git main",
+      "type": "git",
+      "emailresponsible": false
+    },
+    "refs": {
+      "type": "path",
+      "value": "https://shell.cloud.bsocat.net/infra.git/info/refs",
+      "emailresponsible": false
+    }
+  }
+}
