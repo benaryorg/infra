@@ -94,11 +94,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1688425221,
-        "narHash": "sha256-DhZnju72DuX9GhOnCOBIE94aCGKC2BOaF+kGxbnP/K0=",
+        "lastModified": 1688690832,
+        "narHash": "sha256-RJIYuOn9FaQWVzj6ytaKsHyur0KsYO9tOgaMz1XHtpQ=",
         "ref": "refs/heads/master",
-        "rev": "fc6a236548b31aef0be3b0a0377c4459bb39d923",
-        "revCount": 383,
+        "rev": "bfc1c3dca576e2f9e02eb0176e4058305192afe3",
+        "revCount": 384,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/crane"
       },
@@ -170,11 +170,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1688467264,
-        "narHash": "sha256-AUQP1WtmBb36bRc41p5ieTwq6Y8pgiKurbdrsPeP3fg=",
+        "lastModified": 1688731042,
+        "narHash": "sha256-D1p/LLP1SpDYjutt9W+O5Ek+XGdszsjYjvL30ad++OY=",
         "ref": "refs/heads/master",
-        "rev": "b406b8d1bc90f6cd3e120d189b3e929f17ca4aea",
-        "revCount": 2866,
+        "rev": "34db2f05219bcb0e41cc85490e4c338e2405546c",
+        "revCount": 2871,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/home-manager"
       },
@@ -198,13 +198,51 @@
         "url": "https://shell.cloud.bsocat.net/nix-systems"
       }
     },
+    "nixlib": {
+      "locked": {
+        "lastModified": 1688259758,
+        "narHash": "sha256-CYVbYQfIm3vwciCf6CCYE+WOOLE3vcfxfEfNHIfKUJQ=",
+        "ref": "refs/heads/master",
+        "rev": "a92befce80a487380ea5e92ae515fe33cebd3ac6",
+        "revCount": 7969,
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/nixlib"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/nixlib"
+      }
+    },
+    "nixos-generators": {
+      "inputs": {
+        "nixlib": [
+          "nixlib"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1688738567,
+        "narHash": "sha256-yax5BYOfpE0+95kyJmEcfKEdZBaFvCENDogBB4VQB3Q=",
+        "ref": "refs/heads/master",
+        "rev": "9191c85aab6b1a7ad395c13d340f2aa0e3ddf552",
+        "revCount": 317,
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/nix-generators"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://shell.cloud.bsocat.net/nix-generators"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1688389917,
-        "narHash": "sha256-RKiK1QeommEsjQ8fLgxt4831x9O6n2gD7wAhVZTrr8M=",
+        "lastModified": 1688594934,
+        "narHash": "sha256-3dUo20PsmUd57jVZRx5vgKyIN1tv+v/JQweZsve5q/A=",
         "ref": "nixos-23.05",
-        "rev": "aed4b19d312525ae7ca9bceb4e1efe3357d0e2eb",
-        "revCount": 488896,
+        "rev": "e11142026e2cef35ea52c9205703823df225c947",
+        "revCount": 489112,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/nixpkgs"
       },
@@ -216,11 +254,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1688322751,
-        "narHash": "sha256-eW62dC5f33oKZL7VWlomttbUnOTHrAbte9yNUNW8rbk=",
+        "lastModified": 1688590700,
+        "narHash": "sha256-ZF055rIUP89cVwiLpG5xkJzx00gEuuGFF60Bs/LM3wc=",
         "ref": "nixos-unstable",
-        "rev": "0fbe93c5a7cac99f90b60bdf5f149383daaa615f",
-        "revCount": 500597,
+        "rev": "f292b4964cb71f9dfbbd30dc9f511d6165cd109b",
+        "revCount": 501608,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/nixpkgs"
       },
@@ -273,6 +311,8 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nix-systems": "nix-systems",
+        "nixlib": "nixlib",
+        "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "ragenix": "ragenix",
@@ -289,11 +329,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1688438033,
-        "narHash": "sha256-wOmpZis06pVKTR+5meGwhrW10/buf98lnA26uQLaqek=",
+        "lastModified": 1688697203,
+        "narHash": "sha256-0dMSJzu2bFMr9mfkXGRqMr3aPviny4zD4h7yUPk1B0U=",
         "ref": "refs/heads/master",
-        "rev": "c3e43223dece545cfe06ddd92fd782adc73d56c3",
-        "revCount": 1069,
+        "rev": "f95db88269e9a46c67cd442fb667c5ad05a6d962",
+        "revCount": 1072,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/rust-overlay"
       },
