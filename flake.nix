@@ -882,11 +882,17 @@
                   proxy_set_header x-request-base /hydra;
                 '';
               };
+              systemd.slices.build =
+              {
+                enable = true;
+                description = "Slice for all services doing build jobs or similar.";
+                sliceConfig.MemoryHigh = "7G";
+              };
               systemd.services =
               {
-                nix-daemon = { serviceConfig.MemoryHigh = "7G"; };
-                hydra-evaluator = { serviceConfig.MemoryHigh = "7G"; };
-                hydra-queue-runner = { serviceConfig.MemoryHigh = "7G"; };
+                nix-daemon = { serviceConfig.Slice = "build.slice"; };
+                hydra-evaluator = { serviceConfig.Slice = "build.slice"; };
+                hydra-queue-runner = { serviceConfig.Slice = "build.slice"; };
               };
 
               imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
