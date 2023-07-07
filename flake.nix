@@ -882,6 +882,12 @@
                   proxy_set_header x-request-base /hydra;
                 '';
               };
+              systemd.services =
+              {
+                nix-daemon = { serviceConfig.MemoryHigh = "7G"; };
+                hydra-evaluator = { serviceConfig.MemoryHigh = "7G"; };
+                hydra-queue-runner = { serviceConfig.MemoryHigh = "7G"; };
+              };
 
               imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
 
