@@ -9,7 +9,6 @@
   "enableemail": false,
   "emailoverride": "",
   "keepnr": 3,
-  "type": 0,
   "inputs": {
     "infra": {
       "value": "https://shell.cloud.bsocat.net/infra.git main",

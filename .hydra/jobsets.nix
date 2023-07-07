@@ -10,8 +10,7 @@
         schedulingshares = if isMainBranch name then 100 else 1;
         enableemail = false;
         emailoverride = "";
-        keepnr = 2;
-        type = 1;
+        keepnr =  if isMainBranch name then 64 else 4;
         flake = "git+https://shell.cloud.bsocat.net/infra?ref=${name}";
       };
       parseRef = ref: let
