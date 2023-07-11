@@ -995,15 +995,15 @@
         value = colmenaHive.nodes.${name}.config.system.build.toplevel;
       };
       # hydra node jobs
-      hydraNodeJobs = builtins.map buildHydraNodeJobKv hosts;
+      hydraNodeJobs = builtins.listToAttrs (builtins.map buildHydraNodeJobKv hosts);
       # other hydra jobs
       hydraExtraJobs =
-      [
-      ];
+      {
+      };
     in
       {
         colmena = colmenaConfig;
         nixosConfigurations = nixosConfig;
-        hydraJobs = builtins.listToAttrs (hydraNodeJobs ++ hydraExtraJobs);
+        hydraJobs = hydraNodeJobs // hydraExtraJobs;
       };
 }
