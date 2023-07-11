@@ -504,11 +504,32 @@
               age.secrets.grafanaUser = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_user.age; owner = "grafana"; mode = "0400"; };
               age.secrets.grafanaPass = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_pass.age; owner = "grafana"; mode = "0400"; };
               age.secrets.grafanaSecret = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/secret.age; owner = "grafana"; mode = "0400"; };
+              age.secrets.xmppAlerting = { file = ./secret/service/xmpp/xmpp.lxd.bsocat.net/user/benary.org/monitoring.age; };
               benaryorg.prometheus.server.enable = true;
               benaryorg.prometheus.client.enable = true;
-              services.prometheus.retentionTime = "360d";
               services =
               {
+                prometheus =
+                {
+                  retentionTime = "360d";
+                  xmpp-alerts =
+                  {
+                    enable = true;
+                    settings =
+                    {
+                      jid = "monitoring@benary.org";
+                      password_command = "cat \"\${CREDENTIALS_DIRECTORY}/password\"";
+                      to_jid = "binary@benary.org";
+                      listen_address = "::1";
+                      listen_port = 9199;
+                      text_template =
+                      ''
+                        *{{ status.upper() }}*: _{{ labels.host or labels.instance }}_ ({{ labels.alertname }}): {{ annotations.description or annotations.summary }}
+                        {{ generatorURL }}
+                      '';
+                    };
+                  };
+                };
                 grafana =
                 {
                   enable = true;
@@ -563,6 +584,7 @@
                   };
                 };
               };
+              systemd.services.prometheus-xmpp-alerts.serviceConfig.LoadCredential = [ "password:${config.age.secrets.xmppAlerting.path}" ];
 
               system.stateVersion = "23.05";
             };
