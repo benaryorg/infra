@@ -9,7 +9,7 @@ with lib;
       {
         default = "container";
         description = "Whether to enroll the default SSH user.";
-        type = types.enum [ "container" "ovh" ];
+        type = types.enum [ "container" "ovh" "none" ];
       };
       ovh =
       {

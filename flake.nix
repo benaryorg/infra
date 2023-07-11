@@ -46,14 +46,12 @@
 
   outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
     let
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
       colmenaConfig =
       {
         meta =
         {
-          nixpkgs = import nixpkgs
-          {
-            system = "x86_64-linux";
-          };
+          nixpkgs = pkgs;
           specialArgs =
           {
             inherit ragenix benaryorg-website;
@@ -972,6 +970,48 @@
                 port = 443;
               };
             };
+
+        "kexec.example.com" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              imports =
+              [
+                (nixpkgs + "/nixos/modules/installer/netboot/netboot.nix")
+              ];
+
+              nix.settings.substituters = [ "https://nixos-builder.cloud.bsocat.net" ];
+              benaryorg.net.type = "none";
+              benaryorg.hardware.vendor = "none";
+              benaryorg.flake.enable = false;
+              benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+              users.users.root.openssh.authorizedKeys.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+              services =
+              {
+                lldpd.enable = true;
+                unbound.enable = true;
+                openssh = lib.mkForce
+                {
+                  enable = true;
+                  settings =
+                  {
+                    PermitRootLogin = "yes";
+                    PasswordAuthentication = false;
+                  };
+                };
+              };
+              networking =
+              {
+                firewall.enable = false;
+                wireguard.enable = false;
+                tempAddresses = "disabled";
+                useDHCP = true;
+              };
+            };
       };
       # build the hive
       colmenaHive = colmena.lib.makeHive colmenaConfig;
@@ -996,9 +1036,10 @@
       };
       # hydra node jobs
       hydraNodeJobs = builtins.listToAttrs (builtins.map buildHydraNodeJobKv hosts);
-      # other hydra jobs
+      # hydra extra jobs
       hydraExtraJobs =
       {
+        kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
       };
     in
       {
