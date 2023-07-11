@@ -69,6 +69,7 @@
               [
                 ragenix.nixosModules.default
                 benaryorg-website.nixosModules.default
+                colmena.nixosModules.deploymentOptions
                 ./spec/user.nix
                 ./spec/ssh.nix
                 ./spec/nix.nix
@@ -1160,6 +1161,8 @@
       };
       # hydra node jobs
       hydraNodeJobs = builtins.listToAttrs (builtins.map buildHydraNodeJobKv hosts);
+      # hydra tests
+      hydraTests = import ./test { inherit colmena nixpkgs pkgs colmenaConfig; };
       # hydra extra jobs
       hydraExtraJobs =
       {
@@ -1187,6 +1190,6 @@
       {
         colmena = colmenaConfig;
         nixosConfigurations = nixosConfig;
-        hydraJobs = builtins.mapAttrs addHydraMeta (hydraNodeJobs // hydraExtraJobs);
+        hydraJobs = builtins.mapAttrs addHydraMeta (hydraNodeJobs // hydraExtraJobs // hydraTests);
       };
 }
