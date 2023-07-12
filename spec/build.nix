@@ -7,8 +7,15 @@ with lib;
     {
       role = mkOption
       {
-        type = types.enum [ "client" "server" "none" ];
-        description = "In what role to act.";
+        type = types.enum [ "client" "client-light" "server" "none" ];
+        description = mdDoc
+        ''
+          In what role to act.
+          A `server` provides build services as well as a binary cache via SSH and HTTPS including appropriate signatures.
+          A `client` will consume the build services and binary cache.
+          A `client-light` will only consume the binary cache.
+          `none` opts out of the entire module.
+        '';
         default = "client";
       };
       tags = mkOption
@@ -121,12 +128,12 @@ with lib;
               (builtins.filter (n: any ((flip elem) cfg.tags) n.config.benaryorg.build.tags))
             ];
           in
-            mkIf (cfg.role == "client")
+            mkIf (cfg.role == "client" || cfg.role == "client-light")
             {
-              nix.distributedBuilds = true;
+              nix.distributedBuilds = cfg.role == "client";
               nix.settings.trusted-public-keys = map (node: node.config.benaryorg.build.publicKey) server;
               nix.settings.substituters = map (node: "https://${node.config.networking.fqdn}") server;
-              nix.buildMachines = lib.pipe server
+              nix.buildMachines = mkIf (cfg.role == "client") (lib.pipe server
               [
                 # map to entry (hostkeys are global in base)
                 (builtins.map (node:
@@ -138,7 +145,7 @@ with lib;
                   supportedFeatures = node.config.benaryorg.build.features;
                   system = node.config.benaryorg.build.system;
                 }))
-              ];
+              ]);
             })
       ];
 }

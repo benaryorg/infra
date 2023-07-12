@@ -984,14 +984,17 @@
                 (nixpkgs + "/nixos/modules/installer/netboot/netboot.nix")
               ];
 
-              nix.settings.substituters = [ "https://nixos-builder.cloud.bsocat.net" ];
+              benaryorg.base.lightweight = true;
               benaryorg.net.type = "none";
               benaryorg.hardware.vendor = "none";
               benaryorg.flake.enable = false;
+              benaryorg.build.role = "client-light";
+              benaryorg.build.tags = [ "cloud.bsocat.net" ];
               benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
               users.users.root.openssh.authorizedKeys.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
               services =
               {
+                getty.autologinUser = "root";
                 lldpd.enable = true;
                 unbound.enable = true;
                 openssh = lib.mkForce

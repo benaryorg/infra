@@ -23,6 +23,12 @@ with lib;
           type = types.bool;
         };
       };
+      lightweight = mkOption
+      {
+        default = false;
+        description = "Enabling this will remove some larger packages.";
+        type = types.bool;
+      };
     };
   };
 
@@ -114,33 +120,44 @@ with lib;
       '';
     };
 
-    environment.systemPackages = with pkgs;
+    environment.systemPackages = with pkgs; builtins.concatLists
     [
-      # automation tooling
-      colmena ragenix.packages.${pkgs.stdenv.system}.default puppet-bolt nix-diff
-      # network tooling
-      dhcpcd dnsmasq iperf
-      # system tooling
-      btrbk criu efibootmgr psutils pstree podman qemu uucp
-      (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_PREFER_APPLETS=y"; })
-      # misc utils
-      cfssl testssl openssl
-      # shell tooling
-      bvi jq moreutils pv tree
-      # file tooling
-      binwalk detox dos2unix file
-      # tui tooling
-      asciinema pass pinentry-curses tmux tmux-xpanes
-      # databases
-      sqlite
-      # debugging
-      curl dig gdb htop iftop iotop lsof netcat-openbsd nmap nmon socat strace tcpdump traceroute whois
-      # games
-      bsdgames
-      # hardware tooling
-      ethtool hdparm lsscsi pciutils smartmontools usbutils
-      # filesystem tooling
-      bcache-tools btrfs-progs cryptsetup dosfstools fio mdadm ncdu
+      [
+        # automation tooling
+        colmena ragenix.packages.${pkgs.stdenv.system}.default nix-diff
+        # network tooling
+        dhcpcd dnsmasq iperf
+        # system tooling
+        btrbk efibootmgr psutils pstree uucp
+        (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_PREFER_APPLETS=y"; })
+        # misc utils
+        cfssl testssl openssl
+        # shell tooling
+        bvi jq moreutils pv tree
+        # file tooling
+        binwalk detox dos2unix file
+        # tui tooling
+        asciinema pass pinentry-curses tmux tmux-xpanes
+        # databases
+        sqlite
+        # debugging
+        curl dig htop iftop iotop lsof netcat-openbsd nmap nmon socat strace tcpdump traceroute whois
+        # hardware tooling
+        ethtool hdparm lsscsi pciutils smartmontools usbutils
+        # filesystem tooling
+        bcache-tools btrfs-progs cryptsetup dosfstools fio mdadm ncdu
+      ]
+      (lib.optionals (!config.benaryorg.base.lightweight)
+      [
+        # automation tooling
+        puppet-bolt
+        # system tooling
+        criu podman qemu
+        # debugging
+        gdb
+        # games
+        bsdgames
+      ])
     ];
 
     users.users.root =
