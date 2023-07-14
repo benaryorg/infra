@@ -468,7 +468,7 @@
                 certDir = "/run/credentials/syncplay.service";
                 user = "syncplay";
                 group = "syncplay";
-                extraArgs = [ "--rooms-db-file" "/var/lib/syncplay/room.db" ];
+                extraArgs = [ "--isolate-rooms" ];
                 saltFile = config.age.secrets.syncplaySalt.path;
               };
               security.acme.certs."${config.networking.fqdn}" =
