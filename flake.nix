@@ -533,6 +533,7 @@
                   enable = true;
                   settings =
                   {
+                    database.wal = true;
                     security =
                     {
                       admin_user = "$__file{/run/agenix/grafanaUser}";
