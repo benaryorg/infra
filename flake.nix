@@ -1026,6 +1026,7 @@
               benaryorg.deployment.default = false;
               benaryorg.build.role = "client-light";
               benaryorg.build.tags = [ "cloud.bsocat.net" ];
+              benaryorg.flake.autoupgrade = false;
 
               system.stateVersion = "23.05";
             };
