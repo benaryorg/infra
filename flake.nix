@@ -1016,6 +1016,19 @@
                 useDHCP = true;
               };
             };
+
+        "lxc.example.com" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.default = false;
+              benaryorg.build.role = "client-light";
+              benaryorg.build.tags = [ "cloud.bsocat.net" ];
+
+              system.stateVersion = "23.05";
+            };
       };
       # build the hive
       colmenaHive = colmena.lib.makeHive colmenaConfig;
