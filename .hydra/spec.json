@@ -5,7 +5,7 @@
   "nixexprinput": "infra",
   "nixexprpath": ".hydra/jobsets.nix",
   "checkinterval": 15,
-  "schedulingshares": 1,
+  "schedulingshares": 100,
   "enableemail": false,
   "emailoverride": "",
   "keepnr": 3,
