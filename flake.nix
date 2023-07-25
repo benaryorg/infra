@@ -1176,7 +1176,7 @@
             {
               description = "hydra job ${name}";
               license = [ { shortName = "AGPL-3.0-or-later"; } ];
-              homepage = "https://benary.org";
+              homepage = "https://shell.cloud.bsocat.net/infra/";
               maintainers = [ { email = "root@benary.org"; } ];
               schedulingPriority = 10;
               timeout = 36000;
