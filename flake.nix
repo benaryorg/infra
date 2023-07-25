@@ -1152,7 +1152,11 @@
             hostname = colmenaHive.nodes.${name}.config.networking.hostName;
           in
             "node-${hostname}";
-        value = colmenaHive.nodes.${name}.config.system.build.toplevel;
+        value = colmenaHive.nodes.${name}.config.system.build.toplevel
+          //
+            {
+              meta.description = "hydra build for colmena node ${name}";
+            };
       };
       # hydra node jobs
       hydraNodeJobs = builtins.listToAttrs (builtins.map buildHydraNodeJobKv hosts);
@@ -1161,10 +1165,28 @@
       {
         kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
       };
+      addHydraMeta = name: { meta ? {}, ... }@value: value //
+      {
+        meta =
+          let
+            metaDefault = name: default: if builtins.hasAttr name meta then builtins.getAttr name meta else default;
+            metaMerge = attrs: meta // (builtins.mapAttrs metaDefault attrs);
+          in
+            metaMerge
+            {
+              description = "hydra job ${name}";
+              license = [ { shortName = "AGPL-3.0-or-later"; } ];
+              homepage = "https://benary.org";
+              maintainers = [ { email = "root@benary.org"; } ];
+              schedulingPriority = 10;
+              timeout = 36000;
+              maxSilent = 7200;
+            };
+      };
     in
       {
         colmena = colmenaConfig;
         nixosConfigurations = nixosConfig;
-        hydraJobs = hydraNodeJobs // hydraExtraJobs;
+        hydraJobs = builtins.mapAttrs addHydraMeta (hydraNodeJobs // hydraExtraJobs);
       };
 }
