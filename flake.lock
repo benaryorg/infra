@@ -198,44 +198,6 @@
         "url": "https://shell.cloud.bsocat.net/nix-systems"
       }
     },
-    "nixlib": {
-      "locked": {
-        "lastModified": 1690073998,
-        "narHash": "sha256-qmK+VMvflwUzQSQl4XVP5kbodYLAKThNzq6mZrOM2Mo=",
-        "ref": "refs/heads/master",
-        "rev": "d0545f65611a9625f161d0ff02627bc364e024f6",
-        "revCount": 8031,
-        "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nixlib"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nixlib"
-      }
-    },
-    "nixos-generators": {
-      "inputs": {
-        "nixlib": [
-          "nixlib"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1690133435,
-        "narHash": "sha256-YNZiefETggroaTLsLJG2M+wpF0pJPwiauKG4q48ddNU=",
-        "ref": "refs/heads/master",
-        "rev": "b1171de4d362c022130c92d7c8adc4bf2b83d586",
-        "revCount": 324,
-        "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nix-generators"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nix-generators"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1690148897,
@@ -311,8 +273,6 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nix-systems": "nix-systems",
-        "nixlib": "nixlib",
-        "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "ragenix": "ragenix",

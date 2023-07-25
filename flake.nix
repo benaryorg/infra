@@ -38,10 +38,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "git+https://shell.cloud.bsocat.net/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-generators.url = "git+https://shell.cloud.bsocat.net/nix-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-generators.inputs.nixlib.follows = "nixlib";
-    nixlib.url = "git+https://shell.cloud.bsocat.net/nixlib";
   };
 
   outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
