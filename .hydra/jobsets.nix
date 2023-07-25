@@ -37,20 +37,33 @@
           builtins.listToAttrs jobs;
     in
       {
-        jobsets = builtins.derivation
-        {
-          system = builtins.currentSystem;
-          name = "${projectName}-jobspec";
-          builder = "/bin/sh";
-          args =
-          [
-            (builtins.toFile "generate-jobspec.sh"
-            ''
-              read -r jobspec <<"END"
-              ${builtins.toJSON (jobspec refs)}
-              END
-              printf "%s\\n" "$jobspec" > $out
-            '')
-          ];
-        };
+        jobsets =
+        (
+            (builtins.derivation
+            {
+              system = builtins.currentSystem;
+              name = "${projectName}-jobspec";
+              builder = "/bin/sh";
+              args =
+              [
+                (builtins.toFile "generate-jobspec.sh"
+                ''
+                  read -r jobspec <<"END"
+                  ${builtins.toJSON (jobspec refs)}
+                  END
+                  printf "%s\\n" "$jobspec" > $out
+                '')
+              ];
+            })
+          //
+            {
+              meta =
+              {
+                description = "hydra jobset generation";
+                license = [ { shortName = "AGPL-3.0-or-later"; } ];
+                homepage = "https://shell.cloud.bsocat.net/infra/";
+                maintainers = [ { email = "root@benary.org"; } ];
+              };
+            }
+        );
       }
