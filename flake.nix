@@ -152,6 +152,7 @@
 
               zramSwap.enable = true;
               nix.gc.automatic = mkForce false;
+              services.openssh.settings.MaxStartups = "50";
 
               benaryorg.net.host.primaryInterface = "enp1s0";
               benaryorg.net.host.ipv4 = "213.32.7.146/24";
