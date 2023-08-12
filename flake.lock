@@ -36,11 +36,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689350314,
-        "narHash": "sha256-P5Oin5NDfis2x4U7Xku9ti2pGIIwh5mGIUj5T0zXM8k=",
+        "lastModified": 1691876324,
+        "narHash": "sha256-oGOWX5HhzyEZk18n4eKzD+lyrm21croKhdr/s7rtUac=",
         "ref": "refs/heads/main",
-        "rev": "2961e89380d717c7dbb45b96de32dc1bca7ea73d",
-        "revCount": 5,
+        "rev": "14ec71daa4308c7a36521a305047ce961e15ffdf",
+        "revCount": 6,
         "type": "git",
         "url": "https://shell.cloud.bsocat.net/benary.org"
       },
