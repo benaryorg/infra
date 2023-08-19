@@ -647,6 +647,7 @@
                       root_url = "https://${config.networking.fqdn}/";
                     };
                     analytics.reporting_enabled = false;
+                    feature_toggles.publicDashboards = true;
                   };
                   declarativePlugins = with pkgs.grafanaPlugins; [ grafana-piechart-panel ];
                   provision =
