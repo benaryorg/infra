@@ -8,11 +8,11 @@ rustPlatform.buildRustPackage rec
   src = fetchgit
   {
     url = "https://git.shell.bsocat.net/lxddns.git";
-    rev = "554d5a9fcd28a4d9161950ffa58cdae4a731f4c4";
-    sha256 = "sha256-phIPejlAIoo3yRIuHwX72trgaIniEHhMWZtxx8fBV4g=";
+    rev = "9ff9afc0eefcffcdfe052b650b7c9a88226fc3f2";
+    sha256 = "sha256-upFxJ7rQBQkzfXs0ADI1omEkRU4pNtggVjYnSgIeOB4=";
   };
 
-  cargoSha256 = "sha256-7lVWXCYBQk6pEnMeeaPySjmgughAjM5BAYa+I75m+B4=";
+  cargoSha256 = "sha256-nGAxVcy5xDVZZaS/rYQ98PocBnOIouuviv5ERp4yUhA=";
 
   buildNoDefaultFeatures = true;
   buildFeatures = [ "http" ];
