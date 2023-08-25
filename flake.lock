@@ -19,11 +19,11 @@
         "rev": "d8c973fd228949736dedf61b7f8cc1ece3236792",
         "revCount": 249,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/agenix"
+        "url": "https://git.shell.bsocat.net/agenix"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/agenix"
+        "url": "https://git.shell.bsocat.net/agenix"
       }
     },
     "benaryorg-website": {
@@ -42,11 +42,11 @@
         "rev": "14ec71daa4308c7a36521a305047ce961e15ffdf",
         "revCount": 6,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/benary.org"
+        "url": "https://git.shell.bsocat.net/benary.org"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/benary.org"
+        "url": "https://git.shell.bsocat.net/benary.org"
       }
     },
     "colmena": {
@@ -71,11 +71,11 @@
         "rev": "19384f3ee2058c56021e4465a3ec57e84a47d8dd",
         "revCount": 473,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/colmena"
+        "url": "https://git.shell.bsocat.net/colmena"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/colmena"
+        "url": "https://git.shell.bsocat.net/colmena"
       }
     },
     "crane": {
@@ -100,11 +100,11 @@
         "rev": "ef5d11e3c2e5b3924eb0309dba2e1fea2d9062ae",
         "revCount": 394,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/crane"
+        "url": "https://git.shell.bsocat.net/crane"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/crane"
+        "url": "https://git.shell.bsocat.net/crane"
       }
     },
     "darwin": {
@@ -120,11 +120,11 @@
         "rev": "511177ffe8226c78c9cf6a92a7b5f2df3684956b",
         "revCount": 1444,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nix-darwin"
+        "url": "https://git.shell.bsocat.net/nix-darwin"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nix-darwin"
+        "url": "https://git.shell.bsocat.net/nix-darwin"
       }
     },
     "flake-compat": {
@@ -136,11 +136,11 @@
         "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
         "revCount": 44,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/flake-compat"
+        "url": "https://git.shell.bsocat.net/flake-compat"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/flake-compat"
+        "url": "https://git.shell.bsocat.net/flake-compat"
       }
     },
     "flake-utils": {
@@ -150,17 +150,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1692792214,
-        "narHash": "sha256-voZDQOvqHsaReipVd3zTKSBwN7LZcUwi3/ThMxRZToU=",
+        "lastModified": 1692799911,
+        "narHash": "sha256-3eihraek4qL744EvQXsK1Ha6C3CR7nnT8X2qWap4RNk=",
         "ref": "refs/heads/main",
-        "rev": "1721b3e7c882f75f2301b00d48a2884af8c448ae",
-        "revCount": 82,
+        "rev": "f9e7cf818399d17d347f847525c5a5a8032e4e44",
+        "revCount": 85,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/flake-utils"
+        "url": "https://git.shell.bsocat.net/flake-utils"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/flake-utils"
+        "url": "https://git.shell.bsocat.net/flake-utils"
       }
     },
     "home-manager": {
@@ -176,11 +176,11 @@
         "rev": "6a20e40acaebf067da682661aa67da8b36812606",
         "revCount": 2974,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/home-manager"
+        "url": "https://git.shell.bsocat.net/home-manager"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/home-manager"
+        "url": "https://git.shell.bsocat.net/home-manager"
       }
     },
     "nix-systems": {
@@ -191,43 +191,43 @@
         "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
         "revCount": 3,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nix-systems"
+        "url": "https://git.shell.bsocat.net/nix-systems"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nix-systems"
+        "url": "https://git.shell.bsocat.net/nix-systems"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1692698134,
-        "narHash": "sha256-YtMmZWR/dlTypOcwiZfZTMPr3tj9fwr05QTStfSyDSg=",
+        "lastModified": 1692794066,
+        "narHash": "sha256-H0aG8r16dj0x/Wz6wQhQxc9V7AsObOiHPaKxQgH6Y08=",
         "ref": "nixos-23.05",
-        "rev": "a16f7eb56e88c8985fcc6eb81dabd6cade4e425a",
-        "revCount": 490339,
+        "rev": "fc944919f743bb22379dddf18dcb72db6cff84aa",
+        "revCount": 490343,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nixpkgs"
+        "url": "https://git.shell.bsocat.net/nixpkgs"
       },
       "original": {
         "ref": "nixos-23.05",
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nixpkgs"
+        "url": "https://git.shell.bsocat.net/nixpkgs"
       }
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1692638711,
-        "narHash": "sha256-J0LgSFgJVGCC1+j5R2QndadWI1oumusg6hCtYAzLID4=",
+        "lastModified": 1692913444,
+        "narHash": "sha256-1SvMQm2DwofNxXVtNWWtIcTh7GctEVrS/Xel/mdc6iY=",
         "ref": "nixos-unstable",
-        "rev": "91a22f76cd1716f9d0149e8a5c68424bb691de15",
-        "revCount": 517128,
+        "rev": "18324978d632ffc55ef1d928e81630c620f4f447",
+        "revCount": 518195,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nixpkgs"
+        "url": "https://git.shell.bsocat.net/nixpkgs"
       },
       "original": {
         "ref": "nixos-unstable",
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/nixpkgs"
+        "url": "https://git.shell.bsocat.net/nixpkgs"
       }
     },
     "ragenix": {
@@ -255,11 +255,11 @@
         "rev": "281f68c3d477904f79ff1cd5807a8c226cd80a50",
         "revCount": 149,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/ragenix"
+        "url": "https://git.shell.bsocat.net/ragenix"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/ragenix"
+        "url": "https://git.shell.bsocat.net/ragenix"
       }
     },
     "root": {
@@ -289,17 +289,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1692756590,
-        "narHash": "sha256-VnktafFl+0U9wdYO8vGSFOYSSQ+GFd+MiMA0cTZ8mHg=",
+        "lastModified": 1692929460,
+        "narHash": "sha256-zdN6UVtEml7t0WQHVy0avsE+TWJLklXnqJyiPaOa8u0=",
         "ref": "refs/heads/master",
-        "rev": "a9e9946645fcf892c850f8e654a5e675a6fd14d8",
-        "revCount": 1119,
+        "rev": "673e2d3d2a3951adc6f5e3351c9fce6ad130baed",
+        "revCount": 1121,
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/rust-overlay"
+        "url": "https://git.shell.bsocat.net/rust-overlay"
       },
       "original": {
         "type": "git",
-        "url": "https://shell.cloud.bsocat.net/rust-overlay"
+        "url": "https://git.shell.bsocat.net/rust-overlay"
       }
     }
   },
