@@ -1,14 +1,13 @@
-{ lib, stdenv, fetchFromGitHub, nix, rustPlatform }:
+{ lib, stdenv, fetchgit, nix, rustPlatform }:
 
 rustPlatform.buildRustPackage rec
 {
   pname = "lxddns";
   version = "4.0.2";
 
-  src = fetchFromGitHub
+  src = fetchgit
   {
-    owner = "benaryorg";
-    repo = pname;
+    url = "https://shell.cloud.bsocat.net/lxddns.git";
     rev = "554d5a9fcd28a4d9161950ffa58cdae4a731f4c4";
     sha256 = "sha256-phIPejlAIoo3yRIuHwX72trgaIniEHhMWZtxx8fBV4g=";
   };
