@@ -70,6 +70,12 @@ with lib;
         description = "Address to bind lxddns to.";
         type = types.str;
       };
+      legacySmtpProxy = mkOption
+      {
+        default = false;
+        description = "Whether to enable a legacy setup-specific SMTP proxy.";
+        type = types.bool;
+      };
     };
   };
 
@@ -295,7 +301,7 @@ with lib;
           # live in the container config and be pulled from there.
           # Of course that requires a rather elaborate way to assign
           # containers to clusters, but that should be doable?
-          nginx =
+          nginx = lib.mkIf config.benaryorg.lxd.legacySmtpProxy
           {
             enable = true;
             streamConfig =

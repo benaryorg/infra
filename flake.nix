@@ -332,6 +332,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legacySmtpProxy = true;
               benaryorg.lxd.legoConfig =
               {
                 dnsProvider = "hurricane";
@@ -370,6 +371,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legacySmtpProxy = true;
               benaryorg.lxd.legoConfig =
               {
                 dnsProvider = "hurricane";
@@ -407,6 +409,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legacySmtpProxy = true;
               benaryorg.lxd.legoConfig =
               {
                 dnsProvider = "hurricane";
@@ -444,6 +447,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legacySmtpProxy = true;
               benaryorg.lxd.legoConfig =
               {
                 dnsProvider = "hurricane";
@@ -482,6 +486,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legacySmtpProxy = true;
               benaryorg.lxd.legoConfig =
               {
                 dnsProvider = "hurricane";
@@ -519,6 +524,7 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.lxd.enable = true;
               benaryorg.lxd.cluster = "lxd.bsocat.net";
+              benaryorg.lxd.legacySmtpProxy = true;
               benaryorg.lxd.legoConfig =
               {
                 dnsProvider = "hurricane";
