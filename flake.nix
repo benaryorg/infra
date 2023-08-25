@@ -1,42 +1,42 @@
 {
   inputs =
   {
-    nixpkgs.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-23.05";
-    nixpkgs-unstable.url = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-unstable";
-    ragenix.url = "git+https://shell.cloud.bsocat.net/ragenix";
+    nixpkgs.url = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-23.05";
+    nixpkgs-unstable.url = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-unstable";
+    ragenix.url = "git+https://git.shell.bsocat.net/ragenix";
     ragenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
     ragenix.inputs.agenix.follows = "agenix";
     ragenix.inputs.flake-utils.follows = "flake-utils";
     ragenix.inputs.rust-overlay.follows = "rust-overlay";
     ragenix.inputs.crane.follows = "crane";
-    colmena.url = "git+https://shell.cloud.bsocat.net/colmena";
+    colmena.url = "git+https://git.shell.bsocat.net/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
     colmena.inputs.stable.follows = "nixpkgs";
     colmena.inputs.flake-compat.follows = "flake-compat";
     colmena.inputs.flake-utils.follows = "flake-utils";
-    agenix.url = "git+https://shell.cloud.bsocat.net/agenix";
+    agenix.url = "git+https://git.shell.bsocat.net/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
     agenix.inputs.darwin.follows = "darwin";
-    flake-compat.url = "git+https://shell.cloud.bsocat.net/flake-compat";
+    flake-compat.url = "git+https://git.shell.bsocat.net/flake-compat";
     flake-compat.flake = false;
-    flake-utils.url = "git+https://shell.cloud.bsocat.net/flake-utils";
+    flake-utils.url = "git+https://git.shell.bsocat.net/flake-utils";
     flake-utils.inputs.systems.follows = "nix-systems";
-    rust-overlay.url = "git+https://shell.cloud.bsocat.net/rust-overlay";
+    rust-overlay.url = "git+https://git.shell.bsocat.net/rust-overlay";
     rust-overlay.inputs.flake-utils.follows = "flake-utils";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    benaryorg-website.url = "git+https://shell.cloud.bsocat.net/benary.org";
+    benaryorg-website.url = "git+https://git.shell.bsocat.net/benary.org";
     benaryorg-website.inputs.flake-utils.follows = "flake-utils";
     benaryorg-website.inputs.nixpkgs.follows = "nixpkgs";
-    crane.url = "git+https://shell.cloud.bsocat.net/crane";
+    crane.url = "git+https://git.shell.bsocat.net/crane";
     crane.inputs.flake-compat.follows = "flake-compat";
     crane.inputs.flake-utils.follows = "flake-utils";
     crane.inputs.rust-overlay.follows = "rust-overlay";
     crane.inputs.nixpkgs.follows = "nixpkgs";
-    nix-systems.url = "git+https://shell.cloud.bsocat.net/nix-systems";
-    home-manager.url = "git+https://shell.cloud.bsocat.net/home-manager";
+    nix-systems.url = "git+https://git.shell.bsocat.net/nix-systems";
+    home-manager.url = "git+https://git.shell.bsocat.net/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    darwin.url = "git+https://shell.cloud.bsocat.net/nix-darwin";
+    darwin.url = "git+https://git.shell.bsocat.net/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -1017,7 +1017,7 @@
                 privateKeyFile = config.age.secrets.buildSecret.path;
               };
 
-              nix.settings.allowed-uris = [ "https://shell.cloud.bsocat.net/" ];
+              nix.settings.allowed-uris = [ "https://git.shell.bsocat.net/" ];
               services.hydra =
               {
                 enable = true;
@@ -1203,7 +1203,7 @@
             {
               description = "hydra job ${name}";
               license = [ { shortName = "AGPL-3.0-or-later"; } ];
-              homepage = "https://shell.cloud.bsocat.net/infra/";
+              homepage = "https://git.shell.bsocat.net/infra/";
               maintainers = [ { email = "root@benary.org"; } ];
               schedulingPriority = 10;
               timeout = 36000;

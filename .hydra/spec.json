@@ -12,13 +12,13 @@
   "type": 0,
   "inputs": {
     "infra": {
-      "value": "https://shell.cloud.bsocat.net/infra.git main",
+      "value": "https://git.shell.bsocat.net/infra.git main",
       "type": "git",
       "emailresponsible": false
     },
     "refs": {
       "type": "path",
-      "value": "https://shell.cloud.bsocat.net/infra.git/info/refs",
+      "value": "https://git.shell.bsocat.net/infra.git/info/refs",
       "emailresponsible": false
     }
   }

@@ -12,7 +12,7 @@
         emailoverride = "";
         keepnr =  if isMainBranch name then 16 else 4;
         type = 1;
-        flake = "git+https://shell.cloud.bsocat.net/infra?ref=${name}";
+        flake = "git+https://git.shell.bsocat.net/infra?ref=${name}";
       };
       parseRef = ref: let
           parts = builtins.match "([^\t]+)\t(.*)" ref;
@@ -61,7 +61,7 @@
               {
                 description = "hydra jobset generation";
                 license = [ { shortName = "AGPL-3.0-or-later"; } ];
-                homepage = "https://shell.cloud.bsocat.net/infra/";
+                homepage = "https://git.shell.bsocat.net/infra/";
                 maintainers = [ { email = "root@benary.org"; } ];
               };
             }

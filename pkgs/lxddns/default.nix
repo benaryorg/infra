@@ -7,7 +7,7 @@ rustPlatform.buildRustPackage rec
 
   src = fetchgit
   {
-    url = "https://shell.cloud.bsocat.net/lxddns.git";
+    url = "https://git.shell.bsocat.net/lxddns.git";
     rev = "554d5a9fcd28a4d9161950ffa58cdae4a731f4c4";
     sha256 = "sha256-phIPejlAIoo3yRIuHwX72trgaIniEHhMWZtxx8fBV4g=";
   };

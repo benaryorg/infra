@@ -19,13 +19,13 @@ with lib;
       };
       url = mkOption
       {
-        default = "git+https://shell.cloud.bsocat.net/infra?ref=main";
+        default = "git+https://git.shell.bsocat.net/infra?ref=main";
         description = "The flake URl to deploy.";
         type = types.str;
       };
       nixpkgs = mkOption
       {
-        default = "git+https://shell.cloud.bsocat.net/nixpkgs?ref=nixos-23.05";
+        default = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-23.05";
         description = "The nixpkgs distribution to use.";
         type = types.str;
       };
