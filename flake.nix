@@ -229,7 +229,6 @@
 
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
               benaryorg.prometheus.client.enable = true;
-              benaryorg.flake.url = "git+https://shell.cloud.bsocat.net/infra?ref=rgw";
 
               services =
               {
