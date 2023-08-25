@@ -177,7 +177,7 @@
               benaryorg.net.host.primaryInterface = "enp1s0";
               benaryorg.net.host.ipv4 = "213.32.7.146/24";
               benaryorg.net.host.ipv4Gateway = "213.32.7.254";
-              benaryorg.net.host.ipv6 = "2001:41d0:303:192:3697:f6ff:fe5c:fde7/56";
+              benaryorg.net.host.ipv6 = "2001:41d0:303:192::1/56";
               benaryorg.net.host.ipv6Gateway = "2001:41d0:303:1ff:ff:ff:ff:ff";
               benaryorg.hardware.ovh =
               {
