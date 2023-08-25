@@ -167,18 +167,6 @@
               # FIXME: shouldn't be required, potentially needs migration of the git repos over to a container
               users.users.nginx.extraGroups = [ "lxddns" ];
 
-              containers =
-              {
-                nixos-builder =
-                {
-                  autoStart = true;
-                  path = nodes."nixos-builder.cloud.bsocat.net".config.system.build.toplevel;
-                  privateNetwork = true;
-                  localAddress6 = "2001:41d0:303:192:1c5f:5bff:fee4:b4a1";
-                  hostAddress6 = "fc00::1";
-                };
-              };
-
               benaryorg.net.host.primaryInterface = "enp1s0";
               benaryorg.net.host.ipv4 = "213.32.7.146/24";
               benaryorg.net.host.ipv4Gateway = "213.32.7.254";
@@ -993,13 +981,13 @@
               system.stateVersion = "23.05";
             };
 
-        "nixos-builder.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+        "nixos-builder.shell.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
           let
             conf = pkgs.callPackage ./conf {};
           in
             with lib;
             {
-              age.secrets.buildSecret.file = ./secret/build/nixos-builder.cloud.bsocat.net.age;
+              age.secrets.buildSecret.file = ./secret/build/nixos-builder.shell.bsocat.net.age;
 
               benaryorg.prometheus.client.enable = true;
 
@@ -1010,11 +998,6 @@
                 publicKey = "nixos-builder.shell.bsocat.net:i0hLFuNDkp781rdD1nmikT7vsf90Nluo13AL1QE6TSc=";
                 privateKeyFile = config.age.secrets.buildSecret.path;
               };
-
-              benaryorg.net.type = "none";
-              services.unbound.enable = true;
-              services.resolved.enable = mkForce false;
-              networking.firewall.enable = false;
 
               nix.settings.allowed-uris = [ "https://shell.cloud.bsocat.net/" ];
               services.hydra =
