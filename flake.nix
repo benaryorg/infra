@@ -153,6 +153,26 @@
               zramSwap.enable = true;
               nix.gc.automatic = mkForce false;
               services.openssh.settings.MaxStartups = "50";
+              services.ndppd =
+              {
+                enable = true;
+                proxies =
+                {
+                  ${config.benaryorg.net.host.primaryInterface}.rules."2001:41d0:303:192::/64" = { method = "static"; };
+                };
+              };
+
+              containers =
+              {
+                nixos-builder =
+                {
+                  autoStart = true;
+                  path = nodes."nixos-builder.cloud.bsocat.net".config.system.build.toplevel;
+                  privateNetwork = true;
+                  localAddress6 = "2001:41d0:303:192:1c5f:5bff:fee4:b4a1";
+                  hostAddress6 = "fc00::1";
+                };
+              };
 
               benaryorg.net.host.primaryInterface = "enp1s0";
               benaryorg.net.host.ipv4 = "213.32.7.146/24";
@@ -972,6 +992,7 @@
               age.secrets.buildSecret.file = ./secret/build/nixos-builder.cloud.bsocat.net.age;
 
               benaryorg.prometheus.client.enable = true;
+              benaryorg.flake.enable = false;
 
               benaryorg.build =
               {
@@ -983,7 +1004,6 @@
 
               benaryorg.net.type = "none";
               services.unbound.enable = true;
-              proxmoxLXC.manageHostName = true;
               services.resolved.enable = mkForce false;
               networking.firewall.enable = false;
 
@@ -994,11 +1014,6 @@
                 hydraURL = "https://${config.networking.fqdn}/hydra";
                 useSubstitutes = true;
                 notificationSender = "hydra@benary.org";
-                extraConfig =
-                ''
-                  max_concurrent_evals = 1
-                  evaluator_max_memory_size = ${ toString (128 * 1024) }
-                '';
               };
               services.nginx.virtualHosts.${config.networking.fqdn}.locations."/hydra" =
               {
@@ -1012,8 +1027,8 @@
               {
                 enable = true;
                 description = "Slice for all services doing build jobs or similar.";
-                sliceConfig.MemoryHigh = "4G";
-                sliceConfig.MemoryMax = "5G";
+                sliceConfig.MemoryHigh = "24G";
+                sliceConfig.MemoryMax = "25G";
               };
               systemd.services =
               {
@@ -1021,8 +1036,6 @@
                 hydra-evaluator = { serviceConfig.Slice = "build.slice"; };
                 hydra-queue-runner = { serviceConfig.Slice = "build.slice"; };
               };
-
-              imports = [ (nixpkgs + "/nixos/modules/virtualisation/proxmox-lxc.nix") ];
 
               system.stateVersion = "23.05";
             };
