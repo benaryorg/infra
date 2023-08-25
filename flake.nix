@@ -132,21 +132,7 @@
               benaryorg.git.enable = true;
               benaryorg.git.mirror =
               {
-                nixpkgs = { url = "https://github.com/NixOS/nixpkgs.git"; };
-                dotfiles = { url = "https://github.com/benaryorg/dotfiles.git"; };
-                crane = { url = "https://github.com/ipetkov/crane.git"; };
-                flake-compat = { url = "https://github.com/edolstra/flake-compat.git"; };
-                nix-systems = { url = "https://github.com/nix-systems/default.git"; };
-                flake-utils = { url = "https://github.com/numtide/flake-utils.git"; };
-                rust-overlay = { url = "https://github.com/oxalica/rust-overlay.git"; };
-                agenix = { url = "https://github.com/ryantm/agenix.git"; };
-                ragenix = { url = "https://github.com/yaxitech/ragenix.git"; };
-                colmena = { url = "https://github.com/zhaofengli/colmena.git"; };
-                home-manager = { url = "https://github.com/nix-community/home-manager.git"; };
-                nix-darwin = { url = "https://github.com/lnl7/nix-darwin.git"; };
-                nix-generators = { url = "https://github.com/nix-community/nixos-generators.git"; };
-                nixlib = { url = "https://github.com/nix-community/nixpkgs.lib.git"; };
-                lxddns = { url = "https://github.com/benaryorg/lxddns.git"; };
+                infra = { url = "https://git.shell.bsocat.net/infra.git"; };
               };
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
