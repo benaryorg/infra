@@ -32,6 +32,6 @@ rustPlatform.buildRustPackage rec
     description = "Couple LXD, PowerDNS, and lxddns for public IPv6 DNS resolution for your containers.";
     homepage = "https://github.com/benaryorg/lxddns";
     changelog = "https://github.com/benaryorg/lxddns/commits/main";
-    license = [ licenses.isc ];
+    license = [ licenses.agpl3 ];
   };
 }
