@@ -124,6 +124,7 @@
               benaryorg.flake.autoupgrade = false;
               benaryorg.build.role = "none";
 
+              age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/shell.cloud.bsocat.net.age;
               benaryorg.base.sudo.needsPassword = true;
               benaryorg.deployment.default = false;
               benaryorg.prometheus.client.enable = true;
@@ -150,18 +151,21 @@
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = pkgs.lib.attrValues conf.sshkey;
+              benaryorg.lxd.enable = true;
+              benaryorg.lxd.cluster = "shell.bsocat.net";
+              benaryorg.lxd.allowedUsers = [];
+              benaryorg.lxd.legoConfig =
+              {
+                dnsProvider = "hurricane";
+                credentialsFile = config.age.secrets.lxdLegoSecret.path;
+                webroot = null;
+              };
 
               zramSwap.enable = true;
               nix.gc.automatic = mkForce false;
               services.openssh.settings.MaxStartups = "50";
-              services.ndppd =
-              {
-                enable = true;
-                proxies =
-                {
-                  ${config.benaryorg.net.host.primaryInterface}.rules."2001:41d0:303:192::/64" = { method = "static"; };
-                };
-              };
+              # FIXME: shouldn't be required, potentially needs migration of the git repos over to a container
+              users.users.nginx.extraGroups = [ "lxddns" ];
 
               containers =
               {
@@ -998,13 +1002,12 @@
               age.secrets.buildSecret.file = ./secret/build/nixos-builder.cloud.bsocat.net.age;
 
               benaryorg.prometheus.client.enable = true;
-              benaryorg.flake.enable = false;
 
               benaryorg.build =
               {
                 role = "server";
-                tags = [ "cloud.bsocat.net" "lxd.bsocat.net" ];
-                publicKey = "nixos-builder.cloud.bsocat.net:i0hLFuNDkp781rdD1nmikT7vsf90Nluo13AL1QE6TSc=";
+                tags = [ "shell.bsocat.net" "cloud.bsocat.net" "lxd.bsocat.net" ];
+                publicKey = "nixos-builder.shell.bsocat.net:i0hLFuNDkp781rdD1nmikT7vsf90Nluo13AL1QE6TSc=";
                 privateKeyFile = config.age.secrets.buildSecret.path;
               };
 

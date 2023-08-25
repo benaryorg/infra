@@ -76,6 +76,12 @@ with lib;
         description = "Whether to enable a legacy setup-specific SMTP proxy.";
         type = types.bool;
       };
+      allowedUsers = mkOption
+      {
+        default = if config.benaryorg.user.ssh.enable then [ config.benaryorg.user.ssh.name ] else [];
+        description = "List of users which are allowed to access the LXD server.";
+        type = types.listOf types.str;
+      };
     };
   };
 
@@ -97,7 +103,7 @@ with lib;
           group = "lxddns";
         } // config.benaryorg.lxd.legoConfig;
 
-        users.groups.lxd.members = mkIf config.benaryorg.user.ssh.enable [ config.benaryorg.user.ssh.name ];
+        users.groups.lxd.members = config.benaryorg.lxd.allowedUsers;
 
         # lxd user/group for extra large uid ranges
         users.users.root =
