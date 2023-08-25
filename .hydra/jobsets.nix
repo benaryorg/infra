@@ -3,7 +3,7 @@
       isMainBranch = branch: branch == "main";
       jobForBranch = { name, ...}:
       {
-        enabled = 3;
+        enabled = 1;
         hidden = false;
         description = "branch ${name}";
         checkinterval = if isMainBranch name then 60 else 15;
