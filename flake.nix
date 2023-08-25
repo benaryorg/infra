@@ -994,6 +994,11 @@
                 hydraURL = "https://${config.networking.fqdn}/hydra";
                 useSubstitutes = true;
                 notificationSender = "hydra@benary.org";
+                extraConfig =
+                ''
+                  max_concurrent_evals = 1
+                  evaluator_max_memory_size = ${ toString (128 * 1024) }
+                '';
               };
               services.nginx.virtualHosts.${config.networking.fqdn}.locations."/hydra" =
               {
@@ -1007,7 +1012,8 @@
               {
                 enable = true;
                 description = "Slice for all services doing build jobs or similar.";
-                sliceConfig.MemoryHigh = "3G";
+                sliceConfig.MemoryHigh = "4G";
+                sliceConfig.MemoryMax = "5G";
               };
               systemd.services =
               {
