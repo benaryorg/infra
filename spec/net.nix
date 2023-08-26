@@ -9,7 +9,7 @@ with lib;
       {
         default = if config.benaryorg.hardware.vendor == "container" then "container" else "host";
         description = "Which type of networking to deploy.";
-        type = types.enum [ "container" "host" "none" ];
+        type = types.enum [ "container" "host" "manual" "none" ];
       };
       unbound =
       {
@@ -86,6 +86,44 @@ with lib;
         resolved.enable = false;
       };
       benaryorg.prometheus.client.exporters.unbound.enable = true;
+    })
+    (mkIf (config.benaryorg.net.type == "container")
+    {
+      services.resolved.enable = false;
+      systemd.services.systemd-networkd.serviceConfig.ExecStartPre = [ "-+${pkgs.systemd}/bin/udevadm trigger" ];
+      systemd.network =
+      {
+        enable = true;
+        wait-online =
+        {
+          enable = true;
+          ignoredInterfaces = [ "eth1" ];
+        };
+        networks =
+        {
+          "40-ipv6" =
+          {
+            enable = true;
+            name = "eth0";
+            DHCP = "no";
+            ipv6AcceptRAConfig =
+            {
+              DHCPv6Client = false;
+              UseDNS = true;
+            };
+          };
+          "40-ipv4" =
+          {
+            enable = true;
+            name = "eth1";
+            DHCP = "ipv4";
+            dhcpV4Config =
+            {
+              UseDNS = false;
+            };
+          };
+        };
+      };
     })
     (mkIf (config.benaryorg.net.type == "host")
     {

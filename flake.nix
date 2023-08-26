@@ -181,6 +181,7 @@
             with lib;
             {
               age.secrets.buildSecret.file = ./secret/build/nixos.home.bsocat.net.age;
+              benaryorg.net.type = "manual";
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
               benaryorg.prometheus.client.enable = true;
@@ -204,7 +205,7 @@
             with lib;
             {
               age.secrets.homes3LegoSecret.file = ./secret/lego/hedns/home-s3.xn--idk5byd.net.acme.bsocat.net.age;
-
+              benaryorg.net.type = "manual";
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
               benaryorg.prometheus.client.enable = true;
 
