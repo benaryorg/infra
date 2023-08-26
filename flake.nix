@@ -1013,7 +1013,7 @@
               {
                 role = "server";
                 tags = [ "shell.bsocat.net" "cloud.bsocat.net" "lxd.bsocat.net" ];
-                publicKey = "nixos-builder.shell.bsocat.net:i0hLFuNDkp781rdD1nmikT7vsf90Nluo13AL1QE6TSc=";
+                publicKey = "nixos-builder.cloud.bsocat.net:i0hLFuNDkp781rdD1nmikT7vsf90Nluo13AL1QE6TSc=";
                 privateKeyFile = config.age.secrets.buildSecret.path;
               };
 
