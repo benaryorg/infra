@@ -11,23 +11,11 @@ with lib;
         description = "Which type of networking to deploy.";
         type = types.enum [ "container" "host" "manual" "none" ];
       };
-      unbound =
+      resolver = mkOption
       {
-        enable = mkOption
-        {
-          default = config.benaryorg.net.type == "host";
-          description = "Whether to enable local unbound.";
-          type = types.bool;
-        };
-      };
-      rdnssd =
-      {
-        enable = mkOption
-        {
-          default = config.benaryorg.net.type == "container";
-          description = "Whether to enable rdnssd.";
-          type = types.bool;
-        };
+        default = builtins.getAttr config.benaryorg.net.type { host = "unbound"; container = "resolved"; manual = "none"; none = "none"; };
+        description = "Which resolver to use. Defaults to unbound for hardware and systemd-resolved for containers.";
+        type = types.enum [ "unbound" "resolved" "rdnssd" "none" ];
       };
       host =
       {
@@ -71,25 +59,25 @@ with lib;
         # this is just the global DHCP option, individual interfaces may still use DHCP
         useDHCP = false;
       };
-      services.rdnssd.enable = config.benaryorg.net.rdnssd.enable;
+      services.rdnssd.enable = config.benaryorg.net.resolver == "rdnssd";
+      services.resolved.enable = config.benaryorg.net.resolver == "resolved";
+      services.unbound.enable = config.benaryorg.net.resolver == "unbound";
+      networking.useHostResolvConf = false;
     }
-    (mkIf config.benaryorg.net.unbound.enable
+    (mkIf (config.benaryorg.net.resolver == "unbound")
     {
       services =
       {
         unbound =
         {
-          enable = true;
           localControlSocketPath = "/run/unbound/unbound.socket";
           settings.remote-control.control-enable = true;
         };
-        resolved.enable = false;
       };
       benaryorg.prometheus.client.exporters.unbound.enable = true;
     })
     (mkIf (config.benaryorg.net.type == "container")
     {
-      services.resolved.enable = false;
       systemd.services.systemd-networkd.serviceConfig.ExecStartPre = [ "-+${pkgs.systemd}/bin/udevadm trigger" ];
       systemd.network =
       {
