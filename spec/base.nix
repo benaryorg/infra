@@ -160,6 +160,9 @@ with lib;
       ])
     ];
 
+    documentation.dev.enable = true;
+    documentation.nixos.enable = !config.benaryorg.base.lightweight;
+
     users.users.root =
     {
       subUidRanges = [ { startUid = 2000000; count = 1000000; } ];
