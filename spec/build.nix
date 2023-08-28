@@ -55,6 +55,12 @@ with lib;
         default = "x86_64-linux";
         description = "Only required for servers, denotes the supported arch.";
       };
+      doc = mkOption
+      {
+        type = types.bool;
+        default = true;
+        description = "Only relevant for servers, exposes nixos documentation on /doc via HTTPS.";
+      };
     };
   };
 
@@ -107,9 +113,16 @@ with lib;
                 {
                   forceSSL = true;
                   enableACME = true;
-                  locations."/" =
+                  locations =
                   {
-                    proxyPass = "http://127.0.0.1:5000";
+                    "/" =
+                    {
+                      proxyPass = "http://127.0.0.1:5000";
+                    };
+                    "/doc/" = mkIf config.benaryorg.build.doc
+                    {
+                      alias = "${config.system.build.manual.manualHTML}/share/doc/nixos/";
+                    };
                   };
                 };
               };
