@@ -3,16 +3,16 @@
 rustPlatform.buildRustPackage rec
 {
   pname = "lxddns";
-  version = "4.0.2";
+  version = "4.1.1";
 
   src = fetchgit
   {
     url = "https://git.shell.bsocat.net/lxddns.git";
-    rev = "9ff9afc0eefcffcdfe052b650b7c9a88226fc3f2";
-    sha256 = "sha256-upFxJ7rQBQkzfXs0ADI1omEkRU4pNtggVjYnSgIeOB4=";
+    rev = "e5152ada0ff80c3a5a015710f263f4401d34d83f";
+    sha256 = "sha256-mq1/KGLmIDPSqDBOMr0b7QH6f7c1feng4CQTebnDkHI=";
   };
 
-  cargoSha256 = "sha256-nGAxVcy5xDVZZaS/rYQ98PocBnOIouuviv5ERp4yUhA=";
+  cargoSha256 = "sha256-etXtkUYdPGYmHDjjvkJylzz+WK7WD/KsgDw/rLu1KUE=";
 
   buildNoDefaultFeatures = true;
   buildFeatures = [ "http" ];
