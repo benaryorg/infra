@@ -11,6 +11,7 @@ let
   ];
   hostkey =
   [
+    # NixOS
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHuaQCsI854sA1EZ0+iI/J0XoLhNcE+OeqsCDEnHKUM nixos.home.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEzsNKBz1FTuxlB36W1cCAQ5ZSipBMxEhB8A3CCTpjeL radosgw1.home.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJGWGQc44BCDR6m2LB5sThYXxHMNRwJCBi0irETLVb3p terraria.lxd.bsocat.net"
@@ -31,6 +32,14 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDp4Snx4pM3+8yOVEV/VkdphtSeA7Wh7jAYAMdx75N3e benaryorg1.lxd.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXO1VPYJ5YfvCT4wvTWauSSLtmHS2gG8jh7RQyu6hy+ benaryorg2.lxd.bsocat.net"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyYvEMA/opKvs5IcnRdCZmUqg941x6umlf1I0/Sn5sh benaryorg3.lxd.bsocat.net"
+    # unmanaged
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIl6chz1TtkfGY6VT4qZbwcqTRxVpaPXg2Z/Wf6cTZ/ certbox.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICYOtWABsT9IrCIFSDpOCoZPRoa+OnBwA+RaIZTIirF8 dav.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8A9BN1hkRCgGTLEpt/vWlhoGmsqdhvEaJKMArZvALf imap1.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMwOz08g0/UvpN8/mAzSwfVMWYnFDnS/Rbn1RYyX9Myp imap2.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/um+R+g6D1xd0GSbDLX9OTCpSP7qFBRvYFwAYyP9Eu puppet.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfVpEHgHkwFKNdSi/ZZTbltcu3tN8jJ/QbNESLRpdou smtp1.lxd.bsocat.net"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUSA20wO7I2cC7PWnjUeXKvd+NRmKcGZsdlnMkJxCpz smtp2.lxd.bsocat.net"
   ];
   keyConversion = keys: lists.foldr (a: b: a // b) {} (map (key: pipe key [ (splitString " ") reverseList (list: { "${head list}" = (pipe list [ tail reverseList (concatStringsSep " ") ]); }) ]) keys);
 in

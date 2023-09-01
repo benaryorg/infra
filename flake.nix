@@ -1148,6 +1148,90 @@
 
               system.stateVersion = "23.05";
             };
+
+        "certbox.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
+
+        "dav.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
+
+        "imap1.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
+
+        "imap2.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
+
+        "puppet.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
+
+        "smtp1.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
+
+        "smtp2.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              benaryorg.build.role = "none";
+              benaryorg.backup.role = "client";
+            };
       };
       # build the hive
       colmenaHive = colmena.lib.makeHive colmenaConfig;
