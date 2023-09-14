@@ -756,6 +756,9 @@
                       { type = "turns", host = "turn6.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
                     }
 
+                    c2s_direct_tls_ports = { 5223, }
+                    s2s_direct_tls_ports = { 5270, }
+
                     http_max_content_size = 1024 * 1024 * 1024
                     statistics = "internal"
                     statistics_interval = "manual"
