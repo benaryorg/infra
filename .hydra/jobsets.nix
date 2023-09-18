@@ -48,10 +48,9 @@
               [
                 (builtins.toFile "generate-jobspec.sh"
                 ''
-                  read -r jobspec <<"END"
+                  tee $out >&2 <<"END"
                   ${builtins.toJSON (jobspec refs)}
                   END
-                  printf "%s\\n" "$jobspec" > $out
                 '')
               ];
             })
