@@ -199,6 +199,7 @@
             ./spec/acme.nix
             ./spec/desktop
             ./spec/home-manager.nix
+            ./spec/backup.nix
           ];
 
           config =
