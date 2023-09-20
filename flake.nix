@@ -540,7 +540,7 @@
               benaryorg.ssh.x11 = true;
               hardware.opengl.enable = true;
               benaryorg.prometheus.client.enable = true;
-              security.acme.certs."${config.networking.fqdn}".listenHTTP = ":80";
+              security.acme.certs.${config.networking.fqdn}.listenHTTP = ":80";
 
               system.stateVersion = "23.05";
             };
@@ -575,7 +575,7 @@
                 extraArgs = [ "--isolate-rooms" ];
                 saltFile = config.age.secrets.syncplaySalt.path;
               };
-              security.acme.certs."${config.networking.fqdn}" =
+              security.acme.certs.${config.networking.fqdn} =
               {
                 reloadServices = [ "syncplay.service" ];
                 listenHTTP = ":80";
@@ -676,7 +676,7 @@
                   enable = true;
                   recommendedProxySettings = true;
                   recommendedTlsSettings = true;
-                  virtualHosts."${config.networking.fqdn}" =
+                  virtualHosts.${config.networking.fqdn} =
                   {
                     enableACME = true;
                     forceSSL = true;
@@ -712,7 +712,7 @@
               };
               security.acme.certs =
               {
-                "${config.networking.fqdn}" =
+                ${config.networking.fqdn} =
                 {
                   listenHTTP = ":80";
                   reloadServices = [ "prosody.service" ];
@@ -852,7 +852,7 @@
               benaryorg.prometheus.client.enable = true;
               security.acme.certs =
               {
-                "${config.networking.fqdn}".listenHTTP = ":80";
+                ${config.networking.fqdn}.listenHTTP = ":80";
                 "turn.svc.benary.org" =
                 {
                   dnsProvider = "hurricane";
@@ -887,7 +887,7 @@
               age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.website.enable = true;
-              services.nginx.virtualHosts."${config.networking.fqdn}" =
+              services.nginx.virtualHosts.${config.networking.fqdn} =
               {
                 enableACME = true;
                 forceSSL = true;
@@ -913,7 +913,7 @@
               age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.website.enable = true;
-              services.nginx.virtualHosts."${config.networking.fqdn}" =
+              services.nginx.virtualHosts.${config.networking.fqdn} =
               {
                 enableACME = true;
                 forceSSL = true;
@@ -939,7 +939,7 @@
               age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.website.enable = true;
-              services.nginx.virtualHosts."${config.networking.fqdn}" =
+              services.nginx.virtualHosts.${config.networking.fqdn} =
               {
                 enableACME = true;
                 forceSSL = true;

@@ -303,7 +303,7 @@ with lib;
               mapExporterFunction = name:
               {
                 name = "prometheusExporter-${name}";
-                value = stunnelServer name config.services.prometheus.exporters."${name}";
+                value = stunnelServer name config.services.prometheus.exporters.${name};
               };
               servers = pipe exporterList [ (builtins.map mapExporterFunction) builtins.listToAttrs ];
             in
@@ -312,7 +312,7 @@ with lib;
       })
       (mkIf config.benaryorg.prometheus.useAcme
       {
-        security.acme.certs."${config.networking.fqdn}" =
+        security.acme.certs.${config.networking.fqdn} =
         {
           reloadServices = (optional config.benaryorg.prometheus.server.enable "prometheus.service") ++ (optional config.benaryorg.prometheus.client.enable "stunnel.service");
         };

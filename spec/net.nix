@@ -123,7 +123,7 @@ with lib;
           "40-external" =
           {
             enable = true;
-            name = "${config.benaryorg.net.host.primaryInterface}";
+            name = config.benaryorg.net.host.primaryInterface;
             addresses =
             [
               (mkIf (config.benaryorg.net.host.ipv4 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv4; }; })

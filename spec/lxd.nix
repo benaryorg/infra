@@ -97,7 +97,7 @@ with lib;
           enable = true;
           recommendedSysctlSettings = true;
         };
-        security.acme.certs."${config.networking.fqdn}" =
+        security.acme.certs.${config.networking.fqdn} =
         {
           reloadServices = [ "lxddns-responder.service" ];
           group = "lxddns";
@@ -147,7 +147,7 @@ with lib;
           enable = true;
           proxies =
           {
-            "${config.benaryorg.lxd.extInterface}" =
+            ${config.benaryorg.lxd.extInterface} =
             {
               router = false;
               rules."${config.benaryorg.lxd.network}::/64" =
