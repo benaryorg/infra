@@ -77,6 +77,7 @@
                 ./spec/lxd.nix
                 ./spec/prometheus.nix
                 ./spec/build.nix
+                ./spec/backup.nix
               ];
 
               options =
