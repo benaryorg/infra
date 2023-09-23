@@ -541,6 +541,7 @@
               hardware.opengl.enable = true;
               benaryorg.prometheus.client.enable = true;
               security.acme.certs.${config.networking.fqdn}.listenHTTP = ":80";
+              systemd.network.networks."40-ipv4".enable = lib.mkForce false;
 
               system.stateVersion = "23.05";
             };
