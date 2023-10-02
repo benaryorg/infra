@@ -762,8 +762,11 @@
                       { type = "turns", host = "turn6.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
                     }
 
-                    c2s_direct_tls_ports = { 5223, }
-                    s2s_direct_tls_ports = { 5270, }
+                    -- FIXME: prosody cannot be convinced to do SNI for both the hostname and the virtualhosts
+                    -- it will send connection refused for the virtualhost's domains under some circumstances
+                    -- to sum up my experience: prosody *really* wants you to use their certmanager which.… No.
+                    --c2s_direct_tls_ports = { 5223, }
+                    --s2s_direct_tls_ports = { 5270, }
 
                     http_max_content_size = 1024 * 1024 * 1024
                     statistics = "internal"
