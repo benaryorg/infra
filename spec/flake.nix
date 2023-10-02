@@ -51,22 +51,26 @@ with lib;
       onFailure = [ "default.target" ];
       unitConfig.OnFailureJobMode = "isolate";
     };
-    environment.etc."nixos/flake.nix" =
+    environment.etc =
     {
-      mode = "0444";
-      text =
-      ''
-        {
-          inputs.benaryorg.url = "${config.benaryorg.flake.url}";
-          inputs.nixpkgs.url = "${config.benaryorg.flake.nixpkgs}";
-          inputs.benaryorg.inputs.nixpkgs.follows = "nixpkgs";
-
-          outputs = { benaryorg, ... }:
+      nixpkgs.source = pkgs.path;
+      "nixos/flake.nix" =
+      {
+        mode = "0444";
+        text =
+        ''
           {
-            inherit (benaryorg) nixosConfigurations;
-          };
-        }
-      '';
+            inputs.benaryorg.url = "${config.benaryorg.flake.url}";
+            inputs.nixpkgs.url = "${config.benaryorg.flake.nixpkgs}";
+            inputs.benaryorg.inputs.nixpkgs.follows = "nixpkgs";
+
+            outputs = { benaryorg, ... }:
+            {
+              inherit (benaryorg) nixosConfigurations;
+            };
+          }
+        '';
+      };
     };
   };
 }
