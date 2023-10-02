@@ -116,19 +116,7 @@ with lib;
       {
         klaus =
           let
-            klausGunicorn = pkgs.python3.withPackages (ps: with ps;
-              [
-                gunicorn markdown
-                # https://github.com/jonashaag/klaus/issues/309
-                (klaus.overrideAttrs (o:
-                  {
-                    patches = (o.patches or [ ]) ++
-                    [
-                      ../resource/klaus/patch/5f0a7cb7d4186bb9729d73a2864f0e830431f327.patch
-                    ];
-                  })
-                )
-              ]);
+            klausGunicorn = pkgs.python3.withPackages (ps: with ps; [ gunicorn markdown klaus ]);
           in
             {
               enable = true;
