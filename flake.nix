@@ -627,7 +627,7 @@
                       listen_port = 9199;
                       text_template =
                       ''
-                        *{{ status.upper() }}*: _{{ labels.host or labels.instance }}_ ({{ labels.alertname }}): {{ annotations.description or annotations.summary }}
+                        *{{ status.upper() }}* ( `{{ startsAt }}` ): _{{ labels.host or labels.instance }}_ ({{ labels.alertname }}): {{ annotations.description or annotations.summary }}
                         {{ generatorURL }}
                       '';
                     };
