@@ -35,11 +35,18 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "git+https://git.shell.bsocat.net/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    lxddns.url = "git+https://git.shell.bsocat.net/lxddns";
+    lxddns.inputs.nixpkgs.follows = "nixpkgs";
+    lxddns.inputs.flake-utils.follows = "flake-utils";
   };
 
-  outputs = { nixpkgs, colmena, ragenix, benaryorg-website, ... }:
+  outputs = { nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
     let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      pkgs = import nixpkgs
+      {
+        system = "x86_64-linux";
+        overlays = [ lxddns.overlays.default ];
+      };
       colmenaConfig =
       {
         meta =
@@ -62,6 +69,7 @@
               [
                 ragenix.nixosModules.default
                 benaryorg-website.nixosModules.default
+                lxddns.nixosModules.default
                 ./spec/user.nix
                 ./spec/ssh.nix
                 ./spec/nix.nix

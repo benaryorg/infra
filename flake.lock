@@ -174,6 +174,29 @@
         "url": "https://git.shell.bsocat.net/home-manager"
       }
     },
+    "lxddns": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1697992462,
+        "narHash": "sha256-yazsoioso9jPxveS45jznIFTvqoryLnqR1M74Sihdcw=",
+        "ref": "refs/heads/main",
+        "rev": "755a496b62385a164e246bf64af69b05498f1e95",
+        "revCount": 117,
+        "type": "git",
+        "url": "https://git.shell.bsocat.net/lxddns"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.shell.bsocat.net/lxddns"
+      }
+    },
     "nix-systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -263,6 +286,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "lxddns": "lxddns",
         "nix-systems": "nix-systems",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
