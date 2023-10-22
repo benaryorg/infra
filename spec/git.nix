@@ -60,10 +60,12 @@ with lib;
         ''
           $RC{UMASK} = 0027;
           $RC{SITE_INFO} = "${config.networking.fqdn} by Katze";
+          $RC{LOCAL_CODE} = "$rc{GL_ADMIN_BASE}/local";
           push( @{$RC{ENABLE}}, 'D' );
           push( @{$RC{ENABLE}}, 'desc' );
           push( @{$RC{ENABLE}}, 'help' );
           push( @{$RC{ENABLE}}, 'symbolic-ref' );
+          push( @{$RC{ENABLE}}, 'repo-specific-hooks' );
         '';
         group = "git";
         user = "git";
