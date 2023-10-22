@@ -975,7 +975,6 @@
               benaryorg.git.mirror =
               {
                 nixpkgs = { url = "https://github.com/NixOS/nixpkgs.git"; };
-                dotfiles = { url = "https://github.com/benaryorg/dotfiles.git"; };
                 crane = { url = "https://github.com/ipetkov/crane.git"; };
                 flake-compat = { url = "https://github.com/edolstra/flake-compat.git"; };
                 nix-systems = { url = "https://github.com/nix-systems/default.git"; };
