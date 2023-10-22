@@ -1140,6 +1140,11 @@
                 makeEfiBootable = true;
                 makeUsbBootable = true;
               };
+              systemd.services."serial-getty@ttyS0" =
+              {
+                enable = true;
+                wantedBy = [ "getty.target" ];
+              };
               services =
               {
                 getty.autologinUser = "root";
