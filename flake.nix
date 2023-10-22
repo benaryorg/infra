@@ -125,12 +125,7 @@
               benaryorg.base.sudo.needsPassword = true;
               benaryorg.deployment.default = false;
               benaryorg.prometheus.client.enable = true;
-              benaryorg.git.adminkey = conf.sshkey."benaryorg@gnutoo.home.bsocat.net";
-              benaryorg.git.enable = true;
-              benaryorg.git.mirror =
-              {
-                infra = { url = "https://git.shell.bsocat.net/infra.git"; };
-              };
+
               benaryorg.hardware.vendor = "ovh";
               benaryorg.ssh.x11 = true;
               benaryorg.user.ssh.keys = pkgs.lib.attrValues conf.sshkey;
@@ -145,10 +140,24 @@
               };
 
               zramSwap.enable = true;
-              nix.gc.automatic = mkForce false;
               services.openssh.settings.MaxStartups = "50";
               # FIXME: shouldn't be required, potentially needs migration of the git repos over to a container
               users.users.nginx.extraGroups = [ "lxddns" ];
+
+              services.nginx =
+              {
+                enable = true;
+                recommendedTlsSettings = true;
+                virtualHosts =
+                {
+                  ${config.networking.fqdn} =
+                  {
+                    forceSSL = true;
+                    enableACME = true;
+                    locations."/" = { return = "302 \"https://git.shell.bsocat.net\""; };
+                  };
+                };
+              };
 
               benaryorg.net.host.primaryInterface = "enp1s0";
               benaryorg.net.host.ipv4 = "213.32.7.146/24";
