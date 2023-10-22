@@ -53,7 +53,6 @@ with lib;
     };
     environment.etc =
     {
-      nixpkgs.source = pkgs.path;
       "nixos/flake.nix" =
       {
         mode = "0444";
