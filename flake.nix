@@ -988,7 +988,6 @@
                 nix-darwin = { url = "https://github.com/lnl7/nix-darwin.git"; };
                 nix-generators = { url = "https://github.com/nix-community/nixos-generators.git"; };
                 nixlib = { url = "https://github.com/nix-community/nixpkgs.lib.git"; };
-                lxddns = { url = "https://github.com/benaryorg/lxddns.git"; };
               };
 
               system.stateVersion = "23.05";
