@@ -1111,7 +1111,7 @@
               };
             };
 
-        "live.example.com" = { name, nodes, pkgs, lib, config, ... }:
+        "kexec.example.com" = { name, nodes, pkgs, lib, config, ... }:
           let
             conf = pkgs.callPackage ./conf {};
           in
@@ -1122,6 +1122,55 @@
               imports =
               [
                 (nixpkgs + "/nixos/modules/installer/netboot/netboot.nix")
+              ];
+
+              benaryorg.base.lightweight = true;
+              benaryorg.net.type = "none";
+              benaryorg.hardware.vendor = "none";
+              benaryorg.flake.enable = false;
+              benaryorg.build.role = "client-light";
+              benaryorg.build.tags = [ "cloud.bsocat.net" ];
+              benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+              users.users.root.openssh.authorizedKeys.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+              systemd.services."serial-getty@ttyS0" =
+              {
+                enable = true;
+                wantedBy = [ "getty.target" ];
+              };
+              services =
+              {
+                getty.autologinUser = "root";
+                lldpd.enable = true;
+                unbound.enable = true;
+                openssh = lib.mkForce
+                {
+                  enable = true;
+                  settings =
+                  {
+                    PermitRootLogin = "yes";
+                    PasswordAuthentication = false;
+                  };
+                };
+              };
+              networking =
+              {
+                firewall.enable = false;
+                wireguard.enable = false;
+                tempAddresses = "disabled";
+                useDHCP = true;
+              };
+            };
+  
+        "iso.example.com" = { name, nodes, pkgs, lib, config, ... }:
+          let
+            conf = pkgs.callPackage ./conf {};
+          in
+            with lib;
+            {
+              benaryorg.deployment.fake = true;
+
+              imports =
+              [
                 (nixpkgs + "/nixos/modules/installer/cd-dvd/iso-image.nix")
               ];
 
@@ -1213,8 +1262,8 @@
       # hydra extra jobs
       hydraExtraJobs =
       {
-        kexec = colmenaHive.nodes."live.example.com".config.system.build.kexecTree;
-        iso = colmenaHive.nodes."live.example.com".config.system.build.isoImage;
+        kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
+        iso = colmenaHive.nodes."iso.example.com".config.system.build.isoImage;
       };
       addHydraMeta = name: { meta ? {}, ... }@value: value //
       {
