@@ -1111,7 +1111,7 @@
               };
             };
 
-        "kexec.example.com" = { name, nodes, pkgs, lib, config, ... }:
+        "live.example.com" = { name, nodes, pkgs, lib, config, ... }:
           let
             conf = pkgs.callPackage ./conf {};
           in
@@ -1122,6 +1122,7 @@
               imports =
               [
                 (nixpkgs + "/nixos/modules/installer/netboot/netboot.nix")
+                (nixpkgs + "/nixos/modules/installer/cd-dvd/iso-image.nix")
               ];
 
               benaryorg.base.lightweight = true;
@@ -1132,6 +1133,13 @@
               benaryorg.build.tags = [ "cloud.bsocat.net" ];
               benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
               users.users.root.openssh.authorizedKeys.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" conf.sshkey."benaryorg@gnutoo.home.bsocat.net" ];
+              isoImage =
+              {
+                isoBaseName = "katze";
+                makeBiosBootable = true;
+                makeEfiBootable = true;
+                makeUsbBootable = true;
+              };
               services =
               {
                 getty.autologinUser = "root";
@@ -1200,7 +1208,8 @@
       # hydra extra jobs
       hydraExtraJobs =
       {
-        kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
+        kexec = colmenaHive.nodes."live.example.com".config.system.build.kexecTree;
+        iso = colmenaHive.nodes."live.example.com".config.system.build.isoImage;
       };
       addHydraMeta = name: { meta ? {}, ... }@value: value //
       {
