@@ -29,9 +29,6 @@
     benaryorg-website.inputs.flake-utils.follows = "flake-utils";
     benaryorg-website.inputs.nixpkgs.follows = "nixpkgs";
     crane.url = "git+https://git.shell.bsocat.net/crane";
-    crane.inputs.flake-compat.follows = "flake-compat";
-    crane.inputs.flake-utils.follows = "flake-utils";
-    crane.inputs.rust-overlay.follows = "rust-overlay";
     crane.inputs.nixpkgs.follows = "nixpkgs";
     nix-systems.url = "git+https://git.shell.bsocat.net/nix-systems";
     home-manager.url = "git+https://git.shell.bsocat.net/home-manager";
