@@ -907,7 +907,7 @@
           in
             with lib;
             {
-              benaryorg.prometheus.client.enable = false;
+              benaryorg.prometheus.client.enable = true;
 
               services =
               {
