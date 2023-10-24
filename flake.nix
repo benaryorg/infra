@@ -641,7 +641,7 @@
                       listen_port = 9199;
                       text_template =
                       ''
-                        *{{ status.upper() }}* ( `{{ startsAt }}` ): _{{ labels.host or labels.instance }}_ ({{ labels.alertname }}): {{ annotations.description or annotations.summary }}
+                        *{{ status.upper() }}* ( `{{ endsAt if status.upper() == "RESOLVED" else startsAt }}` ): _{{ labels.host or labels.instance }}_ ({{ labels.alertname }}): {{ annotations.description or annotations.summary }}
                         {{ generatorURL }}
                       '';
                     };
