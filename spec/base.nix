@@ -129,7 +129,7 @@ with lib;
         dhcpcd dnsmasq iperf
         # system tooling
         btrbk efibootmgr psutils pstree uucp
-        (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_PREFER_APPLETS=y"; })
+        (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_SH_STANDALONE y"; })
         # misc utils
         cfssl testssl openssl
         # shell tooling
