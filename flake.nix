@@ -276,6 +276,7 @@
                 nginx =
                 {
                   enable = true;
+                  # includes proxy_http_version=1.1 (required by request_buffering)
                   recommendedProxySettings = true;
                   recommendedTlsSettings = true;
                   virtualHosts =
@@ -291,6 +292,13 @@
                       serverAliases = [ "*.home-s3.xn--idk5byd.net" ];
                       enableACME = true;
                       forceSSL = true;
+                      extraConfig =
+                      ''
+                        # avoids request size constraints/temporary files
+                        proxy_buffering off;
+                        proxy_request_buffering off;
+                        client_max_body_size 0;
+                      '';
                       locations."/" =
                       {
                         proxyPass = "http://localhost:7480";
