@@ -64,26 +64,6 @@
               [
                 self.nixosModules.default
               ];
-
-              options =
-              {
-                benaryorg.deployment =
-                {
-                  default = mkOption
-                  {
-                    default = !config.benaryorg.deployment.fake;
-                    description = "Whether to add the host to the @default deployment.";
-                    type = types.bool;
-                  };
-                  fake = mkOption
-                  {
-                    default = false;
-                    description = "Whether the host is fake. Fake hosts are not built and tested, they are merely used for relationships in other modules (such as monitoring).";
-                    type = types.bool;
-                  };
-                };
-              };
-
               config =
               {
                 deployment =
@@ -91,7 +71,7 @@
                   targetHost = name;
                   targetUser = conf.sshuser;
                   privilegeEscalationCommand = [ "sudo" "-H" "TMPDIR=/nix/tmp" "--" ];
-                  tags = [ (mkIf config.benaryorg.deployment.default "default")];
+                  tags = config.benaryorg.deployment.tags;
                   buildOnTarget = true;
                 };
                 security.acme.acceptTerms = true;
@@ -1312,11 +1292,11 @@
         {
           imports =
           [
-            colmena.nixosModules.deploymentOptions
             ragenix.nixosModules.default
             benaryorg-website.nixosModules.default
             lxddns.nixosModules.default
             ./spec/base.nix
+            ./spec/deployment.nix
             ./spec/user.nix
             ./spec/ssh.nix
             ./spec/nix.nix

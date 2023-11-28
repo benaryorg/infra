@@ -75,7 +75,7 @@ with lib;
   config = mkMerge
     [
       {
-        deployment.tags = [ config.benaryorg.hardware.vendor ];
+        benaryorg.deployment.tags = [ config.benaryorg.hardware.vendor ];
       }
       (
         let
