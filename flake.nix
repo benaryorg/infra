@@ -45,17 +45,13 @@
       pkgs = import nixpkgs
       {
         system = "x86_64-linux";
-        overlays = [ ragenix.overlays.default lxddns.overlays.default ];
+        overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
       };
       colmenaConfig =
       {
         meta =
         {
           nixpkgs = pkgs;
-          specialArgs =
-          {
-            inherit benaryorg-website;
-          };
           allowApplyAll = false;
         };
 
