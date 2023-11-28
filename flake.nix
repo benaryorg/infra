@@ -40,12 +40,11 @@
     lxddns.inputs.flake-utils.follows = "flake-utils";
   };
 
-  outputs = { nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
+  outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
     let
       pkgs = import nixpkgs
       {
         system = "x86_64-linux";
-        overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
       };
       colmenaConfig =
       {
@@ -63,21 +62,7 @@
             {
               imports =
               [
-                ragenix.nixosModules.default
-                benaryorg-website.nixosModules.default
-                lxddns.nixosModules.default
-                ./spec/user.nix
-                ./spec/ssh.nix
-                ./spec/nix.nix
-                ./spec/flake.nix
-                ./spec/nullmailer.nix
-                ./spec/hardware.nix
-                ./spec/base.nix
-                ./spec/git.nix
-                ./spec/net.nix
-                ./spec/lxd.nix
-                ./spec/prometheus.nix
-                ./spec/build.nix
+                self.nixosModules.default
               ];
 
               options =
@@ -109,7 +94,6 @@
                   tags = [ (mkIf config.benaryorg.deployment.default "default")];
                   buildOnTarget = true;
                 };
-                benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@shell.cloud.bsocat.net" ] conf) ];
                 security.acme.acceptTerms = true;
                 security.acme.defaults.email = "letsencrypt@benary.org";
               };
@@ -1322,10 +1306,46 @@
               maxSilent = 7200;
             };
       };
+      nixosModules = rec
+      {
+        benaryorg =
+        {
+          imports =
+          [
+            colmena.nixosModules.deploymentOptions
+            ragenix.nixosModules.default
+            benaryorg-website.nixosModules.default
+            lxddns.nixosModules.default
+            ./spec/base.nix
+            ./spec/user.nix
+            ./spec/ssh.nix
+            ./spec/nix.nix
+            ./spec/flake.nix
+            ./spec/nullmailer.nix
+            ./spec/hardware.nix
+            ./spec/git.nix
+            ./spec/net.nix
+            ./spec/prometheus.nix
+            ./spec/lxd.nix
+            ./spec/build.nix
+          ];
+
+          config =
+            let
+              conf = pkgs.callPackage ./conf {};
+            in
+              {
+                nixpkgs.overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
+                benaryorg.user.ssh.keys = [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" ];
+              };
+        };
+        default = benaryorg;
+      };
     in
       {
         colmena = colmenaConfig;
         nixosConfigurations = nixosConfig;
+        nixosModules = nixosModules;
         hydraJobs = builtins.mapAttrs addHydraMeta (hydraNodeJobs // hydraExtraJobs);
       };
 }
