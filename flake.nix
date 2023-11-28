@@ -45,7 +45,7 @@
       pkgs = import nixpkgs
       {
         system = "x86_64-linux";
-        overlays = [ lxddns.overlays.default ];
+        overlays = [ ragenix.overlays.default lxddns.overlays.default ];
       };
       colmenaConfig =
       {
@@ -54,7 +54,7 @@
           nixpkgs = pkgs;
           specialArgs =
           {
-            inherit ragenix benaryorg-website;
+            inherit benaryorg-website;
           };
           allowApplyAll = false;
         };

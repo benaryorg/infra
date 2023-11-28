@@ -1,4 +1,4 @@
-{ name, ragenix, config, pkgs, lib, options, ... }:
+{ name, config, pkgs, lib, options, ... }:
 with lib;
 {
   options =
@@ -124,7 +124,7 @@ with lib;
     [
       [
         # automation tooling
-        colmena ragenix.packages.${pkgs.stdenv.system}.default nix-diff
+        colmena ragenix nix-diff
         # network tooling
         dhcpcd dnsmasq iperf
         # system tooling
