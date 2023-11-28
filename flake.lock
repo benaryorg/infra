@@ -36,11 +36,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1697986135,
-        "narHash": "sha256-sM1FY0ghKi0Xpxu1DjIGhco6Sfc5d1zAUxoEGyxl3Eg=",
+        "lastModified": 1701157479,
+        "narHash": "sha256-VIcSTcHwRUJnlnCw8XLmuJs87nB5r1FoMEtMVfB/pPk=",
         "ref": "refs/heads/main",
-        "rev": "c47ae38992fabdf7e8e072e7b65849a684821d5b",
-        "revCount": 9,
+        "rev": "d94566494209fd84cf64217ec738f7ec9f531024",
+        "revCount": 10,
         "type": "git",
         "url": "https://git.shell.bsocat.net/benary.org"
       },
@@ -214,11 +214,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1700989516,
-        "narHash": "sha256-oKbmPa2wpTHh9XB3+zIx97uMZGNnp97GPliKKG2/plo=",
+        "lastModified": 1701053011,
+        "narHash": "sha256-8QQ7rFbKFqgKgLoaXVJRh7Ik5LtI3pyBBCfOnNOGkF0=",
         "ref": "nixos-23.05",
-        "rev": "d2e4de209881b38392933fabf303cde3454b0b4c",
-        "revCount": 492338,
+        "rev": "5b528f99f73c4fad127118a8c1126b5e003b01a9",
+        "revCount": 492345,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
