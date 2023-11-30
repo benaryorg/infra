@@ -184,11 +184,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1701375601,
-        "narHash": "sha256-26lLcwhERZWcPoWLT6RVijuuCDE12R8Jvpzdh0MWiS8=",
+        "lastModified": 1701376968,
+        "narHash": "sha256-i1tERleaA8qi9QTUYe872fMCrSTLOvB0QiQ6c5SmYzw=",
         "ref": "refs/heads/main",
-        "rev": "b149e6bcb0dc469d34dd49ccef02d105d9092379",
-        "revCount": 120,
+        "rev": "7ab70070fbee5080dd30f62d0b7dd2b44459819f",
+        "revCount": 121,
         "type": "git",
         "url": "https://git.shell.bsocat.net/lxddns"
       },
