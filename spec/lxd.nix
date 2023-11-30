@@ -259,7 +259,7 @@ with lib;
           in
             ''
               api=no
-              remote-connection-string=pipe:command=${pkgs.lxddns}/bin/lxddns-http pipe -v info --domain ${config.benaryorg.lxd.cluster}. --hostmaster ${config.benaryorg.lxd.hostmaster} ${remotes} --soa-ttl 64 --aaaa-ttl 256,timeout=5000
+              remote-connection-string=pipe:command=${pkgs.lxddns-http}/bin/lxddns-http pipe -v info --domain ${config.benaryorg.lxd.cluster}. --hostmaster ${config.benaryorg.lxd.hostmaster} ${remotes} --soa-ttl 64 --aaaa-ttl 256,timeout=5000
               launch=remote
               negquery-cache-ttl=1
               local-address=${builtins.head (splitString "/" config.benaryorg.net.host.ipv6)}, ${builtins.head (splitString "/" config.benaryorg.net.host.ipv4)}
