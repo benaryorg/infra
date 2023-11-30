@@ -37,6 +37,7 @@ with lib;
     networking.hostName = head (splitString "." name);
     networking.domain = concatStringsSep "." (tail (splitString "." name));
     networking.search = [ (concatStringsSep "." (tail (splitString "." name))) ];
+    networking.hosts = mkForce {};
 
     time.timeZone = "Etc/UTC";
     i18n.defaultLocale = "C.UTF-8";
