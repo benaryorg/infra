@@ -112,7 +112,7 @@ with lib;
       {
         enable = true;
         interval = "daily";
-        locate = pkgs.mlocate;
+        package = pkgs.mlocate;
         localuser = null;
       };
       journald.extraConfig =

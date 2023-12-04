@@ -1,7 +1,7 @@
 {
   inputs =
   {
-    nixpkgs.url = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-23.05";
+    nixpkgs.url = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-23.11";
     nixpkgs-unstable.url = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-unstable";
     ragenix.url = "git+https://git.shell.bsocat.net/ragenix";
     ragenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -316,6 +316,8 @@
                   boot = "9d48e3b9-ef76-48b8-969a-266cf0b76be1";
                 };
               };
+
+              boot.swraid.enable = true;
 
               system.stateVersion = "23.05";
             };
