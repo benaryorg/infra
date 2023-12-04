@@ -2,7 +2,7 @@
 # Many of the parameters will have to be tweaked, for instance benaryorg.hardware and benaryorg.net are certain to require attention.
 
 {
-  inputs.benaryorg.url = "git+https://git.shell.bsocat.net/infra.git?ref=module";
+  inputs.benaryorg.url = "tarball+https://git.shell.bsocat.net/infra/snapshot/infra-main.tar.gz";
 
   outputs = { self, benaryorg, ... }:
   {

@@ -12,7 +12,7 @@
         emailoverride = "";
         keepnr =  if isMainBranch name then 16 else 4;
         type = 1;
-        flake = "git+https://git.shell.bsocat.net/infra?ref=${name}";
+        flake = "tarball+https://git.shell.bsocat.net/infra/snapshot/infra-${name}.tar.gz";
       };
       parseRef = ref: let
           parts = builtins.match "([^\t]+)\t(.*)" ref;
