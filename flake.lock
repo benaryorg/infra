@@ -214,16 +214,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1701540982,
-        "narHash": "sha256-5ajSy6ODgGmAbmymRdHnjfVnuVrACjI8wXoGVvrtvww=",
-        "ref": "nixos-23.05",
-        "rev": "6386d8aafc28b3a7ed03880a57bdc6eb4465491d",
-        "revCount": 492454,
+        "lastModified": 1701539137,
+        "narHash": "sha256-nVO/5QYpf1GwjvtpXhyxx5M3U/WN0MwBro4Lsk+9mL0=",
+        "ref": "nixos-23.11",
+        "rev": "933d7dc155096e7575d207be6fb7792bc9f34f6d",
+        "revCount": 552571,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
       "original": {
-        "ref": "nixos-23.05",
+        "ref": "nixos-23.11",
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       }
