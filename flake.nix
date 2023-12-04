@@ -854,6 +854,7 @@
                   group = config.systemd.services.coturn.serviceConfig.Group;
                 };
               };
+              systemd.network.networks."40-ipv4".enable = lib.mkForce false;
               services =
               {
                 coturn =
