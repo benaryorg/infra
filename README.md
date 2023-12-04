@@ -27,3 +27,10 @@ ssh-agent zsh -c 'ssh-add && exec $*' -s colmena apply --on @default
 colmena apply-local --node shell.cloud.bsocat.net --sudo
 ```
 
+# CI
+
+There's [a hydra running on one of the instances](https://nixos-builder.shell.bsocat.net/hydra/).
+Among other things it does check all the node configs and builds things like the [custom bootstrap ISO](https://nixos-builder.shell.bsocat.net/hydra/job/infra/main/iso/latest-finished) and [kexec stuff](https://nixos-builder.shell.bsocat.net/hydra/job/infra/main/kexec/latest-finished).
+
+I also irregularly copy the [kexec stuff in a more readable/usable format onto IPFS](https://pedosinspeedos.net/ipns/generic.ipfs.benary.org/files/random/sysadmin/kexec-nixos/README.html).
+
