@@ -19,13 +19,13 @@ with lib;
       };
       url = mkOption
       {
-        default = "tarball+https://git.shell.bsocat.net/infra/snapshot/infra-main.tar.gz";
+        default = "git+https://git.shell.bsocat.net/infra?ref=main";
         description = "The flake URl to deploy.";
         type = types.str;
       };
       nixpkgs = mkOption
       {
-        default = "tarball+https://git.shell.bsocat.net/nixpkgs/snapshot/nixpkgs-nixos-23.05.tar.gz";
+        default = "git+https://git.shell.bsocat.net/nixpkgs?ref=nixos-23.05";
         description = "The nixpkgs distribution to use.";
         type = types.str;
       };
