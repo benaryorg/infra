@@ -64,6 +64,14 @@ with lib;
       services.unbound.enable = config.benaryorg.net.resolver == "unbound";
       networking.useHostResolvConf = false;
     }
+    (mkIf (config.benaryorg.net.resolver == "resolved")
+    {
+      # https://github.com/NixOS/nixpkgs/issues/114114
+      services.resolved.extraConfig =
+      ''
+        FallbackDNS=
+      '';
+    })
     (mkIf (config.benaryorg.net.resolver == "unbound")
     {
       services =
