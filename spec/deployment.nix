@@ -19,10 +19,15 @@ with lib;
       };
       tags = mkOption
       {
-        default = optional config.benaryorg.deployment.default [ "default" ];
+        default = [];
         description = "List of tags to apply to colmena.";
         type = types.listOf types.str;
       };
     };
+  };
+
+  config =
+  {
+    benaryorg.deployment.tags = mkOrder 1000 (optionals config.benaryorg.deployment.default [ "default" ]);
   };
 }

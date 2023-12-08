@@ -87,7 +87,7 @@ with lib;
 
   config = mkIf config.benaryorg.lxd.enable
   {
-    benaryorg.deployment.tags = [ "lxd" "lxd:${config.benaryorg.lxd.cluster}" ];
+    benaryorg.deployment.tags = mkAfter [ "lxd" "lxd:${config.benaryorg.lxd.cluster}" ];
     virtualisation.lxd =
     {
       enable = true;
