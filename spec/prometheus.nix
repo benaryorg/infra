@@ -251,15 +251,19 @@ with lib;
           in
             exporters;
 
-        systemd.services.stunnel =
+        systemd.services =
         {
-          wants = [ "acme-finished-${config.networking.fqdn}.target" ];
-          after = [ "acme-finished-${config.networking.fqdn}.target" ];
-          serviceConfig.LoadCredential =
-          [
-            "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
-            "key.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
-          ];
+          stunnel =
+          {
+            wants = [ "acme-finished-${config.networking.fqdn}.target" ];
+            after = [ "acme-finished-${config.networking.fqdn}.target" ];
+            serviceConfig.LoadCredential =
+            [
+              "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
+              "key.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
+            ];
+          };
+          prometheus-smokeping-exporter.serviceConfig.RestartSec = "1min";
         };
 
         services.stunnel =
