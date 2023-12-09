@@ -38,6 +38,7 @@
     lxddns.url = "git+https://git.shell.bsocat.net/lxddns";
     lxddns.inputs.nixpkgs.follows = "nixpkgs";
     lxddns.inputs.flake-utils.follows = "flake-utils";
+    lxddns.inputs.systems.follows = "nix-systems";
   };
 
   outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
