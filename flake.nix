@@ -1001,6 +1001,8 @@
                 crane = { url = "https://github.com/ipetkov/crane.git"; };
                 flake-compat = { url = "https://github.com/edolstra/flake-compat.git"; };
                 nix-systems = { url = "https://github.com/nix-systems/default.git"; };
+                nix-systems-default-linux = { url = "https://github.com/nix-systems/default-linux.git"; };
+                nix-systems-x86_64-linux = { url = "https://github.com/nix-systems/x86_64-linux.git"; };
                 flake-utils = { url = "https://github.com/numtide/flake-utils.git"; };
                 rust-overlay = { url = "https://github.com/oxalica/rust-overlay.git"; };
                 agenix = { url = "https://github.com/ryantm/agenix.git"; };
