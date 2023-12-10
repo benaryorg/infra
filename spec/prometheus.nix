@@ -263,7 +263,15 @@ with lib;
               "key.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
             ];
           };
-          prometheus-smokeping-exporter.serviceConfig.RestartSec = "1min";
+          # if systemd resolved restarts then this service restarts too
+          # it may take a little for dns resolution to work again
+          # and the service fails early if DNS cannot be resolved
+          prometheus-smokeping-exporter.serviceConfig =
+          {
+            RestartSec = "1min";
+            TimeoutStartSec = "5min";
+            RestartMode = "direct";
+          };
         };
 
         services.stunnel =
