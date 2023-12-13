@@ -528,6 +528,15 @@
               security.acme.certs.${config.networking.fqdn}.listenHTTP = ":80";
               systemd.network.networks."40-ipv4".enable = lib.mkForce false;
 
+              environment.systemPackages = with pkgs;
+              [
+                alacritty
+                appimage-run
+                dumb-init
+                xpra
+                xterm
+              ];
+
               system.stateVersion = "23.05";
             };
 
