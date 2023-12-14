@@ -168,6 +168,8 @@
                 privateKeyFile = config.age.secrets.buildSecret.path;
               };
 
+              fileSystems."/nix/tmp" = { fsType = "tmpfs"; options = [ "noatime" "size=4g" ]; };
+
               networking.nameservers = [ "2a0c:b641:a40:5::" ];
 
               system.stateVersion = "23.05";
