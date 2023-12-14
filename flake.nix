@@ -320,9 +320,13 @@
                 };
               };
 
-              boot.swraid.enable = true;
+              boot.swraid =
+              {
+                enable = true;
+                mdadmConf = "MAILADDR root@benary.org";
+              };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "lxd2.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
