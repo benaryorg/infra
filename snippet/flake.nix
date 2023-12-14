@@ -25,11 +25,12 @@
         # this is the upstream module
         benaryorg.nixosModules.default
         # custom configuration goes here
-        ({ pkgs, ... }:
+        ({ pkgs, lib, ... }:
         {
           # most of this here is a copy from the iso build, adjust as needed
           benaryorg.base.lightweight = true;
-          benaryorg.net.type = "none";
+          benaryorg.net.type = "manual";
+          benaryorg.net.resolver = "resolved";
           benaryorg.hardware.vendor = "none";
           # since the client will not be added dynamically, substitution will have to do
           benaryorg.build.role = "client-light";
@@ -64,13 +65,7 @@
               };
             };
           };
-          networking =
-          {
-            firewall.enable = false;
-            wireguard.enable = false;
-            tempAddresses = "disabled";
-            useDHCP = true;
-          };
+          networking.useDHCP = lib.mkForce true;
         })
       ];
     };
