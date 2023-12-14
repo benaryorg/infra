@@ -146,7 +146,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "nixos.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -172,7 +172,7 @@
 
               networking.nameservers = [ "2a0c:b641:a40:5::" ];
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "radosgw1.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -281,7 +281,7 @@
 
               networking.nameservers = [ "2a0c:b641:a40:5::" ];
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "lxd1.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -364,7 +364,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "lxd3.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -402,7 +402,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "lxd4.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -441,7 +441,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "lxd5.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -479,7 +479,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "lxd6.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -518,7 +518,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "steam.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -543,7 +543,7 @@
                 xterm
               ];
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "syncplay.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -595,7 +595,7 @@
               };
               systemd.tmpfiles.rules = [ "v '/var/lib/syncplay' 0750 syncplay syncplay - -" ];
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "prometheus.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -696,7 +696,7 @@
               };
               systemd.services.prometheus-xmpp-alerts.serviceConfig.LoadCredential = [ "password:${config.age.secrets.xmppAlerting.path}" ];
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "xmpp.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -843,7 +843,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "turn.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -885,7 +885,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "gaycast.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -920,7 +920,7 @@
                 };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "benaryorg1.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -946,7 +946,7 @@
                 group = config.services.nginx.group;
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "benaryorg2.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -972,7 +972,7 @@
                 group = config.services.nginx.group;
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "benaryorg3.lxd.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -998,7 +998,7 @@
                 group = config.services.nginx.group;
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "git.shell.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -1030,7 +1030,7 @@
                 nixlib = { url = "https://github.com/nix-community/nixpkgs.lib.git"; };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "nixos-builder.shell.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -1253,7 +1253,7 @@
               benaryorg.build.tags = [ "cloud.bsocat.net" ];
               benaryorg.flake.autoupgrade = false;
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
       };
       # build the hive
