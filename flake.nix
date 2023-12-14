@@ -1077,7 +1077,7 @@
                 hydra-queue-runner = { serviceConfig.Slice = "build.slice"; };
               };
 
-              system.stateVersion = "23.05";
+              system.stateVersion = "23.11";
             };
 
         "mir.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
