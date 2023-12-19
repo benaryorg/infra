@@ -76,6 +76,8 @@ with lib;
       DefaultStartLimitBurst=60
     '';
 
+    systemd.tmpfiles.rules = [ "v '/mnt' 0755 root root - -" ];
+
     programs =
     {
       vim.defaultEditor = true;
