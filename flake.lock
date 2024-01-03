@@ -10,14 +10,17 @@
         ],
         "nixpkgs": [
           "nixpkgs"
+        ],
+        "systems": [
+          "nix-systems"
         ]
       },
       "locked": {
-        "lastModified": 1703089996,
-        "narHash": "sha256-ipqShkBmHKC9ft1ZAsA6aeKps32k7+XZSPwfxeHLsAU=",
+        "lastModified": 1703433843,
+        "narHash": "sha256-nmtA4KqFboWxxoOAA6Y1okHbZh+HsXaMPFkYHsoDRDw=",
         "ref": "refs/heads/main",
-        "rev": "564595d0ad4be7277e07fa63b5a991b3c645655d",
-        "revCount": 278,
+        "rev": "417caa847f9383e111d1397039c9d4337d024bf0",
+        "revCount": 295,
         "type": "git",
         "url": "https://git.shell.bsocat.net/agenix"
       },
@@ -85,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1703089493,
-        "narHash": "sha256-WUjYqUP/Lhhop9+aiHVFREgElunx1AHEWxqMT8ePfzo=",
+        "lastModified": 1703439018,
+        "narHash": "sha256-VT+06ft/x3eMZ1MJxWzQP3zXFGcrxGo5VR2rB7t88hs=",
         "ref": "refs/heads/master",
-        "rev": "2a5136f14a9ac93d9d370d64a36026c5de3ae8a4",
-        "revCount": 480,
+        "rev": "afdcd41180e3dfe4dac46b5ee396e3b12ccc967a",
+        "revCount": 481,
         "type": "git",
         "url": "https://git.shell.bsocat.net/crane"
       },
@@ -105,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1700795494,
-        "narHash": "sha256-gzGLZSiOhf155FW7262kdHo2YDeugp3VuIFb4/GGng0=",
+        "lastModified": 1704277720,
+        "narHash": "sha256-meAKNgmh3goankLGWqqpw73pm9IvXjEENJloF0coskE=",
         "ref": "refs/heads/master",
-        "rev": "4b9b83d5a92e8c1fbfd8eb27eda375908c11ec4d",
-        "revCount": 1485,
+        "rev": "0dd382b70c351f528561f71a0a7df82c9d2be9a4",
+        "revCount": 1498,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-darwin"
       },
@@ -161,11 +164,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1703072477,
-        "narHash": "sha256-I2g7o+J26iK3sGk53iuaYiMWryzAYx0zhNQUFzTID/A=",
+        "lastModified": 1704276313,
+        "narHash": "sha256-4eD4RaAKHLj0ztw5pQcNFs3hGpxrsYb0e9Qir+Ute+w=",
         "ref": "refs/heads/master",
-        "rev": "433120e47d016c9960dd9c2b1821e97d223a6a39",
-        "revCount": 3210,
+        "rev": "4d8f90205c6c90be2e81d94d0e5eedf71c1ba34e",
+        "revCount": 3247,
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       },
@@ -217,11 +220,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1702921762,
-        "narHash": "sha256-O/rP7gulApQAB47u6szEd8Pn8Biw0d84j5iuP2tcxzY=",
+        "lastModified": 1703992652,
+        "narHash": "sha256-C0o8AUyu8xYgJ36kOxJfXIroy9if/G6aJbNOpA5W0+M=",
         "ref": "nixos-23.11",
-        "rev": "d02ffbbe834b5599fc5f134e644e49397eb07188",
-        "revCount": 553444,
+        "rev": "32f63574c85fbc80e4ba1fbb932cde9619bad25e",
+        "revCount": 553775,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -233,11 +236,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1703013332,
-        "narHash": "sha256-+tFNwMvlXLbJZXiMHqYq77z/RfmpfpiI3yjL6o/Zo9M=",
+        "lastModified": 1703961334,
+        "narHash": "sha256-M1mV/Cq+pgjk0rt6VxoyyD+O8cOUiai8t9Q6Yyq4noY=",
         "ref": "nixos-unstable",
-        "rev": "54aac082a4d9bb5bbc5c4e899603abfb76a3f6d6",
-        "revCount": 561409,
+        "rev": "b0d36bd0a420ecee3bc916c91886caca87c894e9",
+        "revCount": 564493,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -307,11 +310,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1703037971,
-        "narHash": "sha256-HzfW5MLt+I0DlfPM9sL+Vd1XrywoWiW0LSAez3wp23E=",
+        "lastModified": 1704075545,
+        "narHash": "sha256-L3zgOuVKhPjKsVLc3yTm2YJ6+BATyZBury7wnhyc8QU=",
         "ref": "refs/heads/master",
-        "rev": "16ab5af8f23b63f34dd7a48a68ab3b50dc3dd2b6",
-        "revCount": 1236,
+        "rev": "a0df72e106322b67e9c6e591fe870380bd0da0d5",
+        "revCount": 1246,
         "type": "git",
         "url": "https://git.shell.bsocat.net/rust-overlay"
       },

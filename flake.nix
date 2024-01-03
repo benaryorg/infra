@@ -18,6 +18,7 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
     agenix.inputs.darwin.follows = "darwin";
+    agenix.inputs.systems.follows = "nix-systems";
     flake-compat.url = "git+https://git.shell.bsocat.net/flake-compat";
     flake-compat.flake = false;
     flake-utils.url = "git+https://git.shell.bsocat.net/flake-utils";
