@@ -164,11 +164,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704358952,
-        "narHash": "sha256-yazDFmdyKr0JGMqmzQ5bYOW5FWvau8oFvsQ8eSB2f3A=",
+        "lastModified": 1704498488,
+        "narHash": "sha256-yINKdShHrtjdiJhov+q0s3Y3B830ujRoSbHduUNyKag=",
         "ref": "refs/heads/master",
-        "rev": "c36cb65c4a0ba17ab9262ab3c30920429348746c",
-        "revCount": 3251,
+        "rev": "51e44a13acea71b36245e8bd8c7db53e0a3e61ee",
+        "revCount": 3254,
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       },
@@ -220,11 +220,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1704145853,
-        "narHash": "sha256-G/1AMt9ibpeMlcxvD1vNaC8imGaK+g7zZ99e29BLgWw=",
+        "lastModified": 1704420045,
+        "narHash": "sha256-C36QmoJd5tdQ5R9MC1jM7fBkZW9zBUqbUCsgwS6j4QU=",
         "ref": "nixos-23.11",
-        "rev": "2d2ea8eab9e400618748ab1a6a108255233b602c",
-        "revCount": 553813,
+        "rev": "c1be43e8e837b8dbee2b3665a007e761680f0c3d",
+        "revCount": 553958,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -236,11 +236,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1704194953,
-        "narHash": "sha256-RtDKd8Mynhe5CFnVT8s0/0yqtWFMM9LmCzXv/YKxnq4=",
+        "lastModified": 1704538339,
+        "narHash": "sha256-1734d3mQuux9ySvwf6axRWZRBhtcZA9Q8eftD6EZg6U=",
         "ref": "nixos-unstable",
-        "rev": "bd645e8668ec6612439a9ee7e71f7eac4099d4f6",
-        "revCount": 565234,
+        "rev": "46ae0210ce163b3cba6c7da08840c1d63de9c701",
+        "revCount": 567011,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -310,11 +310,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704075545,
-        "narHash": "sha256-L3zgOuVKhPjKsVLc3yTm2YJ6+BATyZBury7wnhyc8QU=",
+        "lastModified": 1704766659,
+        "narHash": "sha256-Q2wQ9jzp4j96HokmhUQey+pyZMp4Fye/ZPSLtBBV1J8=",
         "ref": "refs/heads/master",
-        "rev": "a0df72e106322b67e9c6e591fe870380bd0da0d5",
-        "revCount": 1246,
+        "rev": "afa87241c19241aca9b7a9103635b82db2b147bb",
+        "revCount": 1251,
         "type": "git",
         "url": "https://git.shell.bsocat.net/rust-overlay"
       },
