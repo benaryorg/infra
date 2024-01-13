@@ -23,4 +23,5 @@ in
     "service/xmpp/xmpp.lxd.bsocat.net/user/monitoring@benary.org.age".publicKeys = [ conf.hostkey."prometheus.lxd.bsocat.net" ];
     "build/nixos-builder.shell.bsocat.net.age".publicKeys = [ conf.hostkey."nixos-builder.shell.bsocat.net" ];
     "build/nixos.home.bsocat.net.age".publicKeys = [ conf.hostkey."nixos.home.bsocat.net" ];
+    "lego/hedns/turn-static.svc.benary.org.age".publicKeys = [ conf.hostkey."turn.lxd.bsocat.net" ];
   }

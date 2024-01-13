@@ -750,18 +750,10 @@
                     unbound = {
                       resolvconf = true;
                     };
-                    external_service_secret = io.open("${config.age.secrets.coturnSecret.path}","r"):read()
-                    external_services = {
-                      { type = "stun", host = "turn.svc.benary.org", port = 3478 },
-                      { type = "turn", host = "turn.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-                      { type = "turns", host = "turn.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
-                      { type = "stun", host = "turn4.svc.benary.org", port = 3478 },
-                      { type = "turn", host = "turn4.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-                      { type = "turns", host = "turn4.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
-                      { type = "stun", host = "turn6.svc.benary.org", port = 3478 },
-                      { type = "turn", host = "turn6.svc.benary.org", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-                      { type = "turns", host = "turn6.svc.benary.org", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" },
-                    }
+
+                    turn_external_host = "turn-static.svc.benary.org"
+                    turn_external_port = 3478
+                    turn_external_secret = io.open("${config.age.secrets.coturnSecret.path}","r"):read()
 
                     -- FIXME: prosody cannot be convinced to do SNI for both the hostname and the virtualhosts
                     -- it will send connection refused for the virtualhost's domains under some circumstances
@@ -803,7 +795,7 @@
                     http_files = false;
                     dialback = false;
                   };
-                  extraModules = [ "turn_external" "external_services" "http_openmetrics" ];
+                  extraModules = [ "turn_external" "http_openmetrics" ];
                   disco_items = [ { url = "xmpp.lxd.bsocat.net"; description = "http upload service"; } ];
                 };
                 stunnel =
@@ -853,7 +845,7 @@
           in
             with lib;
             {
-              age.secrets.coturnLegoSecret.file = ./secret/lego/hedns/turn.svc.benary.org.age;
+              age.secrets.coturnLegoSecret.file = ./secret/lego/hedns/turn-static.svc.benary.org.age;
               age.secrets.coturnSecret =
               {
                 file = ./secret/service/coturn/turn.lxd.bsocat.net.age;
@@ -863,7 +855,7 @@
               security.acme.certs =
               {
                 ${config.networking.fqdn}.listenHTTP = ":80";
-                "turn.svc.benary.org" =
+                "turn-static.svc.benary.org" =
                 {
                   dnsProvider = "hurricane";
                   credentialsFile = config.age.secrets.coturnLegoSecret.path;
@@ -880,9 +872,9 @@
                   static-auth-secret-file = config.age.secrets.coturnSecret.path;
                   secure-stun = true;
                   no-cli = true;
-                  realm = "turn.svc.benary.org";
-                  cert = "/var/lib/acme/turn.svc.benary.org/cert.pem";
-                  pkey = "/var/lib/acme/turn.svc.benary.org/key.pem";
+                  realm = "turn-static.svc.benary.org";
+                  cert = "/var/lib/acme/turn-static.svc.benary.org/cert.pem";
+                  pkey = "/var/lib/acme/turn-static.svc.benary.org/key.pem";
                 };
               };
 
