@@ -16,7 +16,7 @@
         {
           description = lib.mdDoc "List of devices and their UUIDs, each **must** be GPT and have four partitions: 1) bios boot, 2) `/boot` (mdadm), 3) lukskey (1 sector), 4) luksroot (btrfs).";
           type = lib.types.attrsOf (lib.types.attrsOf lib.types.str);
-          example =
+          example = lib.literalExpression
           ''
             device =
             {
@@ -33,7 +33,7 @@
                 uuid = "bb8e805b-52d9-4c03-848e-e57f3b364a41";
                 keyuuid = "09b7135d-0902-4bf5-80e7-b6de7995b06b";
               };
-            }
+            };
           '';
         };
         fs =

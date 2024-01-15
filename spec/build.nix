@@ -21,6 +21,7 @@
       {
         type = lib.types.listOf lib.types.str;
         default = [ config.networking.domain ];
+        defaultText = lib.literalExpression "[ config.networking.domain ]";
         description = lib.mdDoc
         ''
           List of tags to use/serve.

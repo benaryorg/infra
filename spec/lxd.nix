@@ -24,6 +24,7 @@
           (lib.take 4)
           (lib.concatStringsSep ":")
         ];
+        defaultText = lib.literalMD "first 4 hextets derived from {option}`benaryorg.net.host.ipv6`";
         example = "2001:db8:1234:cdef";
         description = "IPv6 /64 to use; only the first four hextets.";
         type = lib.types.str;
@@ -31,6 +32,7 @@
       extInterface = lib.mkOption
       {
         default = config.benaryorg.net.host.primaryInterface;
+        defaultText = lib.literalExpression "config.benaryorg.net.host.primaryInterface";
         description = "External interface.";
         type = lib.types.str;
       };

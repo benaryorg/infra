@@ -66,6 +66,11 @@
         mocks = lib.mkOption
         {
           default = {};
+          description = lib.mdDoc
+          ''
+            Use this to add a prometheus exporter for this client in cases where the exporter is not managed by {option}`services.prometheus.exporters`.
+            This can be used to add arbitrary HTTP endpoints such as those offered by `prosody` or `kubo` to the scraped exporters with minimal overhead.
+          '';
           type = lib.types.attrsOf (lib.types.submodule
           {
             options =
