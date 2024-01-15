@@ -87,6 +87,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILhgl6pXnjK5ZxzFduRmZkSbx5bsF8Tito0M2n8A+2HZ";
+
               deployment.allowLocalDeployment = true;
               benaryorg.flake.autoupgrade = false;
               benaryorg.build.role = "none";
@@ -156,6 +158,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHuaQCsI854sA1EZ0+iI/J0XoLhNcE+OeqsCDEnHKUM";
+
               age.secrets.buildSecret.file = ./secret/build/nixos.home.bsocat.net.age;
               benaryorg.net.type = "manual";
               benaryorg.ssh.x11 = true;
@@ -182,6 +186,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEzsNKBz1FTuxlB36W1cCAQ5ZSipBMxEhB8A3CCTpjeL";
+
               age.secrets.homes3LegoSecret.file = ./secret/lego/hedns/home-s3.xn--idk5byd.net.acme.bsocat.net.age;
               benaryorg.net.type = "manual";
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
@@ -291,6 +297,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMQN8n7AM1npiKBQiyUIg1PzT06umWFcfFFXKV5XSS8R";
+
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd1.cloud.bsocat.net.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -336,6 +344,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIACQK4kpl9p3Y4ZtpqEyvostg7zmnFpb91Z3b+gxDwGQ";
+
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd2.cloud.bsocat.net.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -374,6 +384,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMWOCWu2yJ2MK7LZSrLYttRZhat6stqTjG/WQaYSEl/3";
+
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd3.cloud.bsocat.net.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -412,6 +424,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBNnok7mR9DK1pMAIlae5TG1fMzTtPOQGnNfSNtRy/5m";
+
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd4.cloud.bsocat.net.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -451,6 +465,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMaVAQfp0SDxPbCj/3v1daa96z6PgA40EBLOQzQeCMUp";
+
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd5.cloud.bsocat.net.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -489,6 +505,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIa1t6BignThNJcZzAkhY55aWXPuzAU1KZW+O+C/r4dN";
+
               age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd6.cloud.bsocat.net.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.hardware.vendor = "ovh";
@@ -528,6 +546,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqIBwvc1Pf6GbuVs8fo1UFGJLomb47VJO01ZzFv+BSK";
+
               benaryorg.user.ssh.keys = [ (getAttrFromPath [ "sshkey" "benaryorg@gnutoo.home.bsocat.net" ] conf) ];
               benaryorg.ssh.x11 = true;
               hardware.opengl.enable = true;
@@ -553,6 +573,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXlwb9MouVvrLm49diJxeUktG/HFxS2tedjKMEaYWEi";
+
               age.secrets.syncplaySalt =
               {
                 file = ./secret/service/syncplay/syncplay.lxd.bsocat.net.age;
@@ -605,6 +627,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0ia1VnkJ5lVZ2Nsk7tv+1FPFn9P1JrNRdGRYCf1eNY";
+
               age.secrets.grafanaUser = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_user.age; owner = "grafana"; mode = "0400"; };
               age.secrets.grafanaPass = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_pass.age; owner = "grafana"; mode = "0400"; };
               age.secrets.grafanaSecret = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/secret.age; owner = "grafana"; mode = "0400"; };
@@ -706,6 +730,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPDCg36Iu+EzJhyUNSPldV+G8q4p8l9JWPT0nbG2XXCw";
+
               age.secrets.prosodyLegoSecret.file = ./secret/service/prosody/xmpp.lxd.bsocat.net.age;
               age.secrets.coturnSecret =
               {
@@ -845,6 +871,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRtlLH3L15UCWuEY40YsBuCr9bSr8X4Sk5omHRbl4YE";
+
               age.secrets.coturnLegoSecret.file = ./secret/lego/hedns/turn-static.svc.benary.org.age;
               age.secrets.coturnSecret =
               {
@@ -887,6 +915,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDBX2ygU+eApcIQSWx9GZ7p+u+Zo8ozz529GRwO/sPRY";
+
               benaryorg.prometheus.client.enable = true;
 
               services =
@@ -922,6 +952,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDp4Snx4pM3+8yOVEV/VkdphtSeA7Wh7jAYAMdx75N3e";
+
               age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.website.enable = true;
@@ -948,6 +980,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXO1VPYJ5YfvCT4wvTWauSSLtmHS2gG8jh7RQyu6hy+";
+
               age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.website.enable = true;
@@ -974,6 +1008,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyYvEMA/opKvs5IcnRdCZmUqg941x6umlf1I0/Sn5sh";
+
               age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
               benaryorg.prometheus.client.enable = true;
               benaryorg.website.enable = true;
@@ -1000,6 +1036,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmYms5tymVbqKU/J4g/cHOe0/5sbs7febVBOvQnuJkj";
+
               benaryorg.prometheus.client.enable = true;
 
               benaryorg.git.adminkey = conf.sshkey."benaryorg@gnutoo.home.bsocat.net";
@@ -1032,6 +1070,8 @@
           in
             with lib;
             {
+              benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIs11y4uzabLAmdqd5Zz7owITCiNwx9Z2q5encfwz/kA";
+
               age.secrets.buildSecret.file = ./secret/build/nixos-builder.shell.bsocat.net.age;
 
               benaryorg.prometheus.client.enable = true;
@@ -1241,12 +1281,19 @@
           in
             with lib;
             {
-              benaryorg.deployment.default = false;
+              benaryorg.deployment.fake = true;
+
+              imports =
+              [
+                (nixpkgs + "/nixos/modules/virtualisation/lxc-container.nix")
+              ];
+
               benaryorg.build.role = "client-light";
               benaryorg.build.tags = [ "cloud.bsocat.net" ];
               benaryorg.flake.autoupgrade = false;
 
-              system.stateVersion = "23.11";
+              # the channel is handled by benaryorg/nix already
+              system.installer.channel.enable = false;
             };
       };
       # build the hive
@@ -1281,6 +1328,7 @@
       {
         kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
         iso = colmenaHive.nodes."iso.example.com".config.system.build.isoImage;
+        lxc = colmenaHive.nodes."lxc.example.com".config.system.build.tarball;
       };
       addHydraMeta = name: { meta ? {}, ... }@value: value //
       {

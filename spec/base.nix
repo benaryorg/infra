@@ -1,4 +1,4 @@
-{ name, config, pkgs, lib, options, ... }:
+{ name, config, pkgs, lib, options, nodes, ... }:
 with lib;
 {
   options =
@@ -97,13 +97,12 @@ with lib;
         enable = config.benaryorg.base.gnupg.enable;
         pinentryFlavor = "curses";
       };
-      ssh.knownHosts =
-        let
-          globalConf = pkgs.callPackage ../conf {};
-          hostkey = globalConf.hostkey;
-          toKnownHost = _: value: { publicKey = value; };
-        in
-          builtins.mapAttrs toKnownHost hostkey;
+      ssh.knownHosts = lib.pipe nodes
+      [
+        (builtins.mapAttrs (_: { config, ... }: config.benaryorg.ssh.hostkey))
+        (lib.filterAttrs (_: builtins.isString))
+        (builtins.mapAttrs (_: key: { publicKey = key; }))
+      ];
     };
 
     services =

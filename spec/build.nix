@@ -67,8 +67,6 @@ with lib;
   config =
     let
       cfg = config.benaryorg.build;
-      globalConf = pkgs.callPackage ../conf {};
-      hostkey = globalConf.hostkey;
     in
       mkMerge
       [
@@ -90,7 +88,7 @@ with lib;
               # filter by those which have the local tags
               (builtins.filter (n: any ((flip elem) cfg.tags) n.config.benaryorg.build.tags))
               # map to hostkeys
-              (builtins.map (node: hostkey.${node.config.networking.fqdn}))
+              (builtins.map (n: n.config.benaryorg.ssh.hostkey))
             ];
           };
           services =
