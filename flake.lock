@@ -164,11 +164,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705335923,
-        "narHash": "sha256-jRyp+a89Y7Cb2V/NyIJpgu5gsND419bY16omCZWy+jc=",
+        "lastModified": 1705347059,
+        "narHash": "sha256-MSdJZDeyBIjf1SAZ7OvA44b00zUGTrDxkAm9vVR+XRk=",
         "ref": "refs/heads/master",
-        "rev": "b989db5900df4bd1a786f8afd8063dae09d89a8c",
-        "revCount": 3263,
+        "rev": "8c3b2a0cab64a464de9e41a470eecf1318ccff57",
+        "revCount": 3264,
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       },
@@ -190,11 +190,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1702102266,
-        "narHash": "sha256-lgfy9+/sGbV2HCcvbYZoZWY6uGOtoV0U9WTKUHchgik=",
+        "lastModified": 1705358332,
+        "narHash": "sha256-ENTdOL5e1KggIhTywFbXdpcw1IEXBnjHJncAF7e97Zs=",
         "ref": "refs/heads/main",
-        "rev": "6f4a58c43b47411846c7095bf15e6e50ea9858e3",
-        "revCount": 126,
+        "rev": "04cd47b997a4e195fd8499a23238d2738ffcfa36",
+        "revCount": 127,
         "type": "git",
         "url": "https://git.shell.bsocat.net/lxddns"
       },
