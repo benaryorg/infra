@@ -1,29 +1,28 @@
 { nixpkgs, nodes, config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
     benaryorg.prometheus =
     {
-      useAcme = mkOption
+      useAcme = lib.mkOption
       {
-        type = types.bool;
+        type = lib.types.bool;
         default = config.benaryorg.prometheus.server.enable || config.benaryorg.prometheus.client.enable;
         description = "Whether to pull ACME certificates.";
       };
       server =
       {
-        enable = mkOption
+        enable = lib.mkOption
         {
-          type = types.bool;
+          type = lib.types.bool;
           default = false;
           description = "Whether to enable the prometheus server.";
         };
-        tags = mkOption
+        tags = lib.mkOption
         {
-          type = types.listOf types.str;
+          type = lib.types.listOf lib.types.str;
           default = [ "default" ];
-          description = mdDoc
+          description = lib.mdDoc
           ''
             List of tags to monitor with this server.
 
@@ -34,17 +33,17 @@ with lib;
       };
       client =
       {
-        enable = mkOption
+        enable = lib.mkOption
         {
-          type = types.bool;
+          type = lib.types.bool;
           default = false;
           description = "Whether to enable the prometheus client.";
         };
-        tags = mkOption
+        tags = lib.mkOption
         {
-          type = types.listOf types.str;
+          type = lib.types.listOf lib.types.str;
           default = [ "default" ];
-          description = mdDoc
+          description = lib.mdDoc
           ''
             List of tags to monitor with this server.
 
@@ -52,10 +51,10 @@ with lib;
             This allows for several servers to scrape different sets of clients.
           '';
         };
-        exporters = mkOption
+        exporters = lib.mkOption
         {
           default = {};
-          description = mdDoc
+          description = lib.mdDoc
           ''
             Set of paramaters to be passed to {option}`services.prometheus.exporters`.
             All `listenAddress` parameters will default to `[::1]`.
@@ -64,23 +63,23 @@ with lib;
             The allowed SANs per exporter will be derived via the {option}`benaryorg.prometheus.client.tags` option.
           '';
         };
-        mocks = mkOption
+        mocks = lib.mkOption
         {
           default = {};
-          type = types.attrsOf (types.submodule
+          type = lib.types.attrsOf (lib.types.submodule
           {
             options =
             {
-              enable = mkOption
+              enable = lib.mkOption
               {
-                type = types.bool;
+                type = lib.types.bool;
                 default = true;
                 description = "Whether to enable the mock.";
               };
-              port = mkOption
+              port = lib.mkOption
               {
-                type = types.port;
-                description = mdDoc
+                type = lib.types.port;
+                description = lib.mdDoc
                 ''
                   Which port to scrape.
                   Unless changed by the `scrapeConfig` override, this expects a TLS capable endpoint running on the FQDN of the configured host.
@@ -88,10 +87,10 @@ with lib;
                   These options have no effect on the client and will only be used on the server to construct the scrape configuration.
                 '';
               };
-              scrapeConfig = mkOption
+              scrapeConfig = lib.mkOption
               {
                 default = {};
-                description = mdDoc
+                description = lib.mdDoc
                 ''
                   Scrape configuration as used in prometheus, used to provide values diverging from the defaults.
                   This can be used to scrape using other protocols than HTTPS for instance.
@@ -104,9 +103,9 @@ with lib;
     };
   };
 
-  config = mkMerge
+  config = lib.mkMerge
     [
-      (mkIf config.benaryorg.prometheus.server.enable
+      (lib.mkIf config.benaryorg.prometheus.server.enable
       {
         services.prometheus =
         {
@@ -124,32 +123,32 @@ with lib;
                 # filter by those which have the prometheus client
                 (builtins.filter (n: n.config.benaryorg.prometheus.client.enable))
                 # filter by those which have the local tags
-                (builtins.filter (n: any ((flip elem) tags) n.config.benaryorg.prometheus.client.tags))
+                (builtins.filter (n: lib.any ((lib.flip builtins.elem) tags) n.config.benaryorg.prometheus.client.tags))
                 # simplify the node attrset
                 (builtins.map
                   (node:
                     {
                       fqdn = node.config.networking.fqdn;
                       # filter for attrs, there seem to be "warnings" and "assertions" present as lists
-                      exporters = filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.services.prometheus.exporters;
-                      mocks = filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.benaryorg.prometheus.client.mocks;
+                      exporters = lib.filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.services.prometheus.exporters;
+                      mocks = lib.filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.benaryorg.prometheus.client.mocks;
                     }
                   )
                 )
               ];
               # get all exporters active on possible clients
-              exporterList = unique (builtins.concatMap (n: attrNames n.exporters) clients);
+              exporterList = lib.unique (builtins.concatMap (n: builtins.attrNames n.exporters) clients);
               # generate one job per exporter
-              job = exporter: clients: pipe clients
+              job = exporter: clients: lib.pipe clients
               [
-                (builtins.filter (n: elem exporter (builtins.attrNames n.exporters)))
+                (builtins.filter (n: builtins.elem exporter (builtins.attrNames n.exporters)))
                 (clients:
                   {
                     job_name = exporter;
                     static_configs =
                     [
                       {
-                        targets = builtins.map (node: "${node.fqdn}:${toString (node.exporters."${exporter}".port + 10000)}") clients;
+                        targets = builtins.map (node: "${node.fqdn}:${toString (node.exporters.${exporter}.port + 10000)}") clients;
                       }
                     ];
                     scheme = "https";
@@ -164,7 +163,7 @@ with lib;
               ];
               # build scrape configuration from single mock
               mockToScrapeConfig = { name, mock, fqdn }:
-                mergeAttrs
+                lib.mergeAttrs
                   {
                     job_name = "${name}:${fqdn}";
                     static_configs =
@@ -183,14 +182,14 @@ with lib;
                   }
                   mock.scrapeConfig;
               # get a list of mocks for each client
-              clientToMocks = client: pipe client.mocks
+              clientToMocks = client: lib.pipe client.mocks
               [
                 (builtins.mapAttrs (name: value: { fqdn = client.fqdn; name = name; mock = value; }))
                 builtins.attrValues
                 (builtins.filter (mock: mock.mock.enable))
               ];
               # get additional scrape configuration for list of clients
-              extraScrapeConfigs = clients: pipe clients [ (builtins.concatMap clientToMocks) (builtins.map mockToScrapeConfig) ];
+              extraScrapeConfigs = clients: lib.pipe clients [ (builtins.concatMap clientToMocks) (builtins.map mockToScrapeConfig) ];
             in
               (builtins.map (exporter: job exporter clients) exporterList) ++ (extraScrapeConfigs clients);
         };
@@ -205,7 +204,7 @@ with lib;
           ];
         };
       })
-      (mkIf config.benaryorg.prometheus.client.enable
+      (lib.mkIf config.benaryorg.prometheus.client.enable
       {
         benaryorg.prometheus.client.exporters.node.enable = true;
         benaryorg.prometheus.client.exporters.smokeping.enable = true;
@@ -247,7 +246,7 @@ with lib;
                 group = config.services.unbound.group;
               };
             };
-            exporters = builtins.mapAttrs (key: value: (exporterDefaultFunction key value) // (attrByPath [ key ] {} exporterDefaults) // value) config.benaryorg.prometheus.client.exporters;
+            exporters = builtins.mapAttrs (key: value: (exporterDefaultFunction key value) // (lib.attrByPath [ key ] {} exporterDefaults) // value) config.benaryorg.prometheus.client.exporters;
           in
             exporters;
 
@@ -299,7 +298,7 @@ with lib;
                       # filter by those which have the prometheus server
                       (builtins.filter (n: n.config.benaryorg.prometheus.server.enable))
                       # filter by those which have the local tags
-                      (builtins.filter (n: any ((flip elem) tags) n.config.benaryorg.prometheus.server.tags))
+                      (builtins.filter (n: lib.any ((lib.flip builtins.elem) tags) n.config.benaryorg.prometheus.server.tags))
                     ];
                   in
                     # use the first server
@@ -317,16 +316,16 @@ with lib;
                 name = "prometheusExporter-${name}";
                 value = stunnelServer name config.services.prometheus.exporters.${name};
               };
-              servers = pipe exporterList [ (builtins.map mapExporterFunction) builtins.listToAttrs ];
+              servers = lib.pipe exporterList [ (builtins.map mapExporterFunction) builtins.listToAttrs ];
             in
               servers;
         };
       })
-      (mkIf config.benaryorg.prometheus.useAcme
+      (lib.mkIf config.benaryorg.prometheus.useAcme
       {
         security.acme.certs.${config.networking.fqdn} =
         {
-          reloadServices = (optional config.benaryorg.prometheus.server.enable "prometheus.service") ++ (optional config.benaryorg.prometheus.client.enable "stunnel.service");
+          reloadServices = (lib.optional config.benaryorg.prometheus.server.enable "prometheus.service") ++ (lib.optional config.benaryorg.prometheus.client.enable "stunnel.service");
         };
       })
     ];

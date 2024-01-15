@@ -1,52 +1,51 @@
 { config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
     benaryorg.flake =
     {
-      enable = mkOption
+      enable = lib.mkOption
       {
         default = true;
         description = "Whether to enable flake deployment.";
-        type = types.bool;
+        type = lib.types.bool;
       };
-      autoupgrade = mkOption
+      autoupgrade = lib.mkOption
       {
         default = true;
         description = "Whether enable regular automatic upgrades.";
-        type = types.bool;
+        type = lib.types.bool;
       };
-      url = mkOption
+      url = lib.mkOption
       {
         default = "git+https://git.shell.bsocat.net/infra?ref=main";
         description = "The flake URl to deploy.";
-        type = types.str;
+        type = lib.types.str;
       };
-      nixpkgs = mkOption
+      nixpkgs = lib.mkOption
       {
         default = "tarball+https://git.shell.bsocat.net/nixpkgs/snapshot/nixpkgs-nixos-23.11.tar.gz";
         description = "The nixpkgs distribution to use.";
-        type = types.str;
+        type = lib.types.str;
       };
     };
   };
 
-  config = mkIf config.benaryorg.flake.enable
+  config = lib.mkIf config.benaryorg.flake.enable
   {
-    system.autoUpgrade = mkIf config.benaryorg.flake.autoupgrade
+    system.autoUpgrade = lib.mkIf config.benaryorg.flake.autoupgrade
     {
       enable = true;
       dates = "daily";
       flake = "/etc/nixos";
       flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" "--recreate-lock-file" ];
     };
-    systemd.timers.nixos-upgrade.timerConfig = mkIf config.benaryorg.flake.autoupgrade
+    systemd.timers.nixos-upgrade.timerConfig = lib.mkIf config.benaryorg.flake.autoupgrade
     {
       OnBootSec = "1h";
-      RandomizedDelaySec = mkForce "24h";
+      RandomizedDelaySec = lib.mkForce "24h";
     };
-    systemd.services.nixos-upgrade = mkIf config.benaryorg.flake.autoupgrade
+    systemd.services.nixos-upgrade = lib.mkIf config.benaryorg.flake.autoupgrade
     {
       onFailure = [ "default.target" ];
       unitConfig.OnFailureJobMode = "isolate";

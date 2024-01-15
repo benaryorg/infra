@@ -1,46 +1,40 @@
 { config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
     benaryorg.git =
     {
-      enable = mkOption
-      {
-        default = false;
-        description = "Whether to enable git server functionality.";
-        type = types.bool;
-      };
-      adminkey = mkOption
+      enable = lib.mkEnableOption (lib.mdDoc "git server functionality");
+      adminkey = lib.mkOption
       {
         description = "Gitolite admin SSH key.";
-        type = types.str;
+        type = lib.types.str;
       };
-      mirror = mkOption
+      mirror = lib.mkOption
       {
         description = "List of repositories to mirror.";
         default = {};
         example = { nixpkgs = { url = "https://github.com/NixOS/nixpkgs.git"; }; };
-        type = types.attrsOf (types.submodule ({ name, config, ...}:
+        type = lib.types.attrsOf (lib.types.submodule ({ name, config, ...}:
         {
           options =
           {
-            name = mkOption
+            name = lib.mkOption
             {
               description = "Name of the public repository in gitolite.";
-              type = types.str;
+              type = lib.types.str;
               default = name;
             };
-            interval = mkOption
+            interval = lib.mkOption
             {
               description = "Interval of update in seconds.";
               default = 3600;
-              type = types.int;
+              type = lib.types.int;
             };
-            url = mkOption
+            url = lib.mkOption
             {
               description = "URl of the repository for initial clone.";
-              type = types.str;
+              type = lib.types.str;
             };
           };
         }));
@@ -48,7 +42,7 @@ with lib;
     };
   };
 
-  config = mkIf config.benaryorg.git.enable
+  config = lib.mkIf config.benaryorg.git.enable
   {
     services =
     {

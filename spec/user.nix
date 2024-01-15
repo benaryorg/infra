@@ -1,5 +1,4 @@
 { config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
@@ -7,23 +6,23 @@ with lib;
     {
       ssh =
       {
-        enable = mkOption
+        enable = lib.mkOption
         {
           default = true;
           description = "Whether to enroll the default SSH user.";
-          type = types.bool;
+          type = lib.types.bool;
         };
-        name = mkOption
+        name = lib.mkOption
         {
           default = "benaryorg";
           description = "Name of the default SSH user.";
-          type = types.str;
+          type = lib.types.str;
         };
-        keys = mkOption
+        keys = lib.mkOption
         {
           default = [];
           description = "List of SSH public keys.";
-          type = types.listOf types.str;
+          type = lib.types.listOf lib.types.str;
         };
       };
     };
@@ -31,7 +30,7 @@ with lib;
 
   config =
   {
-    users.users = mkIf config.benaryorg.user.ssh.enable
+    users.users = lib.mkIf config.benaryorg.user.ssh.enable
     {
       root.hashedPassword = "*";
       ${config.benaryorg.user.ssh.name} =

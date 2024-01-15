@@ -1,5 +1,4 @@
 { name, config, pkgs, lib, options, nodes, ... }:
-with lib;
 {
   options =
   {
@@ -7,37 +6,32 @@ with lib;
     {
       sudo =
       {
-        needsPassword = mkOption
+        needsPassword = lib.mkOption
         {
           default = false;
-          description = "Whether to enable OpenSSH server.";
-          type = types.bool;
+          description = "Whether sudo needs a password for base users.";
+          type = lib.types.bool;
         };
       };
       gnupg =
       {
-        enable = mkOption
-        {
-          default = false;
-          description = "Whether to enable GnuPG.";
-          type = types.bool;
-        };
+        enable = lib.mkEnableOption (lib.mdDoc "GnuPG");
       };
-      lightweight = mkOption
+      lightweight = lib.mkOption
       {
         default = false;
         description = "Enabling this will remove some larger packages.";
-        type = types.bool;
+        type = lib.types.bool;
       };
     };
   };
 
   config =
   {
-    networking.hostName = head (splitString "." name);
-    networking.domain = concatStringsSep "." (tail (splitString "." name));
-    networking.search = [ (concatStringsSep "." (tail (splitString "." name))) ];
-    networking.hosts = mkForce {};
+    networking.hostName = builtins.head (lib.splitString "." name);
+    networking.domain = lib.concatStringsSep "." (builtins.tail (lib.splitString "." name));
+    networking.search = [ (lib.concatStringsSep "." (builtins.tail (lib.splitString "." name))) ];
+    networking.hosts = lib.mkForce {};
 
     time.timeZone = "Etc/UTC";
     i18n.defaultLocale = "C.UTF-8";
@@ -67,7 +61,7 @@ with lib;
 
     # fails to start
     systemd.services.mdmonitor.enable = false;
-    systemd.services.nginx.unitConfig.StartLimitIntervalSec = mkDefault 300;
+    systemd.services.nginx.unitConfig.StartLimitIntervalSec = lib.mkDefault 300;
 
     systemd.extraConfig =
     ''

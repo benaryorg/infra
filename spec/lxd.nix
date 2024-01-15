@@ -1,93 +1,87 @@
 { nodes, config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
     benaryorg.lxd =
     {
-      enable = mkOption
-      {
-        default = false;
-        description = "Whether to enable the opinionated LXD cluster configuration.";
-        type = types.bool;
-      };
-      cluster = mkOption
+      enable = lib.mkEnableOption (lib.mdDoc "the opinionated LXD cluster configuration.");
+      cluster = lib.mkOption
       {
         description = "Name of the LXD cluster to integrate with.";
-        type = types.str;
+        type = lib.types.str;
       };
-      legoConfig = mkOption
+      legoConfig = lib.mkOption
       {
         description = "Lego certificate configuration.";
       };
-      network = mkOption
+      network = lib.mkOption
       {
-        default = pipe config.benaryorg.net.host.ipv6
+        default = lib.pipe config.benaryorg.net.host.ipv6
         [
-          (splitString "/")
+          (lib.splitString "/")
           builtins.head
-          (splitString ":")
-          (take 4)
-          (concatStringsSep ":")
+          (lib.splitString ":")
+          (lib.take 4)
+          (lib.concatStringsSep ":")
         ];
         example = "2001:db8:1234:cdef";
         description = "IPv6 /64 to use; only the first four hextets.";
-        type = types.str;
+        type = lib.types.str;
       };
-      extInterface = mkOption
+      extInterface = lib.mkOption
       {
         default = config.benaryorg.net.host.primaryInterface;
         description = "External interface.";
-        type = types.str;
+        type = lib.types.str;
       };
-      bridge = mkOption
+      bridge = lib.mkOption
       {
         default = "br0";
         description = "Internal IPv6 only bridge.";
-        type = types.str;
+        type = lib.types.str;
       };
-      extraRemotes = mkOption
+      extraRemotes = lib.mkOption
       {
         default = [];
         description = "Additional lxddns remotes.";
-        type = types.listOf types.str;
+        type = lib.types.listOf lib.types.str;
       };
-      hostmaster = mkOption
+      hostmaster = lib.mkOption
       {
         default = "hostmaster.benary.org";
         description = "Hostmaster address in DNS notation (for SOA).";
-        type = types.str;
+        type = lib.types.str;
       };
-      lxddnsPort = mkOption
+      lxddnsPort = lib.mkOption
       {
         default = 9132;
         description = "Port to bind lxddns to.";
-        type = types.int;
+        type = lib.types.int;
       };
-      lxddnsAddress = mkOption
+      lxddnsAddress = lib.mkOption
       {
         default = "[::]";
         description = "Address to bind lxddns to.";
-        type = types.str;
+        type = lib.types.str;
       };
-      legacySmtpProxy = mkOption
+      legacySmtpProxy = lib.mkOption
       {
         default = false;
         description = "Whether to enable a legacy setup-specific SMTP proxy.";
-        type = types.bool;
+        type = lib.types.bool;
       };
-      allowedUsers = mkOption
+      allowedUsers = lib.mkOption
       {
         default = if config.benaryorg.user.ssh.enable then [ config.benaryorg.user.ssh.name ] else [];
         description = "List of users which are allowed to access the LXD server.";
-        type = types.listOf types.str;
+        type = lib.types.listOf lib.types.str;
       };
     };
   };
 
-  config = mkIf config.benaryorg.lxd.enable
+  config = lib.mkIf config.benaryorg.lxd.enable
   {
-    benaryorg.deployment.tags = mkAfter [ "lxd" "lxd:${config.benaryorg.lxd.cluster}" ];
+    benaryorg.deployment.tags = lib.mkAfter [ "lxd" "lxd:${config.benaryorg.lxd.cluster}" ];
     virtualisation.lxd =
     {
       enable = true;
@@ -103,8 +97,8 @@ with lib;
     # lxd user/group for extra large uid ranges
     users.users.root =
     {
-      subUidRanges = mkForce [ { startUid = 1000000000; count = 1000000000; } ];
-      subGidRanges = mkForce [ { startGid = 1000000000; count = 1000000000; } ];
+      subUidRanges = lib.mkForce [ { startUid = 1000000000; count = 1000000000; } ];
+      subGidRanges = lib.mkForce [ { startGid = 1000000000; count = 1000000000; } ];
     };
 
     boot.kernel.sysctl =
@@ -253,16 +247,16 @@ with lib;
         enable = true;
         extraConfig =
           let
-            clusterNodes = builtins.filter (x: x.config.benaryorg.lxd.enable && x.config.benaryorg.lxd.cluster == config.benaryorg.lxd.cluster) (attrValues nodes);
+            clusterNodes = builtins.filter (x: x.config.benaryorg.lxd.enable && x.config.benaryorg.lxd.cluster == config.benaryorg.lxd.cluster) (builtins.attrValues nodes);
             managedRemotes = builtins.map (x: "https://${x.config.networking.fqdn}:${toString x.config.benaryorg.lxd.lxddnsPort}") clusterNodes;
-            remotes = concatMapStringsSep " " (x: "--remote ${x}") (config.benaryorg.lxd.extraRemotes ++ managedRemotes);
+            remotes = lib.concatMapStringsSep " " (x: "--remote ${x}") (config.benaryorg.lxd.extraRemotes ++ managedRemotes);
           in
             ''
               api=no
               remote-connection-string=pipe:command=${pkgs.lxddns-http}/bin/lxddns-http pipe -v info --domain ${config.benaryorg.lxd.cluster}. --hostmaster ${config.benaryorg.lxd.hostmaster} ${remotes} --soa-ttl 64 --aaaa-ttl 256,timeout=5000
               launch=remote
               negquery-cache-ttl=1
-              local-address=${builtins.head (splitString "/" config.benaryorg.net.host.ipv6)}, ${builtins.head (splitString "/" config.benaryorg.net.host.ipv4)}
+              local-address=${builtins.head (lib.splitString "/" config.benaryorg.net.host.ipv6)}, ${builtins.head (lib.splitString "/" config.benaryorg.net.host.ipv4)}
               # needed since 4.5
               zone-cache-refresh-interval=0
             '';

@@ -1,21 +1,20 @@
 { config, pkgs, lib, options, ... }:
-with lib;
 {
   options.benaryorg.nullmailer =
   {
-    enable = mkOption
+    enable = lib.mkOption
     {
       default = true;
       description = "Whether to use nullmailer.";
-      type = types.bool;
+      type = lib.types.bool;
     };
-    hostmaster = mkOption
+    hostmaster = lib.mkOption
     {
       default = "root@benary.org";
       description = "Hostmaster email address.";
-      type = types.str;
+      type = lib.types.str;
     };
-    remotes = mkOption
+    remotes = lib.mkOption
     {
       default =
       [
@@ -24,21 +23,21 @@ with lib;
         "smtp2.lxd.bsocat.net smtp port=25 starttls"
       ];
       description = "Remotes to send mail to.";
-      type = types.listOf types.str;
+      type = lib.types.listOf lib.types.str;
     };
   };
 
-  config =
+  config = lib.mkIf config.benaryorg.nullmailer.enable
   {
     services.nullmailer =
     {
-      enable = config.benaryorg.nullmailer.enable;
+      enable = true;
       config =
       {
         defaultdomain = config.networking.fqdn;
         me = config.networking.fqdn;
         doublebounceto = config.benaryorg.nullmailer.hostmaster;
-        remotes = concatStringsSep "\n" config.benaryorg.nullmailer.remotes;
+        remotes = lib.concatStringsSep "\n" config.benaryorg.nullmailer.remotes;
       };
     };
   };

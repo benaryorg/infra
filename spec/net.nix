@@ -1,54 +1,53 @@
 { config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
     benaryorg.net =
     {
-      type = mkOption
+      type = lib.mkOption
       {
         default = if config.benaryorg.hardware.vendor == "container" then "container" else "host";
         description = "Which type of networking to deploy.";
-        type = types.enum [ "container" "host" "manual" "none" ];
+        type = lib.types.enum [ "container" "host" "manual" "none" ];
       };
-      resolver = mkOption
+      resolver = lib.mkOption
       {
         default = builtins.getAttr config.benaryorg.net.type { host = "unbound"; container = "resolved"; manual = "none"; none = "none"; };
         description = "Which resolver to use. Defaults to unbound for hardware and systemd-resolved for containers.";
-        type = types.enum [ "unbound" "resolved" "rdnssd" "none" ];
+        type = lib.types.enum [ "unbound" "resolved" "rdnssd" "none" ];
       };
       host =
       {
-        primaryInterface = mkOption
+        primaryInterface = lib.mkOption
         {
           description = "The primary network interface.";
-          type = types.str;
+          type = lib.types.str;
         };
-        ipv4 = mkOption
+        ipv4 = lib.mkOption
         {
           description = "IPv4 address in CIDR notation.";
-          type = types.nullOr types.str;
+          type = lib.types.nullOr lib.types.str;
         };
-        ipv6 = mkOption
+        ipv6 = lib.mkOption
         {
           description = "IPv6 address in CIDR notation.";
-          type = types.nullOr types.str;
+          type = lib.types.nullOr lib.types.str;
         };
-        ipv4Gateway = mkOption
+        ipv4Gateway = lib.mkOption
         {
           description = "IPv4 gateway address.";
-          type = types.str;
+          type = lib.types.str;
         };
-        ipv6Gateway = mkOption
+        ipv6Gateway = lib.mkOption
         {
           description = "IPv6 gateway address.";
-          type = types.str;
+          type = lib.types.str;
         };
       };
     };
   };
 
-  config = mkIf (config.benaryorg.net.type != "none") (mkMerge
+  config = lib.mkIf (config.benaryorg.net.type != "none") (lib.mkMerge
   [
     {
       networking =
@@ -64,7 +63,7 @@ with lib;
       services.unbound.enable = config.benaryorg.net.resolver == "unbound";
       networking.useHostResolvConf = false;
     }
-    (mkIf (config.benaryorg.net.resolver == "resolved")
+    (lib.mkIf (config.benaryorg.net.resolver == "resolved")
     {
       # https://github.com/NixOS/nixpkgs/issues/114114
       services.resolved.extraConfig =
@@ -72,7 +71,7 @@ with lib;
         FallbackDNS=
       '';
     })
-    (mkIf (config.benaryorg.net.resolver == "unbound")
+    (lib.mkIf (config.benaryorg.net.resolver == "unbound")
     {
       services =
       {
@@ -84,7 +83,7 @@ with lib;
       };
       benaryorg.prometheus.client.exporters.unbound.enable = true;
     })
-    (mkIf (config.benaryorg.net.type == "container")
+    (lib.mkIf (config.benaryorg.net.type == "container")
     {
       systemd.services.systemd-networkd.serviceConfig.ExecStartPre = [ "-+${pkgs.systemd}/bin/udevadm trigger" ];
       systemd.network =
@@ -121,7 +120,7 @@ with lib;
         };
       };
     })
-    (mkIf (config.benaryorg.net.type == "host")
+    (lib.mkIf (config.benaryorg.net.type == "host")
     {
       systemd.network =
       {
@@ -134,17 +133,17 @@ with lib;
             name = config.benaryorg.net.host.primaryInterface;
             addresses =
             [
-              (mkIf (config.benaryorg.net.host.ipv4 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv4; }; })
-              (mkIf (config.benaryorg.net.host.ipv6 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv6; }; })
+              (lib.mkIf (config.benaryorg.net.host.ipv4 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv4; }; })
+              (lib.mkIf (config.benaryorg.net.host.ipv6 != null) { addressConfig = { Address = config.benaryorg.net.host.ipv6; }; })
             ];
             routes =
             [
-              (mkIf (config.benaryorg.net.host.ipv4 != null) { routeConfig =
+              (lib.mkIf (config.benaryorg.net.host.ipv4 != null) { routeConfig =
               {
                 Destination = "0.0.0.0/0";
                 Gateway = config.benaryorg.net.host.ipv4Gateway;
               }; })
-              (mkIf (config.benaryorg.net.host.ipv6 != null) { routeConfig =
+              (lib.mkIf (config.benaryorg.net.host.ipv6 != null) { routeConfig =
               {
                 Destination = "::/0";
                 Gateway = config.benaryorg.net.host.ipv6Gateway;

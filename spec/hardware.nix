@@ -1,22 +1,21 @@
 { nixpkgs, config, pkgs, lib, options, ... }:
-with lib;
 {
   options =
   {
     benaryorg.hardware =
     {
-      vendor = mkOption
+      vendor = lib.mkOption
       {
         default = "container";
         description = "Whether to enroll the default SSH user.";
-        type = types.enum [ "container" "ovh" "none" ];
+        type = lib.types.enum [ "container" "ovh" "none" ];
       };
       ovh =
       {
-        device = mkOption
+        device = lib.mkOption
         {
-          description = "List of devices and their UUIDs, each must be GPT and have four partitions: 1) bios boot, 2) /boot (mdadm), 3) lukskey (1 sector), 4) luksroot (btrfs).";
-          type = types.attrsOf (types.attrsOf types.str);
+          description = lib.mdDoc "List of devices and their UUIDs, each **must** be GPT and have four partitions: 1) bios boot, 2) `/boot` (mdadm), 3) lukskey (1 sector), 4) luksroot (btrfs).";
+          type = lib.types.attrsOf (lib.types.attrsOf lib.types.str);
           example =
           ''
             device =
@@ -39,43 +38,43 @@ with lib;
         };
         fs =
         {
-          boot = mkOption
+          boot = lib.mkOption
           {
-            description = "UUID of /boot (ext4).";
-            type = types.str;
+            description = lib.mdDoc "UUID of `/boot` (ext4).";
+            type = lib.types.str;
           };
-          root = mkOption
+          root = lib.mkOption
           {
             description = "UUID of rootfs (btrfs).";
-            type = types.str;
+            type = lib.types.str;
           };
         };
-        kernelModules = mkOption
+        kernelModules = lib.mkOption
         {
           default = [ "uhci_hcd" "ehci_pci" "ahci" "sd_mod" ];
           description = "List of kernel modules.";
-          type = types.listOf types.str;
+          type = lib.types.listOf lib.types.str;
         };
-        filesystems = mkOption
+        filesystems = lib.mkOption
         {
           default = [ "ext4" "btrfs" ];
           description = "List of filesystems.";
-          type = types.listOf types.str;
+          type = lib.types.listOf lib.types.str;
         };
-        btrfsScrub = mkOption
+        btrfsScrub = lib.mkOption
         {
           default = [ "/" ];
           description = "List of filesystems to scrub (empty will disable scrubbing).";
-          type = types.listOf types.str;
+          type = lib.types.listOf lib.types.str;
         };
       };
     };
   };
 
-  config = mkMerge
+  config = lib.mkMerge
     [
       {
-        benaryorg.deployment.tags = mkAfter [ config.benaryorg.hardware.vendor ];
+        benaryorg.deployment.tags = lib.mkAfter [ config.benaryorg.hardware.vendor ];
       }
       (
         let
@@ -89,7 +88,7 @@ with lib;
             services.udev.extraRules = udevRules;
           }
       )
-      (mkIf (config.benaryorg.hardware.vendor == "container")
+      (lib.mkIf (config.benaryorg.hardware.vendor == "container")
       {
         systemd.oomd.enable = false;
         # remainder of the container configuration is stolen from
@@ -114,13 +113,13 @@ with lib;
           ProtectControlGroups=no
           ProtectKernelTunables=no
         '';
-        system.activationScripts.installInitScript = mkForce
+        system.activationScripts.installInitScript = lib.mkForce
         ''
           ln -fs $systemConfig/init /sbin/init
         '';
         boot.specialFileSystems."/run".options = [ "rshared" ];
       })
-      (mkIf (config.benaryorg.hardware.vendor != "container")
+      (lib.mkIf (config.benaryorg.hardware.vendor != "container")
       {
         boot.kernel.sysctl =
         {
@@ -134,16 +133,16 @@ with lib;
         };
         benaryorg.prometheus.client.exporters.smartctl.enable = true;
       })
-      (mkIf (config.benaryorg.hardware.vendor == "ovh")
+      (lib.mkIf (config.benaryorg.hardware.vendor == "ovh")
       {
         boot.kernelParams = [ "console=ttyS0,115200" ];
         boot.loader.grub =
         {
           enable = true;
-          devices = pipe config.benaryorg.hardware.ovh.device [ attrNames (map (name: "/dev/${name}")) ];
+          devices = lib.pipe config.benaryorg.hardware.ovh.device [ builtins.attrNames (builtins.map (name: "/dev/${name}")) ];
           splashImage = null;
         };
-        swapDevices = mkDefault [];
+        swapDevices = lib.mkDefault [];
         boot.initrd.availableKernelModules = config.benaryorg.hardware.ovh.kernelModules;
         boot.initrd.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
         boot.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
@@ -173,7 +172,7 @@ with lib;
                 keyFile = "/dev/disk/by-partuuid/${data.keyuuid}";
               };
             };
-            luksDevices = (flip pipe) [ (mapAttrsToList device) (foldl (a: b: a // b) {}) ];
+            luksDevices = (lib.flip lib.pipe) [ (lib.mapAttrsToList device) (builtins.foldl' (a: b: a // b) {}) ];
           in
             luksDevices config.benaryorg.hardware.ovh.device;
 
