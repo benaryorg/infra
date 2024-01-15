@@ -74,7 +74,7 @@
             deployment =
             {
               targetHost = name;
-              targetUser = "benaryorg";
+              targetUser = config.benaryorg.user.name;
               privilegeEscalationCommand = [ "sudo" "-H" "TMPDIR=/nix/tmp" "--" ];
               tags = config.benaryorg.deployment.tags;
               buildOnTarget = true;
