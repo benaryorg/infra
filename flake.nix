@@ -1322,6 +1322,7 @@
             ./spec/prometheus.nix
             ./spec/lxd.nix
             ./spec/build.nix
+            ./spec/acme.nix
           ];
 
           config =
