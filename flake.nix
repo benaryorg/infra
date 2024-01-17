@@ -998,7 +998,6 @@
           age.secrets.buildSecret.file = ./secret/build/nixos-builder.shell.bsocat.net.age;
 
           benaryorg.prometheus.client.enable = true;
-
           benaryorg.build =
           {
             role = "server";
@@ -1007,21 +1006,52 @@
             privateKeyFile = config.age.secrets.buildSecret.path;
           };
 
+          services.nginx.virtualHosts.${config.networking.fqdn}.locations."~ ^/hydra([^\\r\\n]*)$".return = "302 \"https://hydra.shell.bsocat.net$1\"";
           nix.settings.allowed-uris = [ "https://git.shell.bsocat.net/" ];
+          systemd.slices.build =
+          {
+            enable = true;
+            description = "Slice for all services doing build jobs or similar.";
+            sliceConfig.MemoryHigh = "24G";
+            sliceConfig.MemoryMax = "25G";
+          };
+          systemd.services =
+          {
+            nix-daemon = { serviceConfig.Slice = "build.slice"; };
+          };
+
+          system.stateVersion = "23.11";
+        };
+
+        "hydra.shell.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+        {
+          benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcgG0ngQ0kAARuIIuh6V43uObAnFBZsGCgxFs/OvW62";
+
+          benaryorg.prometheus.client.enable = true;
+          benaryorg.build.tags = [ "shell.bsocat.net" "aarch64" ];
+
+          nix.settings.allowed-uris = [ "https://git.shell.bsocat.net/" ];
+          services.nginx =
+          {
+            enable = true;
+            recommendedProxySettings = true;
+            recommendedTlsSettings = true;
+            virtualHosts =
+            {
+              ${config.networking.fqdn} =
+              {
+                forceSSL = true;
+                enableACME = true;
+                locations."/".proxyPass = "http://127.0.0.1:3000/";
+              };
+            };
+          };
           services.hydra =
           {
             enable = true;
-            hydraURL = "https://${config.networking.fqdn}/hydra";
+            hydraURL = "https://${config.networking.fqdn}/";
             useSubstitutes = true;
             notificationSender = "hydra@benary.org";
-          };
-          services.nginx.virtualHosts.${config.networking.fqdn}.locations."/hydra" =
-          {
-            proxyPass = "http://127.0.0.1:3000/";
-            extraConfig =
-            ''
-              proxy_set_header x-request-base /hydra;
-            '';
           };
           systemd.slices.build =
           {
