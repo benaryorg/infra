@@ -78,7 +78,7 @@
           {
             enable = true;
             write = true;
-            protocol = "ssh-ng";
+            protocol = "ssh";
             keys = lib.pipe nodes
             [
               # get all the node configs
@@ -150,7 +150,7 @@
                 (builtins.map (node:
                 {
                   hostName = node.config.networking.fqdn;
-                  protocol = "ssh-ng";
+                  protocol = "ssh";
                   sshKey = "/etc/ssh/ssh_host_ed25519_key";
                   sshUser = "nix-ssh";
                   supportedFeatures = node.config.benaryorg.build.features;
