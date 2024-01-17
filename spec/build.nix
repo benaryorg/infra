@@ -155,8 +155,6 @@
                   sshUser = "nix-ssh";
                   supportedFeatures = node.config.benaryorg.build.features;
                   system = node.config.benaryorg.build.system;
-                  # maybe find a better way for this?
-                  maxJobs = 42;
                 }))
               ]);
             })
