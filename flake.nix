@@ -1228,6 +1228,7 @@
         kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
         iso = colmenaHive.nodes."iso.example.com".config.system.build.isoImage;
         lxc = colmenaHive.nodes."lxc.example.com".config.system.build.tarball;
+        lxc-metadata = colmenaHive.nodes."lxc.example.com".config.system.build.metadata;
       };
       addHydraMeta = name: { meta ? {}, ... }@value: value //
       {
