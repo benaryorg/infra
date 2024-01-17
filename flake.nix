@@ -1052,6 +1052,27 @@
             hydraURL = "https://${config.networking.fqdn}/";
             useSubstitutes = true;
             notificationSender = "hydra@benary.org";
+            buildMachinesFiles = lib.pipe config.nix.buildMachines
+            [
+              (builtins.map (machine: builtins.concatStringsSep " "
+                [
+                  "${machine.protocol}://${machine.sshUser}@${machine.hostName}"
+                  "${machine.system}"
+                  # overwrite the ssh key
+                  # hydra uses its key manually, not via nix, so it doesn't have root permissions for this
+                  "/run/credentials/hydra-queue-runner.service/ssh_hydra_ed25519_key"
+                  # number of build jobs, defaults to 1 otherwise
+                  "42"
+                  "1"
+                  (builtins.concatStringsSep "," machine.supportedFeatures)
+                  "-"
+                  "-"
+                ]
+              ))
+              (builtins.concatStringsSep "\n")
+              (pkgs.writers.writeText "hydra-machines")
+              lib.singleton
+            ];
           };
           systemd.slices.build =
           {
@@ -1064,7 +1085,11 @@
           {
             nix-daemon = { serviceConfig.Slice = "build.slice"; };
             hydra-evaluator = { serviceConfig.Slice = "build.slice"; };
-            hydra-queue-runner = { serviceConfig.Slice = "build.slice"; };
+            hydra-queue-runner =
+            {
+              serviceConfig.Slice = "build.slice";
+              serviceConfig.LoadCredential = [ "ssh_hydra_ed25519_key:/etc/ssh/ssh_host_ed25519_key" ];
+            };
           };
 
           system.stateVersion = "23.11";
