@@ -153,7 +153,7 @@
 
         "nixos.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
         {
-          benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHuaQCsI854sA1EZ0+iI/J0XoLhNcE+OeqsCDEnHKUM";
+          benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOngRNLmPolBgNpBPfnCXyVncNaSiErRWF+/lmAhX9u9";
 
           age.secrets.buildSecret.file = ./secret/build/nixos.home.bsocat.net.age;
           benaryorg.net.type = "manual";
