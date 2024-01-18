@@ -44,10 +44,6 @@
 
   outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
     let
-      pkgs = import nixpkgs
-      {
-        system = "x86_64-linux";
-      };
       userkeys =
       {
         "benaryorg@gnutoo.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsXZcbbZzIjxvguXzAOM/eds9CZl5cqWJBL+ScgHliC";
@@ -59,7 +55,7 @@
       {
         meta =
         {
-          nixpkgs = pkgs;
+          nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
           allowApplyAll = false;
         };
 
@@ -1331,7 +1327,7 @@
           config =
           {
             nixpkgs.overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
-            benaryorg.user.ssh.keys = pkgs.lib.mkOrder 1000 [ userkeys."benaryorg@shell.cloud.bsocat.net" ];
+            benaryorg.user.ssh.keys = nixpkgs.lib.mkOrder 1000 [ userkeys."benaryorg@shell.cloud.bsocat.net" ];
           };
         };
         default = benaryorg;
