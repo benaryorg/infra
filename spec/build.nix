@@ -52,7 +52,8 @@
       system = lib.mkOption
       {
         type = lib.types.str;
-        default = "x86_64-linux";
+        default = config.nixpkgs.system;
+        defaultText = lib.literalExpression "config.nixpkgs.system";
         description = "Only required for servers, denotes the supported arch.";
       };
       doc = lib.mkOption
