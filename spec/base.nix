@@ -160,6 +160,7 @@
     documentation.nixos.enable = !config.benaryorg.base.lightweight;
     # this builds documentation for the custom modules
     documentation.nixos.includeAllModules = !config.benaryorg.base.lightweight;
+    documentation.nixos.extraModuleSources = lib.optional (!config.benaryorg.base.lightweight) ../.;
 
     users.users.root =
     {
