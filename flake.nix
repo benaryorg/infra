@@ -1130,13 +1130,13 @@
           };
         };
 
-        "kexec.example.com" = { name, nodes, pkgs, lib, config, ... }:
+        "kexec.example.com" = { name, nodes, pkgs, lib, config, modulesPath, ... }:
         {
           benaryorg.deployment.fake = true;
 
           imports =
           [
-            (nixpkgs + "/nixos/modules/installer/netboot/netboot.nix")
+            (modulesPath + "/installer/netboot/netboot.nix")
           ];
 
           benaryorg.base.lightweight = true;
@@ -1176,13 +1176,13 @@
           };
         };
   
-        "iso.example.com" = { name, nodes, pkgs, lib, config, ... }:
+        "iso.example.com" = { name, nodes, pkgs, lib, config, modulesPath, ... }:
         {
           benaryorg.deployment.fake = true;
 
           imports =
           [
-            (nixpkgs + "/nixos/modules/installer/cd-dvd/iso-image.nix")
+            (modulesPath + "/installer/cd-dvd/iso-image.nix")
           ];
 
           benaryorg.base.lightweight = true;
@@ -1229,13 +1229,13 @@
           };
         };
 
-        "lxc.example.com" = { name, nodes, pkgs, lib, config, ... }:
+        "lxc.example.com" = { name, nodes, pkgs, lib, config, modulesPath, ... }:
         {
           benaryorg.deployment.fake = true;
 
           imports =
           [
-            (nixpkgs + "/nixos/modules/virtualisation/lxc-container.nix")
+            (modulesPath + "/virtualisation/lxc-container.nix")
           ];
 
           benaryorg.build.role = "client-light";
