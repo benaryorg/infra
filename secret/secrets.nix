@@ -2,8 +2,7 @@ let
   flake = builtins.getFlake (builtins.toPath ./..);
   nodes = flake.outputs.nixosConfigurations;
   lib = flake.inputs.nixpkgs.lib;
-  conf = import ../conf { inherit lib; };
-  addJumphostUser = list: list ++ [ conf.sshkey."benaryorg@shell.cloud.bsocat.net" ];
+  addJumphostUser = list: list ++ [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrKgj+479k+nZjVKAeVnh0clxh6MUuEmY0BTtaNMDi5" ];
 in
   lib.pipe nodes
   [
@@ -33,6 +32,7 @@ in
         (builtins.map (builtins.getAttr "key"))
         addJumphostUser
         lib.unique
+        (keys: { publicKeys = keys; })
       ]
     ))
   ]
