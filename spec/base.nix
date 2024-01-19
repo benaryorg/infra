@@ -120,7 +120,7 @@
     [
       [
         # automation tooling
-        colmena ragenix nix-diff
+        nix-diff
         # network tooling
         dhcpcd dnsmasq iperf
         # system tooling
@@ -146,7 +146,7 @@
       (lib.optionals (!config.benaryorg.base.lightweight)
       [
         # automation tooling
-        puppet-bolt
+        colmena ragenix puppet-bolt
         # system tooling
         criu podman qemu
         # debugging
