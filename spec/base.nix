@@ -157,10 +157,14 @@
     ];
 
     documentation.dev.enable = true;
-    documentation.nixos.enable = !config.benaryorg.base.lightweight;
-    # this builds documentation for the custom modules
-    documentation.nixos.includeAllModules = !config.benaryorg.base.lightweight;
-    documentation.nixos.extraModuleSources = lib.optional (!config.benaryorg.base.lightweight) ../.;
+    # general nixos documentation (including the configuration.nix man page)
+    documentation.nixos.enable = true;
+    # no HTML (or other /usr/share) docs on lightweight machines
+    documentation.doc.enable = !config.benaryorg.base.lightweight;
+    # documentation for the custom modules
+    documentation.nixos.includeAllModules = true;
+    # strip the source path prefix (avoids rebuilds on every new revision)
+    documentation.nixos.extraModuleSources = [ ../. ];
 
     users.users.root =
     {
