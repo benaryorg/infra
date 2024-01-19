@@ -122,7 +122,7 @@
         # automation tooling
         nix-diff
         # network tooling
-        dhcpcd dnsmasq iperf
+        bird dhcpcd dnsmasq iperf
         # system tooling
         btrbk efibootmgr psutils pstree uucp
         (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_SH_STANDALONE y"; })
