@@ -130,6 +130,7 @@
                 ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git repack -d
               fi
               printf "mirror of %s" ${config.url} > /var/lib/gitolite/repositories/public/${config.name}.git/description
+              touch /var/lib/gitolite/repositories/public/${config.name}.git/git-daemon-export-ok
             '';
           };
         }))
