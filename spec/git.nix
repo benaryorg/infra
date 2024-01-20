@@ -119,6 +119,7 @@
             };
             script =
             ''
+              set -e
               if
                 ! test -e /var/lib/gitolite/repositories/public/${config.name}.git
               then
@@ -128,6 +129,7 @@
                 ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git remote update --prune
                 ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git repack -d
               fi
+              printf "mirror of %s" ${config.url} > /var/lib/gitolite/repositories/public/${config.name}.git/description
             '';
           };
         }))
