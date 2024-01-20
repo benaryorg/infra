@@ -70,7 +70,7 @@
             deployment =
             {
               targetHost = name;
-              targetUser = config.benaryorg.user.name;
+              targetUser = config.benaryorg.user.ssh.name;
               privilegeEscalationCommand = [ "sudo" "-H" "TMPDIR=/nix/tmp" "--" ];
               tags = config.benaryorg.deployment.tags;
               buildOnTarget = true;
