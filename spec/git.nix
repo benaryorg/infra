@@ -15,7 +15,7 @@
         description = "List of repositories to mirror.";
         default = {};
         example = { nixpkgs = { url = "https://github.com/NixOS/nixpkgs.git"; }; };
-        type = lib.types.attrsOf (lib.types.submodule ({ name, config, ...}:
+        type = lib.types.attrsOf (lib.types.submodule ({ name, ...}:
         {
           options =
           {
@@ -35,6 +35,13 @@
             {
               description = "URl of the repository for initial clone.";
               type = lib.types.str;
+            };
+            owner = lib.mkOption
+            {
+              description = "Owning gitolite user of the mirrored repository.";
+              type = lib.types.str;
+              default = config.benaryorg.user.ssh.name;
+              defaultText = lib.literalExpression "config.benaryorg.user.ssh.name";
             };
           };
         }));
@@ -131,6 +138,7 @@
               fi
               printf "mirror of %s" ${config.url} > /var/lib/gitolite/repositories/public/${config.name}.git/description
               touch /var/lib/gitolite/repositories/public/${config.name}.git/git-daemon-export-ok
+              printf "%s" ${config.owner} > /var/lib/gitolite/repositories/public/${config.name}.git/gl-creator
             '';
           };
         }))
