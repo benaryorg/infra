@@ -49,12 +49,12 @@
         default = [ "big-parallel" ];
         description = "Only required for servers, denotes the supported features.";
       };
-      system = lib.mkOption
+      systems = lib.mkOption
       {
-        type = lib.types.str;
-        default = config.nixpkgs.system;
-        defaultText = lib.literalExpression "config.nixpkgs.system";
-        description = "Only required for servers, denotes the supported arch.";
+        type = lib.types.listOf lib.types.str;
+        default = [ config.nixpkgs.system ];
+        defaultText = lib.literalExpression "[ config.nixpkgs.system ]";
+        description = "Only required for servers, denotes the supported arches.";
       };
       doc = lib.mkOption
       {
@@ -155,7 +155,7 @@
                   sshKey = "/etc/ssh/ssh_host_ed25519_key";
                   sshUser = "nix-ssh";
                   supportedFeatures = node.config.benaryorg.build.features;
-                  system = node.config.benaryorg.build.system;
+                  systems = node.config.benaryorg.build.systems;
                 }))
               ]);
             })

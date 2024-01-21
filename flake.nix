@@ -1054,7 +1054,7 @@
               (builtins.map (machine: builtins.concatStringsSep " "
                 [
                   "${machine.protocol}://${machine.sshUser}@${machine.hostName}"
-                  "${machine.system}"
+                  (builtins.concatStringsSep "," machine.systems)
                   # overwrite the ssh key
                   # hydra uses its key manually, not via nix, so it doesn't have root permissions for this
                   "/run/credentials/hydra-queue-runner.service/ssh_hydra_ed25519_key"
