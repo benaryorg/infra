@@ -1123,7 +1123,7 @@
 
         "dart.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
         {
-          benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcgG0ngQ0kAARuIIuh6V43uObAnFBZsGCgxFs/OvW62";
+          benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOwEKWHIPHTxmG2IbB/D0S6AJejI3FfQvZJqOSmnKGi";
 
           nixpkgs.system = "aarch64-linux";
 
