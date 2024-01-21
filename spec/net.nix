@@ -65,6 +65,8 @@
     }
     (lib.mkIf (config.benaryorg.net.resolver == "resolved")
     {
+      # https://github.com/NixOS/nixpkgs/issues/231191
+      environment.etc."resolv.conf".mode = "direct-symlink";
       # https://github.com/NixOS/nixpkgs/issues/114114
       services.resolved.extraConfig =
       ''
