@@ -50,6 +50,7 @@
         "benaryorg@mir.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKubEmPiQTJCpFuXhubW3SDlxoBXK+sFhcHsUH6kz32p";
         "benaryorg@shell.cloud.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrKgj+479k+nZjVKAeVnh0clxh6MUuEmY0BTtaNMDi5";
         "defaultuser@go.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOwmYJYilHh3ICizwCrBHh8tUGhodC8dv73IUTJp8jP2";
+        "benaryorg@dart.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPp1WESxGNUYOwx3J9W+s0Z7ZqwKx3Jp825tKxE3I8EG";
       };
       colmenaConfig =
       {
@@ -1118,6 +1119,17 @@
           };
 
           system.stateVersion = "23.11";
+        };
+
+        "dart.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+        {
+          benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcgG0ngQ0kAARuIIuh6V43uObAnFBZsGCgxFs/OvW62";
+
+          nixpkgs.system = "aarch64-linux";
+
+          benaryorg.deployment.fake = true;
+          benaryorg.build.tags = [ "aarch64-linux" ];
+          benaryorg.build.role = "client";
         };
 
         "mir.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
