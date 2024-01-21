@@ -129,7 +129,6 @@
           "fs.protected_hardlinks" = 1;
           "net.core.rmem_max" = 4194304;
           "net.core.wmem_max" = 1048576;
-          "vm.swappiness" = 90;
         };
         benaryorg.prometheus.client.exporters.smartctl.enable = true;
       })

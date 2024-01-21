@@ -23,6 +23,12 @@
         description = "Enabling this will remove some larger packages.";
         type = lib.types.bool;
       };
+      zram-swap-sysctl = lib.mkOption
+      {
+        default = true;
+        description = "Optimize sysctls for zram swap.";
+        type = lib.types.bool;
+      };
     };
   };
 
@@ -170,6 +176,15 @@
     {
       subUidRanges = [ { startUid = 2000000; count = 1000000; } ];
       subGidRanges = [ { startGid = 2000000; count = 1000000; } ];
+    };
+
+    # zram swap optization (there is no other swap on my systems)
+    boot.kernel.sysctl = lib.mkIf config.benaryorg.base.zram-swap-sysctl
+    {
+      "vm.swappiness" = 180;
+      "vm.watermark_boost_factor" = 0;
+      "vm.watermark_scale_factor" = 125;
+      "vm.page-cluster" = 0;
     };
   };
 }
