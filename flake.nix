@@ -341,12 +341,6 @@
             };
           };
 
-          boot.swraid =
-          {
-            enable = true;
-            mdadmConf = "MAILADDR root@benary.org";
-          };
-
           system.stateVersion = "23.11";
         };
 

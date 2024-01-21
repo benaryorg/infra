@@ -147,6 +147,12 @@
         boot.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
         hardware.cpu.intel.updateMicrocode = true;
 
+        boot.swraid =
+        {
+          enable = true;
+          mdadmConf = "MAILADDR root@benary.org";
+        };
+
         services =
         {
           openntpd.enable = true;
