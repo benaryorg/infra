@@ -40,10 +40,13 @@
       flake = "/etc/nixos";
       flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" "--recreate-lock-file" ];
     };
-    systemd.timers.nixos-upgrade.timerConfig = lib.mkIf config.benaryorg.flake.autoupgrade
+    systemd.timers.nixos-upgrade = lib.mkIf config.benaryorg.flake.autoupgrade
     {
-      OnBootSec = "1h";
-      RandomizedDelaySec = lib.mkForce "24h";
+      timerConfig =
+      {
+        OnBootSec = "1h";
+        RandomizedDelaySec = lib.mkForce "24h";
+      };
     };
     systemd.services.nixos-upgrade = lib.mkIf config.benaryorg.flake.autoupgrade
     {
