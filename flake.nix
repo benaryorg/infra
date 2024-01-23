@@ -44,14 +44,6 @@
 
   outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
     let
-      userkeys =
-      {
-        "benaryorg@gnutoo.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsXZcbbZzIjxvguXzAOM/eds9CZl5cqWJBL+ScgHliC";
-        "benaryorg@mir.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKubEmPiQTJCpFuXhubW3SDlxoBXK+sFhcHsUH6kz32p";
-        "benaryorg@shell.cloud.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrKgj+479k+nZjVKAeVnh0clxh6MUuEmY0BTtaNMDi5";
-        "defaultuser@go.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOwmYJYilHh3ICizwCrBHh8tUGhodC8dv73IUTJp8jP2";
-        "benaryorg@dart.home.bsocat.net" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPp1WESxGNUYOwx3J9W+s0Z7ZqwKx3Jp825tKxE3I8EG";
-      };
       colmenaConfig =
       {
         meta =
@@ -84,6 +76,7 @@
         "shell.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
         {
           benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILhgl6pXnjK5ZxzFduRmZkSbx5bsF8Tito0M2n8A+2HZ";
+          benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrKgj+479k+nZjVKAeVnh0clxh6MUuEmY0BTtaNMDi5";
 
           deployment.allowLocalDeployment = true;
           benaryorg.flake.autoupgrade = false;
@@ -96,7 +89,13 @@
 
           benaryorg.hardware.vendor = "ovh";
           benaryorg.ssh.x11 = true;
-          benaryorg.user.ssh.keys = pkgs.lib.attrValues userkeys;
+          benaryorg.user.ssh.keys = lib.pipe nodes
+          [
+            builtins.attrValues
+            (builtins.map (node: node.config.benaryorg.ssh.userkey))
+            (builtins.map builtins.attrValues)
+            lib.flatten
+          ];
           benaryorg.lxd.enable = true;
           benaryorg.lxd.cluster = "shell.bsocat.net";
           benaryorg.lxd.allowedUsers = [];
@@ -155,7 +154,7 @@
           age.secrets.buildSecret.file = ./secret/build/nixos.home.bsocat.net.age;
           benaryorg.net.type = "manual";
           benaryorg.ssh.x11 = true;
-          benaryorg.user.ssh.keys = lib.mkAfter [ userkeys."benaryorg@gnutoo.home.bsocat.net" ];
+          benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
           benaryorg.prometheus.client.enable = true;
 
           benaryorg.build =
@@ -180,7 +179,7 @@
           age.secrets.buildSecret.file = ./secret/build/nixos-aarch64.home.bsocat.net.age;
           benaryorg.net.type = "manual";
           benaryorg.ssh.x11 = true;
-          benaryorg.user.ssh.keys = lib.mkAfter [ userkeys."benaryorg@gnutoo.home.bsocat.net" ];
+          benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
           benaryorg.prometheus.client.enable = true;
 
           benaryorg.build =
@@ -206,7 +205,7 @@
 
           age.secrets.homes3LegoSecret.file = ./secret/lego/hedns/home-s3.xn--idk5byd.net.acme.bsocat.net.age;
           benaryorg.net.type = "manual";
-          benaryorg.user.ssh.keys = [ userkeys."benaryorg@gnutoo.home.bsocat.net" ];
+          benaryorg.user.ssh.keys = [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
           benaryorg.prometheus.client.enable = true;
 
           services =
@@ -530,7 +529,7 @@
         {
           benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqIBwvc1Pf6GbuVs8fo1UFGJLomb47VJO01ZzFv+BSK";
 
-          benaryorg.user.ssh.keys = [ userkeys."benaryorg@gnutoo.home.bsocat.net" ];
+          benaryorg.user.ssh.keys = [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
           benaryorg.ssh.x11 = true;
           hardware.opengl.enable = true;
           benaryorg.prometheus.client.enable = true;
@@ -986,7 +985,7 @@
 
           benaryorg.prometheus.client.enable = true;
 
-          benaryorg.git.adminkey = userkeys."benaryorg@gnutoo.home.bsocat.net";
+          benaryorg.git.adminkey = nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg;
           benaryorg.git.enable = true;
           benaryorg.git.mirror =
           {
@@ -1118,6 +1117,7 @@
         "dart.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
         {
           benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOwEKWHIPHTxmG2IbB/D0S6AJejI3FfQvZJqOSmnKGi";
+          benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPp1WESxGNUYOwx3J9W+s0Z7ZqwKx3Jp825tKxE3I8EG";
 
           nixpkgs.system = "aarch64-linux";
 
@@ -1129,6 +1129,8 @@
         "mir.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
         {
           benaryorg.deployment.fake = true;
+
+          benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKubEmPiQTJCpFuXhubW3SDlxoBXK+sFhcHsUH6kz32p";
 
           benaryorg.build.role = "none";
           benaryorg.prometheus.client.enable = true;
@@ -1144,10 +1146,21 @@
         {
           benaryorg.deployment.fake = true;
 
+          benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsXZcbbZzIjxvguXzAOM/eds9CZl5cqWJBL+ScgHliC";
+
           benaryorg.build.role = "none";
           benaryorg.prometheus.client.enable = true;
           benaryorg.prometheus.client.exporters.smokeping.enable = false;
           benaryorg.prometheus.client.exporters.systemd.enable = false;
+        };
+
+        "go.home.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
+        {
+          benaryorg.deployment.fake = true;
+
+          benaryorg.ssh.userkey.defaultuser = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOwmYJYilHh3ICizwCrBHh8tUGhodC8dv73IUTJp8jP2";
+
+          benaryorg.build.role = "none";
         };
 
         "bgp.cloud.bsocat.net" = { name, nodes, pkgs, lib, config, ... }:
@@ -1180,8 +1193,8 @@
           benaryorg.flake.enable = false;
           benaryorg.build.role = "client-light";
           benaryorg.build.tags = [ "cloud.bsocat.net" ];
-          benaryorg.user.ssh.keys = lib.mkAfter [ userkeys."benaryorg@gnutoo.home.bsocat.net" ];
-          users.users.root.openssh.authorizedKeys.keys = [ userkeys."benaryorg@shell.cloud.bsocat.net" userkeys."benaryorg@gnutoo.home.bsocat.net" ];
+          benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
+          users.users.root.openssh.authorizedKeys.keys = [ nodes."shell.cloud.bsocat.net".config.benaryorg.ssh.userkey.benaryorg nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
           systemd.services."serial-getty@ttyS0" =
           {
             enable = true;
@@ -1226,8 +1239,8 @@
           benaryorg.flake.enable = false;
           benaryorg.build.role = "client-light";
           benaryorg.build.tags = [ "cloud.bsocat.net" ];
-          benaryorg.user.ssh.keys = lib.mkAfter [ userkeys."benaryorg@gnutoo.home.bsocat.net" ];
-          users.users.root.openssh.authorizedKeys.keys = [ userkeys."benaryorg@shell.cloud.bsocat.net" userkeys."benaryorg@gnutoo.home.bsocat.net" ];
+          benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
+          users.users.root.openssh.authorizedKeys.keys = [ nodes."shell.cloud.bsocat.net".config.benaryorg.ssh.userkey.benaryorg nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
           isoImage =
           {
             isoBaseName = "katze";
@@ -1362,7 +1375,7 @@
           config =
           {
             nixpkgs.overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
-            benaryorg.user.ssh.keys = nixpkgs.lib.mkOrder 1000 [ userkeys."benaryorg@shell.cloud.bsocat.net" ];
+            benaryorg.user.ssh.keys = nixpkgs.lib.mkOrder 1000 [ nixosConfig.shell.config.benaryorg.ssh.userkey.benaryorg ];
           };
         };
         default = benaryorg;

@@ -22,6 +22,18 @@
         type = lib.types.nullOr lib.types.str;
         default = null;
       };
+      userkey = lib.mkOption
+      {
+        description = lib.mdDoc
+        ''
+          List user SSH keys.
+          This is used to deploy these SSH keys to other nodes by accessing {option}`nodes.<node>.benaryorg.ssh.userkey.<name>`.
+          Keys listed here should be those that reside in {file}`/home/<user>/.ssh/*`.
+        '';
+        default = {};
+        example = { benaryorg = "ssh-ed25519 foobar"; };
+        type = lib.types.attrsOf lib.types.str;
+      };
     };
   };
 
