@@ -42,7 +42,7 @@
     lxddns.inputs.systems.follows = "nix-systems";
   };
 
-  outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
+  outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       colmenaStaticConfig =
@@ -163,6 +163,7 @@
             ragenix.nixosModules.default
             benaryorg-website.nixosModules.default
             lxddns.nixosModules.default
+            home-manager.nixosModules.default
             ./spec/base.nix
             ./spec/deployment.nix
             ./spec/user.nix
