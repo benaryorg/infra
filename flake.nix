@@ -44,7 +44,8 @@
 
   outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, ... }:
     let
-      colmenaConfig =
+      lib = nixpkgs.lib;
+      colmenaStaticConfig =
       {
         meta =
         {
@@ -73,37 +74,33 @@
           };
         };
 
-        "shell.cloud.bsocat.net" = import ./config/host/shell.cloud.bsocat.net.nix;
-        "nixos.home.bsocat.net" = import ./config/host/nixos.home.bsocat.net.nix;
-        "nixos-aarch64.home.bsocat.net" = import ./config/host/nixos-aarch64.home.bsocat.net.nix;
-        "radosgw1.home.bsocat.net" = import ./config/host/radosgw1.home.bsocat.net.nix;
-        "lxd1.cloud.bsocat.net" = import ./config/host/lxd1.cloud.bsocat.net.nix;
-        "lxd2.cloud.bsocat.net" = import ./config/host/lxd2.cloud.bsocat.net.nix;
-        "lxd3.cloud.bsocat.net" = import ./config/host/lxd3.cloud.bsocat.net.nix;
-        "lxd4.cloud.bsocat.net" = import ./config/host/lxd4.cloud.bsocat.net.nix;
-        "lxd5.cloud.bsocat.net" = import ./config/host/lxd5.cloud.bsocat.net.nix;
-        "lxd6.cloud.bsocat.net" = import ./config/host/lxd6.cloud.bsocat.net.nix;
-        "steam.lxd.bsocat.net" = import ./config/host/steam.lxd.bsocat.net.nix;
-        "syncplay.lxd.bsocat.net" = import ./config/host/syncplay.lxd.bsocat.net.nix;
-        "prometheus.lxd.bsocat.net" = import ./config/host/prometheus.lxd.bsocat.net.nix;
-        "xmpp.lxd.bsocat.net" = import ./config/host/xmpp.lxd.bsocat.net.nix;
-        "turn.lxd.bsocat.net" = import ./config/host/turn.lxd.bsocat.net.nix;
-        "gaycast.lxd.bsocat.net" = import ./config/host/gaycast.lxd.bsocat.net.nix;
-        "benaryorg1.lxd.bsocat.net" = import ./config/template/website-container.nix;
-        "benaryorg2.lxd.bsocat.net" = import ./config/template/website-container.nix;
-        "benaryorg3.lxd.bsocat.net" = import ./config/template/website-container.nix;
-        "git.shell.bsocat.net" = import ./config/host/git.shell.bsocat.net.nix;
-        "nixos-builder.shell.bsocat.net" = import ./config/host/nixos-builder.shell.bsocat..nix;
-        "hydra.shell.bsocat.net" = import ./config/host/hydra.shell.bsocat.net.nix;
-        "dart.home.bsocat.net" = import ./config/host/dart.home.bsocat.net.nix;
-        "mir.home.bsocat.net" = import ./config/host/mir.home.bsocat.net.nix;
-        "gnutoo.home.bsocat.net" = import ./config/host/gnutoo.home.bsocat.net.nix;
-        "go.home.bsocat.net" = import ./config/host/go.home.bsocat.net.nix;
-        "bgp.cloud.bsocat.net" = import ./config/host/bgp.cloud.bsocat.net.nix;
-        "kexec.example.com" = import ./config/host/kexec.example.com.nix;
-        "iso.example.com" = import ./config/host/iso.example.com.nix;
-        "lxc.example.com" = import ./config/host/lxc.example.com.nix;
+        "benaryorg1.lxd.bsocat.net" = import ./config/template/website-container;
+        "benaryorg2.lxd.bsocat.net" = import ./config/template/website-container;
+        "benaryorg3.lxd.bsocat.net" = import ./config/template/website-container;
       };
+      # generate config from subdirectories
+      colmenaDynamicConfig = lib.pipe (builtins.readDir ./config/host)
+      [
+        lib.attrsToList
+        # only accept files and directories
+        (builtins.filter ({ value, ... }: value == "directory" || value == "regular"))
+        # remove hidden files/dirs
+        (builtins.filter ({ name, ... }: !(lib.hasPrefix "." name)))
+        # remove non-nix files
+        (builtins.filter ({ name, value }: value == "directory" || lib.hasSuffix ".nix" name))
+        # map to appropriate import
+        (builtins.map ({ name, value }:
+          builtins.getAttr value
+          {
+            directory = { name = name; value = import ((builtins.toPath ./config/host) + "/${name}"); };
+            regular = { name = lib.removeSuffix ".nix" name; value = import ((builtins.toPath ./config/host) + "/${name}"); };
+          }
+        ))
+        # back to attrs
+        lib.listToAttrs
+      ];
+      # merge the dynamic with the static config
+      colmenaConfig = colmenaDynamicConfig // colmenaStaticConfig;
       # build the hive
       colmenaHive = colmena.lib.makeHive colmenaConfig;
       # remove fake hosts
@@ -185,7 +182,7 @@
           config =
           {
             nixpkgs.overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
-            benaryorg.user.ssh.keys = nixpkgs.lib.mkOrder 1000 [ nixosConfig.shell.config.benaryorg.ssh.userkey.benaryorg ];
+            benaryorg.user.ssh.keys = lib.mkOrder 1000 [ nixosConfig.shell.config.benaryorg.ssh.userkey.benaryorg ];
           };
         };
         default = benaryorg;
