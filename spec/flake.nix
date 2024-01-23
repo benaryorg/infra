@@ -38,7 +38,7 @@
       enable = true;
       dates = "daily";
       flake = "/etc/nixos";
-      flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" "--commit-lock-file" "--recreate-lock-file" ];
+      flags = [ "--update-input" "benaryorg" "--update-input" "nixpkgs" "--refresh" ];
     };
     systemd.timers.nixos-upgrade = lib.mkIf config.benaryorg.flake.autoupgrade
     {
