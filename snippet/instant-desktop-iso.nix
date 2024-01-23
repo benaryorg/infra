@@ -11,7 +11,7 @@
       specialArgs =
       {
         name = "iso.home.bsocat.net";
-        nodes = benaryorg.nixosConfigurations;
+        nodes = builtins.listToAttrs (builtins.map (node: { name = node.config.networking.fqdn; value = node; }) (builtins.attrValues benaryorg.nixosConfigurations));
       };
       modules =
       [

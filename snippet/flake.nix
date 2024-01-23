@@ -16,7 +16,7 @@
         name = "foobar.example.com";
         # can be set to an empty attrSet instead, however you can reference upstream
         # this allows e.g. benaryorg.build to still work for substituters
-        nodes = benaryorg.nixosConfigurations;
+        nodes = builtins.listToAttrs (builtins.map (node: { name = node.config.networking.fqdn; value = node; }) (builtins.attrValues benaryorg.nixosConfigurations));;
       };
       modules =
       [
