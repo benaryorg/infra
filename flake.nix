@@ -32,7 +32,7 @@
     crane.url = "git+https://git.shell.bsocat.net/crane";
     crane.inputs.nixpkgs.follows = "nixpkgs";
     nix-systems.url = "git+https://git.shell.bsocat.net/nix-systems";
-    home-manager.url = "git+https://git.shell.bsocat.net/home-manager";
+    home-manager.url = "git+https://git.shell.bsocat.net/home-manager?ref=release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "git+https://git.shell.bsocat.net/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";

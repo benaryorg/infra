@@ -164,15 +164,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1706001011,
-        "narHash": "sha256-J7Bs9LHdZubgNHZ6+eE/7C18lZ1P6S5/zdJSdXFItI4=",
-        "ref": "refs/heads/master",
-        "rev": "3df2a80f3f85f91ea06e5e91071fa74ba92e5084",
-        "revCount": 3284,
+        "lastModified": 1705659542,
+        "narHash": "sha256-WA3xVfAk1AYmFdwghT7mt/erYpsU6JPu9mdTEP/e9HQ=",
+        "ref": "release-23.11",
+        "rev": "10cd9c53115061aa6a0a90aad0b0dde6a999cdb9",
+        "revCount": 3174,
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       },
       "original": {
+        "ref": "release-23.11",
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       }
