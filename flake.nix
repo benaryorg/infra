@@ -89,9 +89,9 @@
         "xmpp.lxd.bsocat.net" = import ./config/host/xmpp.lxd.bsocat.net.nix;
         "turn.lxd.bsocat.net" = import ./config/host/turn.lxd.bsocat.net.nix;
         "gaycast.lxd.bsocat.net" = import ./config/host/gaycast.lxd.bsocat.net.nix;
-        "benaryorg1.lxd.bsocat.net" = import ./config/host/benaryorg1.lxd.bsocat..nix;
-        "benaryorg2.lxd.bsocat.net" = import ./config/host/benaryorg2.lxd.bsocat..nix;
-        "benaryorg3.lxd.bsocat.net" = import ./config/host/benaryorg3.lxd.bsocat..nix;
+        "benaryorg1.lxd.bsocat.net" = import ./config/template/website-container.nix;
+        "benaryorg2.lxd.bsocat.net" = import ./config/template/website-container.nix;
+        "benaryorg3.lxd.bsocat.net" = import ./config/template/website-container.nix;
         "git.shell.bsocat.net" = import ./config/host/git.shell.bsocat.net.nix;
         "nixos-builder.shell.bsocat.net" = import ./config/host/nixos-builder.shell.bsocat..nix;
         "hydra.shell.bsocat.net" = import ./config/host/hydra.shell.bsocat.net.nix;
