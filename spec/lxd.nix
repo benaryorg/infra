@@ -84,16 +84,16 @@
   config = lib.mkIf config.benaryorg.lxd.enable
   {
     benaryorg.deployment.tags = lib.mkAfter [ "lxd" "lxd:${config.benaryorg.lxd.cluster}" ];
-    virtualisation.lxd =
+    virtualisation.incus =
     {
       enable = true;
-      recommendedSysctlSettings = true;
     };
     security.acme.certs.${config.networking.fqdn} =
     {
       reloadServices = [ "lxddns-responder.service" ];
     } // config.benaryorg.lxd.legoConfig;
 
+    users.groups.incus-admin.members = config.benaryorg.lxd.allowedUsers;
     users.groups.lxd.members = config.benaryorg.lxd.allowedUsers;
 
     # lxd user/group for extra large uid ranges
@@ -232,6 +232,7 @@
       lxddns-responder =
       {
         enable = true;
+        virt-command = "${pkgs.incus}/bin/incus";
         http =
         {
           listenAddress = config.benaryorg.lxd.lxddnsAddress;
