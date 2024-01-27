@@ -29,6 +29,8 @@
 
     # do whatever else you wanna do (you *can* use the modules for networking and booting though):
 
+    security.acme.certs.${config.networking.fqdn}.listenHTTP = ":80";
+
     users.users.benaryorg.initialPassword = "1234";
     users.users.benaryorg.group = "benaryorg";
     users.groups.benaryorg.gid = 1000;

@@ -24,7 +24,6 @@
       };
     };
   };
-  security.acme.certs.${config.networking.fqdn}.listenHTTP = ":80";
   systemd.services =
   {
     stunnel =
