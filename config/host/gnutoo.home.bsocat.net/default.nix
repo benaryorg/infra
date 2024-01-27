@@ -14,6 +14,7 @@
   # TODO:
   #  - ipfs module
   #  - btrbk for mir (properly)
+  #  - bootloader funkiness as module
 
   config =
   {
