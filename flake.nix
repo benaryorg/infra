@@ -178,11 +178,18 @@
             ./spec/lxd.nix
             ./spec/build.nix
             ./spec/acme.nix
+            ./spec/desktop
+            ./spec/home-manager.nix
           ];
 
           config =
           {
-            nixpkgs.overlays = [ benaryorg-website.overlays.default ragenix.overlays.default lxddns.overlays.default ];
+            nixpkgs.overlays =
+            [
+              benaryorg-website.overlays.default
+              ragenix.overlays.default
+              lxddns.overlays.default
+            ];
             benaryorg.user.ssh.keys = lib.mkOrder 1000 [ nixosConfig.shell.config.benaryorg.ssh.userkey.benaryorg ];
           };
         };

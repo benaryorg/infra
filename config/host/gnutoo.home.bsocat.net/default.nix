@@ -1,11 +1,41 @@
-{ name, nodes, pkgs, lib, config, ... }:
+{ pkgs, lib, config, ... }:
 {
-  benaryorg.deployment.fake = true;
+  imports =
+  [
+    ./boot.nix
+    ./net.nix
+    ./btrbk.nix
+    ./fs.nix
+    ./audio.nix
+    ./desktop.nix
+    ./ipfs.nix
+  ];
 
-  benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsXZcbbZzIjxvguXzAOM/eds9CZl5cqWJBL+ScgHliC";
+  # TODO:
+  #  - ipfs module
+  #  - btrbk for mir (properly)
 
-  benaryorg.build.role = "none";
-  benaryorg.prometheus.client.enable = true;
-  benaryorg.prometheus.client.exporters.smokeping.enable = false;
-  benaryorg.prometheus.client.exporters.systemd.enable = false;
+  config =
+  {
+    benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA+KZjfYgC2k4TN/npR6iiiH6jNFF1dN2yI912pOLZH8";
+    benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsXZcbbZzIjxvguXzAOM/eds9CZl5cqWJBL+ScgHliC";
+
+    benaryorg.hardware.vendor = "none";
+    benaryorg.prometheus.client.enable = true;
+
+    # during development
+    benaryorg.flake.autoupgrade = false;
+
+    # do whatever else you wanna do (you *can* use the modules for networking and booting though):
+
+    users.users.benaryorg.initialPassword = "1234";
+    users.users.benaryorg.group = "benaryorg";
+    users.groups.benaryorg.gid = 1000;
+
+    users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ];
+
+    console.keyMap = "neo";
+
+    system.stateVersion = "23.11";
+  };
 }
