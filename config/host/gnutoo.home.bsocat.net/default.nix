@@ -35,6 +35,8 @@
 
     users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ];
 
+    zramSwap = { enable = true; memoryPercent = 400; };
+
     console.keyMap = "neo";
 
     system.stateVersion = "23.11";
