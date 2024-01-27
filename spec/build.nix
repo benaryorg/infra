@@ -74,6 +74,7 @@
         (lib.mkIf (cfg.role == "server")
         {
           nix.settings.trusted-users = [ "nix-ssh" ];
+          nix.settings.allowed-uris = lib.mkBefore [ "https://git.shell.bsocat.net/" ];
           nix.settings.secret-key-files = [ cfg.privateKeyFile ];
           nix.sshServe =
           {

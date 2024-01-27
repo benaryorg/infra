@@ -5,7 +5,6 @@
   benaryorg.prometheus.client.enable = true;
   benaryorg.build.tags = [ "shell.bsocat.net" "aarch64-linux" ];
 
-  nix.settings.allowed-uris = [ "https://git.shell.bsocat.net/" ];
   services.nginx =
   {
     enable = true;

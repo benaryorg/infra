@@ -14,7 +14,6 @@
   };
 
   services.nginx.virtualHosts.${config.networking.fqdn}.locations."~ ^/hydra([^\\r\\n]*)$".return = "302 \"https://hydra.shell.bsocat.net$1\"";
-  nix.settings.allowed-uris = [ "https://git.shell.bsocat.net/" ];
   systemd.slices.build =
   {
     enable = true;
