@@ -2,7 +2,6 @@
 {
   environment.systemPackages = with pkgs; [ ceph-client ];
 
-  boot.kernelModules = [ "ceph" ];
   fileSystems =
   {
     "/boot" =
