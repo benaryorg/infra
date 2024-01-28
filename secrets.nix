@@ -17,6 +17,7 @@ in
             [
               builtins.toPath
               (lib.removePrefix (builtins.toPath flake))
+              (lib.removePrefix "/")
             ];
             key = n.config.benaryorg.ssh.hostkey;
           }
