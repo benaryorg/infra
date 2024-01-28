@@ -66,7 +66,15 @@
         home-manager.useUserPackages = true;
         home-manager.users = builtins.mapAttrs (user: settings: { ... }:
           {
-            config = settings // { home.stateVersion = config.system.stateVersion; };
+            config = 
+              {
+                # breaks when on IPv6-only because upstream pulls a tarball directly from source hut which is Legacy IP only
+                # see: https://github.com/nix-community/home-manager/issues/4966
+                manual.html.enable = false;
+                manual.manpages.enable = false;
+                manual.json.enable = false;
+              }
+                // settings // { home.stateVersion = config.system.stateVersion; };
           }) cfg.perUserSettings;
       };
 }
