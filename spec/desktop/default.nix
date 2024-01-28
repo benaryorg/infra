@@ -94,7 +94,18 @@
               };
               config = let cfg = config.benaryorg.desktop; in lib.mkIf cfg.enable
               {
-                home.packages = with pkgs; [ awesome firefox mumble gajim thunderbird ahoviewer gnome.gnome-themes-extra ];
+                home.packages = with pkgs;
+                [
+                  # basic desktop
+                  awesome gnome.gnome-themes-extra
+                  # communication
+                  firefox mumble gajim thunderbird transmission
+                  # utilities
+                  ahoviewer bubblewrap xpra xdg-utils mesa-demos yt-dlp vlc syncplay mpv ffmpeg scrot inkscape krita feh qpdfview cargo cargo-outdated
+                  # xorg utilities
+                  xsel xorg.xwininfo xorg.xset xorg.xrandr xorg.xprop xorg.xkill xorg.xinput xorg.xhost xorg.xev xorg.xauth xorg.setxkbmap
+                  # minor utilities
+                ];
 
                 programs.alacritty =
                 {
@@ -236,6 +247,8 @@
             enable = true;
             displayManager.startx.enable = true;
           };
+
+          hardware.steam-hardware.enable = true;
         })
       ];
 }
