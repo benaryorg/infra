@@ -8,6 +8,11 @@
       keep-outputs = true;
       builders-use-substitutes = true;
       fallback = true;
+      allowed-uris = lib.mkOrder 1000
+      [
+        "https://git.shell.bsocat.net/" # regular git mirror
+        "https://git.sr.ht/~rycee/nmd/" # home manager uses this for documentation
+      ];
     };
     nix.gc.automatic = true;
     nix.gc.options = "--delete-older-than 16d";
