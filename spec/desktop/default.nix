@@ -63,7 +63,7 @@
                   extraInitCommands = lib.mkOption
                   {
                     default = "";
-                    type = lib.types.lines;
+                    type = lib.types.listOf lib.types.str;
                     description = lib.mdDoc
                     ''
                       Additional commands run before your desktop environment starts (i.e. in your {file}`.xinitrc`).
@@ -221,7 +221,7 @@
                     tmux new-session -d -s "nc" -c "$HOME" "nc -6vnklp 1337" || true
                     export XDG_CURRENT_DESKTOP=${cfg.xdgDesktop}
 
-                    ${cfg.extraInitCommands}
+                    ${builtins.concatStringsSep "\n" cfg.extraInitCommands}
 
                     ${cfg.desktopCommand}
                   '';
