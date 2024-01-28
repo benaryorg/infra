@@ -222,6 +222,7 @@
 
                     tmux new-session -d -s "nc" -c "$HOME" "nc -6vnklp 1337" || true
                     export XDG_CURRENT_DESKTOP=${cfg.xdgDesktop}
+                    dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
                     ${builtins.concatStringsSep "\n" cfg.extraInitCommands}
 
@@ -239,18 +240,19 @@
         }
         (lib.mkIf cfg.enable
         {
-          fonts.enableDefaultPackages = true;
-          qt.style = "adwaita-dark";
+          fonts.enableDefaultPackages = lib.mkDefault true;
+          qt.style = lib.mkDefault "adwaita-dark";
 
-          hardware.opengl.enable = true;
-          hardware.opengl.driSupport = true;
+          hardware.opengl.enable = lib.mkDefault true;
+          hardware.opengl.driSupport = lib.mkDefault true;
           services.xserver =
           {
-            enable = true;
-            displayManager.startx.enable = true;
+            enable = lib.mkDefault true;
+            displayManager.startx.enable = lib.mkDefault true;
           };
 
           programs.firejail.enable = true;
+          services.pipewire.enable = lib.mkDefault true;
 
           hardware.steam-hardware.enable = true;
         })
