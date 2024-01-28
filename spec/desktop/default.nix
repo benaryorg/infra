@@ -113,9 +113,10 @@
                   enable = true;
                   settings =
                   {
+                    # FIXME: move to colors when alacritty 0.13 hits
+                    draw_bold_text_with_bright_colors = true;
                     colors =
                     {
-                      draw_bold_text_with_bright_colors = true;
                       normal.black = "#000000";
                       primary.background = "#000000";
                     };
