@@ -105,7 +105,7 @@
                   # xorg utilities
                   xsel xorg.xwininfo xorg.xset xorg.xrandr xorg.xprop xorg.xkill xorg.xinput xorg.xhost xorg.xev xorg.xauth xorg.setxkbmap
                   # sandboxing utilities
-                  firejail bubblewrap
+                  bubblewrap
                 ];
 
                 programs.alacritty =
@@ -248,6 +248,8 @@
             enable = true;
             displayManager.startx.enable = true;
           };
+
+          programs.firejail.enable = true;
 
           hardware.steam-hardware.enable = true;
         })
