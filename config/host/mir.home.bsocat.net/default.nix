@@ -13,7 +13,6 @@
   ];
 
   # TODO:
-  #  - btrbk
   #  - bootloader funkiness as module
 
   config =
