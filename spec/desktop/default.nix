@@ -99,7 +99,8 @@
                   # basic desktop
                   awesome gnome.gnome-themes-extra
                   # communication
-                  firefox mumble gajim thunderbird transmission
+                  firefox mumble thunderbird transmission
+                  (gajim.overrideAttrs (self: { nativeBuildInputs = self.nativeBuildInputs ++ [ gsound ]; })) # gajim needs gsound for sound
                   # utilities
                   ahoviewer xpra xdg-utils mesa-demos yt-dlp vlc syncplay mpv ffmpeg scrot inkscape krita feh qpdfview cargo cargo-outdated
                   # xorg utilities
