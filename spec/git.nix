@@ -135,6 +135,7 @@
               else
                 ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git remote update --prune
                 ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git repack -d
+                ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git gc
               fi
               printf "mirror of %s" ${config.url} > /var/lib/gitolite/repositories/public/${config.name}.git/description
               touch /var/lib/gitolite/repositories/public/${config.name}.git/git-daemon-export-ok
