@@ -69,5 +69,7 @@
     };
   };
 
+  fileSystems."/".options = lib.mkAfter [ "compress=zstd:8" ];
+
   system.stateVersion = "23.11";
 }
