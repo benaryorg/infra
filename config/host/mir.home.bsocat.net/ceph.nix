@@ -85,7 +85,7 @@
             {
               serviceConfig.ExecStartPre = lib.mkForce (osd-pre-start id);
               serviceConfig.ExecStopPost = osd-post-stop id;
-              serviceConfig.TemporaryFileSystem = lib.mkOrder 1000 [ "/var/lib/ceph/osd/ceph-${id}" ];
+              serviceConfig.TemporaryFileSystem = lib.mkOrder 1000 [ "/var/lib/ceph/osd/ceph-${id}:size=64M,nostrictatime,noatime" ];
               unitConfig.ConditionPathExists = lib.mkForce [];
               unitConfig.StartLimitBurst = lib.mkForce 4;
               path = with pkgs; [ util-linux lvm2 cryptsetup ];
@@ -113,7 +113,7 @@
 
       services.stunnel.servers =
       {
-        netaudio =
+        ceph =
         {
           accept = ":::19283";
           # FIXME? maybe make this more stable?
