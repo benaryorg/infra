@@ -102,7 +102,7 @@
                   firefox mumble thunderbird transmission
                   (gajim.overrideAttrs (self: { nativeBuildInputs = self.nativeBuildInputs ++ [ gsound ]; })) # gajim needs gsound for sound
                   # utilities
-                  ahoviewer xpra xdg-utils mesa-demos yt-dlp vlc syncplay mpv ffmpeg scrot inkscape krita feh qpdfview cargo cargo-outdated
+                  ahoviewer xpra xdg-utils mesa-demos yt-dlp vlc syncplay mpv ffmpeg inkscape krita feh qpdfview cargo cargo-outdated
                   # xorg utilities
                   xsel xorg.xwininfo xorg.xset xorg.xrandr xorg.xprop xorg.xkill xorg.xinput xorg.xhost xorg.xev xorg.xauth xorg.setxkbmap
                   # sandboxing utilities

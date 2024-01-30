@@ -1,4 +1,11 @@
-{ lib, fetchurl, awesome, alacritty, tmux, alock, alsa-utils, linkFarm, writeTextFile }:
+{ lib, fetchurl, linkFarm, writeTextFile
+, awesome
+, alacritty
+, tmux
+, alock
+, gscreenshot
+, alsa-utils
+}:
 let
   background-image = fetchurl
   {
@@ -70,6 +77,7 @@ in
       lockscreen = "${alock}/bin/alock -auth pam -bg none -cursor glyph"
       editor = os.getenv("EDITOR") or "vi"
       editor_cmd = terminal .. " -e " .. editor
+      screenshot = "${gscreenshot}/bin/gscreenshot -c -s"
       volume = "${alsa-utils}/bin/amixer sset 'Master'"
       volume_amount = "1%"
       volume_up = volume .. " " .. volume_amount .. "+"
@@ -357,6 +365,8 @@ in
                     {description = "lock the screen", group = "client"}),
           awful.key({ modkey,           }, "Return", function () awful.spawn(terminal_cmd) end,
                     {description = "open a terminal", group = "launcher"}),
+          awful.key({ modkey, "Shift"   }, "s", function () awful.spawn(screenshot) end,
+                    {description = "take a screenshot", group = "launcher"}),
           awful.key({ modkey, "Shift",  }, "r", awesome.restart,
                     {description = "reload awesome", group = "awesome"}),
           awful.key({ modkey, "Shift"   }, "q", awesome.quit,
