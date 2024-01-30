@@ -131,12 +131,11 @@
                 ! test -e /var/lib/gitolite/repositories/public/${config.name}.git
               then
                 ${pkgs.git}/bin/git clone --mirror ${config.url} /var/lib/gitolite/repositories/public/${config.name}.git
-                ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git gc
               else
+                ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git config maintenance.auto false
                 ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git remote update --prune
-                ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git repack -d
-                ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git gc
               fi
+              ${pkgs.git}/bin/git --git-dir /var/lib/gitolite/repositories/public/${config.name}.git maintenance run --task=gc
               printf "mirror of %s" ${config.url} > /var/lib/gitolite/repositories/public/${config.name}.git/description
               touch /var/lib/gitolite/repositories/public/${config.name}.git/git-daemon-export-ok
               printf "%s" ${config.owner} > /var/lib/gitolite/repositories/public/${config.name}.git/gl-creator
