@@ -46,6 +46,8 @@
     hardware.bluetooth.powerOnBoot = true;
     hardware.enableRedistributableFirmware = true;
 
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     boot.kernelModules = lib.mkAfter [ "ceph" "rbd" ];
     virtualisation.incus.enable = true;
     users.groups.incus-admin.members = [ "benaryorg" ];
