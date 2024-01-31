@@ -31,6 +31,9 @@
         "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
         "key.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
       ];
+      serviceConfig.CPUSchedulingPolicy = "rr";
+      serviceConfig.CPUSchedulingPriority = 10;
+      serviceConfig.Nice = -11;
     };
   };
 
