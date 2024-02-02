@@ -126,7 +126,7 @@
     [
       [
         # automation tooling
-        nix-diff
+        nix-diff nix-tree
         # network tooling
         bird dhcpcd dnsmasq iperf
         # system tooling
