@@ -159,6 +159,8 @@
         gdb
         # games
         bsdgames
+        # man pages
+        man-pages man-pages-posix
       ])
     ];
 
