@@ -15,6 +15,10 @@
   benaryorg.build.tags = [ "cloud.bsocat.net" ];
   benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
   users.users.root.openssh.authorizedKeys.keys = [ nodes."shell.cloud.bsocat.net".config.benaryorg.ssh.userkey.benaryorg nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
+
+  boot.swraid.enable = true;
+  # remove warning about unset mail
+  boot.swraid.mdadmConf = "PROGRAM ${pkgs.coreutils}/bin/true";
   systemd.services."serial-getty@ttyS0" =
   {
     enable = true;
