@@ -62,7 +62,7 @@
         {
           buildGoModule = args:
             # intentionally break on newer version
-            assert args.version == "0.2";
+            assert args.version == "0.4.0";
             prev.buildGoModule (args // rec
             {
               version = "0.5.1";
@@ -74,16 +74,6 @@
                 hash = "sha256-3eWkQT2P69ZfN62H9B4WLnmlUOGkpzRR0rctgchP+6A=";
               };
               vendorHash = "sha256-2ZJU7WshN4UIbJv55bFeo9qiAQ/wxu182mnz7pE60xA=";
-              excludedPackages = args.excludedPackages ++ [ "test/mini-oidc" ];
-              postInstall =
-              ''
-                # use custom bash completion as it has extra logic for e.g. instance names
-                installShellCompletion --bash --name incus ./scripts/bash/incus
-
-                installShellCompletion --cmd incus \
-                  --fish <($out/bin/incus completion fish) \
-                  --zsh <($out/bin/incus completion zsh)
-              '';
             });
         };
       })
