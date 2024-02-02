@@ -32,9 +32,10 @@
           "/" =
           {
             incremental = "strict";
-            subvolume."." =
+            subvolume =
             {
-              snapshot_name = "@";
+              "." = { snapshot_name = "@"; };
+              "./home" = { snapshot_name = "@home"; };
             };
           };
         };

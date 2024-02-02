@@ -25,19 +25,29 @@
           "/" =
           {
             incremental = "strict";
-            subvolume."." =
+            subvolume =
             {
-              snapshot_name = "@";
+              "." = { snapshot_name = "@"; };
+              "./home" = { snapshot_name = "@home"; };
             };
           };
           "ssh://mir.home.bsocat.net/" =
           {
             backend_remote = "btrfs-progs-sudo";
-            subvolume."." =
+            subvolume =
             {
-              snapshot_name = "@";
-              snapshot_create = "no";
-              target = "/.snapshot/remote/mir.home.bsocat.net/";
+              "." =
+              {
+                snapshot_name = "@";
+                snapshot_create = "no";
+                target = "/.snapshot/remote/mir.home.bsocat.net/";
+              };
+              "./home" =
+              {
+                snapshot_name = "@home";
+                snapshot_create = "no";
+                target = "/.snapshot/remote/mir.home.bsocat.net/";
+              };
             };
           };
         };
