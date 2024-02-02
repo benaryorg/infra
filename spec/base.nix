@@ -174,6 +174,12 @@
     # strip the source path prefix (avoids rebuilds on every new revision)
     documentation.nixos.extraModuleSources = [ ../. ];
 
+    # no coredumps on disk
+    systemd.coredump.extraConfig =
+    ''
+      Storage=none
+    '';
+
     users.users.root =
     {
       subUidRanges = [ { startUid = 2000000; count = 1000000; } ];
