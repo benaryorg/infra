@@ -5,6 +5,13 @@
   benaryorg.prometheus.client.enable = true;
   benaryorg.build.tags = [ "shell.bsocat.net" "aarch64-linux" ];
 
+  benaryorg.backup.client.directories =
+  [
+    config.services.postgresqlBackup.location
+    "/var/lib/hydra/build-logs"
+  ];
+  services.postgresqlBackup.enable = true;
+
   services.nginx =
   {
     enable = true;
