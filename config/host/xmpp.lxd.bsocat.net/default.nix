@@ -13,6 +13,7 @@
   {
     port = 15280;
   };
+  benaryorg.backup.client.directories = [ "/var/lib/prosody" ];
   security.acme.certs =
   {
     ${config.networking.fqdn} =
