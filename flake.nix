@@ -89,6 +89,13 @@
         "benaryorg1.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDp4Snx4pM3+8yOVEV/VkdphtSeA7Wh7jAYAMdx75N3e" ./config/template/website-container;
         "benaryorg2.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXO1VPYJ5YfvCT4wvTWauSSLtmHS2gG8jh7RQyu6hy+" ./config/template/website-container;
         "benaryorg3.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyYvEMA/opKvs5IcnRdCZmUqg941x6umlf1I0/Sn5sh" ./config/template/website-container;
+        "certbox.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIl6chz1TtkfGY6VT4qZbwcqTRxVpaPXg2Z/Wf6cTZ/" ./config/template/legacy-backup-client;
+        "dav.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICYOtWABsT9IrCIFSDpOCoZPRoa+OnBwA+RaIZTIirF8" ./config/template/legacy-backup-client;
+        "imap1.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8A9BN1hkRCgGTLEpt/vWlhoGmsqdhvEaJKMArZvALf" ./config/template/legacy-backup-client;
+        "imap2.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMwOz08g0/UvpN8/mAzSwfVMWYnFDnS/Rbn1RYyX9Myp" ./config/template/legacy-backup-client;
+        "puppet.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/um+R+g6D1xd0GSbDLX9OTCpSP7qFBRvYFwAYyP9Eu" ./config/template/legacy-backup-client;
+        "smtp1.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfVpEHgHkwFKNdSi/ZZTbltcu3tN8jJ/QbNESLRpdou" ./config/template/legacy-backup-client;
+        "smtp2.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUSA20wO7I2cC7PWnjUeXKvd+NRmKcGZsdlnMkJxCpz" ./config/template/legacy-backup-client;
       };
       # generate config from subdirectories
       colmenaDynamicConfig = lib.pipe (builtins.readDir ./config/host)
