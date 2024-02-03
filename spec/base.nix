@@ -130,10 +130,10 @@
         # network tooling
         bird dhcpcd dnsmasq iperf
         # system tooling
-        btrbk efibootmgr psutils pstree uucp
+        efibootmgr psutils pstree uucp
         (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_SH_STANDALONE y"; })
         # misc utils
-        cfssl testssl openssl bc
+        openssl bc
         # shell tooling
         bvi jq moreutils pv tree
         # file tooling
@@ -147,20 +147,25 @@
         # hardware tooling
         ethtool hdparm lsscsi pciutils smartmontools usbutils
         # filesystem tooling
-        bcache-tools btrfs-progs cryptsetup dosfstools fio mdadm ncdu
+        btrfs-progs cryptsetup dosfstools fio mdadm ncdu
+        # man pages
+        man-pages man-pages-posix
       ]
       (lib.optionals (!config.benaryorg.base.lightweight)
       [
         # automation tooling
-        colmena ragenix puppet-bolt
+        colmena ragenix
         # system tooling
-        criu podman qemu
+        criu podman
+        (qemu_kvm.override
+          { alsaSupport = false; pulseSupport = false; jackSupport = false;
+            sdlSupport = false; gtkSupport = false; vncSupport = false; spiceSupport = false;
+          }
+        )
         # debugging
         gdb
         # games
         bsdgames
-        # man pages
-        man-pages man-pages-posix
       ])
     ];
 
