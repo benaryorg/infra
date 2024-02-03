@@ -38,6 +38,7 @@
   };
 
   hardware.pulseaudio.enable = true;
+  services.pipewire.enable = false;
   systemd.user.services.pulseaudio.serviceConfig =
   {
     ExecStart = lib.mkForce [ "" "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd ::1:9999" ];
