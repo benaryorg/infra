@@ -154,7 +154,7 @@
       (lib.optionals (!config.benaryorg.base.lightweight)
       [
         # automation tooling
-        colmena ragenix
+        colmena
         # system tooling
         criu podman
         (qemu_kvm.override

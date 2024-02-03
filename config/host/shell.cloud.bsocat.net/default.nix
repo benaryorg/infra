@@ -36,6 +36,8 @@
   # FIXME: shouldn't be required, potentially needs migration of the git repos over to a container
   users.users.nginx.extraGroups = [ "lxddns" ];
 
+  users.users.benaryorg.packages = with pkgs; [ ragenix ];
+
   services.nginx =
   {
     enable = true;

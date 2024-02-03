@@ -34,7 +34,7 @@
     users.users.benaryorg.group = "benaryorg";
     users.groups.benaryorg.gid = 1000;
 
-    users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ];
+    users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ragenix ];
 
     zramSwap = { enable = true; memoryPercent = 400; };
 
