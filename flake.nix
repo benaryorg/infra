@@ -45,6 +45,18 @@
   outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, home-manager, ... }:
     let
       lib = nixpkgs.lib;
+      withSshKey = key: module:
+      {
+        imports =
+        [
+          module
+        ];
+
+        config =
+        {
+          benaryorg.ssh.hostkey = key;
+        };
+      };
       colmenaStaticConfig =
       {
         meta =
@@ -74,9 +86,9 @@
           };
         };
 
-        "benaryorg1.lxd.bsocat.net" = import ./config/template/website-container;
-        "benaryorg2.lxd.bsocat.net" = import ./config/template/website-container;
-        "benaryorg3.lxd.bsocat.net" = import ./config/template/website-container;
+        "benaryorg1.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDp4Snx4pM3+8yOVEV/VkdphtSeA7Wh7jAYAMdx75N3e" ./config/template/website-container;
+        "benaryorg2.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXO1VPYJ5YfvCT4wvTWauSSLtmHS2gG8jh7RQyu6hy+" ./config/template/website-container;
+        "benaryorg3.lxd.bsocat.net" = withSshKey "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyYvEMA/opKvs5IcnRdCZmUqg941x6umlf1I0/Sn5sh" ./config/template/website-container;
       };
       # generate config from subdirectories
       colmenaDynamicConfig = lib.pipe (builtins.readDir ./config/host)
