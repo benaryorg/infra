@@ -6,6 +6,13 @@
   age.secrets.grafanaPass = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/admin_pass.age; owner = "grafana"; mode = "0400"; };
   age.secrets.grafanaSecret = { file = ./secret/service/grafana/prometheus.lxd.bsocat.net/secret.age; owner = "grafana"; mode = "0400"; };
   age.secrets.xmppAlerting = { file = ./secret/service/xmpp/xmpp.lxd.bsocat.net/user/benary.org/monitoring.age; };
+
+  benaryorg.backup.client.directories =
+  [
+    "/var/lib/${config.services.prometheus.stateDir}"
+    config.services.grafana.dataDir
+  ];
+
   benaryorg.prometheus.server.enable = true;
   benaryorg.prometheus.client.enable = true;
   services =
