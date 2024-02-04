@@ -5,6 +5,17 @@
   benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
   benaryorg.backup.role = "server";
   benaryorg.prometheus.client.enable = true;
+
+  services.beesd.filesystems =
+  {
+    root =
+    {
+      spec = "/";
+      hashTableSizeMB = 2048;
+      verbosity = "warning";
+    };
+  };
+
   benaryorg.hardware.vendor = "ovh";
   benaryorg.net.host.primaryInterface = "eno1";
   benaryorg.net.host.ipv4 = "142.4.213.97/24";
