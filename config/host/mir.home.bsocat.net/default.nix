@@ -82,6 +82,7 @@
     systemd.services.incus.after = lib.mkAfter [ "ceph.target" ];
 
     virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd.onShutdown = "shutdown";
     virtualisation.libvirtd.qemu.package = pkgs.qemu_full;
 
     zramSwap = { enable = true; memoryPercent = 400; };
