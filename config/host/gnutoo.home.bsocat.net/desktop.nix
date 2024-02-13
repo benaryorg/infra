@@ -4,6 +4,7 @@
 
   benaryorg.home-manager.perUserSettings.benaryorg.benaryorg.desktop.extraInitCommands = [ "xrandr --output DP-3 --primary --mode 2560x1440 --rate 144 --pos 0x0 --output DP-1 --dpi 96 --off --output DP-0 --off || true" ];
 
+  services.logind.lidSwitch = "ignore";
   nixpkgs.config.allowUnfree = true;
   hardware.nvidia.open = false;
   services.xserver.videoDrivers = [ "nvidia" ];
