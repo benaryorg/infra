@@ -10,6 +10,9 @@
     config = builtins.readFile ./file/bird.conf;
   };
   networking.nameservers = [ "2a0c:b641:a40:5::" ];
+  systemd.services.bird2.before = lib.mkAfter [ "network-online.target" ];
+  systemd.services.bird2.wantedBy = [ "network-online.target" ];
+  systemd.services.bird2.after = lib.mkAfter [ "systemd-networkd-wait-online.service" ];
   systemd.network =
   {
     enable = true;
