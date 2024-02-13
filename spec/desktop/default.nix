@@ -224,6 +224,7 @@
                     tmux new-session -d -s "nc" -c "$HOME" "nc -6vnklp 1337" || true
                     export XDG_CURRENT_DESKTOP=${cfg.xdgDesktop}
                     dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+                    systemctl --user import-environment PATH
 
                     ${builtins.concatStringsSep "\n" cfg.extraInitCommands}
 
