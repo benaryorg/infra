@@ -45,6 +45,7 @@
     jack.enable = true;
     socketActivation = false;
   };
+  systemd.user.services.pipewire.wantedBy = [ "default.target" ];
   systemd.user.services.pipewire.path = lib.mkAfter [ pkgs.pipewire pkgs.wireplumber ];
   systemd.user.services.pipewire.environment.LADSPA_PATH = "${pkgs.rnnoise-plugin}/lib/ladspa";
   systemd.user.services.pipewire.environment.XDG_CONFIG_HOME = pkgs.copyPathToStore ./file/pipewire-config-home;
