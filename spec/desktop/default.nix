@@ -90,6 +90,10 @@
                       Which TTY should trigger the graphical login.
                     '';
                   };
+                  awesome =
+                  {
+                    enablePatchage = lib.mkEnableOption (lib.mdDoc "*patchage* support in *awesome*");
+                  };
                 };
               };
               config = let cfg = config.benaryorg.desktop; in lib.mkIf cfg.enable
@@ -234,7 +238,10 @@
                 xdg.configFile.awesome =
                 {
                   enable = true;
-                  source = pkgs.callPackage ./awesome.nix {};
+                  source = pkgs.callPackage ./awesome.nix
+                  {
+                    inherit (cfg.awesome) enablePatchage;
+                  };
                 };
               };
             })

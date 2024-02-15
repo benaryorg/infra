@@ -4,6 +4,7 @@
 , tmux
 , alock
 , gscreenshot
+, enablePatchage ? false, patchage
 , alsa-utils
 }:
 let
@@ -78,6 +79,7 @@ in
       editor = os.getenv("EDITOR") or "vi"
       editor_cmd = terminal .. " -e " .. editor
       screenshot = "${gscreenshot}/bin/gscreenshot -c -s"
+      ${lib.optionalString enablePatchage ''patchage = "${patchage}/bin/patchage"''}
       volume = "${alsa-utils}/bin/amixer sset 'Master'"
       volume_amount = "1%"
       volume_up = volume .. " " .. volume_amount .. "+"
@@ -377,6 +379,10 @@ in
                     {description = "volume up", group = "launcher"}),
           awful.key({ modkey,           }, "Down", function () awful.spawn(volume_down) end,
                     {description = "volume down", group = "launcher"}),
+      ${lib.optionalString enablePatchage ''
+          awful.key({ modkey,           }, "p", function () awful.spawn(patchage) end,
+                    {description = "patchage", group = "launcher"}),
+      ''}
           -- Layout
           awful.key({ modkey, "Shift"   }, "t", function () awful.spawn("setxkbmap us") end,
                     {description = "keyboard layout us", group = "desktop"}),
