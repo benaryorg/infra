@@ -46,7 +46,7 @@
     wantedBy = [ "timers.target" ];
     timerConfig =
     {
-      OnUnitInactiveSec = 60;
+      OnUnitInactiveSec = 150;
       OnBootSec = 600;
       Persistent = true;
     };
