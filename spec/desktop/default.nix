@@ -250,7 +250,7 @@
         (lib.mkIf cfg.enable
         {
           fonts.enableDefaultPackages = lib.mkDefault true;
-          fonts.packages = with pkgs; lib.mkAfter [ noto-fonts ];
+          fonts.packages = with pkgs; lib.mkAfter [ noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif ];
           qt.style = lib.mkDefault "adwaita-dark";
 
           hardware.opengl.enable = lib.mkDefault true;
