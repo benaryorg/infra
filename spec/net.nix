@@ -72,6 +72,8 @@
       ''
         FallbackDNS=
       '';
+      systemd.services.prometheus-smokeping-exporter.requires = lib.mkAfter [ "systemd-resolved.service" ];
+      systemd.services.prometheus-smokeping-exporter.after = lib.mkAfter [ "systemd-resolved.service" ];
     })
     (lib.mkIf (config.benaryorg.net.resolver == "unbound")
     {
@@ -84,6 +86,8 @@
         };
       };
       benaryorg.prometheus.client.exporters.unbound.enable = true;
+      systemd.services.prometheus-smokeping-exporter.requires = lib.mkAfter [ "unbound.service" ];
+      systemd.services.prometheus-smokeping-exporter.after = lib.mkAfter [ "unbound.service" ];
     })
     (lib.mkIf (config.benaryorg.net.type == "container")
     {
