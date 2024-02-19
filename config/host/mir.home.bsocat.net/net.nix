@@ -87,6 +87,7 @@
         {
           IPv6AcceptRA = false;
           IPForward = "ipv4";
+          ConfigureWithoutCarrier = true;
           KeepConfiguration = true;
         };
       };
@@ -108,6 +109,7 @@
         {
           IPv6AcceptRA = false;
           IPForward = "ipv4";
+          ConfigureWithoutCarrier = true;
           KeepConfiguration = true;
         };
       };
