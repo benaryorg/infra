@@ -97,12 +97,25 @@
         enable = config.benaryorg.base.gnupg.enable;
         pinentryFlavor = "curses";
       };
-      ssh.knownHosts = lib.pipe nodes
-      [
-        (builtins.mapAttrs (_: { config, ... }: config.benaryorg.ssh.hostkey))
-        (lib.filterAttrs (_: builtins.isString))
-        (builtins.mapAttrs (_: key: { publicKey = key; }))
-      ];
+      ssh =
+      {
+        extraConfig =
+        ''
+          host *
+            UpdateHostKeys yes
+            TCPKeepAlive yes
+            ConnectTimeout 2
+            ForwardAgent no
+            PreferredAuthentications publickey
+            EnableEscapeCommandline yes
+        '';
+        knownHosts = lib.pipe nodes
+        [
+          (builtins.mapAttrs (_: { config, ... }: config.benaryorg.ssh.hostkey))
+          (lib.filterAttrs (_: builtins.isString))
+          (builtins.mapAttrs (_: key: { publicKey = key; }))
+        ];
+      };
     };
 
     services =
