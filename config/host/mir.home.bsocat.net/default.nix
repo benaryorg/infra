@@ -40,7 +40,7 @@
     xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     xdg.portal.config.common.default = "gtk";
     services.flatpak.enable = true;
-    users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ceph kubo ];
+    users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ceph kubo imagemagick ffmpeg-full ];
 
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
