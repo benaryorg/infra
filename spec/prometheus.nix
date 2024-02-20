@@ -247,7 +247,7 @@
               };
               unbound =
               {
-                controlInterface = "/run/unbound/unbound.socket";
+                unbound.host = "unix:///run/unbound/unbound.socket";
                 group = config.services.unbound.group;
               };
             };
