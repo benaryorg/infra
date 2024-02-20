@@ -247,7 +247,7 @@
               };
               unbound =
               {
-                unbound.host = "unix:///run/unbound/unbound.socket";
+                unbound.host = "unix://${config.services.unbound.localControlSocketPath}";
                 group = config.services.unbound.group;
               };
             };
