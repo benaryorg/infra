@@ -88,24 +88,28 @@
     };
 
     services.cgit.${config.networking.fqdn} =
-    {
-      enable = true;
-      scanPath = "/var/lib/gitolite/repositories/public";
-      settings =
-      {
-        clone-url = "https://${config.networking.fqdn}/$CGIT_REPO_URL";
-        branch-sort = "age";
-        root-title = "${config.networking.fqdn} by Katze";
-        root-desc = "because self-hosted is better";
-        snapshots = "tar.gz";
-        readme = ":README.md";
-        enable-index-owner = false;
-        enable-follow-links = true;
-        remove-suffix = true;
-        source-filter = "${pkgs.cgit}/lib/cgit/filters/syntax-highlighting.py";
-        about-filter = "${pkgs.cgit}/lib/cgit/filters/about-formatting.sh";
-      };
-    };
+      let
+        cgit = pkgs.cgit-pink;
+      in
+        {
+          enable = true;
+          package = cgit;
+          scanPath = "/var/lib/gitolite/repositories/public";
+          settings =
+          {
+            clone-url = "https://${config.networking.fqdn}/$CGIT_REPO_URL";
+            branch-sort = "age";
+            root-title = "${config.networking.fqdn} by Katze";
+            root-desc = "because self-hosted is better";
+            snapshots = "tar.gz";
+            readme = ":README.md";
+            enable-index-owner = false;
+            enable-follow-links = true;
+            remove-suffix = true;
+            source-filter = "${cgit}/lib/cgit/filters/syntax-highlighting.py";
+            about-filter = "${cgit}/lib/cgit/filters/about-formatting.sh";
+          };
+        };
     systemd.services = lib.pipe config.benaryorg.git.mirror
       [
         builtins.attrValues
