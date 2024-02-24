@@ -1,4 +1,4 @@
-{ nixpkgs, nodes, config, pkgs, lib, options, ... }:
+{ nodes, config, pkgs, lib, options, ... }:
 {
   options =
   {

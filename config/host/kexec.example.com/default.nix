@@ -1,4 +1,4 @@
-{ name, nodes, pkgs, lib, config, modulesPath, ... }:
+{ nodes, pkgs, lib, config, modulesPath, ... }:
 {
   benaryorg.deployment.fake = true;
 

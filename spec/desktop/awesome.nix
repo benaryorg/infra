@@ -1,5 +1,4 @@
-{ lib, fetchurl, linkFarm, writeTextFile
-, awesome
+{ lib, fetchurl, writeTextFile
 , alacritty
 , tmux
 , alock

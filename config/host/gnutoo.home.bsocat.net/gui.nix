@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ config, ... }:
 {
   benaryorg.desktop.enable = true;
 

@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 {
   benaryorg.net.type = "manual";
   benaryorg.net.resolver = "none";

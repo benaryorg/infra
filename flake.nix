@@ -65,7 +65,7 @@
           allowApplyAll = false;
         };
 
-        defaults = { name, nodes, pkgs, lib, config, options, ... }:
+        defaults = { name, config, ... }:
         {
           imports =
           [

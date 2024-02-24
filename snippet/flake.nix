@@ -4,7 +4,7 @@
 {
   inputs.benaryorg.url = "git+https://git.shell.bsocat.net/infra.git";
 
-  outputs = { self, benaryorg, ... }:
+  outputs = { benaryorg, ... }:
   {
     # don't forget to name your host
     nixosConfigurations.foobar = benaryorg.inputs.nixpkgs.lib.nixosSystem
@@ -25,7 +25,7 @@
         # this is the upstream module
         benaryorg.nixosModules.default
         # custom configuration goes here
-        ({ pkgs, lib, ... }:
+        ({ lib, ... }:
         {
           # most of this here is a copy from the iso build, adjust as needed
           benaryorg.base.lightweight = true;

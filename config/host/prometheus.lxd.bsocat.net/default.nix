@@ -1,4 +1,4 @@
-{ name, nodes, pkgs, lib, config, ... }:
+{ name, pkgs, config, ... }:
 {
   benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0ia1VnkJ5lVZ2Nsk7tv+1FPFn9P1JrNRdGRYCf1eNY";
 

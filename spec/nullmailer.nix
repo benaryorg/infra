@@ -1,4 +1,4 @@
-{ config, pkgs, lib, options, ... }:
+{ config, lib, options, ... }:
 {
   options.benaryorg.nullmailer =
   {

@@ -3,7 +3,7 @@
   inputs.benaryorg.inputs.nixpkgs.follows = "nixpkgs";
   inputs.nixpkgs.url = "tarball+https://git.shell.bsocat.net/nixpkgs/snapshot/nixpkgs-nixos-23.11.tar.gz";
 
-  outputs = { self, benaryorg, ... }:
+  outputs = { benaryorg, ... }:
   {
     nixosConfigurations.iso = benaryorg.inputs.nixpkgs.lib.nixosSystem
     {

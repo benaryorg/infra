@@ -1,4 +1,4 @@
-{ name, nodes, pkgs, lib, config, ... }:
+{ config, ... }:
 {
   age.secrets.benaryorgLegoSecret.file = ./secret/lego/hedns/benary.org.age;
   benaryorg.prometheus.client.enable = true;
