@@ -16,7 +16,6 @@
   benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
   users.users.root.openssh.authorizedKeys.keys = [ nodes."shell.cloud.bsocat.net".config.benaryorg.ssh.userkey.benaryorg nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
 
-  hardware.enableRedistributableFirmware = true;
   boot.swraid.enable = true;
   # remove warning about unset mail
   boot.swraid.mdadmConf = "PROGRAM ${pkgs.coreutils}/bin/true";

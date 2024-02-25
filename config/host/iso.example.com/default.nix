@@ -23,7 +23,6 @@
     makeEfiBootable = true;
     makeUsbBootable = true;
   };
-  hardware.enableRedistributableFirmware = true;
   boot.swraid.enable = true;
   # remove warning about unset mail
   boot.swraid.mdadmConf = "PROGRAM ${pkgs.coreutils}/bin/true";

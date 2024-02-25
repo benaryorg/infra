@@ -44,7 +44,6 @@
 
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
-    hardware.enableRedistributableFirmware = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

@@ -81,7 +81,6 @@
             };
           };
 
-          hardware.enableRedistributableFirmware = true;
           hardware.opengl = { enable = true; driSupport = true; };
           zramSwap = { enable = true; memoryPercent = 200; };
         })
