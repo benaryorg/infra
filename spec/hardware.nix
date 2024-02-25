@@ -75,6 +75,9 @@
     [
       {
         benaryorg.deployment.tags = lib.mkAfter [ config.benaryorg.hardware.vendor ];
+
+        hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
+        hardware.cpu.amd.updateMicrocode = lib.mkDefault true;
       }
       (
         let
@@ -145,7 +148,6 @@
         boot.initrd.availableKernelModules = config.benaryorg.hardware.ovh.kernelModules;
         boot.initrd.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
         boot.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
-        hardware.cpu.intel.updateMicrocode = true;
 
         boot.swraid =
         {
