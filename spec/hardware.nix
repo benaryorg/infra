@@ -167,7 +167,7 @@
 
         boot.initrd.luks.devices =
           let
-            device = name: data:
+            device = _name: data:
             {
               "luks-${data.uuid}" =
               {

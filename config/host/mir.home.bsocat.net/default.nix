@@ -56,7 +56,7 @@
     # I do not want to follow unstable here because unstable would potentially update further than the next release
     nixpkgs.overlays = lib.mkAfter
     [
-      (final: prev:
+      (_final: prev:
       {
         incus-unwrapped = prev.incus-unwrapped.override
         {

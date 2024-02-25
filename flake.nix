@@ -111,8 +111,8 @@
         (builtins.map ({ name, value }:
           builtins.getAttr value
           {
-            directory = { name = name; value = import ((builtins.toPath ./config/host) + "/${name}"); };
-            regular = { name = lib.removeSuffix ".nix" name; value = import ((builtins.toPath ./config/host) + "/${name}"); };
+            directory = { name = name; value = import (./config/host + "/${name}"); };
+            regular = { name = lib.removeSuffix ".nix" name; value = import (./config/host + "/${name}"); };
           }
         ))
         # back to attrs

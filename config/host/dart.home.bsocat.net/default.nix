@@ -1,4 +1,3 @@
-{ ... }:
 {
   benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBz6svwHHhGz+/C2FKHCC1XaKEnaHc20fp+YOQTojpzU";
   benaryorg.ssh.userkey.benaryorg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpkNc/B083GREqQrk6sOciWvC4k9uU6J3K33LErICQy";

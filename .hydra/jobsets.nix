@@ -1,7 +1,7 @@
 { refs, projectName, ... }:
   let
       isMainBranch = branch: branch == "main";
-      jobForBranch = { name, ...}:
+      jobForBranch = { name, ... }:
       {
         enabled = 1;
         hidden = false;
@@ -38,7 +38,6 @@
     in
       {
         jobsets =
-        (
             (builtins.derivation
             {
               system = builtins.currentSystem;
@@ -64,6 +63,5 @@
                 homepage = "https://git.shell.bsocat.net/infra/";
                 maintainers = [ { email = "root@benary.org"; } ];
               };
-            }
-        );
+            };
       }

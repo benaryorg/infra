@@ -64,7 +64,7 @@
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users = builtins.mapAttrs (user: settings: { ... }:
+        home-manager.users = builtins.mapAttrs (_user: settings: _args:
           {
             config = 
               {

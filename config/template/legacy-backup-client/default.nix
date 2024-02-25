@@ -1,4 +1,3 @@
-{ ... }:
 {
   benaryorg.deployment.fake = true;
 

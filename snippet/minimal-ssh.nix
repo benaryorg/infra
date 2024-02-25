@@ -20,7 +20,7 @@ in
     i18n.defaultLocale = "C.UTF-8";
 
     users.users.root.openssh.authorizedKeys.keys = lib.attrValues sshkey;
-    users.users.benaryorg = lib.mkIf (useUser)
+    users.users.benaryorg = lib.mkIf useUser
     {
       isNormalUser = true;
       extraGroups = [ "wheel" ];

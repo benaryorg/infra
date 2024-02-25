@@ -135,8 +135,8 @@
                     {
                       fqdn = node.config.networking.fqdn;
                       # filter for attrs, there seem to be "warnings" and "assertions" present as lists
-                      exporters = lib.filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.services.prometheus.exporters;
-                      mocks = lib.filterAttrs (name: value: (builtins.isAttrs value) && value.enable) node.config.benaryorg.prometheus.client.mocks;
+                      exporters = lib.filterAttrs (_name: value: (builtins.isAttrs value) && value.enable) node.config.services.prometheus.exporters;
+                      mocks = lib.filterAttrs (_name: value: (builtins.isAttrs value) && value.enable) node.config.benaryorg.prometheus.client.mocks;
                     }
                   )
                 )
@@ -216,7 +216,7 @@
         benaryorg.prometheus.client.exporters.systemd.enable = true;
         services.prometheus.exporters =
           let
-            exporterDefaultFunction = key: value:
+            exporterDefaultFunction = _key: _value:
             {
               listenAddress = "[::1]";
             };
@@ -284,7 +284,7 @@
           servers =
             let
               exporterList = builtins.attrNames config.benaryorg.prometheus.client.exporters;
-              stunnelServer = name: exporterConfig:
+              stunnelServer = exporterConfig:
               {
                 accept = ":::${toString (exporterConfig.port + 10000)}";
                 connect = exporterConfig.port;
@@ -319,7 +319,7 @@
               mapExporterFunction = name:
               {
                 name = "prometheusExporter-${name}";
-                value = stunnelServer name config.services.prometheus.exporters.${name};
+                value = stunnelServer config.services.prometheus.exporters.${name};
               };
               servers = lib.pipe exporterList [ (builtins.map mapExporterFunction) builtins.listToAttrs ];
             in

@@ -1,5 +1,5 @@
 let
-  flake = builtins.getFlake (builtins.toPath ./.);
+  flake = builtins.getFlake (builtins.toString ./.);
   nodes = flake.outputs.nixosConfigurations;
   lib = flake.inputs.nixpkgs.lib;
   addJumphostUser = list: list ++ [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrKgj+479k+nZjVKAeVnh0clxh6MUuEmY0BTtaNMDi5" ];
@@ -16,7 +16,7 @@ in
             file = lib.pipe secret.file
             [
               builtins.toPath
-              (lib.removePrefix (builtins.toPath flake))
+              (lib.removePrefix (builtins.toString flake))
               (lib.removePrefix "/")
             ];
             key = n.config.benaryorg.ssh.hostkey;
