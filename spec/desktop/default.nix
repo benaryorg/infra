@@ -268,8 +268,6 @@
 
           programs.firejail.enable = true;
           services.pipewire.enable = lib.mkDefault true;
-
-          hardware.steam-hardware.enable = true;
         })
       ];
 }

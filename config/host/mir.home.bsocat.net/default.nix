@@ -45,6 +45,9 @@
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
 
+    nixpkgs.config.allowUnfree = true;
+    hardware.steam-hardware.enable = true;
+
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     boot.kernelModules = lib.mkAfter [ "ceph" "rbd" ];
