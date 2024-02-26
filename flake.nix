@@ -62,6 +62,10 @@
         meta =
         {
           nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
+          specialArgs =
+          {
+            benaryorg-flake = self;
+          };
           allowApplyAll = false;
         };
 
