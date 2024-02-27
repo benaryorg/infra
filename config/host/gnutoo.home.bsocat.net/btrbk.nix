@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   services.btrbk =
   {
@@ -19,6 +20,7 @@
         target_preserve_min = "latest";
         target_preserve = "25h 32d 6w *m";
         ssh_user = "btrbk";
+        ssh_identity = "${config.users.users.btrbk.home}/.ssh/id_ed25519";
         volume =
         {
           "/" =
