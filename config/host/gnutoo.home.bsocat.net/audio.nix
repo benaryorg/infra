@@ -26,6 +26,9 @@
   };
   systemd.services =
   {
+    # extends upstream config: https://github.com/NixOS/nixpkgs/blob/860a2c5921f100906d8c711d29a5f62bc283b588/nixos/modules/services/audio/alsa.nix#L109
+    # this way it also *loads* the state on boot again
+    alsa-store.serviceConfig.ExecStart = lib.mkForce [ "${pkgs.coreutils}/bin/mkdir -p /var/lib/alsa" "-${pkgs.alsa-utils}/sbin/alsactl restore --ignore" ];
     stunnel =
     {
       wants = [ "acme-finished-${config.networking.fqdn}.target" ];
