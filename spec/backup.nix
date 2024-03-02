@@ -114,6 +114,8 @@
                   {
                     description = "backup run for ${node.config.networking.fqdn}";
                     startAt = "hourly";
+                    wants = [ "network-online.target" ];
+                    after = [ "network-online.target" ];
                     script =
                     ''
                       if
