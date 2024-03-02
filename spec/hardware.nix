@@ -75,10 +75,6 @@
     [
       {
         benaryorg.deployment.tags = lib.mkAfter [ config.benaryorg.hardware.vendor ];
-
-        hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
-        hardware.cpu.amd.updateMicrocode = lib.mkDefault true;
-        hardware.enableRedistributableFirmware = lib.mkDefault true;
       }
       (
         let
@@ -134,6 +130,11 @@
           "net.core.rmem_max" = 4194304;
           "net.core.wmem_max" = 1048576;
         };
+
+        hardware.cpu.intel.updateMicrocode = lib.mkDefault true;
+        hardware.cpu.amd.updateMicrocode = lib.mkDefault true;
+        hardware.enableRedistributableFirmware = lib.mkDefault true;
+
         benaryorg.prometheus.client.exporters.smartctl.enable = true;
       })
       (lib.mkIf (config.benaryorg.hardware.vendor == "ovh")
