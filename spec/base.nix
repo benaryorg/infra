@@ -82,6 +82,7 @@
     {
       vim.defaultEditor = true;
       nano.enable = false;
+      command-not-found.enable = false;
       mtr.enable = true;
       zsh =
       {
