@@ -81,6 +81,7 @@
     programs =
     {
       vim.defaultEditor = true;
+      nano.enable = false;
       mtr.enable = true;
       zsh =
       {
