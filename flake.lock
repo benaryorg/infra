@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708794349,
-        "narHash": "sha256-jX+B1VGHT0ruHHL5RwS8L21R6miBn4B6s9iVyUJsJJY=",
+        "lastModified": 1709400089,
+        "narHash": "sha256-4A6X9xNWJ0EQhBPjM4JTdxQFDTkSqQchkNfuDWOP068=",
         "ref": "refs/heads/master",
-        "rev": "2c94ff9a6fbeb9f3ea0107f28688edbe9c81deaa",
-        "revCount": 510,
+        "rev": "766e70fd475cd4d73bd65613d06bbb3dcbb75871",
+        "revCount": 512,
         "type": "git",
         "url": "https://git.shell.bsocat.net/crane"
       },
@@ -108,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708737761,
-        "narHash": "sha256-sR/1cYjpgr71ZSrt6Kp5Dg4Ul3mo6pZIG400tuzYks8=",
+        "lastModified": 1709348262,
+        "narHash": "sha256-eYTA1uZtYGFKrDOKiAz1wlE6aIC9WSdBNF8bSS818zM=",
         "ref": "refs/heads/master",
-        "rev": "bbde06bed1b72eddff063fa42f18644e90a0121e",
-        "revCount": 1535,
+        "rev": "8a15cb36fffa0b5fbe31ef16ede0a479bef4b365",
+        "revCount": 1547,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-darwin"
       },
@@ -144,11 +144,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705309234,
-        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "lastModified": 1709126324,
+        "narHash": "sha256-q6EQdSeUZOG26WelxqkmR7kArjgWCdw5sfJVHPH/7j8=",
         "ref": "refs/heads/main",
-        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
-        "revCount": 90,
+        "rev": "d465f4819400de7c8d874d50b982301f28a84605",
+        "revCount": 91,
         "type": "git",
         "url": "https://git.shell.bsocat.net/flake-utils"
       },
@@ -191,11 +191,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1706289216,
-        "narHash": "sha256-KOzVHWPvk0poR49c285YoNRkUTsv5Ge1+onZVLsuBRo=",
+        "lastModified": 1709433328,
+        "narHash": "sha256-jk+HH4oDNWmj316M40URFwtNU84bWdrlSUoLaflY9XA=",
         "ref": "refs/heads/main",
-        "rev": "dd0d7aeb3e2742e26cf1d1a53e7bd78e37c7f265",
-        "revCount": 139,
+        "rev": "6fa45cae9f021f099b1aaa7e6bd43ab75ae51367",
+        "revCount": 142,
         "type": "git",
         "url": "https://git.shell.bsocat.net/lxddns"
       },
@@ -221,11 +221,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1708702655,
-        "narHash": "sha256-qxT5jSLhelfLhQ07+AUxSTm1VnVH+hQxDkQSZ/m/Smo=",
+        "lastModified": 1709309926,
+        "narHash": "sha256-VZFBtXGVD9LWTecGi6eXrE0hJ/mVB3zGUlHImUs2Qak=",
         "ref": "nixos-23.11",
-        "rev": "c5101e457206dd437330d283d6626944e28794b3",
-        "revCount": 556065,
+        "rev": "79baff8812a0d68e24a836df0a364c678089e2c7",
+        "revCount": 556338,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -237,11 +237,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1708807242,
-        "narHash": "sha256-sRTRkhMD4delO/hPxxi+XwLqPn8BuUq6nnj4JqLwOu0=",
+        "lastModified": 1709237383,
+        "narHash": "sha256-cy6ArO4k5qTx+l5o+0mL9f5fa86tYUX3ozE1S+Txlds=",
         "ref": "nixos-unstable",
-        "rev": "73de017ef2d18a04ac4bfd0c02650007ccb31c2a",
-        "revCount": 588267,
+        "rev": "1536926ef5621b09bba54035ae2bb6d806d72ac8",
+        "revCount": 590113,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -270,11 +270,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707771926,
-        "narHash": "sha256-PhWWmby82jm1ddLnQoC4sPcRBnn9tMRmqiwbsYdO8Ec=",
+        "lastModified": 1709219236,
+        "narHash": "sha256-XxNMVtz6/zMcpxOiGMhqjlcQFQ37XUhX2qtP1nCxBhE=",
         "ref": "refs/heads/main",
-        "rev": "2d9122fe28c15ca64770f192f7df97e13b1fb098",
-        "revCount": 158,
+        "rev": "0844f462e037a83620752600330e25035c742c41",
+        "revCount": 159,
         "type": "git",
         "url": "https://git.shell.bsocat.net/ragenix"
       },
@@ -311,11 +311,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708827164,
-        "narHash": "sha256-oBNS6pO04Y6gZBLThP3JDDgviex0+WTXz3bVBenyzms=",
+        "lastModified": 1709345349,
+        "narHash": "sha256-E2tsnkM97cGuzHKOqdkUXfmI+K1wS4dNTJJu5QH2Vuk=",
         "ref": "refs/heads/master",
-        "rev": "e0626adabd5ea461f80b1b11390da2a6575adb30",
-        "revCount": 1301,
+        "rev": "6e6fde31711e699be2e7fb67aae1c7e23ef606e0",
+        "revCount": 1307,
         "type": "git",
         "url": "https://git.shell.bsocat.net/rust-overlay"
       },
