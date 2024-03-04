@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709400089,
-        "narHash": "sha256-4A6X9xNWJ0EQhBPjM4JTdxQFDTkSqQchkNfuDWOP068=",
+        "lastModified": 1709485267,
+        "narHash": "sha256-bunOdYTK9YNiy+u0D6YN8q40oAeHoQ+9EgoatF3InJ8=",
         "ref": "refs/heads/master",
-        "rev": "766e70fd475cd4d73bd65613d06bbb3dcbb75871",
-        "revCount": 512,
+        "rev": "e4a71521a8eafc07524c55326ecc4ea942b06e25",
+        "revCount": 513,
         "type": "git",
         "url": "https://git.shell.bsocat.net/crane"
       },
@@ -108,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709348262,
-        "narHash": "sha256-eYTA1uZtYGFKrDOKiAz1wlE6aIC9WSdBNF8bSS818zM=",
+        "lastModified": 1709554374,
+        "narHash": "sha256-1yYgwxBzia+QrOaQaZ6YKqGFfiQcSBwYLzd9XRsRLQY=",
         "ref": "refs/heads/master",
-        "rev": "8a15cb36fffa0b5fbe31ef16ede0a479bef4b365",
-        "revCount": 1547,
+        "rev": "daa03606dfb5296a22e842acb02b46c1c4e9f5e7",
+        "revCount": 1557,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-darwin"
       },
@@ -191,11 +191,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709433328,
-        "narHash": "sha256-jk+HH4oDNWmj316M40URFwtNU84bWdrlSUoLaflY9XA=",
+        "lastModified": 1709574239,
+        "narHash": "sha256-RNGwGoqSQj4dCXg4KT0ano9S7eGkIuaOTIEpuRn2S3I=",
         "ref": "refs/heads/main",
-        "rev": "6fa45cae9f021f099b1aaa7e6bd43ab75ae51367",
-        "revCount": 142,
+        "rev": "03e10d8f70ca4d1257462c200fdea744ec444447",
+        "revCount": 148,
         "type": "git",
         "url": "https://git.shell.bsocat.net/lxddns"
       },
@@ -311,11 +311,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709345349,
-        "narHash": "sha256-E2tsnkM97cGuzHKOqdkUXfmI+K1wS4dNTJJu5QH2Vuk=",
+        "lastModified": 1709519692,
+        "narHash": "sha256-+ICGcASuUGpx82io6FVkMW7Pv4dvEl1v9A0ZtBKT41A=",
         "ref": "refs/heads/master",
-        "rev": "6e6fde31711e699be2e7fb67aae1c7e23ef606e0",
-        "revCount": 1307,
+        "rev": "30c3af18405567115958c577c62548bdc5a251e7",
+        "revCount": 1309,
         "type": "git",
         "url": "https://git.shell.bsocat.net/rust-overlay"
       },
