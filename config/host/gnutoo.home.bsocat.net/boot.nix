@@ -1,4 +1,3 @@
-{ pkgs, lib, config, ... }:
 {
   boot.initrd.supportedFilesystems = [ "ext2" "ext4" "vfat" "btrfs" ];
   boot.supportedFilesystems = [ "ext2" "ext4" "vfat" "btrfs" ];
