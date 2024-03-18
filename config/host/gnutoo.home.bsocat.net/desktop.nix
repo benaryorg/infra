@@ -8,7 +8,13 @@
   services.logind.lidSwitch = "ignore";
   systemd.suppressedSystemUnits = lib.mkAfter [ "systemd-backlight@.service" ];
   nixpkgs.config.allowUnfree = true;
-  hardware.nvidia.open = false;
+  hardware.nvidia =
+  {
+    open = false;
+    nvidiaSettings = false;
+    modesetting.enable = false;
+    powerManagement.enable = false;
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.xrandrHeads =
   [

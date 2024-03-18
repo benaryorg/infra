@@ -8,7 +8,13 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-  hardware.nvidia.open = true;
+  hardware.nvidia =
+  {
+    open = true;
+    nvidiaSettings = false;
+    modesetting.enable = false;
+    powerManagement.enable = false;
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.xrandrHeads =
   [
