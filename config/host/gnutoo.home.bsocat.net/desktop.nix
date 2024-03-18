@@ -14,6 +14,7 @@
     nvidiaSettings = false;
     modesetting.enable = false;
     powerManagement.enable = false;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.xrandrHeads =
