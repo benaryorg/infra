@@ -17,7 +17,7 @@
     };
     "/srv/cephfs/benaryorg" =
     {
-      device = "[2a0c:b641:a40::264b:feff:fe90:7474]:3301:/";
+      device = "haskell.home.bsocat.net:3303:/";
       fsType = "ceph";
       options = [ "noatime" "name=admin" "fs=benaryorg" "ms_mode=secure" "nofail" "x-systemd.after=ceph.target" ];
     };

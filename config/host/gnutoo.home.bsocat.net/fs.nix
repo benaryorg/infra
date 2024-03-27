@@ -17,7 +17,7 @@
     };
     "/mnt/cephfs/benaryorg" =
     {
-      device = "mir.home.bsocat.net:3301:/";
+      device = "haskell.home.bsocat.net:3303:/";
       fsType = "ceph";
       options = [ "noatime" "name=gnutoo" "fs=benaryorg" "ms_mode=secure" "nofail" "_netdev" ];
     };

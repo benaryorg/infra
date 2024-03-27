@@ -2,16 +2,6 @@
   let
     osd-fsid-map =
     {
-      "0" = "e5d0c428-292d-4222-bfed-93054c5839bc";
-      "1" = "4f7e6083-aa33-4985-a0dd-26ca93d6946b";
-      "2" = "677e1f7e-1fdd-4972-92c6-fc6168515b41";
-      "3" = "c63c1604-4a5d-41ba-b101-3ad83a671235";
-      "4" = "0435bc0f-f446-4c5f-8c41-cb73ea22db69";
-      "5" = "14d24025-6106-498c-a01f-f85d3cc8b689";
-      "6" = "774df17e-54f8-4eda-8779-d6cb5dfd472b";
-      "7" = "e8bd12c8-4385-4d31-bd53-aafe865c6a16";
-      "8" = "4274a9ca-b361-4df8-a3ec-30f3a29f819c";
-      "9" = "b1b365e7-c26e-4223-8842-dff688977967";
     };
   in
     {
@@ -37,32 +27,8 @@
         {
           fsid = "62e93be0-0c5f-4e11-ab8c-e93376a40b87";
           clusterNetwork = "2a0c:b641:a40::/48";
-          monInitialMembers = "v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3301/0 v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3302/0 v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3303/0";
-          monHost = "v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3301/0 v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3302/0 v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3303/0";
-        };
-
-        mon =
-        {
-          enable = true;
-          daemons = [ "0" "1" "2" ];
-        };
-
-        osd =
-        {
-          enable = true;
-          daemons = builtins.attrNames osd-fsid-map;
-        };
-
-        mds =
-        {
-          enable = true;
-          daemons = [ "a" "b" "c" "d" ];
-        };
-
-        mgr =
-        {
-          enable = true;
-          daemons = [ config.networking.fqdn ];
+          monInitialMembers = "v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3301/0 v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3302/0 v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3303/0";
+          monHost = "v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3301/0 v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3302/0 v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3303/0";
         };
       };
 

@@ -15,7 +15,7 @@
       global =
       {
         fsid = "62e93be0-0c5f-4e11-ab8c-e93376a40b87";
-        monHost = "v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3301/0 v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3302/0 v2:[2a0c:b641:a40::264b:feff:fe90:7474]:3303/0";
+        monHost = "v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3301/0 v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3302/0 v2:[2a0c:b641:a40:0:6efe:54ff:fe48:60b9]:3303/0";
 
         authClusterRequired = "cephx";
         authServiceRequired = "cephx";
