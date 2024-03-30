@@ -72,12 +72,7 @@
         enable = true;
         name = "br1";
         DHCP = "no";
-        addresses =
-        [
-          { addressConfig = { Address = "10.0.0.2/24"; }; }
-          { addressConfig = { Address = "2a0c:b641:a40:2::3/128"; }; }
-        ];
-        gateway = [ "10.0.0.1" ];
+        addresses = [];
         linkConfig =
         {
           RequiredForOnline = false;

@@ -1,6 +1,68 @@
 { config, ... }:
 {
   age.secrets.wg64 = { file = ./secret/wireguard/mir.home.bsocat.net/wg64.age; mode = "0400"; };
+  age.secrets.wg4 = { file = ./secret/wireguard/mir.home.bsocat.net/wg4.age; mode = "0640"; owner = "root"; group = "systemd-network"; };
+
+  systemd.network =
+  {
+    netdevs =
+    {
+      "80-wg4" =
+      {
+        netdevConfig =
+        {
+          Kind = "wireguard";
+          Name = "wg4";
+          MTUBytes = "1332";
+        };
+        wireguardConfig =
+        {
+          PrivateKeyFile = config.age.secrets.wg4.path;
+          ListenPort = 51281;
+        };
+        wireguardPeers =
+        [
+          {
+            wireguardPeerConfig =
+            {
+              PublicKey = "oO1quiYKv9V+pPkBkQxD0Uoim9z4apKlk9Jo/zbNbSA=";
+              AllowedIPs = [ "0.0.0.0/0" ];
+              Endpoint = "lxd1.cloud.bsocat.net:51281";
+            };
+          }
+        ];
+      };
+    };
+    networks =
+    {
+      "80-wg4" =
+      {
+        enable = true;
+        name = "wg4";
+        DHCP = "no";
+        linkConfig =
+        {
+          RequiredForOnline = false;
+          ActivationPolicy = "always-up";
+        };
+        addresses =
+        [
+          { addressConfig = { Address = "151.80.112.84/32"; }; }
+        ];
+        routes =
+        [
+          { routeConfig = { Gateway = "169.254.0.1"; GatewayOnLink = true; Destination = "0.0.0.0/0"; }; }
+        ];
+        networkConfig =
+        {
+          IPv6AcceptRA = false;
+          IPForward = "ipv4";
+          ConfigureWithoutCarrier = true;
+          KeepConfiguration = true;
+        };
+      };
+    };
+  };
 
   networking.wg-quick.interfaces.wg64 =
   {

@@ -2,6 +2,22 @@
 {
   benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMQN8n7AM1npiKBQiyUIg1PzT06umWFcfFFXKV5XSS8R";
 
+  age.secrets.wg4 = { file = ./secret/wireguard/lxd1.cloud.bsocat.net/wg4.age; mode = "0400"; };
+  networking.wg-quick.interfaces.wg4 =
+  {
+    address = [ "169.254.0.1" ];
+    listenPort = 51281;
+    mtu = 1332;
+    peers = [
+      {
+        publicKey = "jcwhNWHk83yOJN5Aywt19QvnON87QUpJT/J2b90+Ol8=";
+        allowedIPs = [ "151.80.112.84/32" ];
+        endpoint = "mir.home.bsocat.net:51281";
+      }
+    ];
+    privateKeyFile = config.age.secrets.wg4.path;
+  };
+
   age.secrets.lxdLegoSecret.file = ./secret/lego/hedns/lxd1.cloud.bsocat.net.age;
   benaryorg.prometheus.client.enable = true;
   benaryorg.hardware.vendor = "ovh";
