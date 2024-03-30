@@ -24,7 +24,7 @@
         DHCP = "no";
         addresses =
         [
-          { addressConfig = { Address = "2a0c:b641:a40:0:6efe:54ff:fe48:60b9"; }; }
+          { addressConfig = { Address = "2a0c:b641:a40:0:6efe:54ff:fe48:60b9/128"; }; }
         ];
       };
       "50-external" =
