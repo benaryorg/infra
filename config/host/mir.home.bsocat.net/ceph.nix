@@ -62,40 +62,5 @@
           [
             (builtins.map map-osd)
             builtins.listToAttrs
-          ])
-            //
-          {
-            stunnel =
-            {
-              wants = [ "acme-finished-${config.networking.fqdn}.target" ];
-              after = [ "acme-finished-${config.networking.fqdn}.target" ];
-              serviceConfig.LoadCredential =
-              [
-                "cert.pem:/var/lib/acme/${config.networking.fqdn}/cert.pem"
-                "key.pem:/var/lib/acme/${config.networking.fqdn}/key.pem"
-              ];
-            };
-          };
-
-      services.stunnel.servers =
-      {
-        ceph =
-        {
-          accept = ":::19283";
-          # FIXME? maybe make this more stable?
-          connect = 9283;
-          cert = "/run/credentials/stunnel.service/cert.pem";
-          key = "/run/credentials/stunnel.service/key.pem";
-          CAFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-          # do the dynamic thing?
-          checkHost = "prometheus.lxd.bsocat.net";
-          sslVersion = "TLSv1.3";
-          verifyChain = true;
-        };
-      };
-
-      benaryorg.prometheus.client.mocks.ceph =
-      {
-        port = 19283;
-      };
+          ]);
     }
