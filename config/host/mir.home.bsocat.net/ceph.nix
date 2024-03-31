@@ -58,9 +58,9 @@
             };
           };
         in
-          (lib.pipe config.services.ceph.osd.daemons
+          lib.pipe config.services.ceph.osd.daemons
           [
             (builtins.map map-osd)
             builtins.listToAttrs
-          ]);
+          ];
     }
