@@ -132,8 +132,8 @@
                     };
                     font =
                     {
-                      size = 9.5;
-                      normal = { family = "DejaVu Sans Mono"; style = "Book"; };
+                      size = 10;
+                      normal = { family = "Comic Mono"; };
                     };
                     scrolling.history = 0;
                     keyboard.bindings =
@@ -255,7 +255,7 @@
         (lib.mkIf cfg.enable
         {
           fonts.enableDefaultPackages = lib.mkDefault true;
-          fonts.packages = with pkgs; lib.mkAfter [ noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif ];
+          fonts.packages = with pkgs; lib.mkAfter [ noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif comic-mono ];
           qt.style = lib.mkDefault "adwaita-dark";
 
           hardware.opengl.enable = lib.mkDefault true;
