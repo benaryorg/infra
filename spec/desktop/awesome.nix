@@ -68,7 +68,7 @@ in
       -- Themes define colours, icons, font and wallpapers.
       gfs = require("gears.filesystem")
       beautiful.init(gfs.get_themes_dir() .. "default/theme.lua")
-      beautiful.font = "Comic Mono"
+      beautiful.font = "monospace"
       beautiful.wallpaper = "${background-image}"
 
       -- This is used later as the default terminal and editor to run.

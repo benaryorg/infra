@@ -133,7 +133,7 @@
                     font =
                     {
                       size = 10;
-                      normal = { family = "Comic Mono"; };
+                      normal = { family = "monospace"; };
                     };
                     scrolling.history = 0;
                     keyboard.bindings =
@@ -256,6 +256,7 @@
         {
           fonts.enableDefaultPackages = lib.mkDefault true;
           fonts.packages = with pkgs; lib.mkAfter [ noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif comic-mono ];
+          fonts.fontconfig.defaultFonts.monospace = lib.mkDefault [ "Comic Mono" ];
           qt.style = lib.mkDefault "adwaita-dark";
 
           hardware.opengl.enable = lib.mkDefault true;
