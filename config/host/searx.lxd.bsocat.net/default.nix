@@ -27,6 +27,7 @@
         {
           secret_key = "@SEARXNG_SECRET@";
           base_url = "https://${config.networking.fqdn}/";
+          method = "GET";
         };
         general =
         {
