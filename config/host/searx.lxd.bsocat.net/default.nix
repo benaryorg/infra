@@ -1,4 +1,4 @@
-{ benaryorg-flake, lib, config, ... }:
+{ benaryorg-flake, lib, pkgs, config, ... }:
 {
   benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAJEH2iuMvXZM+P+0kSEGou1pbslPS+Vj8u4xVhF9TKp";
 
@@ -13,11 +13,7 @@
   services =
   {
     # FIXME: https://github.com/searxng/searxng/issues/3227
-    searx.package = benaryorg-flake.inputs.nixpkgs-unstable.legacyPackages.${config.nixpkgs.system}.searxng;
-    uwsgi.package = lib.mkForce (benaryorg-flake.inputs.nixpkgs-unstable.legacyPackages.${config.nixpkgs.system}.uwsgi.override
-    {
-      plugins = lib.unique config.services.uwsgi.plugins;
-    });
+    searx.package = benaryorg-flake.inputs.nixpkgs-unstable.legacyPackages.${config.nixpkgs.system}.searxng.override { inherit (pkgs) python3; };
     searx =
     {
       enable = true;
