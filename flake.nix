@@ -162,8 +162,11 @@
           srcdir = ./.;
         in
           {
-            lint-deadnix = pkgs.runCommand "infra-deadnix" {} "${pkgs.deadnix}/bin/deadnix --fail -- ${srcdir} | tee /dev/stderr > $out";
-            lint-statix = pkgs.runCommand "infra-statix" {} "${pkgs.statix}/bin/statix check --config ${srcdir}/statix.toml -- ${srcdir} | tee /dev/stderr > $out";
+            lint =
+            {
+              deadnix = pkgs.runCommand "infra-deadnix" {} "${pkgs.deadnix}/bin/deadnix --fail -- ${srcdir} | tee /dev/stderr > $out";
+              statix = pkgs.runCommand "infra-statix" {} "${pkgs.statix}/bin/statix check --config ${srcdir}/statix.toml -- ${srcdir} | tee /dev/stderr > $out";
+            };
 
             kexec = colmenaHive.nodes."kexec.example.com".config.system.build.kexecTree;
             iso = colmenaHive.nodes."iso.example.com".config.system.build.isoImage;
