@@ -191,11 +191,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709574239,
-        "narHash": "sha256-RNGwGoqSQj4dCXg4KT0ano9S7eGkIuaOTIEpuRn2S3I=",
+        "lastModified": 1712851879,
+        "narHash": "sha256-5g78DWnODfLAjwvH86C8+tKLfIFckCnDYoHL38P+xBs=",
         "ref": "refs/heads/main",
-        "rev": "03e10d8f70ca4d1257462c200fdea744ec444447",
-        "revCount": 148,
+        "rev": "b85dcaaa6e7b0b20f0bdba28623a1cd9c04b27e9",
+        "revCount": 151,
         "type": "git",
         "url": "https://git.shell.bsocat.net/lxddns"
       },
@@ -264,11 +264,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1712843612,
-        "narHash": "sha256-qi/5BZjlDRgOlrRt3na9ix8df2Oz8fqgoSps4btnocE=",
+        "lastModified": 1712846723,
+        "narHash": "sha256-na2Y+q6p5+J5Li4SQAoZX7EaDF6PkHZPWN1UzX/2CDk=",
         "ref": "refs/heads/main",
-        "rev": "11cbcbf2f5998f5e23cb90c015ee7331c8f88659",
-        "revCount": 2,
+        "rev": "dac1f11da8947ec55c18a23d1add75dc64b93383",
+        "revCount": 5,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-njconnect"
       },
