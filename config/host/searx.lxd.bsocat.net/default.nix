@@ -1,4 +1,4 @@
-{ benaryorg-flake, lib, pkgs, config, ... }:
+{ benaryorg-flake, pkgs, config, ... }:
 {
   benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAJEH2iuMvXZM+P+0kSEGou1pbslPS+Vj8u4xVhF9TKp";
 
