@@ -40,9 +40,13 @@
     lxddns.inputs.nixpkgs.follows = "nixpkgs";
     lxddns.inputs.flake-utils.follows = "flake-utils";
     lxddns.inputs.systems.follows = "nix-systems";
+    njconnect.url = "git+https://git.shell.bsocat.net/nix-njconnect";
+    njconnect.inputs.nixpkgs.follows = "nixpkgs";
+    njconnect.inputs.flake-utils.follows = "flake-utils";
+    njconnect.inputs.systems.follows = "nix-systems";
   };
 
-  outputs = { self, nixpkgs, colmena, ragenix, benaryorg-website, lxddns, home-manager, ... }:
+  outputs = { self, nixpkgs, colmena, ... }@args:
     let
       lib = nixpkgs.lib;
       withSshKey = key: module:
@@ -190,10 +194,10 @@
         {
           imports =
           [
-            ragenix.nixosModules.default
-            benaryorg-website.nixosModules.default
-            lxddns.nixosModules.default
-            home-manager.nixosModules.default
+            args.ragenix.nixosModules.default
+            args.benaryorg-website.nixosModules.default
+            args.lxddns.nixosModules.default
+            args.home-manager.nixosModules.default
             ./spec/base.nix
             ./spec/deployment.nix
             ./spec/user.nix
@@ -217,9 +221,10 @@
           {
             nixpkgs.overlays =
             [
-              benaryorg-website.overlays.default
-              ragenix.overlays.default
-              lxddns.overlays.default
+              args.benaryorg-website.overlays.default
+              args.ragenix.overlays.default
+              args.lxddns.overlays.default
+              args.njconnect.overlays.default
             ];
             benaryorg.user.ssh.keys = lib.mkOrder 1000 [ nixosConfig.shell.config.benaryorg.ssh.userkey.benaryorg ];
           };

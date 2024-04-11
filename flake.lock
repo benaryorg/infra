@@ -251,6 +251,32 @@
         "url": "https://git.shell.bsocat.net/nixpkgs"
       }
     },
+    "njconnect": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "nix-systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1712843612,
+        "narHash": "sha256-qi/5BZjlDRgOlrRt3na9ix8df2Oz8fqgoSps4btnocE=",
+        "ref": "refs/heads/main",
+        "rev": "11cbcbf2f5998f5e23cb90c015ee7331c8f88659",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://git.shell.bsocat.net/nix-njconnect"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.shell.bsocat.net/nix-njconnect"
+      }
+    },
     "ragenix": {
       "inputs": {
         "agenix": [
@@ -297,6 +323,7 @@
         "nix-systems": "nix-systems",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "njconnect": "njconnect",
         "ragenix": "ragenix",
         "rust-overlay": "rust-overlay"
       }

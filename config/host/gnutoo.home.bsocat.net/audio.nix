@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 {
-  users.users.benaryorg.packages = with pkgs; [ pipewire wireplumber pulsemixer alsa-utils ];
+  users.users.benaryorg.packages = with pkgs; [ pipewire wireplumber pulsemixer alsa-utils njconnect ];
 
   sound.enable = true;
   security.rtkit.enable = true;
