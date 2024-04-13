@@ -46,6 +46,8 @@
       ''
         unbound = {
           resolvconf = true;
+          hoststxt = true;
+          forward = { "127.0.0.53" };
         };
 
         turn_external_host = "turn-static.svc.benary.org"
