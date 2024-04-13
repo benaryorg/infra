@@ -42,6 +42,10 @@
       c2sRequireEncryption = true;
       s2sRequireEncryption = true;
       s2sSecureAuth = true;
+      package = pkgs.prosody.override
+      {
+        withCommunityModules = [ "track_muc_joins" "ping_muc" ];
+      };
       extraConfig =
       ''
         unbound = {
