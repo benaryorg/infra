@@ -36,6 +36,8 @@
 
     users.users.benaryorg.packages = with pkgs; [ gnupg vim-full ragenix ];
 
+    powerManagement.cpuFreqGovernor = "powersave";
+
     zramSwap = { enable = true; memoryPercent = 400; };
 
     console.keyMap = "neo";

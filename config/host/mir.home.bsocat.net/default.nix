@@ -84,6 +84,8 @@
     virtualisation.libvirtd.onShutdown = "shutdown";
     virtualisation.libvirtd.qemu.package = pkgs.qemu_full;
 
+    powerManagement.cpuFreqGovernor = "schedutil";
+
     zramSwap = { enable = true; memoryPercent = 400; };
 
     console.keyMap = "neo";
