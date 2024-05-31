@@ -110,6 +110,13 @@
             about-filter = "${cgit}/lib/cgit/filters/about-formatting.sh";
           };
         };
+
+    services.fcgiwrap =
+    {
+      user = config.services.gitolite.user;
+      group = config.services.gitolite.group;
+    };
+
     systemd.services = lib.pipe config.benaryorg.git.mirror
       [
         builtins.attrValues
