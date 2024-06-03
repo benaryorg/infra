@@ -152,6 +152,7 @@
                     ao = "pulse";
                     alang = "jpa,jpn,jp,eng,en";
                     slang = "eng,en,jpa,jpn,jp";
+                    subs-with-matching-audio = true;
                     network-timeout = 4;
                     cache = true;
                     cache-secs = 600;
