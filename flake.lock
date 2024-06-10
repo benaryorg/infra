@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1701157479,
-        "narHash": "sha256-VIcSTcHwRUJnlnCw8XLmuJs87nB5r1FoMEtMVfB/pPk=",
+        "lastModified": 1718029096,
+        "narHash": "sha256-8kvX3bde/R9wxbz9voRPQSyDOKMYo4+U1jtkgjWyZhY=",
         "ref": "refs/heads/main",
-        "rev": "d94566494209fd84cf64217ec738f7ec9f531024",
-        "revCount": 10,
+        "rev": "6e048386182a9998a8c7dffbf35b4b7b9589f037",
+        "revCount": 11,
         "type": "git",
         "url": "https://git.shell.bsocat.net/benary.org"
       },
@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717025063,
-        "narHash": "sha256-dIubLa56W9sNNz0e8jGxrX3CAkPXsq7snuFA/Ie6dn8=",
+        "lastModified": 1717951870,
+        "narHash": "sha256-hGLeRxSEeFz9WvmQ4s4AuMJ5InLSZvoczDdXkWSFi1A=",
         "ref": "refs/heads/master",
-        "rev": "480dff0be03dac0e51a8dfc26e882b0d123a450e",
-        "revCount": 576,
+        "rev": "17d9e9dedd58dde2c562a4296934c6d6a0844534",
+        "revCount": 585,
         "type": "git",
         "url": "https://git.shell.bsocat.net/crane"
       },
@@ -108,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716993688,
-        "narHash": "sha256-vo5k2wQekfeoq/2aleQkBN41dQiQHNTniZeVONWiWLs=",
+        "lastModified": 1717976995,
+        "narHash": "sha256-u3HBinyIyUvL1+N816bODpJmSQdgn0Mbb8BprFw7kqo=",
         "ref": "refs/heads/master",
-        "rev": "c0d5b8c54d6828516c97f6be9f2d00c63a363df4",
-        "revCount": 1604,
+        "rev": "315aa649ba307704db0b16c92f097a08a65ec955",
+        "revCount": 1606,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-darwin"
       },
@@ -164,11 +164,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716729592,
-        "narHash": "sha256-Y3bOjoh2cFBqZN0Jw1zUdyr7tjygyxl2bD/QY73GZP0=",
+        "lastModified": 1717476296,
+        "narHash": "sha256-ScHe38Tr+TxGURC17kby4mIIxOG3aJvZWXzPM79UnEk=",
         "ref": "release-23.11",
-        "rev": "2c78a57c544dd19b07442350727ced097e1aa6e6",
-        "revCount": 3185,
+        "rev": "095ef64aa3b2ab4a4f1bf07f29997e21e3a5576a",
+        "revCount": 3186,
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       },
@@ -221,11 +221,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1716991068,
-        "narHash": "sha256-Av0UWCCiIGJxsZ6TFc+OiKCJNqwoxMNVYDBChmhjNpo=",
+        "lastModified": 1717880976,
+        "narHash": "sha256-BRvSCsKtDUr83NEtbGfHLUOdDK0Cgbezj2PtcHnz+sQ=",
         "ref": "nixos-23.11",
-        "rev": "25cf937a30bf0801447f6bf544fc7486c6309234",
-        "revCount": 558816,
+        "rev": "4913a7c3d8b8d00cb9476a6bd730ff57777f740c",
+        "revCount": 558889,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -237,11 +237,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1716948383,
-        "narHash": "sha256-SzDKxseEcHR5KzPXLwsemyTR/kaM9whxeiJohbL04rs=",
+        "lastModified": 1717786204,
+        "narHash": "sha256-4q0s6m0GUcN7q+Y2DqD27iLvbcd1G50T2lv08kKxkSI=",
         "ref": "nixos-unstable",
-        "rev": "ad57eef4ef0659193044870c731987a6df5cf56b",
-        "revCount": 632549,
+        "rev": "051f920625ab5aabe37c920346e3e69d7d34400e",
+        "revCount": 636273,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
@@ -338,11 +338,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717121863,
-        "narHash": "sha256-/3sxIe7MZqF/jw1RTQCSmgTjwVod43mmrk84m50MJQ4=",
+        "lastModified": 1717985971,
+        "narHash": "sha256-24h/qKp0aeI+Ew13WdRF521kY24PYa5HOvw0mlrABjk=",
         "ref": "refs/heads/master",
-        "rev": "2a7b53172ed08f856b8382d7dcfd36a4e0cbd866",
-        "revCount": 1402,
+        "rev": "abfe5b3126b1b7e9e4daafc1c6478d17f0b584e7",
+        "revCount": 1420,
         "type": "git",
         "url": "https://git.shell.bsocat.net/rust-overlay"
       },
