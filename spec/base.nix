@@ -156,7 +156,7 @@
         # tui tooling
         asciinema pass pinentry-curses tmux tmux-xpanes
         # databases
-        sqlite
+        sqlite-interactive
         # debugging
         curl dig htop iftop iotop lsof netcat-openbsd nmap nmon socat strace tcpdump traceroute whois
         # hardware tooling
