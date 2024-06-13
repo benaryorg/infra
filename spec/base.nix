@@ -148,7 +148,7 @@
         efibootmgr psutils pstree uucp
         (busybox.override { enableStatic = true; enableAppletSymlinks = false; extraConfig = "CONFIG_FEATURE_SH_STANDALONE y"; })
         # misc utils
-        openssl bc
+        openssl bc unixtools.xxd
         # shell tooling
         bvi jq moreutils pv tree
         # file tooling
