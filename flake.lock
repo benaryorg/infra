@@ -264,11 +264,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1712846723,
-        "narHash": "sha256-na2Y+q6p5+J5Li4SQAoZX7EaDF6PkHZPWN1UzX/2CDk=",
+        "lastModified": 1718711628,
+        "narHash": "sha256-Dv41LQRAtFYwyJv7kEKeIjpIjCAXR1Bl57mj8W8ws3E=",
         "ref": "refs/heads/main",
-        "rev": "dac1f11da8947ec55c18a23d1add75dc64b93383",
-        "revCount": 5,
+        "rev": "f716524f3abc017566d868da0747401d8285885a",
+        "revCount": 6,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-njconnect"
       },
