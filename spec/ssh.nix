@@ -47,6 +47,7 @@
     {
       enable = config.benaryorg.ssh.enable;
       startWhenNeeded = false;
+      authorizedKeysInHomedir = lib.mkDefault false;
       settings =
       {
         PermitRootLogin = "no";

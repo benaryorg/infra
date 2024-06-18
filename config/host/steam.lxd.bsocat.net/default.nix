@@ -2,7 +2,7 @@
 {
   benaryorg.ssh.hostkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqIBwvc1Pf6GbuVs8fo1UFGJLomb47VJO01ZzFv+BSK";
 
-  benaryorg.user.ssh.keys = [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
+  benaryorg.user.ssh.keys = [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg nodes."mir.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
   benaryorg.ssh.x11 = true;
   hardware.opengl.enable = true;
   benaryorg.prometheus.client.enable = true;

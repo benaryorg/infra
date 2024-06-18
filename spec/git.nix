@@ -53,6 +53,7 @@
   {
     services =
     {
+      openssh.authorizedKeysInHomedir = true;
       gitolite =
       {
         enable = true;

@@ -5,7 +5,7 @@
   age.secrets.buildSecret.file = ./secret/build/nixos.home.bsocat.net.age;
   benaryorg.net.type = "manual";
   benaryorg.ssh.x11 = true;
-  benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
+  benaryorg.user.ssh.keys = lib.mkAfter [ nodes."gnutoo.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg nodes."mir.home.bsocat.net".config.benaryorg.ssh.userkey.benaryorg ];
   benaryorg.prometheus.client.enable = true;
 
   benaryorg.build =

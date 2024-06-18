@@ -14,6 +14,7 @@
 
   benaryorg.hardware.vendor = "ovh";
   benaryorg.ssh.x11 = true;
+  services.openssh.authorizedKeysInHomedir = true;
   benaryorg.user.ssh.keys = lib.pipe nodes
   [
     builtins.attrValues
