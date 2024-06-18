@@ -99,8 +99,8 @@
     # lxd user/group for extra large uid ranges
     users.users.root =
     {
-      subUidRanges = lib.mkForce [ { startUid = 1000000000; count = 1000000000; } ];
-      subGidRanges = lib.mkForce [ { startGid = 1000000000; count = 1000000000; } ];
+      subUidRanges = lib.mkForce [ { startUid = 1000000; count = 1000000000; } ];
+      subGidRanges = lib.mkForce [ { startGid = 1000000; count = 1000000000; } ];
     };
 
     boot.kernel.sysctl =
