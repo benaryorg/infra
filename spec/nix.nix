@@ -15,7 +15,7 @@
     nix.package = pkgs.lix;
     nix.gc.automatic = true;
     nix.gc.options = "--delete-older-than 16d";
-    nixpkgs.flake.source = pkgs.path;
+    nixpkgs.flake.source = lib.mkDefault pkgs.path;
     environment.etc.nixpkgs.source = config.nixpkgs.flake.source;
     systemd.services.nix-daemon.environment.TMPDIR = "/nix/tmp";
     systemd.tmpfiles.rules = [ "v '/nix/tmp' 0755 root root - -" ];
