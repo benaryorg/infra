@@ -24,7 +24,6 @@
     flake-utils.url = "git+https://git.shell.bsocat.net/flake-utils";
     flake-utils.inputs.systems.follows = "nix-systems";
     rust-overlay.url = "git+https://git.shell.bsocat.net/rust-overlay";
-    rust-overlay.inputs.flake-utils.follows = "flake-utils";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     benaryorg-website.url = "git+https://git.shell.bsocat.net/benary.org";
     benaryorg-website.inputs.flake-utils.follows = "flake-utils";
