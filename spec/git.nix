@@ -126,6 +126,7 @@
           value =
           {
             description = "repository mirror for `${config.name}`";
+            wants = [ "network-online.target" ];
             after = [ "network-online.target" ];
             serviceConfig =
             {
