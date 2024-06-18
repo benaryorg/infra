@@ -67,11 +67,8 @@
     {
       # https://github.com/NixOS/nixpkgs/issues/231191
       environment.etc."resolv.conf".mode = "direct-symlink";
-      # https://github.com/NixOS/nixpkgs/issues/114114
-      services.resolved.extraConfig =
-      ''
-        FallbackDNS=
-      '';
+      # no upstream defaults
+      services.resolved.fallbackDns = [];
     })
     (lib.mkIf (config.benaryorg.net.resolver == "unbound")
     {
