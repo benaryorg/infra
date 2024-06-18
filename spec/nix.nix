@@ -15,9 +15,8 @@
     };
     nix.gc.automatic = true;
     nix.gc.options = "--delete-older-than 16d";
-    environment.etc.nixpkgs.source = pkgs.path;
-    nix.registry.nixpkgs = { to = { path = pkgs.path; type = "path"; }; };
-    nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    nixpkgs.flake.source = pkgs.path;
+    environment.etc.nixpkgs.source = config.nixpkgs.flake.source;
     systemd.services.nix-daemon.environment.TMPDIR = "/nix/tmp";
     systemd.tmpfiles.rules = [ "v '/nix/tmp' 0755 root root - -" ];
   };
