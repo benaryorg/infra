@@ -129,7 +129,8 @@
       lxddns-responder =
       {
         wants = [ "acme-finished-${config.networking.fqdn}.target" ];
-        after = [ "acme-finished-${config.networking.fqdn}.target" ];
+        after = [ "incus.service" "acme-finished-${config.networking.fqdn}.target" ];
+        upholds = [ "incus.service" ];
       };
       pdns =
       {
