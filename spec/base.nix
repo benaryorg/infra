@@ -97,7 +97,7 @@
       gnupg.agent =
       {
         enable = config.benaryorg.base.gnupg.enable;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinentry-curses;
       };
       ssh =
       {
