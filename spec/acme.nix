@@ -13,7 +13,7 @@
     };
   };
 
-  config = 
+  config =
     let
       cfg = config.benaryorg.acme;
       commonOptions = [ "--preferred-chain" "ISRG Root X1" ];
