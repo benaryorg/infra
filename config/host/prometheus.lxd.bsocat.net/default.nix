@@ -101,5 +101,5 @@
   };
   systemd.services.prometheus-xmpp-alerts.serviceConfig.LoadCredential = [ "password:${config.age.secrets.xmppAlerting.path}" ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

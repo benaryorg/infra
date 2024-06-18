@@ -102,5 +102,5 @@
 
   networking.nameservers = [ "2a0c:b641:a40:5::" ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

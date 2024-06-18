@@ -74,5 +74,5 @@
 
   fileSystems."/".options = lib.mkAfter [ "compress=zstd:8" ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

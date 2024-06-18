@@ -45,5 +45,5 @@
   };
   systemd.tmpfiles.rules = [ "v '/var/lib/syncplay' 0750 syncplay syncplay - -" ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
