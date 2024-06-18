@@ -4,10 +4,10 @@
   {
     benaryorg.desktop =
     {
-      enable = lib.mkEnableOption (lib.mdDoc "desktop environment");
+      enable = lib.mkEnableOption "desktop environment";
       defaultUser = lib.mkOption
       {
-        description = lib.mdDoc
+        description =
         ''
           Default user to deploy the desktop environment for.
 
@@ -40,12 +40,12 @@
                 benaryorg.desktop =
                 {
                   enable = lib.mkEnableOption "desktop";
-                  powerSaving = lib.mkEnableOption (lib.mdDoc "X11 power saving options");
+                  powerSaving = lib.mkEnableOption "X11 power saving options";
                   keyboardLayout = lib.mkOption
                   {
                     default = "de neo";
                     type = lib.types.str;
-                    description = lib.mdDoc
+                    description =
                     ''
                       Keyboard layout to set.
                       This is passed to `setxkbmap` verbatim.
@@ -55,7 +55,7 @@
                   {
                     default = "gnome";
                     type = lib.types.str;
-                    description = lib.mdDoc
+                    description =
                     ''
                       Set {env}`XDG_CURRENT_DESKTOP` to a value appropriate for your system.
                     '';
@@ -64,7 +64,7 @@
                   {
                     default = "";
                     type = lib.types.listOf lib.types.str;
-                    description = lib.mdDoc
+                    description =
                     ''
                       Additional commands run before your desktop environment starts (i.e. in your {file}`.xinitrc`).
                     '';
@@ -76,7 +76,7 @@
                       ulimit -v unlimited && exec awesome
                     '';
                     type = lib.types.str;
-                    description = lib.mdDoc
+                    description =
                     ''
                       The command to start your desktop environment or window manager.
                     '';
@@ -85,14 +85,14 @@
                   {
                     default = 2;
                     type = lib.types.numbers.between 1 12;
-                    description = lib.mdDoc
+                    description =
                     ''
                       Which TTY should trigger the graphical login.
                     '';
                   };
                   awesome =
                   {
-                    enablePatchage = lib.mkEnableOption (lib.mdDoc "*patchage* support in *awesome*");
+                    enablePatchage = lib.mkEnableOption "*patchage* support in *awesome*";
                   };
                 };
               };

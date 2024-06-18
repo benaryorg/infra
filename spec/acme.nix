@@ -7,7 +7,7 @@
       enable = lib.mkOption
       {
         default = true;
-        description = lib.mdDoc "Whether to enable acme defaults.";
+        description = "Whether to enable acme defaults.";
         type = lib.types.bool;
       };
     };

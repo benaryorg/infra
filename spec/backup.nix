@@ -7,7 +7,7 @@
       role = lib.mkOption
       {
         type = lib.types.enum [ "client" "server" "none" ];
-        description = lib.mdDoc
+        description =
         ''
           In what role to act.
           A `server` provides accesses the clients via SSH and rsyncs their data.
@@ -15,13 +15,13 @@
           `none` opts out of the entire module.
         '';
         default = if config.benaryorg.backup.client.directories == [] then "none" else "client";
-        defaultText = lib.mdDoc ''If {option}`benaryorg.backup.client.directorie` is an empty list then `"none"` otherwise `"client"`.'';
+        defaultText = ''If {option}`benaryorg.backup.client.directorie` is an empty list then `"none"` otherwise `"client"`.'';
       };
       tags = lib.mkOption
       {
         type = lib.types.listOf lib.types.str;
         default = [ "default" ];
-        description = lib.mdDoc
+        description =
         ''
           List of tags to use/serve.
 
@@ -36,7 +36,7 @@
         {
           type = lib.types.listOf lib.types.str;
           default = [];
-          description = lib.mdDoc
+          description =
           ''
             List of directories to backup.
 
@@ -47,7 +47,7 @@
         {
           type = lib.types.listOf lib.types.str;
           default = [ "/nix" ];
-          description = lib.mdDoc
+          description =
           ''
             List of rsync style patterns to exclude.
 

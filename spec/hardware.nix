@@ -14,7 +14,7 @@
       {
         device = lib.mkOption
         {
-          description = lib.mdDoc "List of devices and their UUIDs, each **must** be GPT and have four partitions: 1) bios boot, 2) `/boot` (mdadm), 3) lukskey (1 sector), 4) luksroot (btrfs).";
+          description = "List of devices and their UUIDs, each **must** be GPT and have four partitions: 1) bios boot, 2) `/boot` (mdadm), 3) lukskey (1 sector), 4) luksroot (btrfs).";
           type = lib.types.attrsOf (lib.types.attrsOf lib.types.str);
           example = lib.literalExpression
           ''
@@ -40,7 +40,7 @@
         {
           boot = lib.mkOption
           {
-            description = lib.mdDoc "UUID of `/boot` (ext4).";
+            description = "UUID of `/boot` (ext4).";
             type = lib.types.str;
           };
           root = lib.mkOption

@@ -15,7 +15,7 @@
       };
       gnupg =
       {
-        enable = lib.mkEnableOption (lib.mdDoc "GnuPG");
+        enable = lib.mkEnableOption "GnuPG";
       };
       lightweight = lib.mkOption
       {

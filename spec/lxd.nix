@@ -4,7 +4,7 @@
   {
     benaryorg.lxd =
     {
-      enable = lib.mkEnableOption (lib.mdDoc "the opinionated LXD cluster configuration.");
+      enable = lib.mkEnableOption "the opinionated LXD cluster configuration.";
       cluster = lib.mkOption
       {
         description = "Name of the LXD cluster to integrate with.";

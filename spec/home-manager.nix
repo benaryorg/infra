@@ -7,13 +7,13 @@
       enable = lib.mkOption
       {
         default = true;
-        description = lib.mdDoc "Whether to enable home-manager defaults.";
+        description = "Whether to enable home-manager defaults.";
         type = lib.types.bool;
       };
       perUserSettings = lib.mkOption
       {
         default = {};
-        description = lib.mdDoc
+        description =
         ''
           Users and their enabled modules.
           The idea is that NixOS modules can register their home-manager modules using {option}`home-manager.sharedModules`, and then use this option to enable them.

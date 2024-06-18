@@ -24,7 +24,7 @@
       };
       userkey = lib.mkOption
       {
-        description = lib.mdDoc
+        description =
         ''
           List user SSH keys.
           This is used to deploy these SSH keys to other nodes by accessing {option}`nodes.<node>.benaryorg.ssh.userkey.<name>`.
