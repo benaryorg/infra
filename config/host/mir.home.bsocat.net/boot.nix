@@ -1,6 +1,12 @@
+{ config, ... }:
 {
-  boot.initrd.supportedFilesystems = [ "ext4" "vfat" "btrfs" ];
-  boot.supportedFilesystems = [ "ext4" "vfat" "btrfs" ];
+  boot.supportedFilesystems =
+  {
+    ext4 = true;
+    vfat = true;
+    btrfs = true;
+  };
+  boot.initrd.supportedFilesystems = config.boot.supportedFilesystems;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;

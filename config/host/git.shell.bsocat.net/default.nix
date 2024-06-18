@@ -26,5 +26,5 @@
     mobile-nixos = { url = "https://github.com/NixOS/mobile-nixos.git"; };
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

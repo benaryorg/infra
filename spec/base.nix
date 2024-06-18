@@ -15,7 +15,7 @@
       };
       gnupg =
       {
-        enable = lib.mkEnableOption (lib.mdDoc "GnuPG");
+        enable = lib.mkEnableOption "GnuPG";
       };
       lightweight = lib.mkOption
       {
@@ -97,7 +97,7 @@
       gnupg.agent =
       {
         enable = config.benaryorg.base.gnupg.enable;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinentry-curses;
       };
       ssh =
       {

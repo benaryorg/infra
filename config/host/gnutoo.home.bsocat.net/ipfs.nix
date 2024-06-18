@@ -23,7 +23,7 @@
   {
     description = "sync IPFS pins stored in MFS";
     after = [ "network-online.target" "ipfs-api.socket" ];
-    wants = [ "ipfs-api.socket" ];
+    wants = [ "network-online.target" "ipfs-api.socket" ];
     serviceConfig =
     {
       Type = "oneshot";
@@ -43,6 +43,7 @@
   {
     description = "sync IPFS pins stored in MFS";
     after = [ "network-online.target" "ipfs-api.socket" ];
+    wants = [ "network-online.target" ];
     wantedBy = [ "timers.target" ];
     timerConfig =
     {

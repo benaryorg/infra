@@ -7,13 +7,13 @@
       enable = lib.mkOption
       {
         default = true;
-        description = lib.mdDoc "Whether to enable home-manager defaults.";
+        description = "Whether to enable home-manager defaults.";
         type = lib.types.bool;
       };
       perUserSettings = lib.mkOption
       {
         default = {};
-        description = lib.mdDoc
+        description =
         ''
           Users and their enabled modules.
           The idea is that NixOS modules can register their home-manager modules using {option}`home-manager.sharedModules`, and then use this option to enable them.
@@ -45,7 +45,7 @@
           For the "default" user, often defaulting to {option}`benaryorg.ssh.user`, the module is enabled, but using `lib.mkDefault` which allows easy overrides in case functionality is desired to be cherry-picked from the module.
 
           Any other user can still opt into the module using:
-          
+
           ```nix
           benaryorg.home-manager.perUserSettings.my-other-user.mymodule.enable = true;
           ```
@@ -56,7 +56,7 @@
     };
   };
 
-  config = 
+  config =
     let
       cfg = config.benaryorg.home-manager;
     in
@@ -66,7 +66,7 @@
         home-manager.useUserPackages = true;
         home-manager.users = builtins.mapAttrs (_user: settings: _args:
           {
-            config = 
+            config =
               {
                 # breaks when on IPv6-only because upstream pulls a tarball directly from source hut which is Legacy IP only
                 # see: https://github.com/nix-community/home-manager/issues/4966

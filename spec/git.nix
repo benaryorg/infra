@@ -4,7 +4,7 @@
   {
     benaryorg.git =
     {
-      enable = lib.mkEnableOption (lib.mdDoc "git server functionality");
+      enable = lib.mkEnableOption "git server functionality";
       adminkey = lib.mkOption
       {
         description = "Gitolite admin SSH key.";
@@ -53,6 +53,7 @@
   {
     services =
     {
+      openssh.authorizedKeysInHomedir = true;
       gitolite =
       {
         enable = true;
@@ -126,6 +127,7 @@
           value =
           {
             description = "repository mirror for `${config.name}`";
+            wants = [ "network-online.target" ];
             after = [ "network-online.target" ];
             serviceConfig =
             {

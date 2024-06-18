@@ -4,7 +4,7 @@
   {
     benaryorg.lxd =
     {
-      enable = lib.mkEnableOption (lib.mdDoc "the opinionated LXD cluster configuration.");
+      enable = lib.mkEnableOption "the opinionated LXD cluster configuration.";
       cluster = lib.mkOption
       {
         description = "Name of the LXD cluster to integrate with.";
@@ -99,8 +99,8 @@
     # lxd user/group for extra large uid ranges
     users.users.root =
     {
-      subUidRanges = lib.mkForce [ { startUid = 1000000000; count = 1000000000; } ];
-      subGidRanges = lib.mkForce [ { startGid = 1000000000; count = 1000000000; } ];
+      subUidRanges = lib.mkForce [ { startUid = 1000000; count = 1000000000; } ];
+      subGidRanges = lib.mkForce [ { startGid = 1000000; count = 1000000000; } ];
     };
 
     boot.kernel.sysctl =
@@ -129,7 +129,8 @@
       lxddns-responder =
       {
         wants = [ "acme-finished-${config.networking.fqdn}.target" ];
-        after = [ "acme-finished-${config.networking.fqdn}.target" ];
+        after = [ "incus.service" "acme-finished-${config.networking.fqdn}.target" ];
+        upholds = [ "incus.service" ];
       };
       pdns =
       {

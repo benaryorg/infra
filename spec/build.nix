@@ -7,7 +7,7 @@
       role = lib.mkOption
       {
         type = lib.types.enum [ "client" "client-light" "server" "none" ];
-        description = lib.mdDoc
+        description =
         ''
           In what role to act.
           A `server` provides build services as well as a binary cache via SSH and HTTPS including appropriate signatures.
@@ -22,7 +22,7 @@
         type = lib.types.listOf lib.types.str;
         default = [ config.networking.domain ];
         defaultText = lib.literalExpression "[ config.networking.domain ]";
-        description = lib.mdDoc
+        description =
         ''
           List of tags to use/serve.
 
@@ -60,7 +60,7 @@
       {
         type = lib.types.bool;
         default = true;
-        description = lib.mdDoc "Only relevant for servers, exposes nixos documentation on `/doc` via HTTPS.";
+        description = "Only relevant for servers, exposes nixos documentation on `/doc` via HTTPS.";
       };
     };
   };

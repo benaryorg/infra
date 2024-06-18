@@ -164,16 +164,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1717476296,
-        "narHash": "sha256-ScHe38Tr+TxGURC17kby4mIIxOG3aJvZWXzPM79UnEk=",
-        "ref": "release-23.11",
-        "rev": "095ef64aa3b2ab4a4f1bf07f29997e21e3a5576a",
-        "revCount": 3186,
+        "lastModified": 1718530513,
+        "narHash": "sha256-BmO8d0r+BVlwWtMLQEYnwmngqdXIuyFzMwvmTcLMee8=",
+        "ref": "release-24.05",
+        "rev": "a1fddf0967c33754271761d91a3d921772b30d0e",
+        "revCount": 3568,
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       },
       "original": {
-        "ref": "release-23.11",
+        "ref": "release-24.05",
         "type": "git",
         "url": "https://git.shell.bsocat.net/home-manager"
       }
@@ -191,11 +191,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1712851879,
-        "narHash": "sha256-5g78DWnODfLAjwvH86C8+tKLfIFckCnDYoHL38P+xBs=",
+        "lastModified": 1718710235,
+        "narHash": "sha256-F50404gVHT3AR3TI7zw9ifpqJGrBX4kKx/x+0CsnBRE=",
         "ref": "refs/heads/main",
-        "rev": "b85dcaaa6e7b0b20f0bdba28623a1cd9c04b27e9",
-        "revCount": 151,
+        "rev": "dbd2e5526ee227a7750eb5169749fab69b9fec42",
+        "revCount": 152,
         "type": "git",
         "url": "https://git.shell.bsocat.net/lxddns"
       },
@@ -221,16 +221,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1718447546,
-        "narHash": "sha256-JHuXsrC9pr4kA4n7LuuPfWFJUVlDBVJ1TXDVpHEuUgM=",
-        "ref": "nixos-23.11",
-        "rev": "842253bf992c3a7157b67600c2857193f126563a",
-        "revCount": 558983,
+        "lastModified": 1718437845,
+        "narHash": "sha256-ZT7Oc1g4I4pHVGGjQFnewFVDRLH5cIZhEzODLz9YXeY=",
+        "ref": "nixos-24.05",
+        "rev": "752c634c09ceb50c45e751f8791cb45cb3d46c9e",
+        "revCount": 631673,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       },
       "original": {
-        "ref": "nixos-23.11",
+        "ref": "nixos-24.05",
         "type": "git",
         "url": "https://git.shell.bsocat.net/nixpkgs"
       }
@@ -264,11 +264,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1712846723,
-        "narHash": "sha256-na2Y+q6p5+J5Li4SQAoZX7EaDF6PkHZPWN1UzX/2CDk=",
+        "lastModified": 1718711628,
+        "narHash": "sha256-Dv41LQRAtFYwyJv7kEKeIjpIjCAXR1Bl57mj8W8ws3E=",
         "ref": "refs/heads/main",
-        "rev": "dac1f11da8947ec55c18a23d1add75dc64b93383",
-        "revCount": 5,
+        "rev": "f716524f3abc017566d868da0747401d8285885a",
+        "revCount": 6,
         "type": "git",
         "url": "https://git.shell.bsocat.net/nix-njconnect"
       },

@@ -14,6 +14,7 @@
 
   benaryorg.hardware.vendor = "ovh";
   benaryorg.ssh.x11 = true;
+  services.openssh.authorizedKeysInHomedir = true;
   benaryorg.user.ssh.keys = lib.pipe nodes
   [
     builtins.attrValues
@@ -73,5 +74,5 @@
 
   fileSystems."/".options = lib.mkAfter [ "compress=zstd:8" ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

@@ -50,33 +50,6 @@
     boot.kernelModules = lib.mkAfter [ "ceph" "rbd" ];
     virtualisation.incus.enable = true;
     users.groups.incus-admin.members = [ "benaryorg" ];
-    # FIXME: the Gentoo incus install was too new at the time
-    # remove when https://github.com/NixOS/nixpkgs/pull/284009 hits any release
-    # I do not want to follow unstable here because unstable would potentially update further than the next release
-    nixpkgs.overlays = lib.mkAfter
-    [
-      (_final: prev:
-      {
-        incus-unwrapped = prev.incus-unwrapped.override
-        {
-          buildGoModule = args:
-            # intentionally break on newer version
-            assert args.version == "0.4.0";
-            prev.buildGoModule (args // rec
-            {
-              version = "0.5.1";
-              src = prev.fetchFromGitHub
-              {
-                owner = "lxc";
-                repo = "incus";
-                rev = "refs/tags/v${version}";
-                hash = "sha256-3eWkQT2P69ZfN62H9B4WLnmlUOGkpzRR0rctgchP+6A=";
-              };
-              vendorHash = "sha256-2ZJU7WshN4UIbJv55bFeo9qiAQ/wxu182mnz7pE60xA=";
-            });
-        };
-      })
-    ];
     systemd.services.incus.path = lib.mkAfter [ pkgs.ceph-client ];
     systemd.services.incus.after = lib.mkAfter [ "ceph.target" ];
 
@@ -90,6 +63,6 @@
 
     console.keyMap = "neo";
 
-    system.stateVersion = "23.11";
+    system.stateVersion = "24.05";
   };
 }

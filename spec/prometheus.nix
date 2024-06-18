@@ -22,7 +22,7 @@
         {
           type = lib.types.listOf lib.types.str;
           default = [ "default" ];
-          description = lib.mdDoc
+          description =
           ''
             List of tags to monitor with this server.
 
@@ -43,7 +43,7 @@
         {
           type = lib.types.listOf lib.types.str;
           default = [ "default" ];
-          description = lib.mdDoc
+          description =
           ''
             List of tags to monitor with this server.
 
@@ -54,7 +54,7 @@
         exporters = lib.mkOption
         {
           default = {};
-          description = lib.mdDoc
+          description =
           ''
             Set of paramaters to be passed to {option}`services.prometheus.exporters`.
             All `listenAddress` parameters will default to `[::1]`.
@@ -66,7 +66,7 @@
         mocks = lib.mkOption
         {
           default = {};
-          description = lib.mdDoc
+          description =
           ''
             Use this to add a prometheus exporter for this client in cases where the exporter is not managed by {option}`services.prometheus.exporters`.
             This can be used to add arbitrary HTTP endpoints such as those offered by `prosody` or `kubo` to the scraped exporters with minimal overhead.
@@ -84,7 +84,7 @@
               port = lib.mkOption
               {
                 type = lib.types.port;
-                description = lib.mdDoc
+                description =
                 ''
                   Which port to scrape.
                   Unless changed by the `scrapeConfig` override, this expects a TLS capable endpoint running on the FQDN of the configured host.
@@ -95,7 +95,7 @@
               scrapeConfig = lib.mkOption
               {
                 default = {};
-                description = lib.mdDoc
+                description =
                 ''
                   Scrape configuration as used in prometheus, used to provide values diverging from the defaults.
                   This can be used to scrape using other protocols than HTTPS for instance.

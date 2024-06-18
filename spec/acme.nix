@@ -7,13 +7,13 @@
       enable = lib.mkOption
       {
         default = true;
-        description = lib.mdDoc "Whether to enable acme defaults.";
+        description = "Whether to enable acme defaults.";
         type = lib.types.bool;
       };
     };
   };
 
-  config = 
+  config =
     let
       cfg = config.benaryorg.acme;
       commonOptions = [ "--preferred-chain" "ISRG Root X1" ];
