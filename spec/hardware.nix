@@ -148,8 +148,8 @@
         };
         swapDevices = lib.mkDefault [];
         boot.initrd.availableKernelModules = config.benaryorg.hardware.ovh.kernelModules;
-        boot.initrd.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
-        boot.supportedFilesystems = config.benaryorg.hardware.ovh.filesystems;
+        boot.supportedFilesystems = lib.genAttrs config.benaryorg.hardware.ovh.filesystems (_: true);
+        boot.initrd.supportedFilesystems = config.boot.supportedFilesystems;
 
         boot.swraid =
         {
