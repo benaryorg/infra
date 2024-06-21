@@ -87,6 +87,13 @@
     virtualisation.incus =
     {
       enable = true;
+      # FIXME: this will still rollout socket activation
+      # the only change is, incus will be wantedBy multi-user.target
+      # so with lxddns running this is probably an issue, I'm not sure
+      socketActivation = false;
+      # some devices seem to have experienced issues stopping cleanly
+      #  (i.e. reaching the shutdown watchdog but containers are still up)
+      softDaemonRestart = false;
     };
     security.acme.certs.${config.networking.fqdn} =
     {

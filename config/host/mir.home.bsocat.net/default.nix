@@ -64,7 +64,12 @@
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     boot.kernelModules = lib.mkAfter [ "ceph" "rbd" ];
-    virtualisation.incus.enable = true;
+    virtualisation.incus =
+    {
+      enable = true;
+      socketActivation = false;
+      softDaemonRestart = false;
+    };
     users.groups.incus-admin.members = [ "benaryorg" ];
     systemd.services.incus.path = lib.mkAfter [ pkgs.ceph-client ];
     systemd.services.incus.after = lib.mkAfter [ "ceph.target" ];
