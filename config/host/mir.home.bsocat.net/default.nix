@@ -41,6 +41,22 @@
 
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
+    hardware.bluetooth.package = pkgs.bluez.overrideAttrs ({ nativeBuildInputs, postInstall, ... }:
+    {
+      version = "5.72";
+      nativeBuildInputs = nativeBuildInputs ++ [ pkgs.python3.pkgs.pygments ];
+      postInstall =
+      ''
+        mkdir -p $out/etc/bluetooth
+        touch $out/etc/bluetooth/{main,input,network}.conf
+        ${postInstall}
+      '';
+      src = pkgs.fetchurl
+      {
+        url = "mirror://kernel/linux/bluetooth/bluez-5.72.tar.xz";
+        hash = "sha256-SZ1/o0WplsG7ZQ9cZ0nh2SkRH6bs4L4OmGh/7mEkU24=";
+      };
+    });
 
     nixpkgs.config.allowUnfree = true;
     hardware.steam-hardware.enable = true;
