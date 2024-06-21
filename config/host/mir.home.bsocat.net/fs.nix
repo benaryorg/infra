@@ -19,7 +19,7 @@
     {
       device = "haskell.home.bsocat.net:3303:/";
       fsType = "ceph";
-      options = [ "noatime" "name=admin" "fs=benaryorg" "ms_mode=secure" "nofail" "x-systemd.after=ceph.target" ];
+      options = [ "noatime" "name=admin" "fs=benaryorg" "ms_mode=secure" "nofail" "x-systemd.after=ceph.target" "x-systemd.before=user.slice" ];
     };
   };
 
