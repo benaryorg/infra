@@ -11,6 +11,7 @@
   benaryorg.build =
   {
     role = "server";
+    priority = -1;
     publicKey = "nixos-aarch64.home.bsocat.net:pV77z/+Ovmn/fK5YtV6FANXG+q4x926/wFhxqet/rWU=";
     privateKeyFile = config.age.secrets.buildSecret.path;
     systems = [ "aarch64-linux" ];

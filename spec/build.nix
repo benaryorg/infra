@@ -31,6 +31,17 @@
           The default is the netwoking domain.
         '';
       };
+      priority = lib.mkOption
+      {
+        type = lib.types.int;
+        default = 0;
+        description =
+        ''
+          Integer priority used for precedence (higher means earlier).
+
+          This is used by the substituter list for instance.
+        '';
+      };
       publicKey = lib.mkOption
       {
         type = lib.types.nullOr lib.types.str;
@@ -138,6 +149,8 @@
               (builtins.filter (n: n.config.benaryorg.build.role == "server"))
               # filter by those which have the local tags
               (builtins.filter (n: lib.any ((lib.flip builtins.elem) cfg.tags) n.config.benaryorg.build.tags))
+              # sort by priority (e.g. to have a distant aarch64 builder not as the primary substituter)
+              (builtins.sort (a: b: a.config.benaryorg.build.priority > b.config.benaryorg.build.priority))
             ];
           in
             lib.mkIf (cfg.role == "client" || cfg.role == "client-light")
