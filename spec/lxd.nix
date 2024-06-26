@@ -153,6 +153,7 @@
 
     systemd.network =
     {
+      wait-online.extraArgs = lib.mkAfter [ "--interface=${config.benaryorg.lxd.extInterface}" "--interface=${config.benaryorg.lxd.bridge}" ];
       networks =
       {
         "40-external" =
@@ -162,6 +163,11 @@
             IPForward = true;
             IPv6SendRA = false;
             IPv6AcceptRA = true;
+          };
+          linkConfig =
+          {
+            RequiredFamilyForOnline = "both";
+            RequiredForOnline = "no-carrier";
           };
           ipv6RoutePrefixes =
           [
@@ -218,7 +224,8 @@
           ];
           linkConfig =
           {
-            RequiredForOnline = false;
+            RequiredFamilyForOnline = "ipv6";
+            RequiredForOnline = "no-carrier";
           };
         };
       };
