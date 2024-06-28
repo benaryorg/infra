@@ -16,19 +16,18 @@
 
     benaryorg.hardware.vendor = "none";
     benaryorg.prometheus.client.enable = true;
-
     benaryorg.flake.autoupgrade = true;
-
-    # do whatever else you wanna do (you *can* use the modules for networking and booting though):
 
     security.acme.certs.${config.networking.fqdn}.listenHTTP = ":80";
 
+    # save some money
+    powerManagement.cpuFreqGovernor = "powersave";
     users.users.benaryorg.packages = with pkgs; [ ceph ];
 
     zramSwap = { enable = true; memoryPercent = 400; };
 
     console.keyMap = "neo";
-
+    # actual serial <3
     systemd.services."serial-getty@ttyS0" =
     {
       enable = true;
